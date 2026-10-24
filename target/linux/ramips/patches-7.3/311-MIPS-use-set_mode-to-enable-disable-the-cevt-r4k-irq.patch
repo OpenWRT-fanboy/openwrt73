@@ -42,7 +42,7 @@ Signed-off-by: John Crispin <blogic@openwrt.org>
  static int mips_next_event(unsigned long delta,
  			   struct clock_event_device *evt)
  {
-@@ -292,7 +317,9 @@ core_initcall(r4k_register_cpufreq_notif
+@@ -281,7 +306,9 @@ core_initcall(r4k_register_cpufreq_notif
  
  int r4k_clockevent_init(void)
  {
@@ -52,7 +52,7 @@ Signed-off-by: John Crispin <blogic@openwrt.org>
  	unsigned int cpu = smp_processor_id();
  	struct clock_event_device *cd;
  	unsigned int irq, min_delta;
-@@ -303,6 +330,15 @@ int r4k_clockevent_init(void)
+@@ -292,6 +319,15 @@ int r4k_clockevent_init(void)
  	if (!c0_compare_int_usable())
  		return -ENXIO;
  
@@ -68,7 +68,7 @@ Signed-off-by: John Crispin <blogic@openwrt.org>
  	cd = &per_cpu(mips_clockevent_device, cpu);
  
  	cd->name		= "MIPS";
-@@ -314,11 +350,17 @@ int r4k_clockevent_init(void)
+@@ -303,11 +339,17 @@ int r4k_clockevent_init(void)
  
  	cd->rating		= 300;
  	cd->cpumask		= cpumask_of(cpu);
@@ -86,7 +86,7 @@ Signed-off-by: John Crispin <blogic@openwrt.org>
  	if (cp0_timer_irq_installed)
  		return 0;
  
-@@ -334,6 +376,7 @@ int r4k_clockevent_init(void)
+@@ -323,6 +365,7 @@ int r4k_clockevent_init(void)
  	if (request_irq(irq, c0_compare_interrupt, flags, "timer",
  			c0_compare_interrupt))
  		pr_err("Failed to request irq %d (timer)\n", irq);
@@ -96,7 +96,7 @@ Signed-off-by: John Crispin <blogic@openwrt.org>
  }
 --- a/drivers/clocksource/Kconfig
 +++ b/drivers/clocksource/Kconfig
-@@ -765,10 +765,15 @@ config EP93XX_TIMER
+@@ -764,10 +764,15 @@ config EP93XX_TIMER
  	help
  	  Enables support for the Cirrus Logic timer block
  	  EP93XX.
