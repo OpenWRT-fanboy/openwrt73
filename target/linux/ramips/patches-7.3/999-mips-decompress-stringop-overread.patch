@@ -1,0 +1,19 @@
+From: OpenAI <openai@example.com>
+Date: Thu, 1 Jan 2026 00:00:00 +0000
+Subject: [PATCH] mips: boot/compressed: silence stringop-overread warning
+
+GCC 14 warns about reading 4 bytes from __image_end with -Wstringop-overread.
+The code is intentional; silence the warning.
+
+---
+ arch/mips/boot/compressed/decompress.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+--- a/arch/mips/boot/compressed/decompress.c
++++ b/arch/mips/boot/compressed/decompress.c
+@@ -1,3 +1,5 @@
++#pragma GCC diagnostic ignored "-Wstringop-overread"
++
+ // SPDX-License-Identifier: GPL-2.0-or-later
+ /*
+  * Copyright 2001 MontaVista Software Inc.

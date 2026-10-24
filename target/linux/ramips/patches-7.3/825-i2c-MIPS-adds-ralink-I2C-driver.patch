@@ -43,7 +43,7 @@ Signed-off-by: John Crispin <blogic@openwrt.org>
 +};
 --- a/drivers/i2c/busses/Kconfig
 +++ b/drivers/i2c/busses/Kconfig
-@@ -1103,6 +1103,11 @@ config I2C_RTL9300
+@@ -1110,6 +1110,11 @@ config I2C_RTL9300
  	  This driver can also be built as a module. If so, the module will
  	  be called i2c-rtl9300.
  
@@ -57,7 +57,7 @@ Signed-off-by: John Crispin <blogic@openwrt.org>
  	depends on ARCH_RENESAS || COMPILE_TEST
 --- a/drivers/i2c/busses/Makefile
 +++ b/drivers/i2c/busses/Makefile
-@@ -98,6 +98,7 @@ obj-$(CONFIG_I2C_PCA_PLATFORM)	+= i2c-pc
+@@ -99,6 +99,7 @@ obj-$(CONFIG_I2C_PCA_PLATFORM)	+= i2c-pc
  obj-$(CONFIG_I2C_PNX)		+= i2c-pnx.o
  obj-$(CONFIG_I2C_PXA)		+= i2c-pxa.o
  obj-$(CONFIG_I2C_PXA_PCI)	+= i2c-pxa-pci.o

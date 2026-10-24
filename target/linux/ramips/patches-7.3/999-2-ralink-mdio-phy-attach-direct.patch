@@ -1,0 +1,19 @@
+From: OpenWrt <openwrt@openwrt.org>
+Subject: [PATCH] ralink: mdio: use phy_attach_direct for Linux 7.3
+
+phy_attach() was removed in 7.3. Use phy_attach_direct() with the
+existing phydev and MII interface.
+
+Signed-off-by: OpenWrt <openwrt@openwrt.org>
+
+--- a/drivers/net/ethernet/ralink/mdio.c
++++ b/drivers/net/ethernet/ralink/mdio.c
+@@ -105,7 +105,7 @@
+ 
+ static void phy_init(struct fe_priv *priv, struct phy_device *phy)
+ {
+-	phy_attach(priv->netdev, dev_name(&phy->mdio.dev), PHY_INTERFACE_MODE_MII);
++	phy_attach_direct(priv->netdev, phy, 0, PHY_INTERFACE_MODE_MII);
+ 
+ 	phy->autoneg = AUTONEG_ENABLE;
+ 	phy->speed = 0;

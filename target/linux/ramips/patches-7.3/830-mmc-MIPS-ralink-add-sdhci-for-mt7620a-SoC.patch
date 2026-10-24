@@ -25,7 +25,7 @@ Signed-off-by: John Crispin <blogic@openwrt.org>
 
 --- a/drivers/mmc/host/Kconfig
 +++ b/drivers/mmc/host/Kconfig
-@@ -1129,6 +1129,8 @@ config MMC_LOONGSON2
+@@ -1144,6 +1144,8 @@ config MMC_LOONGSON2
  config MMC_SDHCI_EXTERNAL_DMA
  	bool
  
