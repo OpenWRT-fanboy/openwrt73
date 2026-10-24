@@ -18,7 +18,7 @@ Signed-off-by: John Crispin <blogic@openwrt.org>
 +source "sound/soc/ralink/Kconfig"
  source "sound/soc/samsung/Kconfig"
  source "sound/soc/sdca/Kconfig"
- source "sound/soc/spear/Kconfig"
+ source "sound/soc/sophgo/Kconfig"
 --- a/sound/soc/Makefile
 +++ b/sound/soc/Makefile
 @@ -67,6 +67,7 @@ obj-$(CONFIG_SND_SOC)	+= pxa/

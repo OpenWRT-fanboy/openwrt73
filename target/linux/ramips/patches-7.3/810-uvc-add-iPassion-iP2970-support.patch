@@ -13,9 +13,9 @@ Signed-off-by: John Crispin <blogic@openwrt.org>
 
 --- a/drivers/media/usb/uvc/uvc_driver.c
 +++ b/drivers/media/usb/uvc/uvc_driver.c
-@@ -3248,6 +3248,18 @@ static const struct usb_device_id uvc_id
+@@ -3270,6 +3270,18 @@ static const struct usb_device_id uvc_id
  	  .bInterfaceSubClass	= 1,
- 	  .bInterfaceProtocol	= 0,
+ 	  .bInterfaceProtocol	= UVC_PC_PROTOCOL_UNDEFINED,
  	  .driver_info		= UVC_INFO_META(V4L2_META_FMT_D4XX) },
 +	/* iPassion iP2970 */
 +	{ .match_flags          = USB_DEVICE_ID_MATCH_DEVICE
@@ -64,7 +64,7 @@ Signed-off-by: John Crispin <blogic@openwrt.org>
  
  #include <media/jpeg.h>
  #include <media/v4l2-common.h>
-@@ -1384,9 +1389,149 @@ static void uvc_video_decode_data(struct
+@@ -1390,9 +1395,149 @@ static void uvc_video_decode_data(struct
  	uvc_urb->async_operations++;
  }
  
@@ -214,7 +214,7 @@ Signed-off-by: John Crispin <blogic@openwrt.org>
  	/* Mark the buffer as done if the EOF marker is set. */
  	if (data[1] & UVC_STREAM_EOF && buf->bytesused != 0) {
  		uvc_dbg(stream->dev, FRAME, "Frame complete (EOF found)\n");
-@@ -1931,6 +2076,8 @@ static int uvc_init_video_isoc(struct uv
+@@ -1934,6 +2079,8 @@ static int uvc_init_video_isoc(struct uv
  	if (npackets == 0)
  		return -ENOMEM;
  
@@ -234,7 +234,7 @@ Signed-off-by: John Crispin <blogic@openwrt.org>
  
  /* Format flags */
  #define UVC_FMT_FLAG_COMPRESSED		0x00000001
-@@ -614,6 +616,7 @@ struct uvc_device {
+@@ -617,6 +619,7 @@ struct uvc_device {
  
  	struct input_dev *input;
  	char input_phys[64];

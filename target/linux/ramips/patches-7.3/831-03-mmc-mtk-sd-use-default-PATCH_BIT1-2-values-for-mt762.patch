@@ -13,7 +13,7 @@ Signed-off-by: Shiji Yang <yangshiji66@outlook.com>
 
 --- a/drivers/mmc/host/mtk-sd.c
 +++ b/drivers/mmc/host/mtk-sd.c
-@@ -1955,7 +1955,8 @@ static void msdc_init_hw(struct msdc_hos
+@@ -1977,7 +1977,8 @@ static void msdc_init_hw(struct msdc_hos
  	val |= FIELD_PREP(MSDC_CKGEN_MSDC_DLY_SEL, 1);
  
  	/* First MSDC_PATCH_BIT setup is done: pull the trigger! */
@@ -23,7 +23,7 @@ Signed-off-by: Shiji Yang <yangshiji66@outlook.com>
  
  	/* Set wr data, crc status, cmd response turnaround period for UHS104 */
  	pb1_val = FIELD_PREP(MSDC_PB1_WRDAT_CRC_TACNTR, 1);
-@@ -2018,8 +2019,10 @@ static void msdc_init_hw(struct msdc_hos
+@@ -2040,8 +2041,10 @@ static void msdc_init_hw(struct msdc_hos
  		pb2_val |= MSDC_PB2_SUPPORT_64G;
  
  	/* Patch Bit 1/2 setup is done: pull the trigger! */
