@@ -1,9 +1,13 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: OpenWrt <openwrt@nobody>
+Date: Sun, 20 Sep 2026 00:00:00 +0000
 Subject: [PATCH] include linux/hex.h where mac_pton/hex_to_bin are used
 
 Since kernel 6.14, mac_pton() and hex_to_bin() are declared in
 linux/hex.h instead of linux/etherdevice.h. Add the missing include to
 avoid implicit declaration errors with -Werror=implicit-function-declaration.
 
+Signed-off-by: OpenWrt <openwrt@nobody>
 ---
  .../wireless/intel/iwlwifi/mvm/debugfs-vif.c | 1 +
  .../net/wireless/mediatek/mt76/mt7615/debugfs.c | 1 +

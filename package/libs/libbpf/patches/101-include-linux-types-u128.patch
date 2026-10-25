@@ -1,3 +1,4 @@
+From: OpenWrt Airoha bring-up <openwrt@airoha>
 Subject: [PATCH] libbpf: provide __u128/__s128 in include/linux/types.h
 
 Kernel 7.3's arch/arm64 UAPI sigcontext.h uses __u128 (6.18 used
@@ -7,6 +8,7 @@ breaking any TU including <signal.h> on aarch64+glibc.
 
 Mirror the kernel UAPI definitions, guarded by __SIZEOF_INT128__.
 
+Signed-off-by: OpenWrt Airoha bring-up <openwrt@airoha>
 ---
  include/linux/types.h | 5 +++++
  1 file changed, 5 insertions(+)
