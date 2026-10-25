@@ -186,13 +186,15 @@ Signed-off-by: Rosen Penev <rosenp@gmail.com>
  };
  
  &usb3_phy {
-@@ -83,5 +92,5 @@
+@@ -45,7 +54,7 @@
  };
  
  &usb3 {
 -	vcc-gpio = <&chipcommon 10 GPIO_ACTIVE_HIGH>;
 +	vbus-supply = <&usb_power>;
  };
+ 
+ &srab {
 --- a/arch/arm/boot/dts/broadcom/bcm4708-netgear-r6250.dts
 +++ b/arch/arm/boot/dts/broadcom/bcm4708-netgear-r6250.dts
 @@ -81,10 +81,19 @@
@@ -234,13 +236,15 @@ Signed-off-by: Rosen Penev <rosenp@gmail.com>
  };
  
  &spi_nor {
-@@ -126,5 +135,5 @@
+@@ -88,7 +97,7 @@
  };
  
  &usb3 {
 -	vcc-gpio = <&chipcommon 0 GPIO_ACTIVE_HIGH>;
 +	vbus-supply = <&usb_power>;
  };
+ 
+ &srab {
 --- a/arch/arm/boot/dts/broadcom/bcm47081-luxul-xwr-1200.dts
 +++ b/arch/arm/boot/dts/broadcom/bcm47081-luxul-xwr-1200.dts
 @@ -104,10 +104,19 @@
@@ -427,7 +431,7 @@ Signed-off-by: Rosen Penev <rosenp@gmail.com>
  };
  
  &pcie_bridge0 {
-@@ -179,11 +188,11 @@
+@@ -178,11 +187,11 @@
  };
  
  &usb2 {
@@ -480,7 +484,7 @@ Signed-off-by: Rosen Penev <rosenp@gmail.com>
  &srab {
 --- a/arch/arm/boot/dts/broadcom/bcm47094-asus-rt-ac3100.dtsi
 +++ b/arch/arm/boot/dts/broadcom/bcm47094-asus-rt-ac3100.dtsi
-@@ -94,6 +94,15 @@
+@@ -98,6 +98,15 @@
  			gpios = <&chipcommon 19 GPIO_ACTIVE_LOW>;
  		};
  	};
@@ -496,7 +500,7 @@ Signed-off-by: Rosen Penev <rosenp@gmail.com>
  };
  
  &nandcs {
-@@ -160,7 +169,7 @@
+@@ -167,7 +176,7 @@
  };
  
  &usb2 {
@@ -523,7 +527,7 @@ Signed-off-by: Rosen Penev <rosenp@gmail.com>
  };
  
  &gmac0 {
-@@ -148,7 +157,7 @@
+@@ -151,7 +160,7 @@
  };
  
  &usb2 {

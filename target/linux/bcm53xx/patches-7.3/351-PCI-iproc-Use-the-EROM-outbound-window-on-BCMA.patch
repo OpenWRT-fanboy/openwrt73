@@ -42,15 +42,15 @@ Signed-off-by: Semih Baskan <strst.gs@gmail.com>
 
 --- a/drivers/pci/controller/pcie-iproc-bcma.c
 +++ b/drivers/pci/controller/pcie-iproc-bcma.c
-@@ -36,6 +36,7 @@ static int iproc_bcma_pcie_probe(struct
+@@ -61,6 +61,7 @@
  	struct device *dev = &bdev->dev;
  	struct iproc_pcie *pcie;
  	struct pci_host_bridge *bridge;
 +	struct resource_entry *win, *tmp;
  	int ret;
  
- 	bridge = devm_pci_alloc_host_bridge(dev, sizeof(*pcie));
-@@ -55,12 +56,20 @@ static int iproc_bcma_pcie_probe(struct
+ 	bridge = pci_alloc_host_bridge(sizeof(*pcie));
+@@ -90,13 +91,21 @@
  
  	pcie->base_addr = bdev->addr;
  
@@ -66,6 +66,7 @@ Signed-off-by: Semih Baskan <strst.gs@gmail.com>
  	pcie->mem.end = bdev->addr_s[0] + SZ_128M - 1;
  	pcie->mem.name = "PCIe MEM space";
  	pcie->mem.flags = IORESOURCE_MEM;
+ 	iproc_bcma_pcie_check_dt_window(pcie);
  	pci_add_resource(&bridge->windows, &pcie->mem);
 -	ret = devm_request_pci_bus_resources(dev, &bridge->windows);
 +	ret = devm_request_resource(dev, &iomem_resource, &pcie->mem);
