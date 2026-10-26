@@ -59,7 +59,7 @@ Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 +#include <linux/slab.h>
 +#include <linux/pm_opp.h>
 +
-+#include "governor.h"
++/* removed governor.h */
 +
 +struct ipq806x_fab_data {
 +	struct clk *fab_clk;

@@ -68,12 +68,13 @@ Tested-by: Jonathan McDowell <noodles@earth.li>
  		};
  	};
  
---- a/arch/arm/boot/dts/qcom/qcom-ipq8064-smb208.dtsi
+--- /dev/null	2026-10-24 22:43:56.151660739 -1000
 +++ b/arch/arm/boot/dts/qcom/qcom-ipq8064-smb208.dtsi
-@@ -2,6 +2,18 @@
- 
- #include "qcom-ipq8064.dtsi"
- 
+@@ -0,0 +1,49 @@
++// SPDX-License-Identifier: GPL-2.0
++
++#include "qcom-ipq8064.dtsi"
++
 +&cpu0 {
 +	cpu-supply = <&smb208_s2a>;
 +};
@@ -86,15 +87,47 @@ Tested-by: Jonathan McDowell <noodles@earth.li>
 +	l2-supply = <&smb208_s1a>;
 +};
 +
- &rpm {
- 	smb208_regulators: regulators {
- 		compatible = "qcom,rpm-smb208-regulators";
---- a/arch/arm/boot/dts/qcom/qcom-ipq8064-v2.0-smb208.dtsi
++&rpm {
++	smb208_regulators: regulators {
++		compatible = "qcom,rpm-smb208-regulators";
++
++		smb208_s1a: s1a {
++			regulator-min-microvolt = <1050000>;
++			regulator-max-microvolt = <1150000>;
++
++			qcom,switch-mode-frequency = <1200000>;
++		};
++
++		smb208_s1b: s1b {
++			regulator-min-microvolt = <1050000>;
++			regulator-max-microvolt = <1150000>;
++
++			qcom,switch-mode-frequency = <1200000>;
++		};
++
++		smb208_s2a: s2a {
++			regulator-min-microvolt = < 800000>;
++			regulator-max-microvolt = <1250000>;
++
++			qcom,switch-mode-frequency = <1200000>;
++		};
++
++		smb208_s2b: s2b {
++			regulator-min-microvolt = < 800000>;
++			regulator-max-microvolt = <1250000>;
++
++			qcom,switch-mode-frequency = <1200000>;
++		};
++	};
++};
+
+--- /dev/null	2026-10-24 22:43:56.151660739 -1000
 +++ b/arch/arm/boot/dts/qcom/qcom-ipq8064-v2.0-smb208.dtsi
-@@ -2,6 +2,18 @@
- 
- #include "qcom-ipq8064-v2.0.dtsi"
- 
+@@ -0,0 +1,49 @@
++// SPDX-License-Identifier: GPL-2.0
++
++#include "qcom-ipq8064-v2.0.dtsi"
++
 +&cpu0 {
 +	cpu-supply = <&smb208_s2a>;
 +};
@@ -107,15 +140,47 @@ Tested-by: Jonathan McDowell <noodles@earth.li>
 +	l2-supply = <&smb208_s1a>;
 +};
 +
- &rpm {
- 	smb208_regulators: regulators {
- 		compatible = "qcom,rpm-smb208-regulators";
---- a/arch/arm/boot/dts/qcom/qcom-ipq8062-smb208.dtsi
++&rpm {
++	smb208_regulators: regulators {
++		compatible = "qcom,rpm-smb208-regulators";
++
++		smb208_s1a: s1a {
++			regulator-min-microvolt = <1050000>;
++			regulator-max-microvolt = <1150000>;
++
++			qcom,switch-mode-frequency = <1200000>;
++		};
++
++		smb208_s1b: s1b {
++			regulator-min-microvolt = <1050000>;
++			regulator-max-microvolt = <1150000>;
++
++			qcom,switch-mode-frequency = <1200000>;
++		};
++
++		smb208_s2a: s2a {
++			regulator-min-microvolt = < 800000>;
++			regulator-max-microvolt = <1250000>;
++
++			qcom,switch-mode-frequency = <1200000>;
++		};
++
++		smb208_s2b: s2b {
++			regulator-min-microvolt = < 800000>;
++			regulator-max-microvolt = <1250000>;
++
++			qcom,switch-mode-frequency = <1200000>;
++		};
++	};
++};
+
+--- /dev/null	2026-10-24 22:43:56.151660739 -1000
 +++ b/arch/arm/boot/dts/qcom/qcom-ipq8062-smb208.dtsi
-@@ -2,6 +2,18 @@
- 
- #include "qcom-ipq8062.dtsi"
- 
+@@ -0,0 +1,49 @@
++// SPDX-License-Identifier: GPL-2.0-only
++
++#include "qcom-ipq8062.dtsi"
++
 +&cpu0 {
 +	cpu-supply = <&smb208_s2a>;
 +};
@@ -128,15 +193,47 @@ Tested-by: Jonathan McDowell <noodles@earth.li>
 +	l2-supply = <&smb208_s1a>;
 +};
 +
- &rpm {
- 	smb208_regulators: regulators {
- 		compatible = "qcom,rpm-smb208-regulators";
---- a/arch/arm/boot/dts/qcom/qcom-ipq8065-smb208.dtsi
++&rpm {
++	smb208_regulators: regulators {
++		compatible = "qcom,rpm-smb208-regulators";
++
++		smb208_s1a: s1a {
++			regulator-min-microvolt = <1050000>;
++			regulator-max-microvolt = <1150000>;
++
++			qcom,switch-mode-frequency = <1200000>;
++		};
++
++		smb208_s1b: s1b {
++			regulator-min-microvolt = <1050000>;
++			regulator-max-microvolt = <1150000>;
++
++			qcom,switch-mode-frequency = <1200000>;
++		};
++
++		smb208_s2a: s2a {
++			regulator-min-microvolt = < 800000>;
++			regulator-max-microvolt = <1150000>;
++
++			qcom,switch-mode-frequency = <1200000>;
++		};
++
++		smb208_s2b: s2b {
++			regulator-min-microvolt = < 800000>;
++			regulator-max-microvolt = <1150000>;
++
++			qcom,switch-mode-frequency = <1200000>;
++		};
++	};
++};
+
+--- /dev/null	2026-10-24 22:43:56.151660739 -1000
 +++ b/arch/arm/boot/dts/qcom/qcom-ipq8065-smb208.dtsi
-@@ -2,6 +2,18 @@
- 
- #include "qcom-ipq8065.dtsi"
- 
+@@ -0,0 +1,49 @@
++// SPDX-License-Identifier: GPL-2.0
++
++#include "qcom-ipq8065.dtsi"
++
 +&cpu0 {
 +	cpu-supply = <&smb208_s2a>;
 +};
@@ -149,6 +246,36 @@ Tested-by: Jonathan McDowell <noodles@earth.li>
 +	l2-supply = <&smb208_s1a>;
 +};
 +
- &rpm {
- 	smb208_regulators: regulators {
- 		compatible = "qcom,rpm-smb208-regulators";
++&rpm {
++	smb208_regulators: regulators {
++		compatible = "qcom,rpm-smb208-regulators";
++
++		smb208_s1a: s1a {
++			regulator-min-microvolt = <1050000>;
++			regulator-max-microvolt = <1150000>;
++
++			qcom,switch-mode-frequency = <1200000>;
++		};
++
++		smb208_s1b: s1b {
++			regulator-min-microvolt = <1050000>;
++			regulator-max-microvolt = <1150000>;
++
++			qcom,switch-mode-frequency = <1200000>;
++		};
++
++		smb208_s2a: s2a {
++			regulator-min-microvolt = <775000>;
++			regulator-max-microvolt = <1275000>;
++
++			qcom,switch-mode-frequency = <1200000>;
++		};
++
++		smb208_s2b: s2b {
++			regulator-min-microvolt = <775000>;
++			regulator-max-microvolt = <1275000>;
++
++			qcom,switch-mode-frequency = <1200000>;
++		};
++	};
++};
