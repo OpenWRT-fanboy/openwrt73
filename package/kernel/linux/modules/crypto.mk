@@ -330,8 +330,8 @@ define KernelPackage/crypto-ghash
   KCONFIG:= \
 	CONFIG_CRYPTO_GHASH \
 	CONFIG_CRYPTO_GHASH_ARM_CE
-  FILES:=$(LINUX_DIR)/crypto/ghash-generic.ko
-  AUTOLOAD:=$(call AutoLoad,09,ghash-generic)
+  FILES:=$(LINUX_DIR)/crypto/ghash-generic.ko@lt7.3
+  AUTOLOAD:=$(call AutoLoad,09,ghash-generic@lt7.3)
   $(call AddDepends/crypto)
 endef
 
