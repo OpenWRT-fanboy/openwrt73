@@ -66,7 +66,7 @@ Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 +#include <linux/regulator/consumer.h>
 +#include <linux/pm_opp.h>
 +
-+#include "governor.h"
++/* removed governor.h */
 +
 +struct krait_cache_data {
 +	struct clk *clk;

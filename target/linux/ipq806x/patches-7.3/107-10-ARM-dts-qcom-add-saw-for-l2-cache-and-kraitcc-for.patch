@@ -65,4 +65,4 @@ Tested-by: Jonathan McDowell <noodles@earth.li>
 +
  		nss_common: syscon@3000000 {
  			compatible = "syscon";
- 			reg = <0x03000000 0x0000FFFF>;
+ 			reg = <0x03000000 0x0000ffff>;

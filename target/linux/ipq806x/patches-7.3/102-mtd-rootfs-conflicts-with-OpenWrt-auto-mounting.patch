@@ -10,14 +10,14 @@ Signed-off-by: John Crispin <john@phrozen.org>
 
 --- a/drivers/mtd/mtdpart.c
 +++ b/drivers/mtd/mtdpart.c
-@@ -57,7 +57,11 @@ static struct mtd_info *allocate_partiti
+@@ -58,7 +58,11 @@ static struct mtd_info *allocate_partiti
  
  	/* allocate the partition structure */
- 	child = kzalloc(sizeof(*child), GFP_KERNEL);
+ 	child = kzalloc_obj(*child);
 -	name = kstrdup(part->name, GFP_KERNEL);
 +	/* "rootfs" conflicts with OpenWrt auto mounting */
 +	if (mtd_type_is_nand(parent) && !strcmp(part->name, "rootfs"))
-+		name = "ubi";
++		name = kstrdup("ubi", GFP_KERNEL);
 +	else
 +		name = kstrdup(part->name, GFP_KERNEL);
  	if (!name || !child) {
