@@ -15,9 +15,9 @@ Signed-off-by: John Crispin <john@phrozen.org>
 
 --- a/drivers/phy/Kconfig
 +++ b/drivers/phy/Kconfig
-@@ -47,6 +47,22 @@ config GENERIC_PHY_MIPI_DPHY
- 	  Provides a number of helpers a core functions for MIPI D-PHY
- 	  drivers to us.
+@@ -114,6 +114,22 @@ config USB_LGM_PHY
+ 	  interface to interact with USB GEN-II and USB 3.x PHY that is part
+ 	  of the Intel network SOC.
  
 +config PHY_AR7100_USB
 +	tristate "Atheros AR7100 USB PHY driver"
@@ -47,8 +47,8 @@ Signed-off-by: John Crispin <john@phrozen.org>
 +obj-$(CONFIG_PHY_AR7100_USB)		+= phy-ar7100-usb.o
 +obj-$(CONFIG_PHY_AR7200_USB)		+= phy-ar7200-usb.o
  obj-$(CONFIG_GENERIC_PHY_MIPI_DPHY)	+= phy-core-mipi-dphy.o
+ obj-$(CONFIG_PHY_AIROHA_PCIE)		+= phy-airoha-pcie.o
  obj-$(CONFIG_PHY_CAN_TRANSCEIVER)	+= phy-can-transceiver.o
- obj-$(CONFIG_PHY_LPC18XX_USB_OTG)	+= phy-lpc18xx-usb-otg.o
 --- /dev/null
 +++ b/drivers/phy/phy-ar7100-usb.c
 @@ -0,0 +1,115 @@
