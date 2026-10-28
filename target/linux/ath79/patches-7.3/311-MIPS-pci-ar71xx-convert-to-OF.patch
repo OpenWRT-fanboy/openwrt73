@@ -136,7 +136,7 @@ Signed-off-by: John Crispin <john@phrozen.org>
 -		irq_set_chip_data(i, apc);
 -	}
 -
-+	apc->domain = irq_domain_add_linear(apc->np, AR71XX_PCI_IRQ_COUNT,
++	apc->domain = irq_domain_create_linear(of_fwnode_handle(apc->np), AR71XX_PCI_IRQ_COUNT,
 +					    &ar71xx_pci_domain_ops, apc);
  	irq_set_chained_handler_and_data(apc->irq, ar71xx_pci_irq_handler,
  					 apc);

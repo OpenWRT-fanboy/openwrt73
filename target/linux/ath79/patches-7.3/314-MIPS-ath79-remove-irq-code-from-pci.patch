@@ -118,7 +118,7 @@ Submitted-by: John Crispin <john@phrozen.org>
 -	__raw_writel(0, base + AR71XX_RESET_REG_PCI_INT_ENABLE);
 -	__raw_writel(0, base + AR71XX_RESET_REG_PCI_INT_STATUS);
 -
--	apc->domain = irq_domain_add_linear(apc->np, AR71XX_PCI_IRQ_COUNT,
+-	apc->domain = irq_domain_create_linear(of_fwnode_handle(apc->np), AR71XX_PCI_IRQ_COUNT,
 -					    &ar71xx_pci_domain_ops, apc);
 -	irq_set_chained_handler_and_data(apc->irq, ar71xx_pci_irq_handler,
 -					 apc);

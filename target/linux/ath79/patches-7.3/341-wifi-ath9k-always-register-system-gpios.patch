@@ -19,7 +19,7 @@ Signed-off-by: Edoardo Pinci <epinci@outlook.com>
 
 --- a/drivers/gpio/gpio-ath79.c
 +++ b/drivers/gpio/gpio-ath79.c
-@@ -215,7 +215,6 @@ static const struct of_device_id ath79_g
+@@ -214,7 +214,6 @@ static const struct of_device_id ath79_g
  };
  MODULE_DEVICE_TABLE(of, ath79_gpio_of_match);
  
@@ -27,7 +27,7 @@ Signed-off-by: Edoardo Pinci <epinci@outlook.com>
  /*
   * This registers all of the ath79k GPIOs as descriptors to be picked
   * directly from the ATH79K wifi driver if the two are jitted together
-@@ -257,13 +256,6 @@ static int ath79_gpio_register_wifi_desc
+@@ -256,13 +255,6 @@ static int ath79_gpio_register_wifi_desc
  
  	return 0;
  }
