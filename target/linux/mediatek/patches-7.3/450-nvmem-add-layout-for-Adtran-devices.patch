@@ -58,6 +58,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
 +// SPDX-License-Identifier: GPL-2.0
 +#include <linux/ctype.h>
 +#include <linux/etherdevice.h>
++#include <linux/hex.h>
 +#include <linux/nvmem-consumer.h>
 +#include <linux/nvmem-provider.h>
 +#include <linux/of.h>
@@ -189,4 +190,3 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
 +
 +MODULE_LICENSE("GPL");
 +MODULE_AUTHOR("Daniel Golle <daniel@makrotopia.org>");
-+MODULE_DESCRIPTION("NVMEM layout driver for Adtran mfginfo");

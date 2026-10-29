@@ -19,7 +19,7 @@ Signed-off-by: Dim Fish <dimfish@gmail.com>
 
 --- a/drivers/mtd/nand/spi/foresee.c
 +++ b/drivers/mtd/nand/spi/foresee.c
-@@ -22,8 +22,8 @@ static SPINAND_OP_VARIANTS(write_cache_v
+@@ -27,8 +27,8 @@ static SPINAND_OP_VARIANTS(write_cache_v
  		SPINAND_PROG_LOAD_1S_1S_1S_OP(true, 0, NULL, 0));
  
  static SPINAND_OP_VARIANTS(update_cache_variants,

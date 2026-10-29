@@ -1,0 +1,16 @@
+Add wcid parameter to mtk_wed_ppe_check to match updated mtk_wed_ops
+signature introduced by flow API backport.
+
+--- a/drivers/net/ethernet/mediatek/mtk_wed.c
++++ b/drivers/net/ethernet/mediatek/mtk_wed.c
+@@ -1956,7 +1956,7 @@ static int mtk_wed_ppe_check_skb(struct mtk_wed_device *dev, struct sk_buff *s
+ }
+ 
+ static void
+-mtk_wed_ppe_check(struct mtk_wed_device *dev, struct sk_buff *skb,
+-		  u32 reason, u32 hash)
++mtk_wed_ppe_check(struct mtk_wed_device *dev, struct sk_buff *skb,
++		  u32 reason, u32 hash, u16 wcid)
+ {
+ 	struct mtk_eth *eth = dev->hw->eth;
+ 	struct ethhdr *eh;

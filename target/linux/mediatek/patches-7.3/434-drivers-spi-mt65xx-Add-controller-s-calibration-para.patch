@@ -33,7 +33,7 @@ Signed-off-by: SkyLake.Huang <skylake.huang@mediatek.com>
  static int mtk_spi_mem_adjust_op_size(struct spi_mem *mem,
  				      struct spi_mem_op *op)
  {
-@@ -1183,6 +1198,7 @@ static int mtk_spi_probe(struct platform
+@@ -1182,6 +1197,7 @@ static int mtk_spi_probe(struct platform
  	host->setup = mtk_spi_setup;
  	host->set_cs_timing = mtk_spi_set_hw_cs_timing;
  	host->use_gpio_descriptors = true;
