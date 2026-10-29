@@ -15,7 +15,7 @@ Signed-off-by: Rosen Penev <rosenp@gmail.com>
 
 --- a/arch/arm64/boot/dts/mediatek/mt7622-rfb1.dts
 +++ b/arch/arm64/boot/dts/mediatek/mt7622-rfb1.dts
-@@ -602,6 +602,16 @@
+@@ -603,6 +603,16 @@
  			partition@1c0000 {
  				label = "Factory";
  				reg = <0x1c0000 0x0100000>;
@@ -32,7 +32,7 @@ Signed-off-by: Rosen Penev <rosenp@gmail.com>
  			};
  
  			partition@200000 {
-@@ -660,5 +670,7 @@
+@@ -661,5 +671,7 @@
  &wmac {
  	pinctrl-names = "default";
  	pinctrl-0 = <&wmac_pins>;

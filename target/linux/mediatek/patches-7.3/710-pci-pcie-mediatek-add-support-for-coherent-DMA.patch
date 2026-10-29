@@ -10,7 +10,7 @@ Signed-off-by: Felix Fietkau <nbd@nbd.name>
 
 --- a/arch/arm64/boot/dts/mediatek/mt7622.dtsi
 +++ b/arch/arm64/boot/dts/mediatek/mt7622.dtsi
-@@ -832,6 +832,9 @@
+@@ -836,6 +836,9 @@
  		bus-range = <0x00 0xff>;
  		ranges = <0x82000000 0 0x20000000 0x0 0x20000000 0 0x8000000>;
  		status = "disabled";
@@ -20,7 +20,7 @@ Signed-off-by: Felix Fietkau <nbd@nbd.name>
  
  		#interrupt-cells = <1>;
  		interrupt-map-mask = <0 0 0 7>;
-@@ -876,6 +879,9 @@
+@@ -880,6 +883,9 @@
  		bus-range = <0x00 0xff>;
  		ranges = <0x82000000 0 0x28000000 0x0 0x28000000 0 0x8000000>;
  		status = "disabled";
@@ -30,7 +30,7 @@ Signed-off-by: Felix Fietkau <nbd@nbd.name>
  
  		#interrupt-cells = <1>;
  		interrupt-map-mask = <0 0 0 7>;
-@@ -937,7 +943,7 @@
+@@ -941,7 +947,7 @@
  	};
  
  	hifsys: clock-controller@1af00000 {
@@ -41,7 +41,7 @@ Signed-off-by: Felix Fietkau <nbd@nbd.name>
  	};
 --- a/drivers/pci/controller/pcie-mediatek.c
 +++ b/drivers/pci/controller/pcie-mediatek.c
-@@ -22,6 +22,7 @@
+@@ -24,6 +24,7 @@
  #include <linux/of_address.h>
  #include <linux/of_pci.h>
  #include <linux/of_platform.h>
@@ -49,7 +49,7 @@ Signed-off-by: Felix Fietkau <nbd@nbd.name>
  #include <linux/pci.h>
  #include <linux/phy/phy.h>
  #include <linux/platform_device.h>
-@@ -141,6 +142,11 @@
+@@ -145,6 +146,11 @@
  #define PCIE_LINK_STATUS_V2	0x804
  #define PCIE_PORT_LINKUP_V2	BIT(10)
  
@@ -61,7 +61,7 @@ Signed-off-by: Felix Fietkau <nbd@nbd.name>
  struct mtk_pcie_port;
  
  /**
-@@ -1062,6 +1068,27 @@ static int mtk_pcie_setup(struct mtk_pci
+@@ -1239,6 +1245,27 @@ static int mtk_pcie_setup(struct mtk_pci
  	struct mtk_pcie_port *port, *tmp;
  	int err, slot;
  

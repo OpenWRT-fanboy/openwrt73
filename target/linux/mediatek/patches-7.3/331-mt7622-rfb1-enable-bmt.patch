@@ -7,7 +7,7 @@ Signed-off-by: Felix Fietkau <nbd@nbd.name>
 ---
 --- a/arch/arm64/boot/dts/mediatek/mt7622-rfb1.dts
 +++ b/arch/arm64/boot/dts/mediatek/mt7622-rfb1.dts
-@@ -572,6 +572,7 @@
+@@ -573,6 +573,7 @@
  		spi-tx-bus-width = <4>;
  		spi-rx-bus-width = <4>;
  		nand-ecc-engine = <&snfi>;
