@@ -1,0 +1,116 @@
+Subject: [PATCH] arm64: dts: qcom: ipq9574: remove the CPU OPP table
+
+Changing the A73 cluster away from the bootloader rate (gpll0, 800MHz)
+to the lowest OPP (a53pll, 936MHz) wedges the SoC on Linux 7.3: the
+boot dies with uncategorized exceptions in the scheduler/timer softirq
+paths and secondary CPUs that can no longer be stopped. With the OPP
+table present, ARM_QCOM_CPUFREQ_NVMEM probes, cpufreq-dt switches to
+936000kHz and the crash follows within seconds.
+
+Removing the OPP table and the CPUs' operating-points-v2 references
+makes qcom-cpufreq-nvmem bail out early (-ENOENT before any clock is
+touched, cpufreq-nvmem.c:495-500) and leaves the cluster at the
+firmware-set rate, which matches the known-good 6.18 runtime state
+(where cpufreq-dt stayed deferred forever). The thermal cooling-maps
+are kept: they resolve to no cooling device exactly as on 6.18 and
+are silent.
+
+Boot-verified on Askey SBE1V1K: cpufreq.off=1 (equivalent state)
+boots to a shell; without it every boot crashed.
+
+---
+--- a/arch/arm64/boot/dts/qcom/ipq9574.dtsi
++++ b/arch/arm64/boot/dts/qcom/ipq9574.dtsi
+@@ -57,7 +57,6 @@
+ 			next-level-cache = <&l2_0>;
+ 			clocks = <&apcs_glb APCS_ALIAS0_CORE_CLK>;
+ 			clock-names = "cpu";
+-			operating-points-v2 = <&cpu_opp_table>;
+ 			#cooling-cells = <2>;
+ 		};
+ 
+@@ -69,7 +68,6 @@
+ 			next-level-cache = <&l2_0>;
+ 			clocks = <&apcs_glb APCS_ALIAS0_CORE_CLK>;
+ 			clock-names = "cpu";
+-			operating-points-v2 = <&cpu_opp_table>;
+ 			#cooling-cells = <2>;
+ 		};
+ 
+@@ -81,7 +79,6 @@
+ 			next-level-cache = <&l2_0>;
+ 			clocks = <&apcs_glb APCS_ALIAS0_CORE_CLK>;
+ 			clock-names = "cpu";
+-			operating-points-v2 = <&cpu_opp_table>;
+ 			#cooling-cells = <2>;
+ 		};
+ 
+@@ -93,7 +90,6 @@
+ 			next-level-cache = <&l2_0>;
+ 			clocks = <&apcs_glb APCS_ALIAS0_CORE_CLK>;
+ 			clock-names = "cpu";
+-			operating-points-v2 = <&cpu_opp_table>;
+ 			#cooling-cells = <2>;
+ 		};
+ 
+@@ -117,60 +113,6 @@
+ 		reg = <0x0 0x40000000 0x0 0x0>;
+ 	};
+ 
+-	cpu_opp_table: opp-table-cpu {
+-		compatible = "operating-points-v2-kryo-cpu";
+-		opp-shared;
+-		nvmem-cells = <&cpu_speed_bin>;
+-
+-		opp-936000000 {
+-			opp-hz = /bits/ 64 <936000000>;
+-			opp-microvolt = <725000>;
+-			opp-supported-hw = <0xf>;
+-			clock-latency-ns = <200000>;
+-		};
+-
+-		opp-1104000000 {
+-			opp-hz = /bits/ 64 <1104000000>;
+-			opp-microvolt = <787500>;
+-			opp-supported-hw = <0xf>;
+-			clock-latency-ns = <200000>;
+-		};
+-
+-		opp-1200000000 {
+-			opp-hz = /bits/ 64 <1200000000>;
+-			opp-microvolt = <862500>;
+-			opp-supported-hw = <0xf>;
+-			clock-latency-ns = <200000>;
+-		};
+-
+-		opp-1416000000 {
+-			opp-hz = /bits/ 64 <1416000000>;
+-			opp-microvolt = <862500>;
+-			opp-supported-hw = <0x7>;
+-			clock-latency-ns = <200000>;
+-		};
+-
+-		opp-1488000000 {
+-			opp-hz = /bits/ 64 <1488000000>;
+-			opp-microvolt = <925000>;
+-			opp-supported-hw = <0x7>;
+-			clock-latency-ns = <200000>;
+-		};
+-
+-		opp-1800000000 {
+-			opp-hz = /bits/ 64 <1800000000>;
+-			opp-microvolt = <987500>;
+-			opp-supported-hw = <0x5>;
+-			clock-latency-ns = <200000>;
+-		};
+-
+-		opp-2208000000 {
+-			opp-hz = /bits/ 64 <2208000000>;
+-			opp-microvolt = <1062500>;
+-			opp-supported-hw = <0x1>;
+-			clock-latency-ns = <200000>;
+-		};
+-	};
+ 
+ 	pmu {
+ 		compatible = "arm,cortex-a73-pmu";
