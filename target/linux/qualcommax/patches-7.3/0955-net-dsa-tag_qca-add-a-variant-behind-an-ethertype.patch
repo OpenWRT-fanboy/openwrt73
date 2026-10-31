@@ -31,25 +31,25 @@ Signed-off-by: Julius Bairaktaris <julius@bairaktaris.de>
  #define QCA_HDR_RECV_VERSION		GENMASK(15, 14)
 --- a/include/net/dsa.h
 +++ b/include/net/dsa.h
-@@ -57,6 +57,7 @@ struct tc_action;
- #define DSA_TAG_PROTO_BRCM_LEGACY_FCS_VALUE	29
- #define DSA_TAG_PROTO_MXL862_VALUE		30
- #define DSA_TAG_PROTO_MXL862_8021Q_VALUE	31
-+#define DSA_TAG_PROTO_QCA_ETYPE_VALUE		32
+@@ -62,6 +62,7 @@ struct tc_action;
+ #define DSA_TAG_PROTO_KSZ8463_VALUE		34
+ #define DSA_TAG_PROTO_MT7628_VALUE		35
+ #define DSA_TAG_PROTO_MXL862_8021Q_VALUE	36
++#define DSA_TAG_PROTO_QCA_ETYPE_VALUE		37
  
  enum dsa_tag_protocol {
  	DSA_TAG_PROTO_NONE		= DSA_TAG_PROTO_NONE_VALUE,
-@@ -91,6 +92,7 @@ enum dsa_tag_protocol {
- 	DSA_TAG_PROTO_VSC73XX_8021Q	= DSA_TAG_PROTO_VSC73XX_8021Q_VALUE,
- 	DSA_TAG_PROTO_MXL862		= DSA_TAG_PROTO_MXL862_VALUE,
- 	DSA_TAG_PROTO_MXL862_8021Q	= DSA_TAG_PROTO_MXL862_8021Q_VALUE,
+@@ -101,6 +102,7 @@ enum dsa_tag_protocol {
+ 	DSA_TAG_PROTO_NETC		= DSA_TAG_PROTO_NETC_VALUE,
+ 	DSA_TAG_PROTO_KSZ8463		= DSA_TAG_PROTO_KSZ8463_VALUE,
+ 	DSA_TAG_PROTO_MT7628		= DSA_TAG_PROTO_MT7628_VALUE,
 +	DSA_TAG_PROTO_QCA_ETYPE		= DSA_TAG_PROTO_QCA_ETYPE_VALUE,
  };
  
  struct dsa_switch;
 --- a/net/dsa/tag_qca.c
 +++ b/net/dsa/tag_qca.c
-@@ -11,17 +11,21 @@
+@@ -11,16 +11,20 @@
  #include "tag.h"
  
  #define QCA_NAME "qca"
@@ -59,7 +59,6 @@ Signed-off-by: Julius Bairaktaris <julius@bairaktaris.de>
 +static struct sk_buff *__qca_tag_xmit(struct sk_buff *skb,
 +				      struct net_device *dev, unsigned int len)
  {
- 	struct dsa_port *dp = dsa_user_to_port(dev);
  	__be16 *phdr;
  	u16 hdr;
  
@@ -74,7 +73,7 @@ Signed-off-by: Julius Bairaktaris <julius@bairaktaris.de>
  
  	/* Set the version field, and set destination port information */
  	hdr = FIELD_PREP(QCA_HDR_XMIT_VERSION, QCA_HDR_VERSION);
-@@ -33,7 +37,19 @@ static struct sk_buff *qca_tag_xmit(stru
+@@ -32,7 +36,19 @@ static struct sk_buff *qca_tag_xmit(stru
  	return skb;
  }
  
@@ -95,24 +94,28 @@ Signed-off-by: Julius Bairaktaris <julius@bairaktaris.de>
  {
  	struct qca_tagger_data *tagger_data;
  	struct dsa_port *dp = dev->dsa_ptr;
-@@ -47,10 +63,15 @@ static struct sk_buff *qca_tag_rcv(struc
+@@ -46,12 +62,19 @@ static struct sk_buff *qca_tag_rcv(struc
  
  	tagger_data = ds->tagger_data;
  
--	if (unlikely(!pskb_may_pull(skb, QCA_HDR_LEN)))
-+	if (unlikely(!pskb_may_pull(skb, len)))
+-	if (unlikely(!pskb_may_pull(skb, QCA_HDR_LEN))) {
++	if (unlikely(!pskb_may_pull(skb, len))) {
+ 		kfree_skb(skb);
  		return NULL;
+ 	}
  
  	phdr = dsa_etype_header_pos_rx(skb);
 +	if (len == QCA_ETYPE_HDR_LEN) {
-+		if (ntohs(*phdr) != QCA_HDR_ETYPE)
++		if (ntohs(*phdr) != QCA_HDR_ETYPE) {
++			kfree_skb(skb);
 +			return NULL;
++		}
 +		phdr++;
 +	}
  	hdr = ntohs(*phdr);
  
  	/* Make sure the version is correct */
-@@ -61,6 +82,17 @@ static struct sk_buff *qca_tag_rcv(struc
+@@ -64,6 +87,17 @@ static struct sk_buff *qca_tag_rcv(struc
  	/* Get pk type */
  	pk_type = FIELD_GET(QCA_HDR_RECV_TYPE, hdr);
  
@@ -130,8 +133,8 @@ Signed-off-by: Julius Bairaktaris <julius@bairaktaris.de>
  	/* Ethernet mgmt read/write packet */
  	if (pk_type == QCA_HDR_RECV_TYPE_RW_REG_ACK) {
  		if (likely(tagger_data->rw_reg_ack_handler))
-@@ -83,12 +115,23 @@ static struct sk_buff *qca_tag_rcv(struc
- 		return NULL;
+@@ -90,12 +124,23 @@ static struct sk_buff *qca_tag_rcv(struc
+ 	}
  
  	/* Remove QCA tag and recalculate checksum */
 -	skb_pull_rcsum(skb, QCA_HDR_LEN);
@@ -156,7 +159,7 @@ Signed-off-by: Julius Bairaktaris <julius@bairaktaris.de>
  static int qca_tag_connect(struct dsa_switch *ds)
  {
  	struct qca_tagger_data *tagger_data;
-@@ -119,8 +162,29 @@ static const struct dsa_device_ops qca_n
+@@ -126,8 +171,29 @@ static const struct dsa_device_ops qca_n
  	.promisc_on_conduit = true,
  };
  

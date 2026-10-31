@@ -48,7 +48,7 @@ Signed-off-by: Robert Marko <robimarko@gmail.com>
  	soc: soc@0 {
  		#address-cells = <1>;
  		#size-cells = <1>;
-@@ -1051,6 +1077,44 @@
+@@ -1049,6 +1075,44 @@
  				ranges;
  			};
  		};

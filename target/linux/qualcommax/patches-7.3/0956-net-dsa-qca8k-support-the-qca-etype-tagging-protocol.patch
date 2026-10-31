@@ -92,8 +92,8 @@ Signed-off-by: Julius Bairaktaris <julius@bairaktaris.de>
  	if (!read_skb) {
  		ret = -ENOMEM;
  		goto err_read_skb;
-@@ -1743,6 +1755,35 @@ qca8k_get_tag_protocol(struct dsa_switch
- 	return DSA_TAG_PROTO_QCA;
+@@ -1866,6 +1878,35 @@ static int qca8xxx_port_lag_leave(struct
+ 	return qca8k_port_lag_refresh_user_ports(ds, lag);
  }
  
 +static int qca8k_change_tag_protocol(struct dsa_switch *ds,
@@ -125,9 +125,9 @@ Signed-off-by: Julius Bairaktaris <julius@bairaktaris.de>
 +	return 0;
 +}
 +
- static struct dsa_port *
- qca8k_preferred_default_local_cpu_port(struct dsa_switch *ds)
- {
+ static void
+ qca8k_conduit_change(struct dsa_switch *ds, const struct net_device *conduit,
+ 		     bool operational)
 @@ -1893,6 +1934,7 @@ static int qca8k_connect_tag_protocol(st
  
  	switch (proto) {
