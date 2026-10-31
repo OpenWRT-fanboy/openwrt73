@@ -1,0 +1,19 @@
+From: OpenWrt <openwrt@openwrt.org>
+Subject: [PATCH] qualcommax: fix stmmac fix_mac_speed callback for 7.3
+
+Linux 7.3 added a phy_interface_t argument to fix_mac_speed.
+
+Signed-off-by: OpenWrt <openwrt@openwrt.org>
+
+--- a/drivers/net/ethernet/stmicro/stmmac/dwmac-ipq5018.c
++++ b/drivers/net/ethernet/stmicro/stmmac/dwmac-ipq5018.c
+@@ -37,7 +37,8 @@
+ };
+ 
+ #if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 18, 0)
+-static void ipq5018_gmac_fix_speed(void *priv, int speed, unsigned int mode)
++static void ipq5018_gmac_fix_speed(void *priv, phy_interface_t interface,
++				   int speed, unsigned int mode)
+ #else
+ static void ipq5018_gmac_fix_speed(void *priv, unsigned int speed, unsigned int mode)
+ #endif
