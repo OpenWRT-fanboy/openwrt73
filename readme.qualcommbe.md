@@ -2,6 +2,7 @@
 
 This file documents the out-of-tree packages that do not build against
 Linux 7.3 on qualcommbe, and the patches used to make them work.
+**Compile-tested subtargets (`CONFIG_TESTING_KERNEL=y`):** none recorded.
 
 ## Kernel and target prerequisites
 
