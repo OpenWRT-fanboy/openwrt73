@@ -27,7 +27,7 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 
 --- a/drivers/usb/host/Kconfig
 +++ b/drivers/usb/host/Kconfig
-@@ -209,6 +209,10 @@ config USB_EHCI_DEVIANT_PORT_STATUS_REG
+@@ -215,6 +215,10 @@
  	bool
  	# Used for hosts with a deviant port status register location
  
@@ -40,7 +40,7 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
  	depends on (PPC32 || MICROBLAZE)
 --- a/drivers/usb/host/ehci-hub.c
 +++ b/drivers/usb/host/ehci-hub.c
-@@ -963,6 +963,13 @@ int ehci_hub_control(
+@@ -963,6 +963,13 @@
  			/* see what we found out */
  			temp = check_reset_complete (ehci, wIndex, status_reg,
  					ehci_readl(ehci, status_reg));
@@ -54,7 +54,7 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
  		}
  
  		/* transfer dedicated ports to the companion hc */
-@@ -1121,7 +1128,16 @@ int ehci_hub_control(
+@@ -1121,7 +1128,16 @@
  				 */
  				if (ehci_has_fsl_hs_errata(ehci))
  					temp |= (1 << PORTSC_FSL_PFSC);
@@ -73,7 +73,7 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
  
 --- a/drivers/usb/host/ehci.h
 +++ b/drivers/usb/host/ehci.h
-@@ -126,6 +126,12 @@ struct ehci_hcd {			/* one per controlle
+@@ -126,6 +126,12 @@
  #ifdef CONFIG_USB_EHCI_DEVIANT_PORT_STATUS_REG
  	u32 __iomem		*port_status;
  #endif
