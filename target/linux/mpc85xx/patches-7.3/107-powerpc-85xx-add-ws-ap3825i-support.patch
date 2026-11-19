@@ -8,7 +8,7 @@ WS-AP3825i AP.
 
 --- a/arch/powerpc/platforms/85xx/Kconfig
 +++ b/arch/powerpc/platforms/85xx/Kconfig
-@@ -73,6 +73,16 @@ config WS_AP3710I
+@@ -73,6 +73,16 @@
  	  This board is a Concurrent Dual-Band wireless access point with a
  	  Freescale P1020 SoC.
  
@@ -27,7 +27,7 @@ WS-AP3825i AP.
  	select DEFAULT_UIMAGE
 --- a/arch/powerpc/platforms/85xx/Makefile
 +++ b/arch/powerpc/platforms/85xx/Makefile
-@@ -26,6 +26,7 @@ obj-$(CONFIG_PANDA)       += panda.o
+@@ -26,6 +26,7 @@
  obj-$(CONFIG_PPC_P2020)   += p2020.o $(obj8259-y)
  obj-$(CONFIG_TWR_P102x)   += twr_p102x.o
  obj-$(CONFIG_WS_AP3710I)  += ws-ap3710i.o
@@ -37,7 +37,7 @@ WS-AP3825i AP.
  obj-$(CONFIG_RED_15W_REV1)	+= red15w_rev1.o
 --- a/arch/powerpc/boot/Makefile
 +++ b/arch/powerpc/boot/Makefile
-@@ -179,6 +179,7 @@ src-plat-$(CONFIG_MVME7100) += motload-h
+@@ -179,6 +179,7 @@
  src-plat-$(CONFIG_HIVEAP_330) += simpleboot.c fixed-head.S
  src-plat-$(CONFIG_TL_WDR4900_V1) += simpleboot.c fixed-head.S
  src-plat-$(CONFIG_WS_AP3710I) += simpleboot.c fixed-head.S
@@ -45,7 +45,7 @@ WS-AP3825i AP.
  
  src-plat-$(CONFIG_PPC_MICROWATT) += fixed-head.S microwatt.c
  
-@@ -346,6 +347,7 @@ image-$(CONFIG_KSI8560)			+= cuImage.ksi
+@@ -346,6 +347,7 @@
  image-$(CONFIG_HIVEAP_330)		+= simpleImage.hiveap-330
  image-$(CONFIG_TL_WDR4900_V1)		+= simpleImage.tl-wdr4900-v1
  image-$(CONFIG_WS_AP3710I)		+= simpleImage.ws-ap3710i
@@ -55,7 +55,7 @@ WS-AP3825i AP.
  
 --- a/arch/powerpc/boot/wrapper
 +++ b/arch/powerpc/boot/wrapper
-@@ -344,6 +344,11 @@ simpleboot-ws-ap3710i)
+@@ -345,6 +345,11 @@
      link_address='0x3000000'
      binary=y
      ;;
