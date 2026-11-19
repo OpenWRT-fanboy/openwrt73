@@ -15,9 +15,10 @@
 #
 # - Nothing useful is done with stdin
 #
+
 --- a/arch/um/drivers/mconsole.h
 +++ b/arch/um/drivers/mconsole.h
-@@ -85,6 +85,7 @@ extern void mconsole_cad(struct mc_reque
+@@ -85,6 +85,7 @@
  extern void mconsole_stop(struct mc_request *req);
  extern void mconsole_go(struct mc_request *req);
  extern void mconsole_log(struct mc_request *req);
@@ -43,7 +44,7 @@
  #include <asm/switch_to.h>
  
  #include <init.h>
-@@ -124,6 +126,59 @@ void mconsole_log(struct mc_request *req
+@@ -124,6 +126,59 @@
  	mconsole_reply(req, "", 0, 0);
  }
  
@@ -103,7 +104,7 @@
  void mconsole_proc(struct mc_request *req)
  {
  	struct vfsmount *mnt = proc_mnt;
-@@ -190,6 +245,7 @@ void mconsole_proc(struct mc_request *re
+@@ -190,6 +245,7 @@
      stop - pause the UML; it will do nothing until it receives a 'go' \n\
      go - continue the UML after a 'stop' \n\
      log <string> - make UML enter <string> into the kernel log\n\
@@ -113,7 +114,7 @@
  "
 --- a/arch/um/drivers/mconsole_user.c
 +++ b/arch/um/drivers/mconsole_user.c
-@@ -30,6 +30,7 @@ static struct mconsole_command commands[
+@@ -30,6 +30,7 @@
  	{ "stop", mconsole_stop, MCONSOLE_PROC },
  	{ "go", mconsole_go, MCONSOLE_INTR },
  	{ "log", mconsole_log, MCONSOLE_INTR },
@@ -123,7 +124,7 @@
  };
 --- a/arch/um/os-Linux/file.c
 +++ b/arch/um/os-Linux/file.c
-@@ -557,6 +557,8 @@ int os_create_unix_socket(const char *fi
+@@ -557,6 +557,8 @@
  
  	addr.sun_family = AF_UNIX;
  
@@ -134,7 +135,7 @@
  	err = bind(sock, (struct sockaddr *) &addr, sizeof(addr));
 --- a/include/linux/kmod.h
 +++ b/include/linux/kmod.h
-@@ -29,4 +29,6 @@ static inline int request_module_nowait(
+@@ -29,4 +29,6 @@
  #define try_then_request_module(x, mod...) (x)
  #endif
  
@@ -143,7 +144,7 @@
  #endif /* __LINUX_KMOD_H__ */
 --- a/include/linux/umh.h
 +++ b/include/linux/umh.h
-@@ -23,6 +23,7 @@ struct subprocess_info {
+@@ -23,6 +23,7 @@
  	const char *path;
  	char **argv;
  	char **envp;
@@ -162,7 +163,7 @@
  
  #include <trace/events/module.h>
  
-@@ -70,6 +72,28 @@ static int call_usermodehelper_exec_asyn
+@@ -70,6 +72,28 @@
  	flush_signal_handlers(current, 1);
  	spin_unlock_irq(&current->sighand->siglock);
  
@@ -189,9 +190,9 @@
 +	}
 +
  	/*
- 	 * Initial kernel threads share ther FS with init, in order to
- 	 * get the init root directory. But we've now created a new
-@@ -329,6 +353,20 @@ static void helper_unlock(void)
+ 	 * Usermodehelper threads get a copy of userspace init's
+ 	 * fs_struct. Reset umask to the default.
+@@ -327,6 +351,20 @@
  		wake_up(&running_helpers_waitq);
  }
  
