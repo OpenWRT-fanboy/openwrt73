@@ -9,7 +9,7 @@ Subject: [PATCH 08/20] pinctrl: add driver for siflower sf19a2890
 
 --- a/drivers/pinctrl/Kconfig
 +++ b/drivers/pinctrl/Kconfig
-@@ -533,6 +533,16 @@ config PINCTRL_SCMI
+@@ -542,6 +542,16 @@
  	  It uses SCMI Message Protocol to interact with the
  	  firmware providing all the pinctrl controls.
  
@@ -28,7 +28,7 @@ Subject: [PATCH 08/20] pinctrl: add driver for siflower sf19a2890
  	depends on OF
 --- a/drivers/pinctrl/Makefile
 +++ b/drivers/pinctrl/Makefile
-@@ -53,6 +53,7 @@ obj-$(CONFIG_PINCTRL_RK805)	+= pinctrl-r
+@@ -55,6 +55,7 @@
  obj-$(CONFIG_PINCTRL_ROCKCHIP)	+= pinctrl-rockchip.o
  obj-$(CONFIG_PINCTRL_RP1)       += pinctrl-rp1.o
  obj-$(CONFIG_PINCTRL_SCMI)	+= pinctrl-scmi.o

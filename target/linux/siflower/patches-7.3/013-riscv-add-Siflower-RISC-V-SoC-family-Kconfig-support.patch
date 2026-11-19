@@ -16,7 +16,7 @@ Signed-off-by: Chuanhong Guo <gch981213@gmail.com>
 
 --- a/arch/riscv/Kconfig.socs
 +++ b/arch/riscv/Kconfig.socs
-@@ -43,6 +43,12 @@ config ARCH_SPACEMIT
+@@ -49,6 +49,12 @@
  	help
  	  This enables support for SpacemiT SoC platform hardware.
  

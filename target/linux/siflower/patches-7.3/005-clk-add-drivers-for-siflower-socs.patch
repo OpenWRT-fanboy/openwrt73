@@ -10,7 +10,7 @@ Signed-off-by: Chuanhong Guo <gch981213@gmail.com>
 
 --- a/drivers/clk/Kconfig
 +++ b/drivers/clk/Kconfig
-@@ -534,6 +534,7 @@ source "drivers/clk/renesas/Kconfig"
+@@ -530,6 +530,7 @@
  source "drivers/clk/rockchip/Kconfig"
  source "drivers/clk/samsung/Kconfig"
  source "drivers/clk/sifive/Kconfig"
@@ -20,8 +20,8 @@ Signed-off-by: Chuanhong Guo <gch981213@gmail.com>
  source "drivers/clk/spacemit/Kconfig"
 --- a/drivers/clk/Makefile
 +++ b/drivers/clk/Makefile
-@@ -145,6 +145,7 @@ obj-y					+= renesas/
- obj-$(CONFIG_ARCH_ROCKCHIP)		+= rockchip/
+@@ -158,6 +158,7 @@
+ obj-$(CONFIG_COMMON_CLK_ROCKCHIP)	+= rockchip/
  obj-$(CONFIG_COMMON_CLK_SAMSUNG)	+= samsung/
  obj-$(CONFIG_CLK_SIFIVE)		+= sifive/
 +obj-$(CONFIG_CLK_SIFLOWER)		+= siflower/
