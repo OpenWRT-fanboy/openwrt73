@@ -37,5 +37,5 @@ Signed-off-by: Zoltan HERPAI <wigyori@uid0.hu>
 +};
 +
  &mmc0 {
- 	non-removable;
- };
+ 	cap-mmc-highspeed;
+ 	cap-mmc-hw-reset;

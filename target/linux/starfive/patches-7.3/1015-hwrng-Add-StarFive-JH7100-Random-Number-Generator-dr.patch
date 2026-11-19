@@ -16,7 +16,7 @@ Signed-off-by: Emil Renner Berthing <kernel@esmil.dk>
 
 --- a/drivers/char/hw_random/Kconfig
 +++ b/drivers/char/hw_random/Kconfig
-@@ -349,6 +349,19 @@ config HW_RANDOM_POWERNV
+@@ -349,6 +349,19 @@
  
  	  If unsure, say Y.
  
@@ -38,14 +38,14 @@ Signed-off-by: Emil Renner Berthing <kernel@esmil.dk>
  	depends on ARCH_HISI || COMPILE_TEST
 --- a/drivers/char/hw_random/Makefile
 +++ b/drivers/char/hw_random/Makefile
-@@ -29,6 +29,7 @@ obj-$(CONFIG_HW_RANDOM_OCTEON) += octeon
+@@ -29,6 +29,7 @@
  obj-$(CONFIG_HW_RANDOM_NOMADIK) += nomadik-rng.o
  obj-$(CONFIG_HW_RANDOM_PSERIES) += pseries-rng.o
  obj-$(CONFIG_HW_RANDOM_POWERNV) += powernv-rng.o
 +obj-$(CONFIG_HW_RANDOM_STARFIVE_VIC)	+= starfive-vic-rng.o
  obj-$(CONFIG_HW_RANDOM_HISI)	+= hisi-rng.o
  obj-$(CONFIG_HW_RANDOM_HISTB) += histb-rng.o
- obj-$(CONFIG_HW_RANDOM_BCM2835) += bcm2835-rng.o
+ obj-$(CONFIG_HW_RANDOM_HISI_TRNG) += hisi-trng-v2.o
 --- /dev/null
 +++ b/drivers/char/hw_random/starfive-vic-rng.c
 @@ -0,0 +1,256 @@

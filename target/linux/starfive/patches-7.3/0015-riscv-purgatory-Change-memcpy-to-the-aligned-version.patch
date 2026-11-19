@@ -18,9 +18,9 @@ Signed-off-by: Hal Feng <hal.feng@starfivetech.com>
 -purgatory-y := purgatory.o sha256.o entry.o string.o ctype.o memcpy.o memset.o
 +purgatory-y := purgatory.o sha256.o entry.o string.o ctype.o memcpy_aligned.o memcpy.o memset.o
  ifeq ($(CONFIG_KASAN_GENERIC)$(CONFIG_KASAN_SW_TAGS),)
- purgatory-y += strcmp.o strlen.o strncmp.o
+ purgatory-y += strcmp.o strlen.o strncmp.o strnlen.o strchr.o strrchr.o
  endif
-@@ -14,9 +14,12 @@ $(obj)/string.o: $(srctree)/lib/string.c
+@@ -14,9 +14,12 @@
  $(obj)/ctype.o: $(srctree)/lib/ctype.c FORCE
  	$(call if_changed_rule,cc_o_c)
  

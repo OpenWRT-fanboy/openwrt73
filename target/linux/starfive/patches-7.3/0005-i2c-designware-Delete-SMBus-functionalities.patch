@@ -14,7 +14,7 @@ Signed-off-by: Hal Feng <hal.feng@starfivetech.com>
 
 --- a/drivers/i2c/busses/i2c-designware-core.h
 +++ b/drivers/i2c/busses/i2c-designware-core.h
-@@ -19,12 +19,10 @@
+@@ -20,12 +20,10 @@
  
  #include <linux/designware_i2c.h>
  
@@ -29,5 +29,5 @@ Signed-off-by: Hal Feng <hal.feng@starfivetech.com>
 +					& ~I2C_FUNC_SMBUS_PROC_CALL \
 +					& ~I2C_FUNC_SMBUS_PEC))
  
- #define DW_IC_SDA_HOLD_MIN_VERS			0x3131312A /* "111*" == v1.11* */
- #define DW_IC_COMP_TYPE_VALUE			0x44570140 /* "DW" + 0x0140 */
+ /*
+  * Register access parameters
