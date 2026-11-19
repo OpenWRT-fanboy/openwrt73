@@ -13,7 +13,7 @@ Signed-off-by: Robert Marko <robert.marko@sartura.hr>
 
 --- a/drivers/net/ethernet/microchip/sparx5/sparx5_netdev.c
 +++ b/drivers/net/ethernet/microchip/sparx5/sparx5_netdev.c
-@@ -259,6 +259,7 @@ static const struct net_device_ops sparx
+@@ -264,6 +264,7 @@
  	.ndo_setup_tc           = sparx5_port_setup_tc,
  	.ndo_hwtstamp_get       = sparx5_port_hwtstamp_get,
  	.ndo_hwtstamp_set       = sparx5_port_hwtstamp_set,
@@ -21,7 +21,7 @@ Signed-off-by: Robert Marko <robert.marko@sartura.hr>
  };
  
  bool sparx5_netdevice_check(const struct net_device *dev)
-@@ -279,6 +280,9 @@ struct net_device *sparx5_create_netdev(
+@@ -284,6 +285,9 @@
  	ndev->hw_features |= NETIF_F_HW_TC;
  	ndev->features |= NETIF_F_HW_TC;
  
