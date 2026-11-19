@@ -36,7 +36,7 @@ David
 
 --- a/drivers/tty/serial/8250/8250_core.c
 +++ b/drivers/tty/serial/8250/8250_core.c
-@@ -89,6 +89,38 @@ static irqreturn_t serial8250_interrupt(
+@@ -93,6 +93,38 @@
  
  		if (l == i->head && pass_counter++ > PASS_LIMIT)
  			break;
