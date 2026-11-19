@@ -28,8 +28,8 @@ Signed-off-by: Rosen Penev <rosenp@gmail.com>
  #include <linux/scatterlist.h>
  #include <linux/pfn.h>
  #include <linux/vmalloc.h>
-@@ -104,6 +105,15 @@ static void __dma_direct_free_pages(stru
- 	dma_free_contiguous(dev, page, size);
+@@ -101,6 +102,15 @@
+ 	return ret;
  }
  
 +static void dma_direct_zero_pages(struct page *page, size_t size)
@@ -41,32 +41,33 @@ Signed-off-by: Rosen Penev <rosenp@gmail.com>
 +		clear_highpage(page + i);
 +}
 +
- static struct page *dma_direct_alloc_swiotlb(struct device *dev, size_t size)
+ static struct page *dma_direct_alloc_swiotlb(struct device *dev, size_t size,
+ 		unsigned long attrs)
  {
- 	struct page *page = swiotlb_alloc(dev, size);
-@@ -270,6 +280,13 @@ void *dma_direct_alloc(struct device *de
+@@ -312,8 +322,12 @@
  	if (remap) {
  		pgprot_t prot = dma_pgprot(dev, PAGE_KERNEL, attrs);
  
+-		/* remove any dirty cache lines on the kernel alias */
+-		arch_dma_prep_coherent(page, size);
 +		/*
 +		 * Zero via the page mapping before creating a potentially
 +		 * uncached remap.  Some architectures cannot safely run normal
 +		 * memset on uncached memory.
 +		 */
 +		dma_direct_zero_pages(page, size);
-+
- 		if (force_dma_unencrypted(dev))
- 			prot = pgprot_decrypted(prot);
  
-@@ -285,10 +302,9 @@ void *dma_direct_alloc(struct device *de
- 		ret = page_address(page);
- 		if (dma_set_decrypted(dev, ret, size))
- 			goto out_leak_pages;
-+		memset(ret, 0, size);
+ 		/* create a coherent mapping */
+ 		cpu_addr = dma_common_contiguous_remap(page, size, prot,
+@@ -322,10 +336,9 @@
+ 			goto out_encrypt_pages;
+ 	} else {
+ 		cpu_addr = page_address(page);
++		memset(cpu_addr, 0, size);
  	}
  
--	memset(ret, 0, size);
+-	memset(cpu_addr, 0, size);
 -
  	if (set_uncached) {
- 		arch_dma_prep_coherent(page, size);
- 		ret = arch_dma_set_uncached(ret, size);
+ 		void *uncached_cpu_addr;
+ 
