@@ -1,0 +1,105 @@
+From: OpenWrt <openwrt@openwrt.org>
+Subject: clk: siflower: sf21: switch clk_ops.round_rate to determine_rate
+
+clk_ops.round_rate was removed in 7.3; clocks must provide
+.determine_rate() and write the achievable rate into clk_rate_request.
+Convert the three sf21 topcrm PLL clocks accordingly, keeping the same
+approximation logic and parent rate.
+
+Signed-off-by: OpenWrt <openwrt@openwrt.org>
+---
+ drivers/clk/siflower/clk-sf21-topcrm.c | 36 ++++++++++++++--------------
+ 1 file changed, 18 insertions(+), 18 deletions(-)
+
+--- a/drivers/clk/siflower/clk-sf21-topcrm.c
++++ b/drivers/clk/siflower/clk-sf21-topcrm.c
+@@ -83,17 +83,17 @@
+ 	return (parent_rate / refdiv) * fbdiv;
+ }
+ 
+-static long sf21_cmnpll_vco_round_rate(struct clk_hw *hw,
+-					    unsigned long rate,
+-					    unsigned long *parent_rate)
++static int sf21_cmnpll_vco_determine_rate(struct clk_hw *hw,
++					  struct clk_rate_request *req)
+ {
+ 	unsigned long fbdiv, refdiv;
+ 
+-	rational_best_approximation(rate, *parent_rate,
++	rational_best_approximation(req->rate, req->best_parent_rate,
+ 				    BIT(PLL_CMN_FBDIV_BITS) - 1,
+ 				    BIT(PLL_CMN_REFDIV_BITS) - 1, &fbdiv,
+ 				    &refdiv);
+-	return (*parent_rate / refdiv) * fbdiv;
++	req->rate = (req->best_parent_rate / refdiv) * fbdiv;
++	return 0;
+ }
+ 
+ static int sf21_cmnpll_vco_set_rate(struct clk_hw *hw, unsigned long rate,
+@@ -133,7 +133,7 @@
+ 
+ static const struct clk_ops sf21_cmnpll_vco_ops = {
+ 	.recalc_rate = sf21_cmnpll_vco_recalc_rate,
+-	.round_rate = sf21_cmnpll_vco_round_rate,
++	.determine_rate = sf21_cmnpll_vco_determine_rate,
+ 	.set_rate = sf21_cmnpll_vco_set_rate,
+ };
+ 
+@@ -182,14 +182,14 @@
+ 	return parent_rate / *diva / *divb;
+ }
+ 
+-static long sf21_cmnpll_postdiv_round_rate(struct clk_hw *hw,
+-						unsigned long rate,
+-						unsigned long *parent_rate)
++static int sf21_cmnpll_postdiv_determine_rate(struct clk_hw *hw,
++					      struct clk_rate_request *req)
+ {
+ 	unsigned int diva, divb;
+ 
+-	return sf21_dualdiv_round_rate(rate, *parent_rate, 7, &diva,
+-					    &divb);
++	req->rate = sf21_dualdiv_round_rate(req->rate, req->best_parent_rate, 7,
++					    &diva, &divb);
++	return 0;
+ }
+ 
+ static int sf21_cmnpll_postdiv_set_rate(struct clk_hw *hw,
+@@ -226,7 +226,7 @@
+ 
+ static const struct clk_ops sf21_cmnpll_postdiv_ops = {
+ 	.recalc_rate = sf21_cmnpll_postdiv_recalc_rate,
+-	.round_rate = sf21_cmnpll_postdiv_round_rate,
++	.determine_rate = sf21_cmnpll_postdiv_determine_rate,
+ 	.set_rate = sf21_cmnpll_postdiv_set_rate,
+ };
+ 
+@@ -386,14 +386,14 @@
+ 	spin_unlock_irqrestore(cmn_priv->lock, flags);
+ }
+ 
+-static long sf21_pciepll_fout_round_rate(struct clk_hw *hw,
+-					      unsigned long rate,
+-					      unsigned long *parent_rate)
++static int sf21_pciepll_fout_determine_rate(struct clk_hw *hw,
++					    struct clk_rate_request *req)
+ {
+ 	unsigned int diva, divb;
+ 
+-	return sf21_dualdiv_round_rate(rate, *parent_rate, 8, &diva,
+-					    &divb);
++	req->rate = sf21_dualdiv_round_rate(req->rate, req->best_parent_rate, 8,
++					    &diva, &divb);
++	return 0;
+ }
+ 
+ static int sf21_pciepll_fout_set_rate(struct clk_hw *hw,
+@@ -438,7 +438,7 @@
+ 	.enable = sf21_pciepll_fout_enable,
+ 	.disable = sf21_pciepll_fout_disable,
+ 	.recalc_rate = sf21_pciepll_fout_recalc_rate,
+-	.round_rate = sf21_pciepll_fout_round_rate,
++	.determine_rate = sf21_pciepll_fout_determine_rate,
+ 	.set_rate = sf21_pciepll_fout_set_rate,
+ };
+ 
