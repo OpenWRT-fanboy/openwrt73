@@ -33,7 +33,7 @@ Signed-off-by: Guilherme Silva Sousa <guisousa09@hotmail.com>
 
 --- a/sound/soc/bcm/bcm2835-i2s.c
 +++ b/sound/soc/bcm/bcm2835-i2s.c
-@@ -149,8 +149,8 @@ static void bcm2835_i2s_stop_clock(struc
+@@ -150,8 +150,8 @@
  	dev->clk_prepared = false;
  }
  
@@ -44,7 +44,7 @@ Signed-off-by: Guilherme Silva Sousa <guisousa09@hotmail.com>
  {
  	int timeout = 1000;
  	uint32_t syncval;
-@@ -187,8 +187,9 @@ static void bcm2835_i2s_clear_fifos(stru
+@@ -188,8 +188,9 @@
  	/* Wait for 2 PCM clock cycles */
  
  	/*
@@ -56,7 +56,7 @@ Signed-off-by: Guilherme Silva Sousa <guisousa09@hotmail.com>
  	 */
  	regmap_read(dev->i2s_regmap, BCM2835_I2S_CS_A_REG, &syncval);
  	syncval &= BCM2835_I2S_SYNC;
-@@ -204,7 +205,8 @@ static void bcm2835_i2s_clear_fifos(stru
+@@ -205,7 +206,8 @@
  	}
  
  	if (!timeout)
@@ -66,7 +66,7 @@ Signed-off-by: Guilherme Silva Sousa <guisousa09@hotmail.com>
  
  	/* Stop clock if it was not running before */
  	if (!clk_was_prepared)
-@@ -213,6 +215,14 @@ static void bcm2835_i2s_clear_fifos(stru
+@@ -214,6 +216,14 @@
  	/* Restore I2S state */
  	regmap_update_bits(dev->i2s_regmap, BCM2835_I2S_CS_A_REG,
  			BCM2835_I2S_RXON | BCM2835_I2S_TXON, i2s_active_state);
@@ -81,7 +81,7 @@ Signed-off-by: Guilherme Silva Sousa <guisousa09@hotmail.com>
  }
  
  static int bcm2835_i2s_set_dai_fmt(struct snd_soc_dai *dai,
-@@ -588,6 +598,11 @@ static int bcm2835_i2s_hw_params(struct
+@@ -589,6 +599,11 @@
  			| BCM2835_I2S_RX(0x20), 0xffffffff);
  
  	/* Clear FIFOs */
@@ -93,7 +93,7 @@ Signed-off-by: Guilherme Silva Sousa <guisousa09@hotmail.com>
  	bcm2835_i2s_clear_fifos(dev, true, true);
  
  	dev_dbg(dev->dev,
-@@ -636,7 +651,13 @@ static int bcm2835_i2s_prepare(struct sn
+@@ -633,7 +648,13 @@
  		bcm2835_i2s_clear_fifos(dev, true, false);
  	else if (substream->stream == SNDRV_PCM_STREAM_CAPTURE
  			&& (cs_reg & BCM2835_I2S_RXD))

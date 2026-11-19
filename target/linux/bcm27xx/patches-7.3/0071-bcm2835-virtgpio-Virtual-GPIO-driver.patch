@@ -35,7 +35,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
 
 --- a/drivers/gpio/Kconfig
 +++ b/drivers/gpio/Kconfig
-@@ -237,6 +237,12 @@ config GPIO_BLZP1600
+@@ -241,6 +241,12 @@
  	  The controller is based on the Verisilicon Microelectronics GPIO APB v0.2
  	  IP block.
  
@@ -50,14 +50,14 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  	default y if (ARCH_BRCMSTB || BMIPS_GENERIC)
 --- a/drivers/gpio/Makefile
 +++ b/drivers/gpio/Makefile
-@@ -43,6 +43,7 @@ obj-$(CONFIG_GPIO_ASPEED_SGPIO)		+= gpio
+@@ -42,6 +42,7 @@
  obj-$(CONFIG_GPIO_ATH79)		+= gpio-ath79.o
  obj-$(CONFIG_GPIO_BCM_KONA)		+= gpio-bcm-kona.o
  obj-$(CONFIG_GPIO_BCM_XGS_IPROC)	+= gpio-xgs-iproc.o
 +obj-$(CONFIG_GPIO_BCM_VIRT)		+= gpio-bcm-virt.o
  obj-$(CONFIG_GPIO_BD71815)		+= gpio-bd71815.o
  obj-$(CONFIG_GPIO_BD71828)		+= gpio-bd71828.o
- obj-$(CONFIG_GPIO_BD9571MWV)		+= gpio-bd9571mwv.o
+ obj-$(CONFIG_GPIO_BD72720)		+= gpio-bd72720.o
 --- /dev/null
 +++ b/drivers/gpio/gpio-bcm-virt.c
 @@ -0,0 +1,213 @@

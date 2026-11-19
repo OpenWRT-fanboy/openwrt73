@@ -13,9 +13,9 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.org>
  .../vchiq-mmal/mmal-parameters.h              | 32 ++++++++++++++++++-
  1 file changed, 31 insertions(+), 1 deletion(-)
 
---- a/drivers/staging/vc04_services/vchiq-mmal/mmal-parameters.h
-+++ b/drivers/staging/vc04_services/vchiq-mmal/mmal-parameters.h
-@@ -577,7 +577,37 @@ enum mmal_parameter_video_type {
+--- a/drivers/platform/raspberrypi/vchiq-mmal/mmal-parameters.h
++++ b/drivers/platform/raspberrypi/vchiq-mmal/mmal-parameters.h
+@@ -577,7 +577,37 @@
  	MMAL_PARAMETER_VIDEO_ENCODE_H264_LOW_DELAY_HRD_FLAG,
  
  	/**< @ref MMAL_PARAMETER_BOOLEAN_T */

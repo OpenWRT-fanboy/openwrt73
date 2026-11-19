@@ -19,7 +19,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
 
 --- a/drivers/gpu/drm/vc4/vc4_dsi.c
 +++ b/drivers/gpu/drm/vc4/vc4_dsi.c
-@@ -869,6 +869,7 @@ static bool vc4_dsi_bridge_mode_fixup(st
+@@ -871,6 +871,7 @@
  	unsigned long pixel_clock_hz = mode->clock * 1000;
  	unsigned long pll_clock = pixel_clock_hz * dsi->divider;
  	int divider;
@@ -27,7 +27,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  
  	/* Find what divider gets us a faster clock than the requested
  	 * pixel clock.
-@@ -885,12 +886,27 @@ static bool vc4_dsi_bridge_mode_fixup(st
+@@ -887,12 +888,27 @@
  	pixel_clock_hz = pll_clock / dsi->divider;
  
  	adjusted_mode->clock = pixel_clock_hz / 1000;

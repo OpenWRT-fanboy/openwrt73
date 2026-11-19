@@ -17,7 +17,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
 
 --- a/drivers/mmc/host/cqhci-core.c
 +++ b/drivers/mmc/host/cqhci-core.c
-@@ -388,9 +388,11 @@ static void cqhci_off(struct mmc_host *m
+@@ -388,9 +388,11 @@
  
  	err = readx_poll_timeout(cqhci_read_ctl, cq_host, reg,
  				 reg & CQHCI_HALT, 0, CQHCI_OFF_TIMEOUT);
@@ -31,7 +31,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
  		pr_debug("%s: cqhci: CQE off\n", mmc_hostname(mmc));
  
  	if (cq_host->ops->post_disable)
-@@ -980,8 +982,11 @@ static bool cqhci_halt(struct mmc_host *
+@@ -979,8 +981,11 @@
  
  	ret = cqhci_halted(cq_host);
  

@@ -13,7 +13,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
 
 --- a/drivers/clk/Kconfig
 +++ b/drivers/clk/Kconfig
-@@ -96,6 +96,12 @@ config COMMON_CLK_RP1
+@@ -96,6 +96,12 @@
  	  This multi-function device has 3 main PLLs and several clock
  	  generators to drive the internal sub-peripherals.
  
@@ -28,7 +28,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  	depends on (MFD_HI655X_PMIC || COMPILE_TEST)
 --- a/drivers/clk/Makefile
 +++ b/drivers/clk/Makefile
-@@ -88,6 +88,7 @@ obj-$(CONFIG_COMMON_CLK_PWM)		+= clk-pwm
+@@ -96,6 +96,7 @@
  obj-$(CONFIG_CLK_QORIQ)			+= clk-qoriq.o
  obj-$(CONFIG_COMMON_CLK_RK808)		+= clk-rk808.o
  obj-$(CONFIG_COMMON_CLK_RP1)            += clk-rp1.o

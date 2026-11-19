@@ -18,7 +18,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
 
 --- a/drivers/gpu/drm/vc4/vc4_crtc.c
 +++ b/drivers/gpu/drm/vc4/vc4_crtc.c
-@@ -852,7 +852,7 @@ static void vc4_crtc_handle_page_flip(st
+@@ -850,7 +850,7 @@
  		 * the CRTC and encoder already reconfigured, leading to
  		 * underruns. This can be seen when reconfiguring the CRTC.
  		 */
@@ -29,7 +29,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  	spin_unlock(&vc4_crtc->irq_lock);
 --- a/drivers/gpu/drm/vc4/vc4_kms.c
 +++ b/drivers/gpu/drm/vc4/vc4_kms.c
-@@ -391,7 +391,7 @@ static void vc4_atomic_commit_tail(struc
+@@ -401,7 +401,7 @@
  	if (WARN_ON(IS_ERR(new_hvs_state)))
  		return;
  

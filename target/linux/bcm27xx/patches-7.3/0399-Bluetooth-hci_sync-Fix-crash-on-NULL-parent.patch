@@ -15,13 +15,13 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
 
 --- a/net/bluetooth/hci_sync.c
 +++ b/net/bluetooth/hci_sync.c
-@@ -5087,7 +5087,8 @@ static const struct {
+@@ -3750,7 +3750,8 @@
   */
- static int hci_dev_setup_sync(struct hci_dev *hdev)
+ static void hci_dev_get_bd_addr_from_property(struct hci_dev *hdev)
  {
 -	struct fwnode_handle *fwnode = dev_fwnode(hdev->dev.parent);
 +	struct fwnode_handle *fwnode =
 +		hdev->dev.parent ? dev_fwnode(hdev->dev.parent) : NULL;
- 	int ret = 0;
- 	bool invalid_bdaddr;
- 	size_t i;
+ 	bdaddr_t ba;
+ 	int ret;
+ 

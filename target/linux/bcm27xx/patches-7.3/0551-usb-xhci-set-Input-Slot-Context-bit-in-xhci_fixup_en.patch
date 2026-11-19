@@ -17,7 +17,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
 
 --- a/drivers/usb/host/xhci.c
 +++ b/drivers/usb/host/xhci.c
-@@ -1634,10 +1634,11 @@ static int xhci_check_ep0_maxpacket(stru
+@@ -1625,10 +1625,11 @@
   * XXX: bandwidth is not recalculated. We should probably do that.
   */
  
@@ -33,7 +33,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
  
  static void xhci_fixup_endpoint(struct usb_hcd *hcd, struct usb_device *udev,
  				struct usb_host_endpoint *ep, int interval)
-@@ -1651,10 +1652,14 @@ static void xhci_fixup_endpoint(struct u
+@@ -1642,10 +1643,14 @@
  	int ret;
  	int ep_index;
  	unsigned long flags;
@@ -49,7 +49,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
  
  	/* FS/LS interval translations */
  	if ((udev->speed == USB_SPEED_FULL ||
-@@ -1715,8 +1720,8 @@ static void xhci_fixup_endpoint(struct u
+@@ -1706,8 +1711,8 @@
  		mutex_unlock(&xhci->mutex);
  		return;
  	}

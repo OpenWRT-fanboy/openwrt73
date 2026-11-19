@@ -16,12 +16,12 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
 
 --- a/mm/vmscan.c
 +++ b/mm/vmscan.c
-@@ -4301,7 +4301,7 @@ bool lru_gen_look_around(struct page_vma
- 		if (!folio)
- 			continue;
+@@ -4278,7 +4278,7 @@
+ 	lockdep_assert_held(pvmw->ptl);
+ 	VM_WARN_ON_ONCE_FOLIO(folio_test_lru(folio), folio);
  
--		if (!ptep_clear_young_notify(vma, addr, pte + i))
-+		if (!ptep_clear_flush_young_notify(vma, addr, pte + i))
- 			continue;
+-	if (!test_and_clear_young_ptes_notify(vma, addr, pte, nr))
++	if (!clear_flush_young_ptes_notify(vma, addr, pte, nr))
+ 		return false;
  
- 		if (last != folio) {
+ 	if (spin_is_contended(pvmw->ptl))

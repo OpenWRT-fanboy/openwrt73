@@ -10,7 +10,7 @@ Signed-off-by: Dom Cobley <popcornmix@gmail.com>
 
 --- a/drivers/gpu/drm/vc4/vc4_plane.c
 +++ b/drivers/gpu/drm/vc4/vc4_plane.c
-@@ -597,7 +597,7 @@ static void vc4_write_tpz(struct vc4_pla
+@@ -595,7 +595,7 @@
  #define PHASE_BITS 6
  
  static void vc4_write_ppf(struct vc4_plane_state *vc4_state, u32 src, u32 dst,
@@ -19,7 +19,7 @@ Signed-off-by: Dom Cobley <popcornmix@gmail.com>
  {
  	struct vc4_dev *vc4 = to_vc4_dev(vc4_state->base.plane->dev);
  	u32 scale = src / dst;
-@@ -608,7 +608,7 @@ static void vc4_write_ppf(struct vc4_pla
+@@ -606,7 +606,7 @@
  
  	/*
  	 * Start the phase at 1/2 pixel from the 1st pixel at src_x.
@@ -28,7 +28,7 @@ Signed-off-by: Dom Cobley <popcornmix@gmail.com>
  	 */
  	if (channel) {
  		/*
-@@ -616,6 +616,7 @@ static void vc4_write_ppf(struct vc4_pla
+@@ -614,6 +614,7 @@
  		 * display list's x value
  		 */
  		offset = (xy & 0x1ffff) >> (16 - PHASE_BITS) >> 1;
@@ -36,7 +36,7 @@ Signed-off-by: Dom Cobley <popcornmix@gmail.com>
  		offset += -(1 << PHASE_BITS >> 2);
  	} else {
  		/*
-@@ -842,13 +843,15 @@ static void vc4_write_scaling_parameters
+@@ -840,13 +841,15 @@
  	/* Ch0 H-PPF Word 0: Scaling Parameters */
  	if (vc4_state->x_scaling[channel] == VC4_SCALING_PPF) {
  		vc4_write_ppf(vc4_state, vc4_state->src_w[channel],
@@ -54,7 +54,7 @@ Signed-off-by: Dom Cobley <popcornmix@gmail.com>
  		vc4_dlist_write(vc4_state, 0xc0c0c0c0);
  	}
  
-@@ -2564,6 +2567,8 @@ struct drm_plane *vc4_plane_init(struct
+@@ -2561,6 +2564,8 @@
  					  DRM_COLOR_YCBCR_BT709,
  					  DRM_COLOR_YCBCR_LIMITED_RANGE);
  

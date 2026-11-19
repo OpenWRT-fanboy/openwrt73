@@ -22,7 +22,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
 
 --- a/drivers/mmc/core/card.h
 +++ b/drivers/mmc/core/card.h
-@@ -307,6 +307,11 @@ static inline int mmc_card_no_uhs_ddr50_
+@@ -307,6 +307,11 @@
  	return c->quirks & MMC_QUIRK_NO_UHS_DDR50_TUNING;
  }
  
@@ -36,7 +36,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
  	return c->quirks & MMC_QUIRK_BROKEN_MDT;
 --- a/drivers/mmc/core/sd.c
 +++ b/drivers/mmc/core/sd.c
-@@ -1527,6 +1527,10 @@ cont:
+@@ -1529,6 +1529,10 @@
  			goto free_card;
  	}
  
@@ -49,7 +49,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
  		/*
 --- a/include/linux/mmc/card.h
 +++ b/include/linux/mmc/card.h
-@@ -332,6 +332,7 @@ struct mmc_card {
+@@ -331,6 +331,7 @@
  #define MMC_QUIRK_NO_UHS_DDR50_TUNING	(1<<18) /* Disable DDR50 tuning */
  #define MMC_QUIRK_BROKEN_MDT    (1<<19) /* Wrong manufacturing year */
  #define MMC_QUIRK_FIXED_SECURE_ERASE_TRIM_TIME	(1<<20) /* Secure erase/trim time is fixed regardless of size */

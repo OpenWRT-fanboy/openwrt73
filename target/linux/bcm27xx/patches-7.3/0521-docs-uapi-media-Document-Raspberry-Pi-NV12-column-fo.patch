@@ -14,7 +14,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
 
 --- a/Documentation/userspace-api/media/v4l/pixfmt-yuv-planar.rst
 +++ b/Documentation/userspace-api/media/v4l/pixfmt-yuv-planar.rst
-@@ -955,6 +955,48 @@ Data in the 12 high bits, zeros in the 4
+@@ -956,6 +956,48 @@
        - Cb\ :sub:`11`
        - Cr\ :sub:`11`
  

@@ -23,7 +23,7 @@ Signed-off-by: popcornmix <popcornmix@gmail.com>
  config TTY_PRINTK
 --- a/drivers/char/Makefile
 +++ b/drivers/char/Makefile
-@@ -44,3 +44,4 @@ obj-$(CONFIG_PS3_FLASH)		+= ps3flash.o
+@@ -41,3 +41,4 @@
  obj-$(CONFIG_XILLYBUS_CLASS)	+= xillybus/
  obj-$(CONFIG_POWERNV_OP_PANEL)	+= powernv-op-panel.o
  obj-$(CONFIG_ADI)		+= adi.o

@@ -23,7 +23,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
 
 --- a/drivers/net/phy/bcm-phy-ptp.c
 +++ b/drivers/net/phy/bcm-phy-ptp.c
-@@ -912,6 +912,18 @@ struct bcm_ptp_private *bcm_ptp_probe(st
+@@ -925,6 +925,18 @@
  	switch (BRCM_PHY_MODEL(phydev)) {
  	case PHY_ID_BCM54210E:
  		break;

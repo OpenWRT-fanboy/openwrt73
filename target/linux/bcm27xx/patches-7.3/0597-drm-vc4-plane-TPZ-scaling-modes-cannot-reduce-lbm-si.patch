@@ -20,7 +20,7 @@ Signed-off-by: Dom Cobley <popcornmix@gmail.com>
 
 --- a/drivers/gpu/drm/vc4/vc4_plane.c
 +++ b/drivers/gpu/drm/vc4/vc4_plane.c
-@@ -805,7 +805,10 @@ static unsigned int vc4_lbm_components(c
+@@ -803,7 +803,10 @@
  	if (info->is_yuv)
  		return channel ? 2 : 1;
  
@@ -32,13 +32,3 @@ Signed-off-by: Dom Cobley <popcornmix@gmail.com>
  		return 4;
  
  	return 3;
-@@ -836,9 +839,6 @@ static unsigned int vc4_lbm_channel_size
- 	if (!components)
- 		return 0;
- 
--	if (state->alpha != DRM_BLEND_ALPHA_OPAQUE && info->has_alpha)
--		components -= 1;
--
- 	words = width * wpc * components;
- 
- 	lines = DIV_ROUND_UP(words, 128 / info->hsub);

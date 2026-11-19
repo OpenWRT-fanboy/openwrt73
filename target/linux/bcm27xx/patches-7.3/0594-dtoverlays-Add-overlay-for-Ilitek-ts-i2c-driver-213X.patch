@@ -12,36 +12,6 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  3 files changed, 74 insertions(+)
  create mode 100644 arch/arm/boot/dts/overlays/ilitek-ts-i2c-overlay.dts
 
---- a/arch/arm/boot/dts/overlays/Makefile
-+++ b/arch/arm/boot/dts/overlays/Makefile
-@@ -131,6 +131,7 @@ dtbo-$(CONFIG_ARCH_BCM2835) += \
- 	i2s-dac.dtbo \
- 	i2s-gpio28-31.dtbo \
- 	i2s-master-dac.dtbo \
-+	ilitek-ts-i2c.dtbo \
- 	ilitek251x.dtbo \
- 	imx219.dtbo \
- 	imx258.dtbo \
---- a/arch/arm/boot/dts/overlays/README
-+++ b/arch/arm/boot/dts/overlays/README
-@@ -2784,6 +2784,17 @@ Load:   dtoverlay=i2s-master-dac
- Params: <None>
- 
- 
-+Name:   ilitek-ts-i2c
-+Info:   Enables I2C connected Ilitek 23XX, 25XX, and 213X touch controllers
-+        using GPIO 4 (pin 7 on GPIO header) for interrupt.
-+Load:   dtoverlay=ilitek-ts-i2c,<param>=<val>
-+Params: interrupt               GPIO used for interrupt (default 4)
-+        invx                    Touchscreen inverted x axis
-+        invy                    Touchscreen inverted y axis
-+        swapxy                  Touchscreen swapped x y axis
-+        i2c-path                Override I2C path to allow for i2c-gpio buses
-+
-+
- Name:   ilitek251x
- Info:   Enables I2C connected Ilitek 251x multiple touch controller using
-         GPIO 4 (pin 7 on GPIO header) for interrupt.
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/ilitek-ts-i2c-overlay.dts
 @@ -0,0 +1,62 @@

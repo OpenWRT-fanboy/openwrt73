@@ -16,7 +16,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
 
 --- a/drivers/gpu/drm/vc4/vc4_plane.c
 +++ b/drivers/gpu/drm/vc4/vc4_plane.c
-@@ -37,6 +37,7 @@ static const struct hvs_format {
+@@ -36,6 +36,7 @@
  	u32 pixel_order_hvs5;
  	bool hvs5_only;
  	bool hvs6_only;
@@ -24,7 +24,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  } hvs_formats[] = {
  	{
  		.drm = DRM_FORMAT_XRGB8888,
-@@ -109,6 +110,7 @@ static const struct hvs_format {
+@@ -108,6 +109,7 @@
  		.hvs = HVS_PIXEL_FORMAT_YCBCR_YUV422_3PLANE,
  		.pixel_order = HVS_PIXEL_ORDER_XYCRCB,
  		.pixel_order_hvs5 = HVS_PIXEL_ORDER_XYCRCB,
@@ -32,7 +32,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  	},
  	{
  		.drm = DRM_FORMAT_YUV444,
-@@ -121,6 +123,7 @@ static const struct hvs_format {
+@@ -120,6 +122,7 @@
  		.hvs = HVS_PIXEL_FORMAT_YCBCR_YUV422_3PLANE,
  		.pixel_order = HVS_PIXEL_ORDER_XYCRCB,
  		.pixel_order_hvs5 = HVS_PIXEL_ORDER_XYCRCB,
@@ -40,7 +40,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  	},
  	{
  		.drm = DRM_FORMAT_YUV420,
-@@ -133,6 +136,7 @@ static const struct hvs_format {
+@@ -132,6 +135,7 @@
  		.hvs = HVS_PIXEL_FORMAT_YCBCR_YUV420_3PLANE,
  		.pixel_order = HVS_PIXEL_ORDER_XYCRCB,
  		.pixel_order_hvs5 = HVS_PIXEL_ORDER_XYCRCB,
@@ -48,7 +48,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  	},
  	{
  		.drm = DRM_FORMAT_NV12,
-@@ -1873,6 +1877,14 @@ static u32 vc6_plane_get_csc_mode(struct
+@@ -1870,6 +1874,14 @@
  	return ret;
  }
  
@@ -63,7 +63,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  static int vc6_plane_mode_set(struct drm_plane *plane,
  			      struct drm_plane_state *state)
  {
-@@ -2165,8 +2177,10 @@ static int vc6_plane_mode_set(struct drm
+@@ -2162,8 +2174,10 @@
  	 * TODO: This only covers Raster Scan Order planes
  	 */
  	for (i = 0; i < num_planes; i++) {

@@ -17,7 +17,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 
 --- a/drivers/gpio/gpiolib.c
 +++ b/drivers/gpio/gpiolib.c
-@@ -51,6 +51,8 @@
+@@ -53,6 +53,8 @@
   * GPIOs can sometimes cost only an instruction or two per bit.
   */
  
@@ -25,8 +25,8 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +
  /* Device and char device-related information */
  static DEFINE_IDA(gpio_ida);
- static dev_t gpio_devt;
-@@ -3018,8 +3020,8 @@ int gpiod_direction_output_nonotify(stru
+ static dev_t gpio_devt __ro_after_init;
+@@ -3189,8 +3191,8 @@
  		value = !!value;
  
  	/* GPIOs used for enabled IRQs shall not be set as output */
@@ -37,7 +37,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
  		gpiod_err(desc,
  			  "%s: tried to set a GPIO tied to an IRQ as output\n",
  			  __func__);
-@@ -4058,8 +4060,8 @@ int gpiochip_lock_as_irq(struct gpio_chi
+@@ -4238,8 +4240,8 @@
  	}
  
  	/* To be valid for IRQ the line needs to be input or open drain */

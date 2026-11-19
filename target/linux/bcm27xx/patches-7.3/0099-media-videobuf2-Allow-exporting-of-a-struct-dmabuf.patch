@@ -19,7 +19,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.org>
 
 --- a/drivers/media/common/videobuf2/videobuf2-core.c
 +++ b/drivers/media/common/videobuf2/videobuf2-core.c
-@@ -2431,11 +2431,11 @@ static int __find_plane_by_offset(struct
+@@ -2419,11 +2419,11 @@
  	return 0;
  }
  
@@ -34,7 +34,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.org>
  	struct dma_buf *dbuf;
  
  	if (q->memory != VB2_MEMORY_MMAP) {
-@@ -2480,6 +2480,21 @@ int vb2_core_expbuf(struct vb2_queue *q,
+@@ -2468,6 +2468,21 @@
  		return -EINVAL;
  	}
  
@@ -58,7 +58,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.org>
  		dprintk(q, 3, "buffer %d, plane %d failed to export (%d)\n",
 --- a/include/media/videobuf2-core.h
 +++ b/include/media/videobuf2-core.h
-@@ -968,6 +968,21 @@ int vb2_core_streamon(struct vb2_queue *
+@@ -955,6 +955,21 @@
  int vb2_core_streamoff(struct vb2_queue *q, unsigned int type);
  
  /**

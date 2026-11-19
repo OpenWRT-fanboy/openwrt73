@@ -18,49 +18,6 @@ Signed-off-by: FrankLeeEDA <Fli@edatec.cn>
  create mode 100644 arch/arm/boot/dts/overlays/vc4-kms-dsi-edatec-panel-070c-overlay.dts
  create mode 100644 arch/arm/boot/dts/overlays/vc4-kms-dsi-edatec-panel-101c-overlay.dts
 
---- a/arch/arm/boot/dts/overlays/Makefile
-+++ b/arch/arm/boot/dts/overlays/Makefile
-@@ -337,6 +337,8 @@ dtbo-$(CONFIG_ARCH_BCM2835) += \
- 	vc4-kms-dpi-hyperpixel4sq.dtbo \
- 	vc4-kms-dpi-panel.dtbo \
- 	vc4-kms-dsi-7inch.dtbo \
-+	vc4-kms-dsi-edatec-panel-070c.dtbo \
-+	vc4-kms-dsi-edatec-panel-101c.dtbo \
- 	vc4-kms-dsi-generic.dtbo \
- 	vc4-kms-dsi-ili79600-10-1inch.dtbo \
- 	vc4-kms-dsi-ili9881-5inch.dtbo \
---- a/arch/arm/boot/dts/overlays/README
-+++ b/arch/arm/boot/dts/overlays/README
-@@ -5791,6 +5791,29 @@ Params: sizex                   Touchscr
-                                 the default DSI1 and i2c_csi_dsi).
- 
- 
-+Name:   vc4-kms-dsi-edatec-panel-070c
-+Info:   Enable the edatec DSI 7" screen.
-+        support ed-dispr-070c.
-+        support ed-dispr5-070c.
-+        support ed-dispr4-070c.
-+Load:   dtoverlay=vc4-kms-dsi-edatec-panel-070c,<param>=<val>
-+Params: interrupt               GPIO pin for interrupt signal(default 16)
-+        i2c1                    Use i2c-1
-+        i2c4                    Use i2c-4 (specialized for CM5)
-+
-+
-+Name:   vc4-kms-dsi-edatec-panel-101c
-+Info:   Enable the edatec DSI 10" screen.
-+        support ed-dispr-101c.
-+        support ed-dispr5-101c.
-+        support ed-dispr4-101c.
-+Load:   dtoverlay=vc4-kms-dsi-edatec-panel-101c,<param>=<val>
-+Params: rotation                Display rotation {0,90,180,270} (default 270)
-+        interrupt               GPIO pin for interrupt signal(default 16)
-+        i2c1                    Use i2c-1
-+        i2c4                    Use i2c-4 (specialized for CM5)
-+
-+
- Name:   vc4-kms-dsi-generic
- Info:   Enable a generic DSI display under KMS.
-         Default timings are for a 840x480 RGB888 panel.
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/vc4-kms-dsi-edatec-panel-070c-overlay.dts
 @@ -0,0 +1,119 @@

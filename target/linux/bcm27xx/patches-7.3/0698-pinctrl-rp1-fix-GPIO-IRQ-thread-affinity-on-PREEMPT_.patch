@@ -21,7 +21,7 @@ Signed-off-by: Michael Byczkowski <by@by-online.de>
 
 --- a/drivers/pinctrl/pinctrl-rp1.c
 +++ b/drivers/pinctrl/pinctrl-rp1.c
-@@ -958,8 +958,15 @@ static int rp1_gpio_irq_set_affinity(str
+@@ -1007,8 +1007,15 @@
  		}
  	}
  

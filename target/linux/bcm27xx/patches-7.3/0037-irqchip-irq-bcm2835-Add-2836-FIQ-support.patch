@@ -8,12 +8,12 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Noralf Trønnes <noralf@tronnes.org>
 ---
- drivers/irqchip/irq-bcm2835.c | 43 +++++++++++++++++++++++++++++++++--
- 1 file changed, 41 insertions(+), 2 deletions(-)
+ drivers/irqchip/irq-bcm2835.c | 45 +++++++++++++++++++++++++++++++++++++++--
+ 1 file changed, 43 insertions(+), 2 deletions(-)
 
 --- a/drivers/irqchip/irq-bcm2835.c
 +++ b/drivers/irqchip/irq-bcm2835.c
-@@ -41,8 +41,11 @@
+@@ -41,8 +41,13 @@
  #include <linux/of_irq.h>
  #include <linux/irqchip.h>
  #include <linux/irqdomain.h>
@@ -21,11 +21,13 @@ Signed-off-by: Noralf Trønnes <noralf@tronnes.org>
 +#include <linux/regmap.h>
  
  #include <asm/exception.h>
++#ifndef CONFIG_ARM64
 +#include <asm/mach/irq.h>
++#endif
  
  /* Put the bank and irq (32 bits) into the hwirq */
  #define MAKE_HWIRQ(b, n)	(((b) << 5) | (n))
-@@ -60,6 +63,9 @@
+@@ -60,6 +65,9 @@
  #define BANK0_VALID_MASK	(BANK0_HWIRQ_MASK | BANK1_HWIRQ | BANK2_HWIRQ \
  					| SHORTCUT1_MASK | SHORTCUT2_MASK)
  
@@ -35,7 +37,7 @@ Signed-off-by: Noralf Trønnes <noralf@tronnes.org>
  #define REG_FIQ_CONTROL		0x0c
  #define FIQ_CONTROL_ENABLE	BIT(7)
  #define REG_FIQ_ENABLE		FIQ_CONTROL_ENABLE
-@@ -86,6 +92,7 @@ struct armctrl_ic {
+@@ -86,6 +94,7 @@
  	void __iomem *enable[NR_BANKS];
  	void __iomem *disable[NR_BANKS];
  	struct irq_domain *domain;
@@ -43,7 +45,7 @@ Signed-off-by: Noralf Trønnes <noralf@tronnes.org>
  };
  
  static struct armctrl_ic intc __read_mostly;
-@@ -119,12 +126,35 @@ static void armctrl_mask_irq(struct irq_
+@@ -119,12 +128,35 @@
  
  static void armctrl_unmask_irq(struct irq_data *d)
  {
@@ -81,7 +83,7 @@ Signed-off-by: Noralf Trønnes <noralf@tronnes.org>
  }
  
  static struct irq_chip armctrl_chip = {
-@@ -217,6 +247,15 @@ static int __init armctrl_of_init(struct
+@@ -217,6 +249,15 @@
  		set_handle_irq(bcm2835_handle_irq);
  	}
  

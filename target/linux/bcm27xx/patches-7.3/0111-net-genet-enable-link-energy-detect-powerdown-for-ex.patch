@@ -20,7 +20,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.org>
 
 --- a/drivers/net/ethernet/broadcom/genet/bcmmii.c
 +++ b/drivers/net/ethernet/broadcom/genet/bcmmii.c
-@@ -314,6 +314,8 @@ int bcmgenet_mii_probe(struct net_device
+@@ -313,6 +313,8 @@
  	/* Communicate the integrated PHY revision */
  	if (priv->internal_phy)
  		phy_flags = priv->gphy_rev;

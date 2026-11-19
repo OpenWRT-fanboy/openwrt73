@@ -23,13 +23,13 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  #define CM_PULSECTL		0x190
  #define CM_PULSEDIV		0x194
  #define CM_SDCCTL		0x1a8
-@@ -2357,6 +2358,9 @@ static int bcm2835_clk_probe(struct plat
+@@ -2341,6 +2342,9 @@
  	if (IS_ERR(cprman->regs))
  		return PTR_ERR(cprman->regs);
  
 +	/* Mux DSI0 clock to PLLD */
 +	cprman_write(cprman, CM_DSI0HSCK, 1);
 +
- 	fw_node = of_parse_phandle(dev->of_node, "firmware", 0);
- 	if (fw_node) {
- 		struct rpi_firmware *fw = rpi_firmware_get(fw_node);
+ 	memcpy(cprman->real_parent_names, cprman_parent_names,
+ 	       sizeof(cprman_parent_names));
+ 	of_clk_parent_fill(dev->of_node, cprman->real_parent_names,

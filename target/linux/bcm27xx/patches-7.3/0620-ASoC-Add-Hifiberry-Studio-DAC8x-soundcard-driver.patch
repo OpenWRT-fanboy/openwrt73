@@ -20,10 +20,10 @@ Signed-off-by: j-schambacher <joerg@hifiberry.com>
 
 --- a/sound/soc/bcm/Kconfig
 +++ b/sound/soc/bcm/Kconfig
-@@ -102,6 +102,14 @@ config SND_BCM2708_SOC_HIFIBERRY_DACPLUS
-         help
-          Say Y or M if you want to add support for HifiBerry DSP-DAC.
+@@ -30,3 +30,11 @@
+ 	  If you don't know what to do here, say N
  
+ endmenu
 +config SND_BCM2708_SOC_HIFIBERRY_STUDIO_DAC8X
 +        tristate "Support for HifiBerry Studio DAC8x soundcards"
 +        help
@@ -32,27 +32,16 @@ Signed-off-by: j-schambacher <joerg@hifiberry.com>
 +	 Supports mulit channel DAC and ADC combnations.
 +	 Only available for Pi 5
 +
- config SND_BCM2708_SOC_HIFIBERRY_DIGI
-         tristate "Support for HifiBerry Digi"
-         select SND_SOC_WM8804
 --- a/sound/soc/bcm/Makefile
 +++ b/sound/soc/bcm/Makefile
-@@ -24,6 +24,7 @@ snd-soc-hifiberry-dacplushd-objs := hifi
- snd-soc-hifiberry-dacplusadc-objs := hifiberry_dacplusadc.o
- snd-soc-hifiberry-dacplusadcpro-objs := hifiberry_dacplusadcpro.o
- snd-soc-hifiberry-dacplusdsp-objs := hifiberry_dacplusdsp.o
-+snd-soc-hifiberry-studio-dac8x-objs := hifiberry_studio_dac8x.o
- snd-soc-justboom-both-objs := justboom-both.o
- snd-soc-justboom-dac-objs := justboom-dac.o
- snd-soc-rpi-cirrus-objs := rpi-cirrus.o
-@@ -58,6 +59,7 @@ obj-$(CONFIG_SND_BCM2708_SOC_HIFIBERRY_D
- obj-$(CONFIG_SND_BCM2708_SOC_HIFIBERRY_DACPLUSADC) += snd-soc-hifiberry-dacplusadc.o
- obj-$(CONFIG_SND_BCM2708_SOC_HIFIBERRY_DACPLUSADCPRO) += snd-soc-hifiberry-dacplusadcpro.o
- obj-$(CONFIG_SND_BCM2708_SOC_HIFIBERRY_DACPLUSDSP) += snd-soc-hifiberry-dacplusdsp.o
+@@ -12,4 +12,5 @@
+ # BCM63XX Platform Support
+ snd-soc-63xx-y := bcm63xx-i2s-whistler.o bcm63xx-pcm-whistler.o
+ 
+-obj-$(CONFIG_SND_BCM63XX_I2S_WHISTLER) += snd-soc-63xx.o
+\ No newline at end of file
++obj-$(CONFIG_SND_BCM63XX_I2S_WHISTLER) += snd-soc-63xx.osnd-soc-hifiberry-studio-dac8x-objs := hifiberry_studio_dac8x.o
 +obj-$(CONFIG_SND_BCM2708_SOC_HIFIBERRY_STUDIO_DAC8X) += snd-soc-hifiberry-studio-dac8x.o
- obj-$(CONFIG_SND_BCM2708_SOC_JUSTBOOM_BOTH) += snd-soc-justboom-both.o
- obj-$(CONFIG_SND_BCM2708_SOC_JUSTBOOM_DAC) += snd-soc-justboom-dac.o
- obj-$(CONFIG_SND_BCM2708_SOC_RPI_CIRRUS) += snd-soc-rpi-cirrus.o
 --- /dev/null
 +++ b/sound/soc/bcm/hifiberry_studio_dac8x.c
 @@ -0,0 +1,938 @@

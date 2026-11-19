@@ -18,16 +18,11 @@ Signed-off-by: Hans Verkuil <hverkuil+cisco@kernel.org>
 
 --- a/Documentation/devicetree/bindings/media/i2c/st,vd55g1.yaml
 +++ b/Documentation/devicetree/bindings/media/i2c/st,vd55g1.yaml
-@@ -25,7 +25,11 @@ allOf:
+@@ -25,7 +25,6 @@
  
  properties:
    compatible:
--    const: st,vd55g1
-+    enum:
-+      - st,vd55g1
-+      - st,vd65g4
-+    description:
-+      VD55G1 is the monochrome variant, while VD65G4 is the color one.
- 
-   reg:
-     maxItems: 1
+-    enum:
+       - st,vd55g1
+       - st,vd55g4
+       - st,vd65g4

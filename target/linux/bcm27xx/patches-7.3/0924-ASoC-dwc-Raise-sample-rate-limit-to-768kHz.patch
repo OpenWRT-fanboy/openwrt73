@@ -13,11 +13,11 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
 
 --- a/sound/soc/dwc/dwc-i2s.c
 +++ b/sound/soc/dwc/dwc-i2s.c
-@@ -813,7 +813,7 @@ static int dw_configure_dai_by_dt(struct
+@@ -698,7 +698,7 @@
  	u32 idx2;
  	int ret;
  
--	ret = dw_configure_dai(dev, dw_i2s_dai, SNDRV_PCM_RATE_8000_384000);
+-	ret = dw_configure_dai(dev, dw_i2s_dai, SNDRV_PCM_RATE_8000_192000);
 +	ret = dw_configure_dai(dev, dw_i2s_dai, SNDRV_PCM_RATE_8000_768000);
  	if (ret < 0)
  		return ret;

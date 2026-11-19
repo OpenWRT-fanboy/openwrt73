@@ -78,7 +78,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
 
 --- a/drivers/gpio/Kconfig
 +++ b/drivers/gpio/Kconfig
-@@ -1427,6 +1427,15 @@ config GPIO_ELKHARTLAKE
+@@ -1494,6 +1494,15 @@
  	  To compile this driver as a module, choose M here: the module will
  	  be called gpio-elkhartlake.
  
@@ -96,7 +96,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  	depends on MFD_JANZ_CMODIO
 --- a/drivers/gpio/Makefile
 +++ b/drivers/gpio/Makefile
-@@ -70,6 +70,7 @@ obj-$(CONFIG_GPIO_EN7523)		+= gpio-en752
+@@ -71,6 +71,7 @@
  obj-$(CONFIG_GPIO_EP93XX)		+= gpio-ep93xx.o
  obj-$(CONFIG_GPIO_EXAR)			+= gpio-exar.o
  obj-$(CONFIG_GPIO_F7188X)		+= gpio-f7188x.o

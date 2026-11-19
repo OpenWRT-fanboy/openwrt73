@@ -11,7 +11,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
 
 --- a/drivers/spi/spi-dw-core.c
 +++ b/drivers/spi/spi-dw-core.c
-@@ -241,8 +241,11 @@ static irqreturn_t dw_spi_transfer_handl
+@@ -241,8 +241,11 @@
  	 */
  	if (irq_status & DW_SPI_INT_TXEI) {
  		dw_writer(dws);
@@ -24,7 +24,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  	}
  
  	return IRQ_HANDLED;
-@@ -369,8 +372,11 @@ static void dw_spi_irq_setup(struct dw_s
+@@ -424,8 +427,11 @@
  
  	dws->transfer_handler = dw_spi_transfer_handler;
  
@@ -48,7 +48,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  
  #include "spi-dw.h"
  
-@@ -341,8 +342,11 @@ static int dw_spi_mmio_probe(struct plat
+@@ -390,8 +391,11 @@
  	dws->paddr = mem->start;
  
  	dws->irq = platform_get_irq(pdev, 0);

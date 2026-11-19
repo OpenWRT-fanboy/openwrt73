@@ -21,7 +21,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
 
 --- a/drivers/gpu/drm/display/drm_hdmi_state_helper.c
 +++ b/drivers/gpu/drm/display/drm_hdmi_state_helper.c
-@@ -321,7 +321,7 @@ void __drm_atomic_helper_connector_hdmi_
+@@ -322,7 +322,7 @@
  	unsigned int max_bpc = connector->max_bpc;
  
  	new_conn_state->max_bpc = max_bpc;
@@ -29,10 +29,10 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
 +	new_conn_state->max_requested_bpc = 8;
  	new_conn_state->hdmi.broadcast_rgb = DRM_HDMI_BROADCAST_RGB_AUTO;
  }
- EXPORT_SYMBOL(__drm_atomic_helper_connector_hdmi_reset);
+ EXPORT_SYMBOL(__drm_atomic_helper_connector_hdmi_state_init);
 --- a/drivers/gpu/drm/drm_connector.c
 +++ b/drivers/gpu/drm/drm_connector.c
-@@ -2839,8 +2839,8 @@ int drm_connector_attach_max_bpc_propert
+@@ -2887,8 +2887,8 @@
  	}
  
  	drm_object_attach_property(&connector->base, prop, max);

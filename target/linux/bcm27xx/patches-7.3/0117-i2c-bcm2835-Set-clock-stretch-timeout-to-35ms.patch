@@ -55,7 +55,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
 
 --- a/drivers/i2c/busses/i2c-bcm2835.c
 +++ b/drivers/i2c/busses/i2c-bcm2835.c
-@@ -60,6 +60,10 @@ static unsigned int debug;
+@@ -60,6 +60,10 @@
  module_param(debug, uint, 0644);
  MODULE_PARM_DESC(debug, "1=err, 2=isr, 3=xfer");
  
@@ -66,7 +66,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  #define BCM2835_DEBUG_MAX	512
  struct bcm2835_debug {
  	struct i2c_msg *msg;
-@@ -193,6 +197,7 @@ static int clk_bcm2835_i2c_set_rate(stru
+@@ -193,6 +197,7 @@
  {
  	struct clk_bcm2835_i2c *div = to_clk_bcm2835_i2c(hw);
  	u32 redl, fedl;
@@ -74,7 +74,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  	u32 divider = clk_bcm2835_i2c_calc_divider(rate, parent_rate);
  
  	if (divider == -EINVAL)
-@@ -216,6 +221,17 @@ static int clk_bcm2835_i2c_set_rate(stru
+@@ -216,6 +221,17 @@
  	bcm2835_i2c_writel(div->i2c_dev, BCM2835_I2C_DEL,
  			   (fedl << BCM2835_I2C_FEDL_SHIFT) |
  			   (redl << BCM2835_I2C_REDL_SHIFT));
@@ -92,7 +92,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  	return 0;
  }
  
-@@ -369,10 +385,8 @@ static irqreturn_t bcm2835_i2c_isr(int t
+@@ -371,10 +387,8 @@
  	bcm2835_debug_add(i2c_dev, val);
  
  	err = val & (BCM2835_I2C_S_CLKT | BCM2835_I2C_S_ERR);
@@ -104,16 +104,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  
  	if (val & BCM2835_I2C_S_DONE) {
  		if (!i2c_dev->curr_msg) {
-@@ -384,8 +398,6 @@ static irqreturn_t bcm2835_i2c_isr(int t
- 
- 		if ((val & BCM2835_I2C_S_RXD) || i2c_dev->msg_buf_remaining)
- 			i2c_dev->msg_err = BCM2835_I2C_S_LEN;
--		else
--			i2c_dev->msg_err = 0;
- 		goto complete;
- 	}
- 
-@@ -431,6 +443,7 @@ static int bcm2835_i2c_xfer(struct i2c_a
+@@ -433,6 +447,7 @@
  {
  	struct bcm2835_i2c_dev *i2c_dev = i2c_get_adapdata(adap);
  	unsigned long time_left;
@@ -121,7 +112,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  	int i;
  
  	if (debug)
-@@ -440,15 +453,19 @@ static int bcm2835_i2c_xfer(struct i2c_a
+@@ -442,15 +457,19 @@
  		for (i = 0; i < num; i++)
  			bcm2835_debug_print_msg(i2c_dev, &msgs[i], i + 1, num, __func__);
  
@@ -142,7 +133,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  	reinit_completion(&i2c_dev->completion);
  
  	bcm2835_i2c_start_transfer(i2c_dev);
-@@ -458,6 +475,9 @@ static int bcm2835_i2c_xfer(struct i2c_a
+@@ -460,6 +479,9 @@
  
  	bcm2835_i2c_finish_transfer(i2c_dev);
  
@@ -152,7 +143,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  	if (debug > 1 || (debug && (!time_left || i2c_dev->msg_err)))
  		bcm2835_debug_print(i2c_dev);
  	i2c_dev->debug_num_msgs = 0;
-@@ -483,7 +503,7 @@ static int bcm2835_i2c_xfer(struct i2c_a
+@@ -485,7 +507,7 @@
  
  static u32 bcm2835_i2c_func(struct i2c_adapter *adap)
  {

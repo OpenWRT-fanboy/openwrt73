@@ -16,7 +16,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.org>
 
 --- a/drivers/media/i2c/adv7180.c
 +++ b/drivers/media/i2c/adv7180.c
-@@ -859,6 +859,9 @@ static int init_device(struct adv7180_st
+@@ -858,6 +858,9 @@
  		return ret;
  
  	adv7180_set_field_mode(state);
@@ -26,7 +26,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.org>
  
  	__v4l2_ctrl_handler_setup(&state->ctrl_hdl);
  
-@@ -1415,6 +1418,7 @@ static int adv7180_probe(struct i2c_clie
+@@ -1444,6 +1447,7 @@
  	struct device_node *np = client->dev.of_node;
  	struct adv7180_state *state;
  	struct v4l2_subdev *sd;
@@ -34,7 +34,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.org>
  	int ret;
  
  	/* Check if the adapter supports the needed features */
-@@ -1470,6 +1474,14 @@ static int adv7180_probe(struct i2c_clie
+@@ -1501,6 +1505,14 @@
  	state->curr_norm = V4L2_STD_NTSC;
  
  	state->input = 0;

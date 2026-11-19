@@ -25,7 +25,7 @@ Signed-off-by: Maíra Canal <mcanal@igalia.com>
 
 --- a/drivers/gpio/gpiolib.c
 +++ b/drivers/gpio/gpiolib.c
-@@ -53,7 +53,12 @@
+@@ -55,7 +55,12 @@
  
  #define dont_test_bit(b,d) (0)
  

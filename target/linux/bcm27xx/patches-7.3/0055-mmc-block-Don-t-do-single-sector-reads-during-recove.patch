@@ -22,12 +22,12 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
 
 --- a/drivers/mmc/core/block.c
 +++ b/drivers/mmc/core/block.c
-@@ -1985,7 +1985,7 @@ static void mmc_blk_mq_rw_recovery(struc
- 		return;
- 	}
+@@ -1464,7 +1464,7 @@
+ 		 * at a time in order to accurately determine which
+ 		 * sectors can be read successfully.
+ 		 */
+-		if (recovery_mode)
++		if (0 && recovery_mode)
+ 			brq->data.blocks = queue_physical_block_size(mq->queue) >> SECTOR_SHIFT;
  
--	if (rq_data_dir(req) == READ && brq->data.blocks >
-+	if (0 && rq_data_dir(req) == READ && brq->data.blocks >
- 			queue_physical_block_size(mq->queue) >> 9) {
- 		/* Read one (native) sector at a time */
- 		mmc_blk_read_single(mq, req);
+ 		/*

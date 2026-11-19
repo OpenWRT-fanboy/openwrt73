@@ -45,9 +45,9 @@ Signed-off-by: Dom Cobley <popcornmix@gmail.com>
 
 --- a/drivers/gpu/drm/vc4/vc4_drv.h
 +++ b/drivers/gpu/drm/vc4/vc4_drv.h
-@@ -339,6 +339,12 @@ struct vc4_hvs {
- 	struct clk *core_clk;
- 	struct clk *disp_clk;
+@@ -387,6 +387,12 @@
+ 	struct drm_private_state base;
+ 	unsigned long core_clock_rate;
  
 +	/* Last min rate requested on core_clk and disp_clk. Each
 +	 * clk_set_min_rate() on a firmware clock costs at least one
@@ -56,14 +56,14 @@ Signed-off-by: Dom Cobley <popcornmix@gmail.com>
 +	unsigned long core_clk_min_rate;
 +
  	struct {
- 		unsigned int desc;
- 		unsigned int enabled: 1;
+ 		unsigned in_use: 1;
+ 		unsigned long fifo_load;
 --- a/drivers/gpu/drm/vc4/vc4_kms.c
 +++ b/drivers/gpu/drm/vc4/vc4_kms.c
-@@ -385,6 +385,40 @@ static void vc6_hvs_pv_muxing_commit(str
- 	}
- }
- 
+@@ -385,6 +385,40 @@
+ 			drm_err(&vc4->base, "Unhandled encoder type for PV muxing %d",
+ 				vc4_encoder->type);
+ 			mux = 0;
 +/* Each clk_set_min_rate() on a firmware clock costs at least one
 + * mailbox round-trip to the VPU, so don't repeat requests that
 + * wouldn't change the rate.
@@ -98,10 +98,10 @@ Signed-off-by: Dom Cobley <popcornmix@gmail.com>
 +	return false;
 +}
 +
- static void vc4_atomic_commit_tail(struct drm_atomic_state *state)
- {
- 	struct drm_device *dev = state->dev;
-@@ -441,17 +475,19 @@ static void vc4_atomic_commit_tail(struc
+ 			break;
+ 		}
+ 
+@@ -451,17 +485,19 @@
  	if (vc4->gen == VC4_GEN_5 && !vc4->firmware_kms) {
  		unsigned long state_rate = max(old_hvs_state->core_clock_rate,
  					       new_hvs_state->core_clock_rate);
@@ -128,7 +128,7 @@ Signed-off-by: Dom Cobley <popcornmix@gmail.com>
  	}
  
  	drm_atomic_helper_commit_modeset_disables(dev, state);
-@@ -498,17 +534,11 @@ static void vc4_atomic_commit_tail(struc
+@@ -508,17 +544,11 @@
  						hvs->max_core_rate,
  						new_hvs_state->core_clock_rate);
  

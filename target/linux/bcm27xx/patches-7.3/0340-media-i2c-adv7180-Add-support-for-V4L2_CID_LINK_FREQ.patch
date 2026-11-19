@@ -15,7 +15,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
 
 --- a/drivers/media/i2c/adv7180.c
 +++ b/drivers/media/i2c/adv7180.c
-@@ -189,6 +189,16 @@
+@@ -188,6 +188,16 @@
  /* Initial number of frames to skip to avoid possible garbage */
  #define ADV7180_NUM_OF_SKIP_FRAMES       2
  
@@ -32,7 +32,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  static int dbg_input;
  module_param(dbg_input, int, 0644);
  MODULE_PARM_DESC(dbg_input, "Input number (0-31)");
-@@ -228,6 +238,7 @@ struct adv7180_state {
+@@ -227,6 +237,7 @@
  	const struct adv7180_chip_info *chip_info;
  	enum v4l2_field		field;
  	bool			force_bt656_4;
@@ -40,7 +40,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  };
  #define to_adv7180_sd(_ctrl) (&container_of(_ctrl->handler,		\
  					    struct adv7180_state,	\
-@@ -608,6 +619,9 @@ static int adv7180_s_ctrl(struct v4l2_ct
+@@ -607,6 +618,9 @@
  
  	lockdep_assert_held(&state->mutex);
  
@@ -50,7 +50,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  	val = ctrl->val;
  	switch (ctrl->id) {
  	case V4L2_CID_BRIGHTNESS:
-@@ -668,7 +682,7 @@ static const struct v4l2_ctrl_config adv
+@@ -667,7 +681,7 @@
  
  static int adv7180_init_controls(struct adv7180_state *state)
  {
@@ -59,7 +59,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  	state->ctrl_hdl.lock = &state->mutex;
  
  	v4l2_ctrl_new_std(&state->ctrl_hdl, &adv7180_ctrl_ops,
-@@ -695,6 +709,17 @@ static int adv7180_init_controls(struct
+@@ -694,6 +708,17 @@
  					     test_pattern_menu);
  	}
  
@@ -77,7 +77,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  	state->sd.ctrl_handler = &state->ctrl_hdl;
  	if (state->ctrl_hdl.error) {
  		int err = state->ctrl_hdl.error;
-@@ -822,6 +847,12 @@ static int adv7180_set_pad_format(struct
+@@ -821,6 +846,12 @@
  
  	if (format->which == V4L2_SUBDEV_FORMAT_ACTIVE) {
  		state->field = format->format.field;

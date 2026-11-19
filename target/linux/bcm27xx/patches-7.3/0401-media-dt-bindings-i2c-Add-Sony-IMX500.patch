@@ -150,10 +150,10 @@ Signed-off-by: Richard Oliver <richard.oliver@raspberrypi.com>
 +
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -24098,6 +24098,13 @@ F:	Documentation/devicetree/bindings/med
- F:	Documentation/devicetree/bindings/media/i2c/imx477.yaml
- F:	drivers/media/i2c/imx477.c
- 
+@@ -24098,6 +24098,13 @@
+ M:	Marc Dionne <marc.dionne@auristor.com>
+ L:	linux-afs@lists.infradead.org
+ S:	Supported
 +SONY IMX500 SENSOR DRIVER
 +M:	Raspberry Pi Kernel Maintenance <kernel-list@raspberrypi.com>
 +L:	linux-media@vger.kernel.org
@@ -161,6 +161,6 @@ Signed-off-by: Richard Oliver <richard.oliver@raspberrypi.com>
 +T:	git git://linuxtv.org/media_tree.git
 +F:	Documentation/devicetree/bindings/media/i2c/sony,imx500.yaml
 +
- SONY IMX519 SENSOR DRIVER
- M:	Arducam Kernel Maintenance <info@arducam.com>
- L:	linux-media@vger.kernel.org
+ W:	https://www.infradead.org/~dhowells/kafs/
+ F:	Documentation/networking/rxrpc.rst
+ F:	include/keys/rxrpc-type.h

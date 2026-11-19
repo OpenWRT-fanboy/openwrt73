@@ -10,12 +10,12 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
 
 --- a/drivers/hwmon/sht3x.c
 +++ b/drivers/hwmon/sht3x.c
-@@ -934,13 +934,25 @@ static int sht3x_probe(struct i2c_client
- static const struct i2c_device_id sht3x_ids[] = {
- 	{"sht3x", sht3x},
- 	{"sts3x", sts3x},
+@@ -938,13 +938,21 @@
+ 	{ .name = "sht3x", .driver_data = sht3x },
+ 	{ .name = "sts3x", .driver_data = sts3x },
+ 	{ .name = "sht85", .driver_data = sht3x },
 +	{"sht85", sht3x},
- 	{}
+ 	{ }
  };
  
  MODULE_DEVICE_TABLE(i2c, sht3x_ids);
@@ -28,12 +28,8 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
 +};
 +MODULE_DEVICE_TABLE(of, sht3x_of_ids);
 +
- static struct i2c_driver sht3x_i2c_driver = {
--	.driver.name = "sht3x",
-+	.driver = {
-+		.name = "sht3x",
-+		.of_match_table = sht3x_of_ids,
-+	},
- 	.probe       = sht3x_probe,
- 	.id_table    = sht3x_ids,
+ static const struct of_device_id sht3x_of_match[] = {
+-	{ .compatible = "sensirion,sht30", .data = (void *)(uintptr_t)sht3x },
+ 	{ .compatible = "sensirion,sts30", .data = (void *)(uintptr_t)sts3x },
+ 	{ }
  };

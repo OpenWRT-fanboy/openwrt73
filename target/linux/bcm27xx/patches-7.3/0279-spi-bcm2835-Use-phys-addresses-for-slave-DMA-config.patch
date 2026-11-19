@@ -14,7 +14,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
 
 --- a/drivers/spi/spi-bcm2835.c
 +++ b/drivers/spi/spi-bcm2835.c
-@@ -119,6 +119,7 @@ MODULE_PARM_DESC(polling_limit_us,
+@@ -119,6 +119,7 @@
   */
  struct bcm2835_spi {
  	void __iomem *regs;
@@ -22,27 +22,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  	struct clk *clk;
  	struct gpio_desc *cs_gpio;
  	unsigned long clk_hz;
-@@ -891,19 +892,8 @@ static int bcm2835_dma_init(struct spi_c
- 			    struct bcm2835_spi *bs)
- {
- 	struct dma_slave_config slave_config;
--	const __be32 *addr;
--	dma_addr_t dma_reg_base;
- 	int ret;
- 
--	/* base address in dma-space */
--	addr = of_get_address(ctlr->dev.of_node, 0, NULL, NULL);
--	if (!addr) {
--		dev_err(dev, "could not get DMA-register address - not using dma mode\n");
--		/* Fall back to interrupt mode */
--		return 0;
--	}
--	dma_reg_base = be32_to_cpup(addr);
--
- 	/* get tx/rx dma */
- 	ctlr->dma_tx = dma_request_chan(dev, "tx");
- 	if (IS_ERR(ctlr->dma_tx)) {
-@@ -925,7 +915,7 @@ static int bcm2835_dma_init(struct spi_c
+@@ -925,7 +926,7 @@
  	 * or, in case of an RX-only transfer, cyclically copies from the zero
  	 * page to the FIFO using a preallocated, reusable descriptor.
  	 */
@@ -51,7 +31,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  	slave_config.dst_addr_width = DMA_SLAVE_BUSWIDTH_4_BYTES;
  
  	ret = dmaengine_slave_config(ctlr->dma_tx, &slave_config);
-@@ -964,9 +954,9 @@ static int bcm2835_dma_init(struct spi_c
+@@ -964,9 +965,9 @@
  	 * RX FIFO or, in case of a TX-only transfer, cyclically writes a
  	 * precalculated value to the CS register to clear the RX FIFO.
  	 */
@@ -63,7 +43,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  	slave_config.dst_addr_width = DMA_SLAVE_BUSWIDTH_4_BYTES;
  
  	ret = dmaengine_slave_config(ctlr->dma_rx, &slave_config);
-@@ -1360,6 +1350,7 @@ static int bcm2835_spi_probe(struct plat
+@@ -1362,6 +1363,7 @@
  {
  	struct spi_controller *ctlr;
  	struct bcm2835_spi *bs;
@@ -71,7 +51,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  	int err;
  
  	ctlr = devm_spi_alloc_host(&pdev->dev, sizeof(*bs));
-@@ -1383,10 +1374,11 @@ static int bcm2835_spi_probe(struct plat
+@@ -1384,10 +1386,11 @@
  	bs = spi_controller_get_devdata(ctlr);
  	bs->ctlr = ctlr;
  

@@ -24,9 +24,9 @@ Signed-off-by: Maíra Canal <mcanal@igalia.com>
 
 --- a/drivers/gpu/drm/v3d/v3d_drv.c
 +++ b/drivers/gpu/drm/v3d/v3d_drv.c
-@@ -431,7 +431,7 @@ static int v3d_platform_drm_probe(struct
- 
- 	v3d_init_hw_state(v3d);
+@@ -466,7 +466,7 @@
+ 	ident3 = V3D_READ(V3D_HUB_IDENT3);
+ 	v3d->rev = V3D_GET_FIELD(ident3, V3D_HUB_IDENT3_IPREV);
  
 -	pm_runtime_set_autosuspend_delay(dev, 100);
 +	pm_runtime_set_autosuspend_delay(dev, 50);

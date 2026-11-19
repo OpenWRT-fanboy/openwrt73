@@ -18,7 +18,7 @@ Signed-off-by: Maíra Canal <mcanal@igalia.com>
 
 --- a/drivers/gpu/drm/vc4/tests/vc4_mock_output.c
 +++ b/drivers/gpu/drm/vc4/tests/vc4_mock_output.c
-@@ -90,29 +90,29 @@ vc4_mock_atomic_add_output(struct kunit
+@@ -88,29 +88,29 @@
  
  	encoder = vc4_find_encoder_by_type(drm, type);
  	if (!encoder)

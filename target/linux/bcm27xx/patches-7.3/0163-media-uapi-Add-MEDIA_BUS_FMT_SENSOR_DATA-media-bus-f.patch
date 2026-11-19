@@ -14,7 +14,7 @@ Signed-off-by: Naushir Patuck <naush@raspberrypi.com>
 
 --- a/Documentation/userspace-api/media/v4l/subdev-formats.rst
 +++ b/Documentation/userspace-api/media/v4l/subdev-formats.rst
-@@ -8713,3 +8713,33 @@ and finally the bit number in subscript.
+@@ -9134,3 +9134,33 @@
        - x
        - x
        - x
@@ -50,7 +50,7 @@ Signed-off-by: Naushir Patuck <naush@raspberrypi.com>
 +	<https://mipi.org/specifications/csi-2>`_
 --- a/include/uapi/linux/media-bus-format.h
 +++ b/include/uapi/linux/media-bus-format.h
-@@ -185,4 +185,7 @@
+@@ -190,4 +190,7 @@
  #define MEDIA_BUS_FMT_META_20			0x8006
  #define MEDIA_BUS_FMT_META_24			0x8007
  

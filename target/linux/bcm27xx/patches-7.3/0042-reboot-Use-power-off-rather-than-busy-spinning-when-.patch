@@ -23,7 +23,7 @@ Signed-off-by: Dom Cobley <popcornmix@gmail.com>
 
 --- a/arch/arm/kernel/reboot.c
 +++ b/arch/arm/kernel/reboot.c
-@@ -102,9 +102,7 @@ void machine_shutdown(void)
+@@ -102,9 +102,7 @@
   */
  void machine_halt(void)
  {
@@ -36,7 +36,7 @@ Signed-off-by: Dom Cobley <popcornmix@gmail.com>
  /*
 --- a/arch/arm64/kernel/process.c
 +++ b/arch/arm64/kernel/process.c
-@@ -99,9 +99,7 @@ void machine_shutdown(void)
+@@ -100,9 +100,7 @@
   */
  void machine_halt(void)
  {

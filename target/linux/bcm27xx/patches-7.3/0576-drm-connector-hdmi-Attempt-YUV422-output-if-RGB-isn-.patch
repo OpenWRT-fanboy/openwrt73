@@ -15,15 +15,15 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
 
 --- a/drivers/gpu/drm/display/drm_hdmi_state_helper.c
 +++ b/drivers/gpu/drm/display/drm_hdmi_state_helper.c
-@@ -653,6 +653,11 @@ hdmi_compute_config(const struct drm_con
+@@ -654,6 +654,11 @@
+ 			    drm_hdmi_connector_get_output_format_name(conn_state->hdmi.output_format),
+ 			    conn_state->hdmi.tmds_char_rate);
  
- 	ret = hdmi_compute_format_bpc(connector, conn_state, mode, max_bpc,
- 				      HDMI_COLORSPACE_RGB);
-+
 +	if (ret)
 +		ret = hdmi_compute_format_bpc(connector, conn_state, mode,
 +					      max_bpc, HDMI_COLORSPACE_YUV422);
 +
- 	if (ret) {
- 		if (connector->ycbcr_420_allowed) {
- 			ret = hdmi_compute_format_bpc(connector, conn_state,
++
+ 		return 0;
+ 	}
+ 

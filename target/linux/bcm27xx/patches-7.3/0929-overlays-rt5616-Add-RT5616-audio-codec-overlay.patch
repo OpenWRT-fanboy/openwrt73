@@ -26,33 +26,6 @@ Signed-off-by: zjzhao <zjzhao@edatec.cn>
  3 files changed, 87 insertions(+)
  create mode 100644 arch/arm/boot/dts/overlays/rt5616-overlay.dts
 
---- a/arch/arm/boot/dts/overlays/Makefile
-+++ b/arch/arm/boot/dts/overlays/Makefile
-@@ -264,6 +264,7 @@ dtbo-$(CONFIG_ARCH_BCM2835) += \
- 	rpi-sense-v2.dtbo \
- 	rpi-tv.dtbo \
- 	rra-digidac1-wm8741-audio.dtbo \
-+	rt5616.dtbo \
- 	sainsmart18.dtbo \
- 	sc16is750-i2c.dtbo \
- 	sc16is752-i2c.dtbo \
---- a/arch/arm/boot/dts/overlays/README
-+++ b/arch/arm/boot/dts/overlays/README
-@@ -4738,6 +4738,14 @@ Load:   dtoverlay=rra-digidac1-wm8741-au
- Params: <None>
- 
- 
-+Name:   rt5616
-+Info:   Overlay for the Realtek RT5616 I2S audio codec (HAT with the RT5616
-+        codec on I2C1 at 0x1b, MCLK 12.288 MHz, I2S connected to the I2S
-+        consumer controller on GPIO 18-21).
-+Load:   dtoverlay=rt5616,<param>=<val>
-+Params: alsaname                Changes the card name in ALSA
-+
-+
- Name:   sainsmart18
- Info:   Overlay for the SPI-connected Sainsmart 1.8" display (based on the
-         ST7735R chip).
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/rt5616-overlay.dts
 @@ -0,0 +1,78 @@

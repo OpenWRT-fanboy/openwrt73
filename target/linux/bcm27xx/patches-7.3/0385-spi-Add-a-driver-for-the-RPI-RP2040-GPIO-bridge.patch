@@ -58,7 +58,7 @@ Signed-off-by: Richard Oliver <richard.oliver@raspberrypi.com>
 
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -21546,6 +21546,7 @@ RASPBERRY PI RP2040 GPIO BRIDGE DRIVER
+@@ -22838,6 +22838,7 @@
  M:	Raspberry Pi Kernel Maintenance <kernel-list@raspberrypi.com>
  S:	Maintained
  F:	Documentation/devicetree/bindings/spi/raspberrypi,rp2040-gpio-bridge.yaml
@@ -68,7 +68,7 @@ Signed-off-by: Richard Oliver <richard.oliver@raspberrypi.com>
  M:	Jacopo Mondi <jacopo.mondi@ideasonboard.com>
 --- a/drivers/spi/Kconfig
 +++ b/drivers/spi/Kconfig
-@@ -932,6 +932,18 @@ config SPI_RB4XX
+@@ -955,6 +955,18 @@
  	help
  	  SPI controller driver for the Mikrotik RB4xx series boards.
  
@@ -89,7 +89,7 @@ Signed-off-by: Richard Oliver <richard.oliver@raspberrypi.com>
  	depends on RENESAS_RPCIF
 --- a/drivers/spi/Makefile
 +++ b/drivers/spi/Makefile
-@@ -126,6 +126,7 @@ obj-$(CONFIG_SPI_ROCKCHIP_SFC)		+= spi-r
+@@ -131,6 +131,7 @@
  obj-$(CONFIG_SPI_RB4XX)			+= spi-rb4xx.o
  obj-$(CONFIG_MACH_REALTEK_RTL)		+= spi-realtek-rtl.o
  obj-$(CONFIG_SPI_REALTEK_SNAND)		+= spi-realtek-rtl-snand.o

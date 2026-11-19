@@ -14,7 +14,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
 
 --- a/drivers/dma/bcm2835-dma.c
 +++ b/drivers/dma/bcm2835-dma.c
-@@ -1253,6 +1253,7 @@ static struct dma_chan *bcm2835_dma_xlat
+@@ -1236,6 +1236,7 @@
  	return chan;
  }
  
@@ -22,7 +22,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  static int bcm2835_dma_suspend_late(struct device *dev)
  {
  	struct bcm2835_dmadev *od = dev_get_drvdata(dev);
-@@ -1269,6 +1270,9 @@ static int bcm2835_dma_suspend_late(stru
+@@ -1252,6 +1253,9 @@
  
  	return 0;
  }

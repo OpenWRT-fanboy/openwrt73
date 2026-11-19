@@ -15,7 +15,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
 
 --- a/drivers/irqchip/irq-bcm2835.c
 +++ b/drivers/irqchip/irq-bcm2835.c
-@@ -153,7 +153,8 @@ static void armctrl_unmask_irq(struct ir
+@@ -154,7 +154,8 @@
  	}
  }
  
@@ -25,7 +25,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
  
  static void armctrl_ack_irq(struct irq_data *d)
  {
-@@ -168,7 +169,7 @@ static struct irq_chip armctrl_chip = {
+@@ -169,7 +170,7 @@
  	.irq_unmask = armctrl_unmask_irq,
  	.flags = IRQCHIP_MASK_ON_SUSPEND |
  		 IRQCHIP_SKIP_SET_WAKE,
@@ -36,7 +36,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
  };
 --- a/drivers/irqchip/irq-bcm2836.c
 +++ b/drivers/irqchip/irq-bcm2836.c
-@@ -89,7 +89,7 @@ static void bcm2836_arm_irqchip_unmask_g
+@@ -89,7 +89,7 @@
  {
  }
  

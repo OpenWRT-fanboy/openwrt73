@@ -14,7 +14,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
 
 --- a/drivers/watchdog/watchdog_dev.c
 +++ b/drivers/watchdog/watchdog_dev.c
-@@ -943,7 +943,7 @@ static int watchdog_release(struct inode
+@@ -938,7 +938,7 @@
  {
  	struct watchdog_core_data *wd_data = file->private_data;
  	struct watchdog_device *wdd;
@@ -23,7 +23,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  	bool running;
  
  	mutex_lock(&wd_data->lock);
-@@ -967,6 +967,9 @@ static int watchdog_release(struct inode
+@@ -962,6 +962,9 @@
  	if (err < 0) {
  		pr_crit("watchdog%d: watchdog did not stop!\n", wdd->id);
  		watchdog_ping(wdd);

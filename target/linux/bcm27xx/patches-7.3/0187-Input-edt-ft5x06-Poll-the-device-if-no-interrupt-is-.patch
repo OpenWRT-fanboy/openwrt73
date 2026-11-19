@@ -121,7 +121,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  enum edt_pmode {
  	EDT_PMODE_NOT_SUPPORTED,
  	EDT_PMODE_HIBERNATE,
-@@ -138,14 +143,19 @@ struct edt_ft5x06_ts_data {
+@@ -138,14 +143,19 @@
  	u8 tdata_cmd;
  	int tdata_len;
  	int tdata_offset;
@@ -142,7 +142,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  };
  
  struct edt_i2c_chip_data {
-@@ -302,17 +312,49 @@ static irqreturn_t edt_ft5x06_ts_isr(int
+@@ -302,17 +312,49 @@
  	u8 rdbuf[63];
  	int i, type, x, y, id;
  	int error;
@@ -193,7 +193,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  		u8 *buf = &rdbuf[i * tsdata->point_len + tsdata->tdata_offset];
  
  		type = buf[0] >> 6;
-@@ -334,10 +376,25 @@ static irqreturn_t edt_ft5x06_ts_isr(int
+@@ -336,10 +378,25 @@
  
  		input_mt_slot(tsdata->input, id);
  		if (input_mt_report_slot_state(tsdata->input, MT_TOOL_FINGER,
@@ -220,7 +220,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  
  	input_mt_report_pointer_emulation(tsdata->input, true);
  	input_sync(tsdata->input);
-@@ -346,6 +403,22 @@ out:
+@@ -348,6 +405,22 @@
  	return IRQ_HANDLED;
  }
  
@@ -243,7 +243,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  struct edt_ft5x06_attribute {
  	struct device_attribute dattr;
  	size_t field_offset;
-@@ -861,6 +934,9 @@ static int edt_ft5x06_ts_identify(struct
+@@ -838,6 +911,9 @@
  	char *model_name = tsdata->name;
  	char *fw_version = tsdata->fw_version;
  
@@ -253,7 +253,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  	/* see what we find if we assume it is a M06 *
  	 * if we get less than EDT_NAME_LEN, we don't want
  	 * to have garbage in there
-@@ -1049,20 +1125,23 @@ static void edt_ft5x06_ts_get_parameters
+@@ -1026,20 +1102,23 @@
  static void edt_ft5x06_ts_set_tdata_parameters(struct edt_ft5x06_ts_data *tsdata)
  {
  	int crclen;
@@ -278,7 +278,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  		tsdata->tdata_offset + crclen;
  }
  
-@@ -1257,7 +1336,7 @@ static int edt_ft5x06_ts_probe(struct i2
+@@ -1234,7 +1313,7 @@
  	if (tsdata->reset_gpio) {
  		usleep_range(5000, 6000);
  		gpiod_set_value_cansleep(tsdata->reset_gpio, 0);
@@ -287,7 +287,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  	}
  
  	input = devm_input_allocate_device(&client->dev);
-@@ -1331,17 +1410,28 @@ static int edt_ft5x06_ts_probe(struct i2
+@@ -1308,17 +1387,28 @@
  		return error;
  	}
  
@@ -327,7 +327,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  	}
  
  	error = input_register_device(input);
-@@ -1363,6 +1453,10 @@ static void edt_ft5x06_ts_remove(struct
+@@ -1340,6 +1430,10 @@
  {
  	struct edt_ft5x06_ts_data *tsdata = i2c_get_clientdata(client);
  

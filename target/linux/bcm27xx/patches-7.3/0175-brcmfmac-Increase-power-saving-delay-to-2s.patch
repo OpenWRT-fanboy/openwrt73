@@ -14,7 +14,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
 
 --- a/drivers/net/wireless/broadcom/brcm80211/brcmfmac/cfg80211.c
 +++ b/drivers/net/wireless/broadcom/brcm80211/brcmfmac/cfg80211.c
-@@ -3322,7 +3322,7 @@ brcmf_cfg80211_set_power_mgmt(struct wip
+@@ -3334,7 +3334,7 @@
  		brcmf_dbg(INFO, "Do not enable power save for P2P clients\n");
  		pm = PM_OFF;
  	}
@@ -23,7 +23,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  
  	err = brcmf_fil_cmd_int_set(ifp, BRCMF_C_SET_PM, pm);
  	if (err) {
-@@ -3332,6 +3332,7 @@ brcmf_cfg80211_set_power_mgmt(struct wip
+@@ -3344,6 +3344,7 @@
  			bphy_err(drvr, "error (%d)\n", err);
  	}
  

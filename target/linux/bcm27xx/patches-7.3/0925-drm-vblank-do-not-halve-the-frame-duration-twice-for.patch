@@ -68,7 +68,7 @@ Signed-off-by: Dom Cobley <popcornmix@gmail.com>
 
 --- a/drivers/gpu/drm/drm_vblank.c
 +++ b/drivers/gpu/drm/drm_vblank.c
-@@ -649,9 +649,15 @@ void drm_calc_timestamping_constants(str
+@@ -660,9 +660,15 @@
  		framedur_ns = div_u64((u64) frame_size * 1000000, dotclock);
  
  		/*

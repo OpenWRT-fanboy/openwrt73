@@ -14,7 +14,7 @@ Signed-off-by: Maxime Ripard <maxime@cerno.tech>
 
 --- a/drivers/gpu/drm/vc4/tests/vc4_mock.h
 +++ b/drivers/gpu/drm/vc4/tests/vc4_mock.h
-@@ -39,6 +39,9 @@ struct vc4_dummy_plane {
+@@ -39,6 +39,9 @@
  	struct vc4_plane plane;
  };
  
@@ -34,7 +34,7 @@ Signed-off-by: Maxime Ripard <maxime@cerno.tech>
  #include <drm/drm_plane.h>
  
  #include <kunit/test.h>
-@@ -37,3 +38,24 @@ struct drm_plane *vc4_dummy_plane(struct
+@@ -23,3 +24,24 @@
  
  	return plane;
  }

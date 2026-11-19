@@ -12,8 +12,8 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.org>
  .../vc04_services/vchiq-mmal/mmal-encodings.h | 27 +++++++++++++++++++
  1 file changed, 27 insertions(+)
 
---- a/drivers/staging/vc04_services/vchiq-mmal/mmal-encodings.h
-+++ b/drivers/staging/vc04_services/vchiq-mmal/mmal-encodings.h
+--- a/drivers/platform/raspberrypi/vchiq-mmal/mmal-encodings.h
++++ b/drivers/platform/raspberrypi/vchiq-mmal/mmal-encodings.h
 @@ -69,6 +69,33 @@
   */
  #define MMAL_ENCODING_OPAQUE           MMAL_FOURCC('O', 'P', 'Q', 'V')

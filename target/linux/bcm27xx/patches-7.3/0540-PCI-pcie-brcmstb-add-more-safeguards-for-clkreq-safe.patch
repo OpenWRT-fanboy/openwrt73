@@ -24,10 +24,10 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
 
 --- a/drivers/pci/controller/pcie-brcmstb.c
 +++ b/drivers/pci/controller/pcie-brcmstb.c
-@@ -165,11 +165,15 @@
+@@ -140,11 +140,15 @@
+ 		PCIE_MISC_CPU_2_PCIE_MEM_WIN0_LIMIT_HI + ((win) * 8)
  
  #define  PCIE_MISC_HARD_PCIE_HARD_DEBUG_CLKREQ_DEBUG_ENABLE_MASK	0x2
- #define  PCIE_MISC_HARD_PCIE_HARD_DEBUG_PERST_ASSERT_MASK		0x8
 +#define  PCIE_MISC_HARD_PCIE_HARD_DEBUG_REFCLK_OVRD_ENABLE_MASK		0x10000
 +#define  PCIE_MISC_HARD_PCIE_HARD_DEBUG_REFCLK_OVRD_OUT_MASK		0x100000
  #define  PCIE_MISC_HARD_PCIE_HARD_DEBUG_L1SS_ENABLE_MASK		0x200000
@@ -40,7 +40,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
  	   PCIE_MISC_HARD_PCIE_HARD_DEBUG_L1SS_ENABLE_MASK)
  
  #define PCIE_MISC_UBUS_BAR1_CONFIG_REMAP			0x40ac
-@@ -1616,12 +1620,21 @@ static void brcm_config_clkreq(struct br
+@@ -1545,12 +1549,21 @@
  
  	} else {
  		/*

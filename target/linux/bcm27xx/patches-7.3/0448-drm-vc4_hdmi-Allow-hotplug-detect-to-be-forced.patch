@@ -25,7 +25,7 @@ Signed-off-by: Dom Cobley <popcornmix@gmail.com>
 
 --- a/drivers/gpu/drm/vc4/vc4_hdmi.c
 +++ b/drivers/gpu/drm/vc4/vc4_hdmi.c
-@@ -44,6 +44,8 @@
+@@ -46,6 +46,8 @@
  #include <linux/component.h>
  #include <linux/gpio/consumer.h>
  #include <linux/i2c.h>
@@ -34,7 +34,7 @@ Signed-off-by: Dom Cobley <popcornmix@gmail.com>
  #include <linux/of.h>
  #include <linux/of_address.h>
  #include <linux/pm_runtime.h>
-@@ -113,6 +115,10 @@
+@@ -115,6 +117,10 @@
  
  #define HDMI_14_MAX_TMDS_CLK   (340 * 1000 * 1000)
  
@@ -45,7 +45,7 @@ Signed-off-by: Dom Cobley <popcornmix@gmail.com>
  static bool vc4_hdmi_supports_scrambling(struct vc4_hdmi *vc4_hdmi)
  {
  	struct drm_display_info *display = &vc4_hdmi->connector.display_info;
-@@ -423,7 +429,9 @@ static int vc4_hdmi_connector_detect_ctx
+@@ -417,7 +423,9 @@
  		return connector_status_unknown;
  	}
  

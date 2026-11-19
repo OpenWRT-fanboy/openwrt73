@@ -35,7 +35,7 @@ Signed-off-by: Dom Cobley <popcornmix@gmail.com>
 
 --- a/drivers/gpu/drm/vc4/vc4_hdmi.c
 +++ b/drivers/gpu/drm/vc4/vc4_hdmi.c
-@@ -654,7 +654,7 @@ static int vc4_hdmi_write_infoframe(stru
+@@ -685,7 +685,7 @@
  	if (!drm_dev_enter(drm, &idx))
  		return 0;
  
@@ -44,7 +44,7 @@ Signed-off-by: Dom Cobley <popcornmix@gmail.com>
  		ret = -ENOMEM;
  		goto out;
  	}
-@@ -680,6 +680,9 @@ static int vc4_hdmi_write_infoframe(stru
+@@ -711,6 +711,9 @@
  		       base + packet_reg);
  		packet_reg += 4;
  

@@ -31,7 +31,7 @@ See: https://github.com/raspberrypi/linux/issues/1064
 
 --- a/drivers/leds/leds-gpio.c
 +++ b/drivers/leds/leds-gpio.c
-@@ -50,8 +50,15 @@ static void gpio_led_set(struct led_clas
+@@ -49,8 +49,15 @@
  		led_dat->platform_gpio_blink_set(led_dat->gpiod, level,
  						 NULL, NULL);
  		led_dat->blinking = 0;
@@ -48,7 +48,7 @@ See: https://github.com/raspberrypi/linux/issues/1064
  			gpiod_set_value_cansleep(led_dat->gpiod, level);
  		else
  			gpiod_set_value(led_dat->gpiod, level);
-@@ -65,6 +72,13 @@ static int gpio_led_set_blocking(struct
+@@ -64,6 +71,13 @@
  	return 0;
  }
  
@@ -62,7 +62,7 @@ See: https://github.com/raspberrypi/linux/issues/1064
  static int gpio_blink_set(struct led_classdev *led_cdev,
  	unsigned long *delay_on, unsigned long *delay_off)
  {
-@@ -94,6 +108,7 @@ static int create_gpio_led(const struct
+@@ -93,6 +107,7 @@
  		led_dat->platform_gpio_blink_set = blink_set;
  		led_dat->cdev.blink_set = gpio_blink_set;
  	}
@@ -72,7 +72,7 @@ See: https://github.com/raspberrypi/linux/issues/1064
  		if (state < 0)
 --- a/drivers/leds/trigger/Kconfig
 +++ b/drivers/leds/trigger/Kconfig
-@@ -113,6 +113,13 @@ config LEDS_TRIGGER_CAMERA
+@@ -113,6 +113,13 @@
  	  This enables direct flash/torch on/off by the driver, kernel space.
  	  If unsure, say Y.
  
@@ -88,7 +88,7 @@ See: https://github.com/raspberrypi/linux/issues/1064
  	help
 --- a/drivers/leds/trigger/Makefile
 +++ b/drivers/leds/trigger/Makefile
-@@ -11,6 +11,7 @@ obj-$(CONFIG_LEDS_TRIGGER_ACTIVITY)	+= l
+@@ -11,6 +11,7 @@
  obj-$(CONFIG_LEDS_TRIGGER_DEFAULT_ON)	+= ledtrig-default-on.o
  obj-$(CONFIG_LEDS_TRIGGER_TRANSIENT)	+= ledtrig-transient.o
  obj-$(CONFIG_LEDS_TRIGGER_CAMERA)	+= ledtrig-camera.o
@@ -156,7 +156,7 @@ See: https://github.com/raspberrypi/linux/issues/1064
 +MODULE_LICENSE("GPL");
 --- a/include/linux/leds.h
 +++ b/include/linux/leds.h
-@@ -109,6 +109,9 @@ struct led_classdev {
+@@ -109,6 +109,9 @@
  #define LED_INIT_DEFAULT_TRIGGER BIT(23)
  #define LED_REJECT_NAME_CONFLICT BIT(24)
  #define LED_MULTI_COLOR		BIT(25)

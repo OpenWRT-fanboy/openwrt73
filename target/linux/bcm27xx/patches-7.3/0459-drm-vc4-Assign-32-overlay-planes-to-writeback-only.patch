@@ -15,7 +15,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
 
 --- a/drivers/gpu/drm/vc4/vc4_plane.c
 +++ b/drivers/gpu/drm/vc4/vc4_plane.c
-@@ -2613,13 +2613,28 @@ struct drm_plane *vc4_plane_init(struct
+@@ -2610,13 +2610,28 @@
  	return plane;
  }
  
@@ -45,7 +45,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  
  	/* Set up some arbitrary number of planes.  We're not limited
  	 * by a set number of physical registers, just the space in
-@@ -2633,7 +2648,22 @@ int vc4_plane_create_additional_planes(s
+@@ -2630,7 +2645,22 @@
  	for (i = 0; i < VC4_NUM_OVERLAY_PLANES; i++) {
  		struct drm_plane *plane =
  			vc4_plane_init(drm, DRM_PLANE_TYPE_OVERLAY,

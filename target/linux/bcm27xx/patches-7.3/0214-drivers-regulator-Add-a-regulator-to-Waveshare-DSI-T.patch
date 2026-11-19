@@ -25,7 +25,7 @@ Signed-off-by: Waveshare_Team <support@waveshare.com>
 
 --- a/drivers/regulator/Kconfig
 +++ b/drivers/regulator/Kconfig
-@@ -1201,6 +1201,16 @@ config REGULATOR_RASPBERRYPI_TOUCHSCREEN
+@@ -1245,6 +1245,16 @@
  	  unit. The regulator is used to enable power to the display and to
  	  control backlight PWM.
  
@@ -44,7 +44,7 @@ Signed-off-by: Waveshare_Team <support@waveshare.com>
  	depends on MFD_RC5T583
 --- a/drivers/regulator/Makefile
 +++ b/drivers/regulator/Makefile
-@@ -141,6 +141,7 @@ obj-$(CONFIG_REGULATOR_PCAP) += pcap-reg
+@@ -145,6 +145,7 @@
  obj-$(CONFIG_REGULATOR_RAA215300) += raa215300.o
  obj-$(CONFIG_REGULATOR_RASPBERRYPI_TOUCHSCREEN_ATTINY)  += rpi-panel-attiny-regulator.o
  obj-$(CONFIG_REGULATOR_RASPBERRYPI_TOUCHSCREEN_V2)  += rpi-panel-v2-regulator.o

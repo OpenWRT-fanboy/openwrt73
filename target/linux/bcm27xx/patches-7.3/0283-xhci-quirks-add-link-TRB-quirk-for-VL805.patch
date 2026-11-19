@@ -24,7 +24,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
 
 --- a/drivers/usb/host/xhci-pci.c
 +++ b/drivers/usb/host/xhci-pci.c
-@@ -449,6 +449,7 @@ static void xhci_pci_quirks(struct devic
+@@ -450,6 +450,7 @@
  		xhci->quirks |= XHCI_LPM_SUPPORT;
  		xhci->quirks |= XHCI_TRB_OVERFETCH;
  		xhci->quirks |= XHCI_EP_CTX_BROKEN_DCS;
@@ -34,26 +34,26 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
  
 --- a/drivers/usb/host/xhci-ring.c
 +++ b/drivers/usb/host/xhci-ring.c
-@@ -766,6 +766,16 @@ static int xhci_move_dequeue_past_td(str
- 
- 	} while (!hw_dequeue_found || !td_last_trb_found);
+@@ -737,6 +737,16 @@
+ 		new_cycle = le32_to_cpu(td->start_trb->generic.field[3]) & TRB_CYCLE;
+ 	}
  
 +	/*
 +	 * Quirk: the xHC does not correctly parse link TRBs if the HW Dequeue
 +	 * pointer is set to one. Advance to the next TRB (and next segment).
 +	 */
-+	if (xhci->quirks & XHCI_AVOID_DQ_ON_LINK && trb_is_link(new_deq)) {
-+		if (link_trb_toggles_cycle(new_deq))
++	if (xhci->quirks & XHCI_AVOID_DQ_ON_LINK && trb_is_link(ep->queued_deq_ptr)) {
++		if (link_trb_toggles_cycle(ep->queued_deq_ptr))
 +			new_cycle ^= 0x1;
-+		next_trb(&new_seg, &new_deq);
++		next_trb(&ep->queued_deq_seg, &ep->queued_deq_ptr);
 +	}
 +
- 	/* Don't update the ring cycle state for the producer (us). */
- 	addr = xhci_trb_virt_to_dma(new_seg, new_deq);
+ 	addr = xhci_trb_virt_to_dma(ep->queued_deq_seg, ep->queued_deq_ptr);
  	if (addr == 0) {
+ 		xhci_warn(xhci, "Can't find new dequeue dma of seg %p, ptr %p\n",
 --- a/drivers/usb/host/xhci.h
 +++ b/drivers/usb/host/xhci.h
-@@ -1638,6 +1638,9 @@ struct xhci_hcd {
+@@ -1648,6 +1648,9 @@
  #define XHCI_ETRON_HOST	BIT_ULL(49)
  #define XHCI_LIMIT_ENDPOINT_INTERVAL_9 BIT_ULL(50)
  

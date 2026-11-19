@@ -26,7 +26,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
 
 --- a/drivers/gpio/gpiolib.c
 +++ b/drivers/gpio/gpiolib.c
-@@ -53,6 +53,42 @@
+@@ -55,6 +55,42 @@
  
  #define dont_test_bit(b,d) (0)
  
@@ -53,7 +53,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
 +#define CLASS(gcg, gd) \
 +	struct gcg gd = gcg ## _init
 +
-+static struct gpio_chip_guard gpio_chip_guard_init(struct gpio_desc *desc)
++static struct gpio_chip_guard gpio_chip_guard_init(const struct gpio_desc *desc)
 +{
 +	struct gpio_chip_guard _guard;
 +
@@ -68,4 +68,4 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
 +
  /* Device and char device-related information */
  static DEFINE_IDA(gpio_ida);
- static dev_t gpio_devt;
+ static dev_t gpio_devt __ro_after_init;

@@ -131,9 +131,9 @@ Signed-off-by: Lee Jackson <info@arducam.com>
 +...
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -1996,6 +1996,14 @@ S:	Maintained
- F:	drivers/net/arcnet/
- F:	include/uapi/linux/if_arcnet.h
+@@ -2183,6 +2183,14 @@
+ F:	Documentation/hwmon/arctic_fan_controller.rst
+ F:	drivers/hwmon/arctic_fan_controller.c
  
 +ARDUCAM PIVARIETY SENSOR DRIVER
 +M:	Arducam Kernel Maintenance <info@arducam.com>

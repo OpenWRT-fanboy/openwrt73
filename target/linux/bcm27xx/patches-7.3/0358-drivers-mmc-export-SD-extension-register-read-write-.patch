@@ -16,7 +16,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
 
 --- a/drivers/mmc/core/sd.c
 +++ b/drivers/mmc/core/sd.c
-@@ -1034,83 +1034,6 @@ static bool mmc_sd_card_using_v18(struct
+@@ -1031,83 +1031,6 @@
  	       (SD_MODE_UHS_SDR50 | SD_MODE_UHS_SDR104 | SD_MODE_UHS_DDR50);
  }
  
@@ -100,7 +100,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
  static int sd_parse_ext_reg_power(struct mmc_card *card, u8 fno, u8 page,
  				  u16 offset)
  {
-@@ -1120,7 +1043,7 @@ static int sd_parse_ext_reg_power(struct
+@@ -1117,7 +1040,7 @@
  	reg_buf = card->ext_reg_buf;
  
  	/* Read the extension register for power management function. */
@@ -109,7 +109,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
  	if (err) {
  		pr_warn("%s: error %d reading PM func of ext reg\n",
  			mmc_hostname(card->host), err);
-@@ -1158,7 +1081,7 @@ static int sd_parse_ext_reg_perf(struct
+@@ -1155,7 +1078,7 @@
  
  	reg_buf = card->ext_reg_buf;
  
@@ -118,7 +118,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
  	if (err) {
  		pr_warn("%s: error %d reading PERF func of ext reg\n",
  			mmc_hostname(card->host), err);
-@@ -1253,7 +1176,7 @@ static int sd_parse_ext_reg(struct mmc_c
+@@ -1250,7 +1173,7 @@
  	return 0;
  }
  
@@ -127,7 +127,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
  {
  	int err, i;
  	u8 num_ext, *gen_info_buf;
-@@ -1279,7 +1202,7 @@ static int sd_read_ext_regs(struct mmc_c
+@@ -1276,7 +1199,7 @@
  	 * Read 512 bytes of general info, which is found at function number 0,
  	 * at page 0 and with no offset.
  	 */
@@ -136,7 +136,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
  	if (err) {
  		pr_err("%s: error %d reading general info of SD ext reg\n",
  			mmc_hostname(card->host), err);
-@@ -1351,7 +1274,7 @@ static int sd_flush_cache(struct mmc_hos
+@@ -1348,7 +1271,7 @@
  	page = card->ext_perf.page;
  	offset = card->ext_perf.offset + 261;
  
@@ -145,7 +145,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
  	if (err) {
  		pr_warn("%s: error %d writing Cache Flush bit\n",
  			mmc_hostname(host), err);
-@@ -1367,7 +1290,7 @@ static int sd_flush_cache(struct mmc_hos
+@@ -1364,7 +1287,7 @@
  	 * Read the Flush Cache bit. The card shall reset it, to confirm that
  	 * it's has completed the flushing of the cache.
  	 */
@@ -154,7 +154,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
  	if (err) {
  		pr_warn("%s: error %d reading Cache Flush bit\n",
  			mmc_hostname(host), err);
-@@ -1390,7 +1313,7 @@ static int sd_enable_cache(struct mmc_ca
+@@ -1387,7 +1310,7 @@
  	 * Set Cache Enable at bit 0 in the performance enhancement register at
  	 * 260 bytes offset.
  	 */
@@ -163,7 +163,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
  			       card->ext_perf.offset + 260, BIT(0));
  	if (err) {
  		pr_warn("%s: error %d writing Cache Enable bit\n",
-@@ -1566,7 +1489,7 @@ retry:
+@@ -1562,7 +1485,7 @@
  cont:
  	if (!oldcard) {
  		/* Read/parse the extension registers. */
@@ -172,7 +172,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
  		if (err)
  			goto free_card;
  	}
-@@ -1685,7 +1608,7 @@ static int sd_busy_poweroff_notify_cb(vo
+@@ -1681,7 +1604,7 @@
  	 * one byte offset and is one byte long. The Power Off Notification
  	 * Ready is bit 0.
  	 */
@@ -181,7 +181,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
  			      card->ext_power.offset + 1, 1, data->reg_buf);
  	if (err) {
  		pr_warn("%s: error %d reading status reg of PM func\n",
-@@ -1711,7 +1634,7 @@ static int sd_poweroff_notify(struct mmc
+@@ -1707,7 +1630,7 @@
  	 * Set the Power Off Notification bit in the power management settings
  	 * register at 2 bytes offset.
  	 */
@@ -192,7 +192,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
  		pr_warn("%s: error %d writing Power Off Notify bit\n",
 --- a/drivers/mmc/core/sd_ops.c
 +++ b/drivers/mmc/core/sd_ops.c
-@@ -418,8 +418,83 @@ int mmc_app_sd_status(struct mmc_card *c
+@@ -418,8 +418,83 @@
  	return 0;
  }
  
@@ -278,7 +278,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
  
  static int mmc_sd_cmdq_switch(struct mmc_card *card, bool enable)
  {
-@@ -435,8 +510,8 @@ static int mmc_sd_cmdq_switch(struct mmc
+@@ -435,8 +510,8 @@
  		reg = BIT(0);
  
  	/* Performance enhancement register byte 262 controls command queueing */
@@ -291,7 +291,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
  
 --- a/drivers/mmc/core/sd_ops.h
 +++ b/drivers/mmc/core/sd_ops.h
-@@ -26,6 +26,10 @@ int mmc_send_ext_addr(struct mmc_host *h
+@@ -26,6 +26,10 @@
  void mmc_uhs2_prepare_cmd(struct mmc_host *host, struct mmc_request *mrq);
  int mmc_sd_cmdq_enable(struct mmc_card *card);
  int mmc_sd_cmdq_disable(struct mmc_card *card);

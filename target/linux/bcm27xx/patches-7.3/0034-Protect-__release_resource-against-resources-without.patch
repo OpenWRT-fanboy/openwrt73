@@ -12,7 +12,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 
 --- a/kernel/resource.c
 +++ b/kernel/resource.c
-@@ -210,6 +210,12 @@ static int __release_resource(struct res
+@@ -218,6 +218,12 @@
  {
  	struct resource *tmp, **p, *chd;
  

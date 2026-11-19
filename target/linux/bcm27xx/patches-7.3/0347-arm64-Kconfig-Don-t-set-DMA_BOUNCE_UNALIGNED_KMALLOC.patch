@@ -17,7 +17,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
 
 --- a/arch/arm64/Kconfig
 +++ b/arch/arm64/Kconfig
-@@ -139,7 +139,8 @@ config ARM64
+@@ -115,7 +115,8 @@
  	select DCACHE_WORD_ACCESS
  	select HAVE_EXTRA_IPI_TRACEPOINTS
  	select DYNAMIC_FTRACE if FUNCTION_TRACER

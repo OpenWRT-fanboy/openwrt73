@@ -63,7 +63,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  #include <linux/irqdomain.h>
  
  #include <asm/exception.h>
-@@ -154,12 +155,24 @@ static void armctrl_unmask_irq(struct ir
+@@ -153,12 +154,24 @@
  	}
  }
  
@@ -88,7 +88,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  };
  
  static int armctrl_xlate(struct irq_domain *d, struct device_node *ctrlr,
-@@ -332,7 +345,8 @@ static void bcm2836_chained_handle_irq(s
+@@ -323,7 +336,8 @@
  {
  	u32 hwirq;
  
@@ -100,7 +100,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  
 --- a/drivers/irqchip/irq-bcm2836.c
 +++ b/drivers/irqchip/irq-bcm2836.c
-@@ -89,6 +89,27 @@ static void bcm2836_arm_irqchip_unmask_g
+@@ -89,6 +89,27 @@
  {
  }
  

@@ -30,8 +30,8 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 -#include <linux/regmap.h>
  
  #include <asm/exception.h>
- #include <asm/mach/irq.h>
-@@ -92,7 +90,7 @@ struct armctrl_ic {
+ #ifndef CONFIG_ARM64
+@@ -94,7 +92,7 @@
  	void __iomem *enable[NR_BANKS];
  	void __iomem *disable[NR_BANKS];
  	struct irq_domain *domain;
@@ -40,7 +40,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
  };
  
  static struct armctrl_ic intc __read_mostly;
-@@ -129,24 +127,20 @@ static void armctrl_unmask_irq(struct ir
+@@ -131,24 +129,20 @@
  	if (d->hwirq >= NUMBER_IRQS) {
  		if (num_online_cpus() > 1) {
  			unsigned int data;
@@ -72,7 +72,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
  		}
  
  		writel_relaxed(REG_FIQ_ENABLE | hwirq_to_fiq(d->hwirq),
-@@ -248,12 +242,10 @@ static int __init armctrl_of_init(struct
+@@ -250,12 +244,10 @@
  	}
  
  	if (is_2836) {
@@ -91,7 +91,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
  	/* Make a duplicate irq range which is used to enable FIQ */
 --- a/drivers/irqchip/irq-bcm2836.c
 +++ b/drivers/irqchip/irq-bcm2836.c
-@@ -22,6 +22,9 @@ struct bcm2836_arm_irqchip_intc {
+@@ -22,6 +22,9 @@
  
  static struct bcm2836_arm_irqchip_intc intc  __read_mostly;
  
@@ -101,7 +101,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
  static void bcm2836_arm_irqchip_mask_per_cpu_irq(unsigned int reg_offset,
  						 unsigned int bit,
  						 int cpu)
-@@ -323,6 +326,8 @@ static int __init bcm2836_arm_irqchip_l1
+@@ -323,6 +326,8 @@
  		panic("%pOF: unable to map local interrupt registers\n", node);
  	}
  

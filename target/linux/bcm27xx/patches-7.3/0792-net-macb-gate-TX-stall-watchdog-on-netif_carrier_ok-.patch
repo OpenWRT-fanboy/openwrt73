@@ -46,7 +46,7 @@ Signed-off-by: Lukasz Raczylo <lukasz@raczylo.com>
 
 --- a/drivers/net/ethernet/cadence/macb_main.c
 +++ b/drivers/net/ethernet/cadence/macb_main.c
-@@ -2077,6 +2077,16 @@ static void macb_tx_stall_watchdog(struc
+@@ -2049,6 +2049,16 @@
  	if (!netif_running(bp->dev))
  		return;
  
@@ -63,7 +63,7 @@ Signed-off-by: Lukasz Raczylo <lukasz@raczylo.com>
  	spin_lock_irqsave(&queue->tx_ptr_lock, flags);
  	cur_tail = queue->tx_tail;
  	cur_head = queue->tx_head;
-@@ -2086,13 +2096,14 @@ static void macb_tx_stall_watchdog(struc
+@@ -2058,13 +2068,14 @@
  	spin_unlock_irqrestore(&queue->tx_ptr_lock, flags);
  
  	if (stalled) {

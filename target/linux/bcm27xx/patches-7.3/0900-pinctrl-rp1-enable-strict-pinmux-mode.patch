@@ -21,7 +21,7 @@ Signed-off-by: Nicolai Buchwitz <nb@tipi-net.de>
 
 --- a/drivers/pinctrl/pinctrl-rp1.c
 +++ b/drivers/pinctrl/pinctrl-rp1.c
-@@ -1363,6 +1363,7 @@ static const struct pinmux_ops rp1_pmx_o
+@@ -1431,6 +1431,7 @@
  	.gpio_disable_free = rp1_pmx_gpio_disable_free,
  	.gpio_set_direction = rp1_pmx_gpio_set_direction,
  	.function_is_gpio = rp1_pmx_function_is_gpio,

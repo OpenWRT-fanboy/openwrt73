@@ -31,44 +31,6 @@ This reverts commit 6bd54195d0b29330576542c8128e7a5c58d6bcdd.
  delete mode 100644 drivers/media/platform/raspberrypi/hevc_dec/hevc_d_video.c
  delete mode 100644 drivers/media/platform/raspberrypi/hevc_dec/hevc_d_video.h
 
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -21548,16 +21548,6 @@ S:	Maintained
- F:	Documentation/devicetree/bindings/spi/raspberrypi,rp2040-gpio-bridge.yaml
- F:	drivers/spi/spi-rp2040-gpio-bridge.c
- 
--RASPBERRY PI HEVC DECODER
--M:	John Cox <john.cox@raspberrypi.com>
--M:	Dom Cobley <dom@raspberrypi.com>
--M:	Dave Stevenson <dave.stevenson@raspberrypi.com>
--M:	Raspberry Pi Internal Kernel List <kernel-list@raspberrypi.com>
--L:	linux-media@vger.kernel.org
--S:	Maintained
--F:	Documentation/devicetree/bindings/media/raspberrypi,rpi_hevc_dec.yaml
--F:	drivers/media/platform/raspberrypi/hevc_dec
--
- RASPBERRY PI PISP BACK END
- M:	Jacopo Mondi <jacopo.mondi@ideasonboard.com>
- R:	Raspberry Pi Kernel Maintenance <kernel-list@raspberrypi.com>
---- a/drivers/media/platform/raspberrypi/Kconfig
-+++ b/drivers/media/platform/raspberrypi/Kconfig
-@@ -2,7 +2,6 @@
- 
- comment "Raspberry Pi media platform drivers"
- 
--source "drivers/media/platform/raspberrypi/hevc_dec/Kconfig"
- source "drivers/media/platform/raspberrypi/pisp_be/Kconfig"
- source "drivers/media/platform/raspberrypi/rp1-cfe/Kconfig"
- source "drivers/media/platform/raspberrypi/rp1_cfe/Kconfig"
---- a/drivers/media/platform/raspberrypi/Makefile
-+++ b/drivers/media/platform/raspberrypi/Makefile
-@@ -1,6 +1,5 @@
- # SPDX-License-Identifier: GPL-2.0
- 
--obj-y += hevc_dec/
- obj-y += pisp_be/
- obj-y += rp1-cfe/
- obj-y += rp1_cfe/
 --- a/drivers/media/platform/raspberrypi/hevc_dec/Kconfig
 +++ /dev/null
 @@ -1,17 +0,0 @@

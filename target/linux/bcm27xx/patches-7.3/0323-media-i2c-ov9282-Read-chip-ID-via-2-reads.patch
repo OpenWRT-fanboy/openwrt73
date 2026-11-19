@@ -17,22 +17,22 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
 
 --- a/drivers/media/i2c/ov9282.c
 +++ b/drivers/media/i2c/ov9282.c
-@@ -1078,12 +1078,16 @@ error_unlock:
+@@ -973,12 +973,16 @@
  static int ov9282_detect(struct ov9282 *ov9282)
  {
  	int ret;
--	u32 val;
-+	u32 val, msb;
+-	u64 val;
++	u64 val, msb;
  
--	ret = ov9282_read_reg(ov9282, OV9282_REG_ID, 2, &val);
-+	ret = ov9282_read_reg(ov9282, OV9282_REG_ID + 1, 1, &val);
+-	ret = cci_read(ov9282->regmap, OV9282_REG_ID, &val, NULL);
++	ret = cci_read(ov9282->regmap, CCI_REG8(0x300b), &val, NULL);
 +	if (ret)
 +		return ret;
-+	ret = ov9282_read_reg(ov9282, OV9282_REG_ID, 1, &msb);
++	ret = cci_read(ov9282->regmap, CCI_REG8(0x300a), &msb, NULL);
  	if (ret)
  		return ret;
  
 +	val |= (msb << 8);
  	if (val != OV9282_ID) {
- 		dev_err(ov9282->dev, "chip id mismatch: %x!=%x",
+ 		dev_err(ov9282->dev, "chip id mismatch: %x!=%llx",
  			OV9282_ID, val);

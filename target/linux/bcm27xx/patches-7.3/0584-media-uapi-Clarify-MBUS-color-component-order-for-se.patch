@@ -20,24 +20,16 @@ Signed-off-by: Maxime Ripard <mripard@kernel.org>
 
 --- a/Documentation/userspace-api/media/v4l/subdev-formats.rst
 +++ b/Documentation/userspace-api/media/v4l/subdev-formats.rst
-@@ -160,12 +160,14 @@ correspondence between them.
- 
- The media bus pixel codes document parallel formats. Should the pixel data be
- transported over a serial bus, the media bus pixel code that describes a
--parallel format that transfers a sample on a single clock cycle is used. For
--instance, both MEDIA_BUS_FMT_BGR888_1X24 and MEDIA_BUS_FMT_BGR888_3X8 are used
--on parallel busses for transferring an 8 bits per sample BGR data, whereas on
--serial busses the data in this format is only referred to using
--MEDIA_BUS_FMT_BGR888_1X24. This is because there is effectively only a single
--way to transport that format on the serial busses.
-+parallel format that transfers a sample on a single clock cycle is used. The
-+color component order used is the same used on the serial bus. For instance,
-+both MEDIA_BUS_FMT_BGR888_1X24 and MEDIA_BUS_FMT_BGR888_3X8 are used on parallel
-+busses for transferring an 8 bits per sample BGR data, whereas on serial busses
-+the data in this format is only referred to using MEDIA_BUS_FMT_BGR888_1X24,
-+with BGR meaning that the blue component is transmitted first, then green, then
-+red. This is because there is effectively only a single way to transport that
-+format on the serial busses.
+@@ -165,12 +165,6 @@
+ single clock cycle, and whose bit orders from LSB to MSB correspond to
+ the order in which colour components are transmitted on the serial bus.
+ For instance, the MIPI CSI-2 24-bit RGB (RGB888) format uses the
+-MEDIA_BUS_FMT_RGB888_1X24 media bus code because CSI-2 transmits the
+-blue colour component first, followed by green and red, and
+-MEDIA_BUS_FMT_RGB888_1X24 defines the first bit of blue at bit 0.
+-While used for 24-bit RGB data on parallel buses, the
+-MEDIA_BUS_FMT_RGB888_3X8 or MEDIA_BUS_FMT_BGR888_1X24 codes must not be
+-used for CSI-2.
  
  Packed RGB Formats
  ^^^^^^^^^^^^^^^^^^

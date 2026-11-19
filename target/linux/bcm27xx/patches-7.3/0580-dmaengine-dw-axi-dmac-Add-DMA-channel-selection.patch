@@ -16,7 +16,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
 
 --- a/drivers/dma/dw-axi-dmac/dw-axi-dmac-platform.c
 +++ b/drivers/dma/dw-axi-dmac/dw-axi-dmac-platform.c
-@@ -1479,19 +1479,75 @@ static int __maybe_unused axi_dma_runtim
+@@ -1358,29 +1358,77 @@
  	return axi_dma_resume(chip);
  }
  
@@ -29,10 +29,12 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
 +}
 +
  static struct dma_chan *dw_axi_dma_of_xlate(struct of_phandle_args *dma_spec,
- 					    struct of_dma *ofdma)
+-					    struct of_dma *ofdma)
++						    struct of_dma *ofdma)
  {
+ 	unsigned int handshake = dma_spec->args[0];
  	struct dw_axi_dma *dw = ofdma->of_dma_data;
- 	struct axi_dma_chan *chan;
+ 	struct axi_dma_chan *chan = NULL;
 +	uint32_t chan_flags_all = 0;
 +	uint32_t busy_channels;
  	struct dma_chan *dchan;
@@ -45,11 +47,13 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
 +
 +	for (i = 0; i < dw->hdata->nr_channels; i++)
 +		chan_flags_all |= dw->chan_flags[i];
-+
+ 
+-	if (dw->hdata->use_handshake_as_channel_number) {
+-		if (handshake >= dw->hdata->nr_channels)
 +	dma_cap_zero(mask);
 +	dma_cap_set(DMA_SLAVE, mask);
 +
-+	chan_sel = dma_spec->args[0];
++	chan_sel = handshake;
 +	busy_channels = 0;
 +	dchan = NULL;
 +
@@ -62,7 +66,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
 +				continue;
 +			/*
 +			 * Positive matches (wanted flags that match) score twice that of
-+			 * negetive matches (not wanted flags that are not present).
++			 * negative matches (not wanted flags that are not present).
 +			 */
 +			score = 2 * hweight32(chan_sel & dw->chan_flags[i]) +
 +				1 * hweight32(~chan_sel & ~dw->chan_flags[i] & chan_flags_all);
@@ -73,13 +77,14 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
 +				chan_mask |= (1 << i);
 +			}
 +		}
- 
--	dchan = dma_get_any_slave_channel(&dw->dma);
--	if (!dchan)
--		return NULL;
-+		if (!chan_mask)
-+			return NULL;
 +
++		if (!chan_mask)
+ 			return NULL;
+ 
+-		chan = &dw->chan[handshake];
+-		dchan = dma_get_slave_channel(&chan->vc.chan);
+-	} else {
+-		dchan = dma_get_any_slave_channel(&dw->dma);
 +		dchan = __dma_request_channel(&mask, dw_axi_dma_filter_fn,
 +					      &chan_mask, ofdma->of_node);
 +		if (dchan)
@@ -87,34 +92,20 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
 +
 +		/* Repeat, after first marking this group of channels as busy */
 +		busy_channels |= chan_mask;
-+	}
- 
- 	chan = dchan_to_axi_dma_chan(dchan);
--	chan->hw_handshake_num = dma_spec->args[0];
-+	chan->hw_handshake_num = (u8)chan_sel;
-+
- 	return dchan;
- }
- 
-@@ -1573,6 +1629,15 @@ static int parse_device_properties(struc
- 		}
  	}
  
-+	/* snps,chan-flags is optional */
-+	memset(chip->dw->chan_flags, 0, sizeof(chip->dw->chan_flags));
-+	if (device_property_read_u32_array(dev, "snps,chan-flags",
-+				       chip->dw->chan_flags,
-+				       chip->dw->hdata->nr_channels) < 0)
-+		device_property_read_u32_array(dev, "snps,sel-require",
-+					       chip->dw->chan_flags,
-+					       chip->dw->hdata->nr_channels);
-+
- 	return 0;
- }
+ 	if (!dchan)
+ 		return NULL;
  
---- a/drivers/dma/dw-axi-dmac/dw-axi-dmac.h
+-	if (!chan)
+-		chan = dchan_to_axi_dma_chan(dchan);
++	chan = dchan_to_axi_dma_chan(dchan);
+ 	chan->hw_handshake_num = handshake;
+ 	return dchan;
+ }
+--- a/drivers/dma/dw-axi-dmac/dw-axi-dmac.h--- a/drivers/dma/dw-axi-dmac/dw-axi-dmac.h
 +++ b/drivers/dma/dw-axi-dmac/dw-axi-dmac.h
-@@ -58,6 +58,7 @@ struct dw_axi_dma {
+@@ -59,6 +59,7 @@
  	struct dma_device	dma;
  	struct dw_axi_dma_hcfg	*hdata;
  	struct device_dma_parameters	dma_parms;

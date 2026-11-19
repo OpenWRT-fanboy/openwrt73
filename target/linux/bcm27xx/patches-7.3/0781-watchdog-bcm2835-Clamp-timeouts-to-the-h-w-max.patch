@@ -28,7 +28,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
 
 --- a/drivers/watchdog/bcm2835_wdt.c
 +++ b/drivers/watchdog/bcm2835_wdt.c
-@@ -65,7 +65,7 @@ static int bcm2835_wdt_start(struct watc
+@@ -70,7 +70,7 @@
  
  	spin_lock_irqsave(&wdt->lock, flags);
  

@@ -59,36 +59,22 @@ Signed-off-by: Maxime Ripard <maxime@cerno.tech>
 
 --- a/drivers/gpu/drm/drm_atomic_helper.c
 +++ b/drivers/gpu/drm/drm_atomic_helper.c
-@@ -1892,13 +1892,6 @@ drm_atomic_helper_wait_for_vblanks(struc
- 	int i, ret;
- 	unsigned int crtc_mask = 0;
- 
--	 /*
--	  * Legacy cursor ioctls are completely unsynced, and userspace
--	  * relies on that (by doing tons of cursor updates).
--	  */
--	if (state->legacy_cursor_update)
--		return;
--
- 	for_each_oldnew_crtc_in_state(state, crtc, old_crtc_state, new_crtc_state, i) {
- 		if (!new_crtc_state->active)
- 			continue;
-@@ -2547,12 +2540,6 @@ int drm_atomic_helper_setup_commit(struc
- 			complete_all(&commit->flip_done);
+@@ -2557,12 +2557,6 @@
  			continue;
  		}
--
+ 
 -		/* Legacy cursor updates are fully unsynced. */
 -		if (state->legacy_cursor_update) {
 -			complete_all(&commit->flip_done);
 -			continue;
 -		}
- 
+-
  		if (!new_crtc_state->event) {
- 			commit->event = kzalloc(sizeof(*commit->event),
+ 			commit->event = kzalloc_obj(*commit->event);
+ 			if (!commit->event)
 --- a/drivers/gpu/drm/i915/display/intel_display.c
 +++ b/drivers/gpu/drm/i915/display/intel_display.c
-@@ -7653,6 +7653,19 @@ int intel_atomic_commit(struct drm_devic
+@@ -7818,6 +7818,19 @@
  				state->base.legacy_cursor_update = false;
  	}
  
@@ -110,7 +96,7 @@ Signed-off-by: Maxime Ripard <maxime@cerno.tech>
  		drm_dbg_atomic(display->drm,
 --- a/drivers/gpu/drm/msm/msm_atomic.c
 +++ b/drivers/gpu/drm/msm/msm_atomic.c
-@@ -255,6 +255,8 @@ void msm_atomic_commit_tail(struct drm_a
+@@ -255,6 +255,8 @@
  		/* async updates are limited to single-crtc updates: */
  		WARN_ON(crtc_mask != drm_crtc_mask(async_crtc));
  

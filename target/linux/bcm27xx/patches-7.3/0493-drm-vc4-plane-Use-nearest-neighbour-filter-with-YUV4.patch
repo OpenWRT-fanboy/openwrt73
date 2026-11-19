@@ -19,7 +19,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
 
 --- a/drivers/gpu/drm/vc4/vc4_drv.h
 +++ b/drivers/gpu/drm/vc4/vc4_drv.h
-@@ -454,6 +454,10 @@ struct vc4_plane_state {
+@@ -447,6 +447,10 @@
  	enum vc4_scaling_mode x_scaling[2], y_scaling[2];
  	bool is_unity;
  	bool is_yuv;
@@ -32,7 +32,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  	unsigned int lbm_handle;
 --- a/drivers/gpu/drm/vc4/vc4_plane.c
 +++ b/drivers/gpu/drm/vc4/vc4_plane.c
-@@ -302,6 +302,7 @@ struct drm_plane_state *vc4_plane_duplic
+@@ -301,6 +301,7 @@
  		refcount_inc(&hvs->lbm_refcounts[vc4_state->lbm_handle].refcount);
  
  	vc4_state->dlist_initialized = 0;
@@ -40,7 +40,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  
  	__drm_atomic_helper_plane_duplicate_state(plane, &vc4_state->base);
  
-@@ -874,6 +875,10 @@ static void vc4_write_scaling_parameters
+@@ -872,6 +873,10 @@
  {
  	struct vc4_dev *vc4 = to_vc4_dev(state->plane->dev);
  	struct vc4_plane_state *vc4_state = to_vc4_plane_state(state);
@@ -51,7 +51,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  
  	WARN_ON_ONCE(vc4->gen > VC4_GEN_6_D);
  
-@@ -882,7 +887,7 @@ static void vc4_write_scaling_parameters
+@@ -880,7 +885,7 @@
  		vc4_write_ppf(vc4_state, vc4_state->src_w[channel],
  			      vc4_state->crtc_w, vc4_state->src_x, channel,
  			      state->chroma_siting_h,
@@ -60,7 +60,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  	}
  
  	/* Ch0 V-PPF Words 0-1: Scaling Parameters, Context */
-@@ -890,7 +895,7 @@ static void vc4_write_scaling_parameters
+@@ -888,7 +893,7 @@
  		vc4_write_ppf(vc4_state, vc4_state->src_h[channel],
  			      vc4_state->crtc_h, vc4_state->src_y, channel,
  			      state->chroma_siting_v,
@@ -69,7 +69,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  		vc4_dlist_write(vc4_state, 0xc0c0c0c0);
  	}
  
-@@ -1870,12 +1875,19 @@ static int vc6_plane_mode_set(struct drm
+@@ -1867,12 +1872,19 @@
  		if (vc4_state->x_scaling[0] == VC4_SCALING_NONE) {
  			vc4_state->x_scaling[0] = VC4_SCALING_PPF;
  			vc4_state->is_unity = false;
@@ -89,7 +89,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  	}
  
  	if (!vc4_state->src_w[0] || !vc4_state->src_h[0] ||
-@@ -2202,6 +2214,9 @@ static int vc6_plane_mode_set(struct drm
+@@ -2199,6 +2211,9 @@
  				filter = &vc4->hvs->nearest_neighbour_filter;
  				break;
  			}

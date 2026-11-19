@@ -36,7 +36,7 @@ Signed-off-by: Dom Cobley <popcornmix@gmail.com>
 
 --- a/sound/soc/codecs/hdmi-codec.c
 +++ b/sound/soc/codecs/hdmi-codec.c
-@@ -362,6 +362,10 @@ static int hdmi_codec_get_ch_alloc_table
+@@ -363,6 +363,10 @@
  	unsigned long spk_mask;
  	const struct hdmi_codec_cea_spk_alloc *cap = hdmi_codec_channel_alloc;
  

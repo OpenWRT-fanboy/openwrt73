@@ -26,7 +26,7 @@ Signed-off-by: Alexander Winkowski <dereference23@outlook.com>
 
 --- a/drivers/media/i2c/Kconfig
 +++ b/drivers/media/i2c/Kconfig
-@@ -454,6 +454,16 @@ config VIDEO_OV13B10
+@@ -475,6 +475,16 @@
  	  This is a Video4Linux2 sensor driver for the OmniVision
  	  OV13B10 camera.
  
@@ -45,7 +45,7 @@ Signed-off-by: Alexander Winkowski <dereference23@outlook.com>
  	help
 --- a/drivers/media/i2c/Makefile
 +++ b/drivers/media/i2c/Makefile
-@@ -94,6 +94,7 @@ obj-$(CONFIG_VIDEO_OV08D10) += ov08d10.o
+@@ -96,6 +96,7 @@
  obj-$(CONFIG_VIDEO_OV08X40) += ov08x40.o
  obj-$(CONFIG_VIDEO_OV13858) += ov13858.o
  obj-$(CONFIG_VIDEO_OV13B10) += ov13b10.o

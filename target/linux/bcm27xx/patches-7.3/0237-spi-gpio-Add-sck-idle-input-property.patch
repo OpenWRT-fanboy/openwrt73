@@ -14,7 +14,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
 
 --- a/drivers/spi/spi-gpio.c
 +++ b/drivers/spi/spi-gpio.c
-@@ -34,6 +34,7 @@ struct spi_gpio {
+@@ -33,6 +33,7 @@
  	struct gpio_desc		*sck;
  	struct gpio_desc		*miso;
  	struct gpio_desc		*mosi;
@@ -22,7 +22,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  	struct gpio_desc		**cs_gpios;
  };
  
-@@ -196,8 +197,12 @@ static void spi_gpio_chipselect(struct s
+@@ -195,8 +196,12 @@
  	struct spi_gpio *spi_gpio = spi_to_spi_gpio(spi);
  
  	/* set initial clock line level */
@@ -37,7 +37,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  
  	/* Drive chip select line, if we have one */
  	if (spi_gpio->cs_gpios) {
-@@ -206,6 +211,9 @@ static void spi_gpio_chipselect(struct s
+@@ -205,6 +210,9 @@
  		/* SPI chip selects are normally active-low */
  		gpiod_set_value_cansleep(cs, (spi->mode & SPI_CS_HIGH) ? is_active : !is_active);
  	}
@@ -47,7 +47,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  }
  
  static void spi_gpio_set_mosi_idle(struct spi_device *spi)
-@@ -301,6 +309,7 @@ static int spi_gpio_request(struct devic
+@@ -300,6 +308,7 @@
  	if (IS_ERR(spi_gpio->miso))
  		return PTR_ERR(spi_gpio->miso);
  

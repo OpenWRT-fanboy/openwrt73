@@ -18,58 +18,6 @@ Signed-off-by: zumbiepig <121742281+zumbiepig@users.noreply.github.com>
  3 files changed, 184 insertions(+)
  create mode 100644 arch/arm/boot/dts/overlays/pwm-fan-overlay.dts
 
---- a/arch/arm/boot/dts/overlays/Makefile
-+++ b/arch/arm/boot/dts/overlays/Makefile
-@@ -238,6 +238,7 @@ dtbo-$(CONFIG_ARCH_BCM2835) += \
- 	proto-codec.dtbo \
- 	pwm.dtbo \
- 	pwm-2chan.dtbo \
-+	pwm-fan.dtbo \
- 	pwm-gpio.dtbo \
- 	pwm-gpio-fan.dtbo \
- 	pwm-ir-tx.dtbo \
---- a/arch/arm/boot/dts/overlays/README
-+++ b/arch/arm/boot/dts/overlays/README
-@@ -4369,6 +4369,39 @@ Params: pin                     Output p
-         clock                   PWM clock frequency (informational)
- 
- 
-+Name:   pwm-fan
-+Info:   Configure a PWM GPIO pin to control a cooling fan.
-+Load:   dtoverlay=pwm-fan,<param>=<val>
-+Params: fan_gpio_12             Use GPIO12 (PWM0) to control the fan.
-+        fan_gpio_18             Use GPIO18 (PWM0) to control the fan (default).
-+        fan_gpio_13             Use GPIO13 (PWM1) to control the fan.
-+        fan_gpio_19             Use GPIO19 (PWM1) to control the fan.
-+        fan_temp0               Temperature threshold (in millicelsius) for
-+                                1st cooling level (default 50000).
-+        fan_temp0_hyst          Temperature hysteresis (in millicelsius) for
-+                                1st cooling level (default 5000).
-+        fan_temp0_speed         Fan PWM setting for 1st cooling level (0-255,
-+                                default 75).
-+        fan_temp1               Temperature threshold (in millicelsius) for
-+                                2nd cooling level (default 60000).
-+        fan_temp1_hyst          Temperature hysteresis (in millicelsius) for
-+                                2nd cooling level (default 5000).
-+        fan_temp1_speed         Fan PWM setting for 2nd cooling level (0-255,
-+                                default 125).
-+        fan_temp2               Temperature threshold (in millicelsius) for
-+                                3rd cooling level (default 67500).
-+        fan_temp2_hyst          Temperature hysteresis (in millicelsius) for
-+                                3rd cooling level (default 5000).
-+        fan_temp2_speed         Fan PWM setting for 3rd cooling level (0-255,
-+                                default 175).
-+        fan_temp3               Temperature threshold (in millicelsius) for
-+                                4th cooling level (default 75000).
-+        fan_temp3_hyst          Temperature hysteresis (in millicelsius) for
-+                                4th cooling level (default 5000).
-+        fan_temp3_speed         Fan PWM setting for 4th cooling level (0-255,
-+                                default 250).
-+
-+
- Name:   pwm-gpio
- Info:   Configures the software PWM GPIO driver
- Load:   dtoverlay=pwm-gpio,<param>=<val>
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/pwm-fan-overlay.dts
 @@ -0,0 +1,150 @@

@@ -22,11 +22,11 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
 
 --- a/include/uapi/linux/v4l2-controls.h
 +++ b/include/uapi/linux/v4l2-controls.h
-@@ -230,7 +230,7 @@ enum v4l2_colorfx {
- 
- /* The base for the bcm2835-isp driver controls.
-  * We reserve 16 controls for this driver. */
--#define V4L2_CID_USER_BCM2835_ISP_BASE		(V4L2_CID_USER_BASE + 0x10f0)
+@@ -232,7 +232,7 @@
+  * The base for the Arm Mali-C55 ISP driver controls.
+  * We reserve 16 controls for this driver
+  */
+-#define V4L2_CID_USER_MALI_C55_BASE		(V4L2_CID_USER_BASE + 0x1230)
 +#define V4L2_CID_USER_BCM2835_ISP_BASE		(V4L2_CID_USER_BASE + 0x10e0)
  
  /* MPEG-class control IDs */

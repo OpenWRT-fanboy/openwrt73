@@ -22,40 +22,6 @@ Signed-off-by: zjzhao <zjzhao@edatec.cn>
  create mode 100644 arch/arm/boot/dts/overlays/ed-backlight-pwm-overlay.dts
  create mode 100644 arch/arm/boot/dts/overlays/ed-backlight-pwm-pi5-overlay.dts
 
---- a/arch/arm/boot/dts/overlays/Makefile
-+++ b/arch/arm/boot/dts/overlays/Makefile
-@@ -63,6 +63,8 @@ dtbo-$(CONFIG_ARCH_BCM2835) += \
- 	draws-pi5.dtbo \
- 	dwc-otg-deprecated.dtbo \
- 	dwc2.dtbo \
-+	ed-backlight-pwm.dtbo \
-+	ed-backlight-pwm-pi5.dtbo \
- 	ed-ipc.dtbo \
- 	edt-ft5406.dtbo \
- 	enc28j60.dtbo \
---- a/arch/arm/boot/dts/overlays/README
-+++ b/arch/arm/boot/dts/overlays/README
-@@ -1278,6 +1278,20 @@ Params: dr_mode                 Dual rol
-                                 mode
- 
- 
-+Name:   ed-backlight-pwm
-+Info:   Configures the EDATEC PWM backlight for CM4 based boards
-+        (BCM2711). Creates a pwm-backlight device with a 16-step gamma
-+        brightness table and an optional pca9535 GPIO expander at 0x20
-+        for the backlight enable signal.
-+Load:   dtoverlay=ed-backlight-pwm,<param>=<val>
-+Params: sg215                   Invert the brightness curve for 21.5"
-+                                SG215 panels
-+
-+
-+Name:   ed-backlight-pwm-pi5
-+Info:   See ed-backlight-pwm (this is the CM5 version)
-+
-+
- Name:   ed-ipc
- Info:   Configures the EDATEC IPC/EXP series hardware peripherals.
-         This overlay provides support for PCA9535 GPIO expanders on
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/ed-backlight-pwm-overlay.dts
 @@ -0,0 +1,62 @@
@@ -186,21 +152,3 @@ Signed-off-by: zjzhao <zjzhao@edatec.cn>
 +		sg215 = <0>, "+3";
 +	};
 +};
---- a/arch/arm/boot/dts/overlays/overlay_map.dts
-+++ b/arch/arm/boot/dts/overlays/overlay_map.dts
-@@ -63,6 +63,15 @@
- 		bcm2712;
- 	};
- 
-+	ed-backlight-pwm {
-+		bcm2711;
-+		bcm2712 = "ed-backlight-pwm-pi5";
-+	};
-+
-+	ed-backlight-pwm-pi5 {
-+		bcm2712;
-+	};
-+
- 	dwc-otg {
- 		renamed = "dwc-otg-deprecated";
- 	};

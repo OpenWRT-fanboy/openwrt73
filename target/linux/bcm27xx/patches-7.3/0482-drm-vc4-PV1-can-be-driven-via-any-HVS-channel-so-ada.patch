@@ -20,20 +20,9 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  drivers/gpu/drm/vc4/vc4_kms.c  | 29 +++++++++++++++--------------
  2 files changed, 16 insertions(+), 15 deletions(-)
 
---- a/drivers/gpu/drm/vc4/vc4_crtc.c
-+++ b/drivers/gpu/drm/vc4/vc4_crtc.c
-@@ -1220,7 +1220,7 @@ const struct vc4_pv_data bcm2835_pv1_dat
- 	.base = {
- 		.name = "pixelvalve-1",
- 		.debugfs_name = "crtc1_regs",
--		.hvs_available_channels = BIT(2),
-+		.hvs_available_channels = BIT(0) | BIT(1) | BIT(2),
- 		.hvs_output = 2,
- 	},
- 	.fifo_depth = 64,
 --- a/drivers/gpu/drm/vc4/vc4_kms.c
 +++ b/drivers/gpu/drm/vc4/vc4_kms.c
-@@ -224,12 +224,11 @@ static void vc4_hvs_pv_muxing_commit(str
+@@ -234,12 +234,11 @@
  		struct vc4_crtc *vc4_crtc = to_vc4_crtc(crtc);
  		struct vc4_crtc_state *vc4_state = to_vc4_crtc_state(crtc_state);
  		u32 dispctrl;
@@ -47,7 +36,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  			continue;
  
  		/*
-@@ -237,26 +236,28 @@ static void vc4_hvs_pv_muxing_commit(str
+@@ -247,26 +246,28 @@
  		 * FIFO X'.
  		 * SCALER_DISPCTRL_DSP3 = 3 means 'disable DSP 3'.
  		 *

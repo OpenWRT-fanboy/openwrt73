@@ -24,9 +24,9 @@ Signed-off-by: Alex Riesen <alexander.riesen@cetitec.com>
 
 --- a/drivers/video/backlight/Kconfig
 +++ b/drivers/video/backlight/Kconfig
-@@ -249,6 +249,13 @@ config BACKLIGHT_PWM
- 	  If you have a LCD backlight adjustable by PWM, say Y to enable
- 	  this driver.
+@@ -277,6 +277,13 @@
+ 	  backlight subsystem. It communicates with the board controller to
+ 	  adjust LCD backlight using PWM signals.
  
 +config BACKLIGHT_RPI
 +	tristate "Raspberry Pi display firmware driven backlight"
@@ -40,14 +40,14 @@ Signed-off-by: Alex Riesen <alexander.riesen@cetitec.com>
  	depends on PMIC_DA903X
 --- a/drivers/video/backlight/Makefile
 +++ b/drivers/video/backlight/Makefile
-@@ -52,6 +52,7 @@ obj-$(CONFIG_BACKLIGHT_OMAP1)		+= omap1_
+@@ -55,6 +55,7 @@
  obj-$(CONFIG_BACKLIGHT_PANDORA)		+= pandora_bl.o
  obj-$(CONFIG_BACKLIGHT_PWM)		+= pwm_bl.o
  obj-$(CONFIG_BACKLIGHT_QCOM_WLED)	+= qcom-wled.o
 +obj-$(CONFIG_BACKLIGHT_RPI)			+= rpi_backlight.o
  obj-$(CONFIG_BACKLIGHT_RT4831)		+= rt4831-backlight.o
  obj-$(CONFIG_BACKLIGHT_SAHARA)		+= kb3886_bl.o
- obj-$(CONFIG_BACKLIGHT_SKY81452)	+= sky81452-backlight.o
+ obj-$(CONFIG_BACKLIGHT_SY7758)		+= sy7758.o
 --- /dev/null
 +++ b/drivers/video/backlight/rpi_backlight.c
 @@ -0,0 +1,118 @@

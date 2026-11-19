@@ -190,16 +190,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
 
 --- a/drivers/dma/Kconfig
 +++ b/drivers/dma/Kconfig
-@@ -143,7 +143,7 @@ config BCM_SBA_RAID
- 
- config DMA_BCM2835
- 	tristate "BCM2835 DMA engine support"
--	depends on ARCH_BCM2835 || ARCH_BCM2708 || ARCH_BCM2709
-+	depends on ARCH_BCM2835
- 	select DMA_ENGINE
- 	select DMA_VIRTUAL_CHANNELS
- 
-@@ -685,6 +685,10 @@ config UNIPHIER_XDMAC
+@@ -671,6 +671,10 @@
  	  UniPhier platform. This DMA controller can transfer data from
  	  memory to memory, memory to peripheral and peripheral to memory.
  
@@ -212,14 +203,14 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  	depends on ARCH_XGENE || COMPILE_TEST
 --- a/drivers/dma/Makefile
 +++ b/drivers/dma/Makefile
-@@ -22,6 +22,7 @@ obj-$(CONFIG_AT_HDMAC) += at_hdmac.o
- obj-$(CONFIG_AT_XDMAC) += at_xdmac.o
+@@ -23,6 +23,7 @@
  obj-$(CONFIG_AXI_DMAC) += dma-axi-dmac.o
  obj-$(CONFIG_BCM_SBA_RAID) += bcm-sba-raid.o
-+obj-$(CONFIG_DMA_BCM2708) += bcm2708-dmaengine.o
  obj-$(CONFIG_DMA_BCM2835) += bcm2835-dma.o
++obj-$(CONFIG_DMA_BCM2708)		+= bcm2708-dmaengine.o
  obj-$(CONFIG_DMA_JZ4780) += dma-jz4780.o
  obj-$(CONFIG_DMA_SA11X0) += sa11x0-dma.o
+ obj-$(CONFIG_DMA_SUN4I) += sun4i-dma.o
 --- /dev/null
 +++ b/drivers/dma/bcm2708-dmaengine.c
 @@ -0,0 +1,281 @@

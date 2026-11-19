@@ -19,7 +19,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
 
 --- a/drivers/video/backlight/backlight.c
 +++ b/drivers/video/backlight/backlight.c
-@@ -241,6 +241,15 @@ static ssize_t max_brightness_show(struc
+@@ -241,6 +241,15 @@
  }
  static DEVICE_ATTR_RO(max_brightness);
  
@@ -35,7 +35,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  static ssize_t actual_brightness_show(struct device *dev,
  		struct device_attribute *attr, char *buf)
  {
-@@ -319,6 +328,7 @@ static struct attribute *bl_device_attrs
+@@ -319,6 +328,7 @@
  	&dev_attr_max_brightness.attr,
  	&dev_attr_scale.attr,
  	&dev_attr_type.attr,
@@ -43,7 +43,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  	NULL,
  };
  ATTRIBUTE_GROUPS(bl_device);
-@@ -575,6 +585,17 @@ static int of_parent_match(struct device
+@@ -575,6 +585,17 @@
  	return dev->parent && dev->parent->of_node == data;
  }
  
@@ -63,7 +63,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
   * @node: device-tree node of the backlight device
 --- a/include/linux/backlight.h
 +++ b/include/linux/backlight.h
-@@ -236,6 +236,13 @@ struct backlight_properties {
+@@ -235,6 +235,13 @@
  	 * @scale: The type of the brightness scale.
  	 */
  	enum backlight_scale scale;
@@ -77,7 +77,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  };
  
  /**
-@@ -441,12 +448,20 @@ of_find_backlight_by_node(struct device_
+@@ -440,12 +447,20 @@
  
  #if IS_ENABLED(CONFIG_BACKLIGHT_CLASS_DEVICE)
  struct backlight_device *devm_of_find_backlight(struct device *dev);

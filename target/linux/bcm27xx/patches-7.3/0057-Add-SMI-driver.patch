@@ -163,7 +163,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
 +
 --- a/drivers/char/broadcom/Kconfig
 +++ b/drivers/char/broadcom/Kconfig
-@@ -16,3 +16,12 @@ config BCM2708_VCMEM
+@@ -16,3 +16,12 @@
            Helper for videocore memory access and total size allocation.
  
  endif
@@ -594,7 +594,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
 +MODULE_AUTHOR("Luke Wren <luke@raspberrypi.org>");
 --- a/drivers/misc/Kconfig
 +++ b/drivers/misc/Kconfig
-@@ -9,6 +9,14 @@ config SENSORS_LIS3LV02D
+@@ -9,6 +9,14 @@
  	tristate
  	depends on INPUT
  
@@ -611,7 +611,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  	depends on (I2C || SPI) && SYSFS
 --- a/drivers/misc/Makefile
 +++ b/drivers/misc/Makefile
-@@ -9,6 +9,7 @@ obj-$(CONFIG_AD525X_DPOT)	+= ad525x_dpot
+@@ -8,6 +8,7 @@
  obj-$(CONFIG_AD525X_DPOT_I2C)	+= ad525x_dpot-i2c.o
  obj-$(CONFIG_AD525X_DPOT_SPI)	+= ad525x_dpot-spi.o
  obj-$(CONFIG_ATMEL_SSC)		+= atmel-ssc.o

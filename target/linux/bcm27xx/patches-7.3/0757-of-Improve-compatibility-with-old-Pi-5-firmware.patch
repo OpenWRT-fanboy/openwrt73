@@ -19,37 +19,17 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  drivers/of/of_reserved_mem.c                 | 45 +++++++++++++++++---
  3 files changed, 78 insertions(+), 7 deletions(-)
 
---- a/arch/arm64/boot/dts/broadcom/bcm2712-ds.dtsi
-+++ b/arch/arm64/boot/dts/broadcom/bcm2712-ds.dtsi
-@@ -60,6 +60,17 @@
- 	};
- };
- 
-+/*
-+ * With a #size-cells of 2, the 'size' property should be 2 cells long.
-+ * Unfortunately the old firmware will only write the CMA value correctly
-+ * if the property is 1 cell long. Fortunately the new firmware silently
-+ * makes 'size' 2 cells long, so create what is actually an invalid DTS file
-+ * on the understanding that it will be patched up as needed.
-+ */
-+&cma {
-+	size = <0x4000000>; /* 64MB */
-+};
-+
- &soc {
- 	system_timer: timer@7c003000 {
- 		compatible = "brcm,bcm2835-system-timer";
 --- a/drivers/of/fdt.c
 +++ b/drivers/of/fdt.c
-@@ -1033,6 +1033,7 @@ int __init early_init_dt_scan_memory(voi
- 
+@@ -1042,6 +1042,7 @@
  	fdt_for_each_subnode(node, fdt, 0) {
- 		const char *type = of_get_flat_dt_prop(node, "device_type", NULL);
+ 		const char *type = fdt_stringlist_get(fdt, node,
+ 						      "device_type", 0, NULL);
 +		int actual_size_cells = dt_root_size_cells;
- 		const __be32 *reg, *endp;
- 		int l;
+ 		const __be32 *reg;
+ 		int i, l;
  		bool hotpluggable;
-@@ -1050,17 +1051,41 @@ int __init early_init_dt_scan_memory(voi
+@@ -1059,6 +1060,30 @@
  		if (reg == NULL)
  			continue;
  
@@ -60,7 +40,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
 +			bool ok = true;
 +
 +			/* Scan reg to see if the content makes sense with size-cells == 1 */
-+			endp = reg + (l / sizeof(__be32));
++			const __be32 *endp = reg + (l / sizeof(__be32));
 +			while ((endp - r) >= (dt_root_addr_cells + size_cells)) {
 +				const u64 megabyte = 1024 * 1024ull;
 +				const u64 max_memory = 64 * 1024 * 1024 * 1024ull;
@@ -77,101 +57,62 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
 +				actual_size_cells = size_cells;
 +		}
 +
- 		endp = reg + (l / sizeof(__be32));
  		hotpluggable = of_get_flat_dt_prop(node, "hotpluggable", NULL);
  
- 		pr_debug("memory scan node %s, reg size %d,\n",
- 			 fdt_get_name(fdt, node, NULL), l);
- 
--		while ((endp - reg) >= (dt_root_addr_cells + dt_root_size_cells)) {
-+		while ((endp - reg) >= (dt_root_addr_cells + actual_size_cells)) {
- 			u64 base, size;
- 
- 			base = dt_mem_next_cell(dt_root_addr_cells, &reg);
--			size = dt_mem_next_cell(dt_root_size_cells, &reg);
-+			size = dt_mem_next_cell(actual_size_cells, &reg);
- 
- 			if (size == 0)
- 				continue;
+ 		pr_debug("memory scan node %s, reg {addr,size} entries %d,\n",
 --- a/drivers/of/of_reserved_mem.c
 +++ b/drivers/of/of_reserved_mem.c
-@@ -168,11 +168,25 @@ static int __init __reserved_mem_reserve
- 	int len;
+@@ -148,11 +148,21 @@
  	const __be32 *prop;
- 	bool nomap, default_cma;
+ 	bool nomap;
+ 	u64 b, s;
 +	int actual_size_cells = 0;
  
- 	prop = of_get_flat_dt_prop(node, "reg", &len);
- 	if (!prop)
+ 	prop = of_flat_dt_get_addr_size_prop(node, "reg", &len);
+ 	if (!prop || !len)
  		return -ENOENT;
  
-+	if (dt_root_addr_cells == 2 &&
-+		dt_root_size_cells == 2 &&
-+		len == (2 + 1) * sizeof(__be32)) {
++	if (dt_root_addr_cells == 2 && dt_root_size_cells == 2 &&
++	    len == (2 + 1) * sizeof(__be32)) {
 +		pr_warn("invalid reg property size in '%s' - firmware out-of-date?\n",
 +			uname);
 +		actual_size_cells = 1;
-+		t_len = (dt_root_addr_cells + actual_size_cells) * sizeof(__be32);
 +	} else {
 +		actual_size_cells = dt_root_size_cells;
 +	}
 +
-+	t_len = (dt_root_addr_cells + actual_size_cells) * sizeof(__be32);
-+
- 	if (len && len % t_len != 0) {
- 		pr_err("Reserved memory: invalid reg property in '%s', skipping node.\n",
- 		       uname);
-@@ -189,7 +203,7 @@ static int __init __reserved_mem_reserve
+ 	if (len > 1)
+ 		pr_warn("Reserved memory: node '%s' has %d <base size> entries, only the first is used\n",
+ 			uname, len);
+@@ -163,7 +173,8 @@
+ 	if (err && err != -ENODEV)
+ 		return err;
  
- 	while (len >= t_len) {
- 		base = dt_mem_next_cell(dt_root_addr_cells, &prop);
--		size = dt_mem_next_cell(dt_root_size_cells, &prop);
-+		size = dt_mem_next_cell(actual_size_cells, &prop);
+-	of_flat_dt_read_addr_size(prop, 0, &b, &s);
++	b = dt_mem_next_cell(dt_root_addr_cells, &prop);
++	s = dt_mem_next_cell(actual_size_cells, &prop);
+ 	base = b;
+ 	size = s;
  
- 		if (size && early_init_dt_reserve_memory(base, size, nomap) == 0) {
- 			/* Architecture specific contiguous memory fixup. */
-@@ -277,8 +291,21 @@ void __init fdt_scan_reserved_mem_reg_no
- 		if (default_cma && cma_skip_dt_default_reserved_mem())
- 			continue;
- 
--		if (!of_flat_dt_get_addr_size(child, "reg", &b, &s))
--			continue;
-+		if (!of_flat_dt_get_addr_size(child, "reg", &b, &s)) {
-+			const __be32 *prop;
-+			int size;
-+
-+			prop = of_get_flat_dt_prop(child, "reg", &size);
-+			if (dt_root_addr_cells == 2 &&
-+			    dt_root_size_cells == 2 &&
-+			    size == 12) {
-+				/* Handle this specific error case from old firmware */
-+				b = of_read_number(prop, dt_root_addr_cells);
-+				s = of_read_number(prop + 2, 1);
-+			} else {
-+				continue;
-+			}
-+		}
- 
- 		base = b;
- 		size = s;
-@@ -424,16 +451,24 @@ static int __init __reserved_mem_alloc_s
+@@ -456,16 +467,25 @@
  	const __be32 *prop;
- 	bool nomap, default_cma;
+ 	bool nomap;
  	int ret;
 +	int actual_size_cells;
  
  	prop = of_get_flat_dt_prop(node, "size", &len);
  	if (!prop)
  		return -EINVAL;
+ 
+-	if (len != dt_root_size_cells * sizeof(__be32)) {
 +	if (dt_root_size_cells == 2 && len == sizeof(__be32)) {
-+		pr_warn("invalid reg property size in '%s' - firmware out-of-date?\n",
++		pr_warn("invalid size property in '%s' node - firmware out-of-date?\n",
 +			uname);
 +		actual_size_cells = 1;
 +	} else {
 +		actual_size_cells = dt_root_size_cells;
 +	}
- 
--	if (len != dt_root_size_cells * sizeof(__be32)) {
++
 +	if (len != actual_size_cells * sizeof(__be32)) {
  		pr_err("invalid size property in '%s' node.\n", uname);
  		return -EINVAL;

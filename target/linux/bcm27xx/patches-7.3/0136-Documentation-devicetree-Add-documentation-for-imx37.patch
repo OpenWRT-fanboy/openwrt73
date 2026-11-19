@@ -132,11 +132,11 @@ Signed-off-by: David Plowman <david.plowman@raspberrypi.com>
 +...
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -24049,6 +24049,7 @@ M:	Raspberry Pi Kernel Maintenance <kern
- L:	linux-media@vger.kernel.org
- S:	Maintained
- T:	git git://linuxtv.org/media_tree.git
+@@ -24049,6 +24049,7 @@
+ R:	Lyude Paul <lyude@redhat.com>
+ R:	Daniel Almeida <daniel.almeida@collabora.com>
+ R:	"Onur Özkan" <work@onurozkan.dev>
 +F:	Documentation/devicetree/bindings/media/i2c/imx378.yaml
- F:	Documentation/devicetree/bindings/media/i2c/imx477.yaml
- F:	drivers/media/i2c/imx477.c
- 
+ L:	linux-kernel@vger.kernel.org
+ L:	rust-for-linux@vger.kernel.org
+ S:	Maintained

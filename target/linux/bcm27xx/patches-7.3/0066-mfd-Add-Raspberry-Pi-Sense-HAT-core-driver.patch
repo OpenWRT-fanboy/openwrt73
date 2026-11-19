@@ -40,7 +40,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
 
 --- a/drivers/video/fbdev/Kconfig
 +++ b/drivers/video/fbdev/Kconfig
-@@ -1833,6 +1833,19 @@ config FB_SM712
+@@ -1811,6 +1811,19 @@
  	  called sm712fb. If you want to compile it as a module, say M
  	  here and read <file:Documentation/kbuild/modules.rst>.
  
@@ -62,7 +62,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  source "drivers/video/fbdev/mmp/Kconfig"
 --- a/drivers/video/fbdev/Makefile
 +++ b/drivers/video/fbdev/Makefile
-@@ -124,6 +124,7 @@ obj-$(CONFIG_FB_VGA16)            += vga
+@@ -122,6 +122,7 @@
  obj-$(CONFIG_FB_OF)               += offb.o
  obj-$(CONFIG_FB_SSD1307)	  += ssd1307fb.o
  obj-$(CONFIG_FB_SIMPLE)           += simplefb.o
