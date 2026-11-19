@@ -64,7 +64,7 @@ Cc: Robert Marko <robert.marko@sartura.hr>
 +================= == =====================================================
 --- a/Documentation/hwmon/index.rst
 +++ b/Documentation/hwmon/index.rst
-@@ -91,6 +91,7 @@ Hardware Monitoring Kernel Drivers
+@@ -96,6 +96,7 @@
     ibmaem
     ibm-cffps
     ibmpowernv

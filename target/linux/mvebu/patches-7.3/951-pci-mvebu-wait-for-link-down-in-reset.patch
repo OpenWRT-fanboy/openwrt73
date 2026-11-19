@@ -21,7 +21,7 @@ Signed-off-by: Michele Salerno <mikysal78@gmail.com>
 
 --- a/drivers/pci/controller/pci-mvebu.c
 +++ b/drivers/pci/controller/pci-mvebu.c
-@@ -1379,6 +1379,15 @@ static int mvebu_pcie_powerup(struct mve
+@@ -1378,6 +1378,15 @@
  		of_property_read_u32(port->dn, "reset-delay-us",
  				     &reset_udelay);
  

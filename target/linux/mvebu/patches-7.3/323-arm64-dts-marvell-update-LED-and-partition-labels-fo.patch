@@ -22,7 +22,7 @@ Signed-off-by: Stefan Kalscheuer <stefan@stklcode.de>
  #include "armada-372x.dtsi"
  
  / {
-@@ -63,12 +64,14 @@
+@@ -58,12 +59,14 @@
  		};
  
  		led-wan {
@@ -39,7 +39,7 @@ Signed-off-by: Stefan Kalscheuer <stefan@stklcode.de>
  			gpios = <&gpionb 13 GPIO_ACTIVE_LOW>;
  			default-state = "on";
  		};
-@@ -89,8 +92,9 @@
+@@ -84,8 +87,9 @@
  			#size-cells = <1>;
  
  			partition@0 {
@@ -50,7 +50,7 @@ Signed-off-by: Stefan Kalscheuer <stefan@stklcode.de>
  			};
  
  			partition@f0000 {
-@@ -105,14 +109,21 @@
+@@ -100,14 +104,21 @@
  			};
  
  			partition@100000 {
