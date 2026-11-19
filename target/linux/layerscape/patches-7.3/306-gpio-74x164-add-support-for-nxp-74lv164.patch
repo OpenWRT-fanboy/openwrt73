@@ -12,7 +12,7 @@ Signed-off-by: Sascha Plumhoff <sapl@plumhoff.net>
 
 --- a/Documentation/devicetree/bindings/gpio/fairchild,74hc595.yaml
 +++ b/Documentation/devicetree/bindings/gpio/fairchild,74hc595.yaml
-@@ -30,6 +30,7 @@ properties:
+@@ -29,6 +29,7 @@
    compatible:
      enum:
        - fairchild,74hc595
@@ -22,7 +22,7 @@ Signed-off-by: Sascha Plumhoff <sapl@plumhoff.net>
    reg:
 --- a/drivers/gpio/gpio-74x164.c
 +++ b/drivers/gpio/gpio-74x164.c
-@@ -166,6 +166,7 @@ static int gen_74x164_probe(struct spi_d
+@@ -181,6 +181,7 @@
  
  static const struct spi_device_id gen_74x164_spi_ids[] = {
  	{ .name = "74hc595" },
@@ -30,7 +30,7 @@ Signed-off-by: Sascha Plumhoff <sapl@plumhoff.net>
  	{ .name = "74lvc594" },
  	{},
  };
-@@ -173,6 +174,7 @@ MODULE_DEVICE_TABLE(spi, gen_74x164_spi_
+@@ -188,6 +189,7 @@
  
  static const struct of_device_id gen_74x164_dt_ids[] = {
  	{ .compatible = "fairchild,74hc595" },
