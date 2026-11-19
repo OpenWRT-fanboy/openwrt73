@@ -28,7 +28,7 @@ Signed-off-by: Mark Brown <broonie@kernel.org>
 
 --- a/drivers/spi/spi-realtek-rtl.c
 +++ b/drivers/spi/spi-realtek-rtl.c
-@@ -19,7 +19,6 @@ struct rtspi {
+@@ -18,7 +18,6 @@
  #define RTL_SPI_SFCSR_CSB0		BIT(31)
  #define RTL_SPI_SFCSR_CSB1		BIT(30)
  #define RTL_SPI_SFCSR_RDY		BIT(27)
@@ -36,7 +36,7 @@ Signed-off-by: Mark Brown <broonie@kernel.org>
  #define RTL_SPI_SFCSR_LEN_MASK		~(0x03 << 28)
  #define RTL_SPI_SFCSR_LEN1		(0x00 << 28)
  #define RTL_SPI_SFCSR_LEN4		(0x03 << 28)
-@@ -30,17 +29,31 @@ struct rtspi {
+@@ -29,17 +28,31 @@
  #define REG(x)		(rtspi->base + x)
  
  
@@ -74,7 +74,7 @@ Signed-off-by: Mark Brown <broonie@kernel.org>
  	__raw_writel(value, REG(RTL_SPI_SFCSR));
  }
  
-@@ -139,11 +152,9 @@ static void init_hw(struct rtspi *rtspi)
+@@ -138,11 +151,9 @@
  	value |= RTL_SPI_SFCR_RBO | RTL_SPI_SFCR_WBO;
  	__raw_writel(value, REG(RTL_SPI_SFCR));
  
@@ -89,7 +89,7 @@ Signed-off-by: Mark Brown <broonie@kernel.org>
  	__raw_writel(value, REG(RTL_SPI_SFCSR));
  }
  
-@@ -173,6 +184,7 @@ static int realtek_rtl_spi_probe(struct
+@@ -171,6 +182,7 @@
  	ctrl->flags = SPI_CONTROLLER_HALF_DUPLEX;
  	ctrl->set_cs = rt_set_cs;
  	ctrl->transfer_one = transfer_one;

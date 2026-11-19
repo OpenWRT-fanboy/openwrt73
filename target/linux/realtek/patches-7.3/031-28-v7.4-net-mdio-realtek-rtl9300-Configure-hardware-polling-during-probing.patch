@@ -57,7 +57,7 @@ Signed-off-by: Jakub Kicinski <kuba@kernel.org>
 
 --- a/drivers/net/mdio/mdio-realtek-rtl9300.c
 +++ b/drivers/net/mdio/mdio-realtek-rtl9300.c
-@@ -147,6 +147,7 @@
+@@ -146,6 +146,7 @@
  #define   RTL9300_PHY_CTRL_INDATA		GENMASK(31, 16)
  #define   RTL9300_PHY_CTRL_DATA			GENMASK(15, 0)
  #define RTL9300_SMI_ACCESS_PHY_CTRL_3		0xcb7c
@@ -65,7 +65,7 @@ Signed-off-by: Jakub Kicinski <kuba@kernel.org>
  #define RTL9300_SMI_PORT0_5_ADDR_CTRL		0xcb80
  
  #define RTL9310_NUM_BUSES			4
-@@ -172,6 +173,7 @@
+@@ -173,6 +174,7 @@
  #define   RTL9310_PHY_CTRL_INDATA		GENMASK(15, 0)
  #define RTL9310_SMI_INDRT_ACCESS_MMD_CTRL	0x0c18
  #define RTL9310_SMI_PORT_ADDR_CTRL		0x0c74
@@ -73,7 +73,7 @@ Signed-off-by: Jakub Kicinski <kuba@kernel.org>
  #define RTL9310_SMI_PORT_POLLING_SEL		0x0c9c
  
  #define PHY_CTRL_CMD				BIT(0)
-@@ -219,6 +221,7 @@ struct otto_emdio_info {
+@@ -220,6 +222,7 @@
  	u8 num_buses;
  	u8 num_ports;
  	u16 num_pages;
@@ -81,7 +81,7 @@ Signed-off-by: Jakub Kicinski <kuba@kernel.org>
  	int (*setup_controller)(struct otto_emdio_priv *priv);
  	int (*read_c22)(struct mii_bus *bus, int port, int regnum, u32 *value);
  	int (*read_c45)(struct mii_bus *bus, int port, int dev_addr, int regnum, u32 *value);
-@@ -254,6 +257,12 @@ static struct otto_emdio_priv *otto_emdi
+@@ -255,6 +258,12 @@
  	return chan->priv;
  }
  
@@ -94,7 +94,7 @@ Signed-off-by: Jakub Kicinski <kuba@kernel.org>
  static int otto_emdio_run_cmd(struct mii_bus *bus, u32 cmd,
  			      struct otto_emdio_cmd_regs *cmd_data)
  {
-@@ -597,6 +606,36 @@ static int otto_emdio_9310_setup_control
+@@ -602,6 +611,36 @@
  	return 0;
  }
  
@@ -131,7 +131,7 @@ Signed-off-by: Jakub Kicinski <kuba@kernel.org>
  static int otto_emdio_probe_one(struct device *dev, struct otto_emdio_priv *priv,
  				 struct fwnode_handle *node)
  {
-@@ -626,6 +665,9 @@ static int otto_emdio_probe_one(struct d
+@@ -631,6 +670,9 @@
  		bus->write = otto_emdio_write_c22;
  	}
  	bus->parent = dev;
@@ -141,7 +141,7 @@ Signed-off-by: Jakub Kicinski <kuba@kernel.org>
  	chan = bus->priv;
  	chan->mdio_bus = mdio_bus;
  	chan->priv = priv;
-@@ -742,6 +784,19 @@ put_nodes:
+@@ -747,6 +789,19 @@
  	return err;
  }
  
@@ -161,7 +161,7 @@ Signed-off-by: Jakub Kicinski <kuba@kernel.org>
  static int otto_emdio_probe(struct platform_device *pdev)
  {
  	struct device *dev = &pdev->dev;
-@@ -761,6 +816,10 @@ static int otto_emdio_probe(struct platf
+@@ -766,6 +821,10 @@
  	if (IS_ERR(priv->regmap))
  		return PTR_ERR(priv->regmap);
  
@@ -172,7 +172,7 @@ Signed-off-by: Jakub Kicinski <kuba@kernel.org>
  	platform_set_drvdata(pdev, priv);
  
  	err = otto_emdio_map_ports(dev);
-@@ -801,6 +860,7 @@ static const struct otto_emdio_info otto
+@@ -806,6 +865,7 @@
  	.num_buses = RTL9300_NUM_BUSES,
  	.num_ports = RTL9300_NUM_PORTS,
  	.num_pages = RTL9300_NUM_PAGES,
@@ -180,7 +180,7 @@ Signed-off-by: Jakub Kicinski <kuba@kernel.org>
  	.setup_controller = otto_emdio_9300_setup_controller,
  	.read_c22 = otto_emdio_9300_read_c22,
  	.read_c45 = otto_emdio_9300_read_c45,
-@@ -826,6 +886,7 @@ static const struct otto_emdio_info otto
+@@ -831,6 +891,7 @@
  	.num_buses = RTL9310_NUM_BUSES,
  	.num_pages = RTL9310_NUM_PAGES,
  	.num_ports = RTL9310_NUM_PORTS,

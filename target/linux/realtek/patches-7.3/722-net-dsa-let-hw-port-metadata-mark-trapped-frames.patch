@@ -12,7 +12,7 @@ Signed-off-by: Paul Tobias <openwrt-commits@tobias.pt>
 
 --- a/include/net/dst_metadata.h
 +++ b/include/net/dst_metadata.h
-@@ -18,6 +18,11 @@ enum metadata_type {
+@@ -18,6 +18,11 @@
  struct hw_port_info {
  	struct net_device *lower_dev;
  	u32 port_id;
@@ -26,7 +26,7 @@ Signed-off-by: Paul Tobias <openwrt-commits@tobias.pt>
  struct macsec_info {
 --- a/net/dsa/tag.c
 +++ b/net/dsa/tag.c
-@@ -70,6 +70,7 @@ static int dsa_switch_rcv(struct sk_buff
+@@ -70,6 +70,7 @@
  
  	if (md_dst && md_dst->type == METADATA_HW_PORT_MUX) {
  		unsigned int port = md_dst->u.port_info.port_id;
@@ -34,7 +34,7 @@ Signed-off-by: Paul Tobias <openwrt-commits@tobias.pt>
  
  		skb_dst_drop(skb);
  		if (!skb_has_extensions(skb))
-@@ -77,7 +78,10 @@ static int dsa_switch_rcv(struct sk_buff
+@@ -77,7 +78,10 @@
  
  		skb->dev = dsa_conduit_find_user(dev, 0, port);
  		if (likely(skb->dev)) {
@@ -44,5 +44,5 @@ Signed-off-by: Paul Tobias <openwrt-commits@tobias.pt>
 +			else
 +				dsa_default_offload_fwd_mark(skb);
  			nskb = skb;
- 		}
- 	} else {
+ 		} else {
+ 			/* Just drop the skb if we can't find the user */

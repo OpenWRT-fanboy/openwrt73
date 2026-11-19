@@ -37,7 +37,7 @@ Signed-off-by: Jakub Kicinski <kuba@kernel.org>
 
 --- a/drivers/net/mdio/mdio-realtek-rtl9300.c
 +++ b/drivers/net/mdio/mdio-realtek-rtl9300.c
-@@ -149,6 +149,28 @@
+@@ -148,6 +148,28 @@
  #define RTL8380_SMI_POLL_CTRL			0xa17c
  #define RTL8380_SMI_PORT0_5_ADDR_CTRL		0xa1c8
  
@@ -66,7 +66,7 @@ Signed-off-by: Jakub Kicinski <kuba@kernel.org>
  #define RTL9300_NUM_BUSES			4
  #define RTL9300_NUM_PAGES			4096
  #define RTL9300_NUM_PORTS			28
-@@ -430,6 +452,62 @@ static int otto_emdio_8380_write_c45(str
+@@ -431,6 +453,62 @@
  	return otto_emdio_write_cmd(bus, RTL8380_PHY_CTRL_TYPE_C45, &cmd_data);
  }
  
@@ -129,7 +129,7 @@ Signed-off-by: Jakub Kicinski <kuba@kernel.org>
  static int otto_emdio_9300_read_c22(struct mii_bus *bus, int port, int regnum, u32 *value)
  {
  	struct otto_emdio_priv *priv = otto_emdio_bus_to_priv(bus);
-@@ -981,6 +1059,29 @@ static const struct otto_emdio_info otto
+@@ -986,6 +1064,29 @@
  	.write_c45 = otto_emdio_8380_write_c45,
  };
  
@@ -159,7 +159,7 @@ Signed-off-by: Jakub Kicinski <kuba@kernel.org>
  static const struct otto_emdio_info otto_emdio_9300_info = {
  	.addr_map_base = RTL9300_SMI_PORT0_5_ADDR_CTRL,
  	.bus_map_base = RTL9300_SMI_PORT0_15_POLLING_SEL,
-@@ -1032,6 +1133,7 @@ static const struct otto_emdio_info otto
+@@ -1037,6 +1138,7 @@
  
  static const struct of_device_id otto_emdio_ids[] = {
  	{ .compatible = "realtek,rtl8380-mdio", .data = &otto_emdio_8380_info },

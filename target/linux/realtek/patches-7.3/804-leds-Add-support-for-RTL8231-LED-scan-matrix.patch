@@ -21,7 +21,7 @@ Signed-off-by: Sander Vanheule <sander@svanheule.net>
 
 --- a/drivers/leds/Kconfig
 +++ b/drivers/leds/Kconfig
-@@ -666,6 +666,16 @@ config LEDS_REGULATOR
+@@ -676,6 +676,16 @@
  	help
  	  This option enables support for regulator driven LEDs.
  
@@ -40,7 +40,7 @@ Signed-off-by: Sander Vanheule <sander@svanheule.net>
  	depends on LEDS_CLASS
 --- a/drivers/leds/Makefile
 +++ b/drivers/leds/Makefile
-@@ -84,6 +84,7 @@ obj-$(CONFIG_LEDS_POWERNV)		+= leds-powe
+@@ -86,6 +86,7 @@
  obj-$(CONFIG_LEDS_PWM)			+= leds-pwm.o
  obj-$(CONFIG_LEDS_QNAP_MCU)		+= leds-qnap-mcu.o
  obj-$(CONFIG_LEDS_REGULATOR)		+= leds-regulator.o
