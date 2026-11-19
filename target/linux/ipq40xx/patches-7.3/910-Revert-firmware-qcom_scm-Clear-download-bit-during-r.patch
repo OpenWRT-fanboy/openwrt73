@@ -15,13 +15,11 @@ Signed-off-by: Robert Marko <robimarko@gmail.com>
 
 --- a/drivers/firmware/qcom/qcom_scm.c
 +++ b/drivers/firmware/qcom/qcom_scm.c
-@@ -2593,7 +2593,8 @@ err_rmem:
+@@ -2962,6 +2962,7 @@
  static void qcom_scm_shutdown(struct platform_device *pdev)
  {
  	/* Clean shutdown, disable download mode to allow normal restart */
--	qcom_scm_set_download_mode(QCOM_DLOAD_NODUMP);
 +	if (download_mode)
-+		qcom_scm_set_download_mode(QCOM_DLOAD_NODUMP);
+ 	qcom_scm_set_download_mode(__scm, QCOM_DLOAD_NODUMP);
+ 	qcom_pas_ops_unregister();
  }
- 
- static const struct of_device_id qcom_scm_dt_match[] = {

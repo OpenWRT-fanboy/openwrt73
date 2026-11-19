@@ -24,7 +24,7 @@ Signed-off-by: Maxime Chevallier <maxime.chevallier@bootlin.com>
 
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -21160,6 +21160,13 @@ L:	netdev@vger.kernel.org
+@@ -22437,6 +22437,13 @@
  S:	Maintained
  F:	drivers/net/ethernet/qualcomm/emac/
  
@@ -36,11 +36,11 @@ Signed-off-by: Maxime Chevallier <maxime.chevallier@bootlin.com>
 +F:	drivers/net/ethernet/qualcomm/ipqess/
 +
  QUALCOMM ETHQOS ETHERNET DRIVER
- M:	Vinod Koul <vkoul@kernel.org>
+ M:	Mohd Ayaan Anwar <mohd.anwar@oss.qualcomm.com>
  L:	netdev@vger.kernel.org
 --- a/drivers/net/ethernet/qualcomm/Kconfig
 +++ b/drivers/net/ethernet/qualcomm/Kconfig
-@@ -75,6 +75,17 @@ config QCOM_PPE
+@@ -75,6 +75,17 @@
  	  To compile this driver as a module, choose M here. The module
  	  will be called qcom-ppe.
  
@@ -60,7 +60,7 @@ Signed-off-by: Maxime Chevallier <maxime.chevallier@bootlin.com>
  endif # NET_VENDOR_QUALCOMM
 --- a/drivers/net/ethernet/qualcomm/Makefile
 +++ b/drivers/net/ethernet/qualcomm/Makefile
-@@ -11,5 +11,7 @@ qcauart-objs := qca_uart.o
+@@ -11,5 +11,7 @@
  
  obj-y += emac/
  

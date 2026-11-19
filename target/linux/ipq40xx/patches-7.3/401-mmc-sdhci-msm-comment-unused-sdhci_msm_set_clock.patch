@@ -13,7 +13,7 @@ Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 
 --- a/drivers/mmc/host/sdhci-msm.c
 +++ b/drivers/mmc/host/sdhci-msm.c
-@@ -1835,51 +1835,49 @@ static unsigned int sdhci_msm_get_min_cl
+@@ -1847,51 +1847,49 @@
  	return SDHCI_MSM_MIN_CLOCK;
  }
  
