@@ -14,7 +14,7 @@ Signed-off-by: Álvaro Fernández Rojas <noltari@gmail.com>
 
 --- a/drivers/pci/controller/Kconfig
 +++ b/drivers/pci/controller/Kconfig
-@@ -179,6 +179,11 @@ config PCI_LOONGSON
+@@ -195,6 +195,11 @@
  	  Say Y here if you want to enable PCI controller support on
  	  Loongson systems.
  
