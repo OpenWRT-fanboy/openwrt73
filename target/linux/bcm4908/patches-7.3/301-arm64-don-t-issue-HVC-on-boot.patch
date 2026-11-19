@@ -19,7 +19,7 @@ Signed-off-by: Rafał Miłecki <rafal@milecki.pl>
 
 --- a/arch/arm64/kernel/hyp-stub.S
 +++ b/arch/arm64/kernel/hyp-stub.S
-@@ -252,7 +252,7 @@ SYM_FUNC_START(finalise_el2)
+@@ -254,7 +254,7 @@
  	b.ne	1f
  
  	mov	x0, #HVC_FINALISE_EL2
