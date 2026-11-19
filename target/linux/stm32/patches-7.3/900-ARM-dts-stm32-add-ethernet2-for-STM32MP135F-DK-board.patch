@@ -20,7 +20,7 @@ Signed-off-by: Thomas Richard <thomas.richard@bootlin.com>
  		serial0 = &uart4;
  		serial1 = &usart1;
  		serial2 = &uart8;
-@@ -208,6 +209,30 @@
+@@ -253,6 +254,30 @@
  	};
  };
  
@@ -50,4 +50,4 @@ Signed-off-by: Thomas Richard <thomas.richard@bootlin.com>
 +
  &i2c1 {
  	pinctrl-names = "default", "sleep";
- 	pinctrl-0 = <&i2c1_pins_a>;
+ 	/* SDA on PE8 = CN8.27, SCL on PD12 = CN8.28 */
