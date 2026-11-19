@@ -14,7 +14,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
 
 --- a/arch/arm/boot/dts/rockchip/rv1126-pinctrl.dtsi
 +++ b/arch/arm/boot/dts/rockchip/rv1126-pinctrl.dtsi
-@@ -279,6 +279,234 @@
+@@ -289,6 +289,234 @@
  			<3 RK_PB5 3 &pcfg_pull_none>;
  		};
  	};

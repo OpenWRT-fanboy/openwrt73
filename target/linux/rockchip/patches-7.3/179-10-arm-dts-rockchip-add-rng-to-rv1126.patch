@@ -15,7 +15,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
 
 --- a/arch/arm/boot/dts/rockchip/rv1126.dtsi
 +++ b/arch/arm/boot/dts/rockchip/rv1126.dtsi
-@@ -706,6 +706,14 @@
+@@ -673,6 +673,14 @@
  		power-domains = <&power RV1126_PD_CRYPTO>;
  	};
  

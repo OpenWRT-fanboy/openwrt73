@@ -18,7 +18,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
 
 --- a/arch/arm/boot/dts/rockchip/rv1126.dtsi
 +++ b/arch/arm/boot/dts/rockchip/rv1126.dtsi
-@@ -118,6 +118,16 @@
+@@ -119,6 +119,16 @@
  		};
  	};
  
@@ -35,7 +35,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
  	qos_emmc: qos@fe860000 {
  		compatible = "rockchip,rv1126-qos", "syscon";
  		reg = <0xfe860000 0x20>;
-@@ -204,6 +214,18 @@
+@@ -205,6 +215,18 @@
  				#power-domain-cells = <0>;
  			};
  
@@ -54,7 +54,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
  			power-domain@RV1126_PD_VO {
  				reg = <RV1126_PD_VO>;
  				clocks = <&cru ACLK_RGA>,
-@@ -375,6 +397,50 @@
+@@ -376,6 +398,50 @@
  		#reset-cells = <1>;
  	};
  
@@ -105,7 +105,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
  	dmac: dma-controller@ff4e0000 {
  		compatible = "arm,pl330", "arm,primecell";
  		reg = <0xff4e0000 0x4000>;
-@@ -714,6 +780,56 @@
+@@ -729,6 +795,56 @@
  		status = "disabled";
  	};
  

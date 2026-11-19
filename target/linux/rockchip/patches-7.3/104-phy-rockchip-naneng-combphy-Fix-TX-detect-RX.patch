@@ -41,7 +41,7 @@ Signed-off-by: Shawn Lin <shawn.lin@rock-chips.com>
  #define RK3568_PHYREG30				0x74
  #define RK3568_PHYREG30_GATE_TX_PCK_SEL         BIT(7)
  #define RK3568_PHYREG30_GATE_TX_PCK_DLY_PLL_OFF BIT(7)
-@@ -193,6 +196,7 @@ struct rockchip_combphy_cfg {
+@@ -194,6 +197,7 @@
  	unsigned int num_phys;
  	unsigned int phy_ids[3];
  	const struct rockchip_combphy_grfcfg *grfcfg;
@@ -49,7 +49,7 @@ Signed-off-by: Shawn Lin <shawn.lin@rock-chips.com>
  	int (*combphy_cfg)(struct rockchip_combphy_priv *priv);
  };
  
-@@ -264,6 +268,17 @@ static int rockchip_combphy_init(struct
+@@ -265,6 +269,17 @@
  
  	switch (priv->type) {
  	case PHY_TYPE_PCIE:
@@ -67,7 +67,7 @@ Signed-off-by: Shawn Lin <shawn.lin@rock-chips.com>
  	case PHY_TYPE_USB3:
  	case PHY_TYPE_SATA:
  	case PHY_TYPE_SGMII:
-@@ -747,6 +762,7 @@ static const struct rockchip_combphy_cfg
+@@ -801,6 +816,7 @@
  	},
  	.grfcfg		= &rk3562_combphy_grfcfgs,
  	.combphy_cfg	= rk3562_combphy_cfg,
@@ -75,7 +75,7 @@ Signed-off-by: Shawn Lin <shawn.lin@rock-chips.com>
  };
  
  static int rk3568_combphy_cfg(struct rockchip_combphy_priv *priv)
-@@ -964,6 +980,7 @@ static const struct rockchip_combphy_cfg
+@@ -998,6 +1014,7 @@
  	},
  	.grfcfg		= &rk3568_combphy_grfcfgs,
  	.combphy_cfg	= rk3568_combphy_cfg,
@@ -83,7 +83,7 @@ Signed-off-by: Shawn Lin <shawn.lin@rock-chips.com>
  };
  
  static int rk3576_combphy_cfg(struct rockchip_combphy_priv *priv)
-@@ -1233,6 +1250,7 @@ static const struct rockchip_combphy_cfg
+@@ -1219,6 +1236,7 @@
  	},
  	.grfcfg		= &rk3576_combphy_grfcfgs,
  	.combphy_cfg	= rk3576_combphy_cfg,
@@ -91,7 +91,7 @@ Signed-off-by: Shawn Lin <shawn.lin@rock-chips.com>
  };
  
  static int rk3588_combphy_cfg(struct rockchip_combphy_priv *priv)
-@@ -1420,6 +1438,7 @@ static const struct rockchip_combphy_cfg
+@@ -1391,6 +1409,7 @@
  	},
  	.grfcfg		= &rk3588_combphy_grfcfgs,
  	.combphy_cfg	= rk3588_combphy_cfg,

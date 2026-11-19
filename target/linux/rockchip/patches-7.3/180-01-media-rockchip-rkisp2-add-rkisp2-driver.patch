@@ -87,7 +87,7 @@ Changes in v2:
 
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -22301,6 +22301,16 @@ F:	Documentation/userspace-api/media/v4l
+@@ -23716,6 +23716,16 @@
  F:	drivers/media/platform/rockchip/rkisp1
  F:	include/uapi/linux/rkisp1-config.h
  
@@ -106,14 +106,14 @@ Changes in v2:
  M:	Aurelien Jarno <aurelien@aurel32.net>
 --- a/drivers/media/platform/rockchip/Kconfig
 +++ b/drivers/media/platform/rockchip/Kconfig
-@@ -6,3 +6,4 @@ source "drivers/media/platform/rockchip/
+@@ -6,3 +6,4 @@
  source "drivers/media/platform/rockchip/rkcif/Kconfig"
  source "drivers/media/platform/rockchip/rkisp1/Kconfig"
  source "drivers/media/platform/rockchip/rkvdec/Kconfig"
 +source "drivers/media/platform/rockchip/rkisp2/Kconfig"
 --- a/drivers/media/platform/rockchip/Makefile
 +++ b/drivers/media/platform/rockchip/Makefile
-@@ -3,3 +3,4 @@ obj-y += rga/
+@@ -3,3 +3,4 @@
  obj-y += rkcif/
  obj-y += rkisp1/
  obj-y += rkvdec/
@@ -12195,7 +12195,7 @@ Changes in v2:
 +#endif /* _UAPI_RKISP2_CONFIG_H */
 --- a/include/uapi/linux/rkisp1-config.h
 +++ b/include/uapi/linux/rkisp1-config.h
-@@ -202,6 +202,7 @@ enum rkisp1_cif_isp_version {
+@@ -207,6 +207,7 @@
  	RKISP1_V12,
  	RKISP1_V13,
  	RKISP1_V_IMX8MP,

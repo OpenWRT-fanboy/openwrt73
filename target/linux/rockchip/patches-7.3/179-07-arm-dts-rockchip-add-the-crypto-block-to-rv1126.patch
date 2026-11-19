@@ -14,7 +14,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
 
 --- a/arch/arm/boot/dts/rockchip/rv1126.dtsi
 +++ b/arch/arm/boot/dts/rockchip/rv1126.dtsi
-@@ -314,6 +314,11 @@
+@@ -310,6 +310,11 @@
  		reg = <0xfe8a0180 0x20>;
  	};
  
@@ -26,7 +26,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
  	gic: interrupt-controller@feff0000 {
  		compatible = "arm,gic-400";
  		interrupt-controller;
-@@ -406,6 +411,16 @@
+@@ -402,6 +407,16 @@
  				#power-domain-cells = <0>;
  			};
  
@@ -43,8 +43,8 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
  			power-domain@RV1126_PD_VO {
  				reg = <RV1126_PD_VO>;
  				clocks = <&cru ACLK_RGA>,
-@@ -681,6 +696,16 @@
- 		status = "disabled";
+@@ -648,6 +663,16 @@
+ 		clock-names = "apb_pclk";
  	};
  
 +	crypto: crypto@ff500000 {

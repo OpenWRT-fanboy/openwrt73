@@ -17,7 +17,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
 
 --- a/arch/arm/boot/dts/rockchip/rv1126.dtsi
 +++ b/arch/arm/boot/dts/rockchip/rv1126.dtsi
-@@ -170,6 +170,21 @@
+@@ -171,6 +171,21 @@
  		reg = <0xfe810080 0x20>;
  	};
  
@@ -39,7 +39,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
  	qos_emmc: qos@fe860000 {
  		compatible = "rockchip,rv1126-qos", "syscon";
  		reg = <0xfe860000 0x20>;
-@@ -268,6 +283,26 @@
+@@ -269,6 +284,26 @@
  				#power-domain-cells = <0>;
  			};
  
@@ -66,7 +66,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
  			power-domain@RV1126_PD_VO {
  				reg = <RV1126_PD_VO>;
  				clocks = <&cru ACLK_RGA>,
-@@ -439,6 +474,26 @@
+@@ -440,6 +475,26 @@
  		#reset-cells = <1>;
  	};
  
@@ -93,7 +93,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
  	u2phy0: usb2-phy@ff4c0000 {
  		compatible = "rockchip,rv1126-usb2phy";
  		reg = <0xff4c0000 0x8000>;
-@@ -726,6 +781,84 @@
+@@ -741,6 +796,84 @@
  		status = "disabled";
  	};
  
@@ -178,7 +178,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
  	vop: vop@ffb00000 {
  		compatible = "rockchip,rv1126-vop";
  		reg = <0xffb00000 0x200>, <0xffb00a00 0x400>;
-@@ -763,6 +896,33 @@
+@@ -778,6 +911,33 @@
  		status = "disabled";
  	};
  

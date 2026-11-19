@@ -15,7 +15,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
 
 --- a/arch/arm/boot/dts/rockchip/rv1126.dtsi
 +++ b/arch/arm/boot/dts/rockchip/rv1126.dtsi
-@@ -264,6 +264,16 @@
+@@ -260,6 +260,16 @@
  		reg = <0xfe890100 0x20>;
  	};
  
@@ -32,7 +32,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
  	qos_emmc: qos@fe860000 {
  		compatible = "rockchip,rv1126-qos", "syscon";
  		reg = <0xfe860000 0x20>;
-@@ -327,6 +337,20 @@
+@@ -323,6 +333,20 @@
  			#address-cells = <1>;
  			#size-cells = <0>;
  
@@ -53,7 +53,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
  			power-domain@RV1126_PD_NVM {
  				reg = <RV1126_PD_NVM>;
  				clocks = <&cru HCLK_EMMC>,
-@@ -1126,6 +1150,30 @@
+@@ -1064,6 +1088,30 @@
  		};
  	};
  

@@ -15,7 +15,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
 
 --- a/drivers/thermal/rockchip_thermal.c
 +++ b/drivers/thermal/rockchip_thermal.c
-@@ -81,7 +81,7 @@ struct chip_tsadc_table {
+@@ -81,7 +81,7 @@
   * @get_temp: get the raw temperature, unadjusted by trim
   * @set_alarm_temp: set the high temperature interrupt
   * @set_tshut_temp: set the hardware-controlled shutdown temperature
@@ -24,7 +24,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
   * @get_trim_code: convert a hardware temperature code to one adjusted for by trim
   * @table: the chip-specific conversion table
   */
-@@ -114,7 +114,8 @@ struct rockchip_tsadc_chip {
+@@ -114,7 +114,8 @@
  			      int chn, void __iomem *reg, int temp);
  	int (*set_tshut_temp)(const struct chip_tsadc_table *table,
  			      int chn, void __iomem *reg, int temp);
@@ -34,7 +34,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
  	int (*get_trim_code)(const struct chip_tsadc_table *table,
  			     int code, int trim_base, int trim_base_frac);
  
-@@ -1137,8 +1138,8 @@ static int rk_tsadcv3_tshut_temp(const s
+@@ -1137,8 +1138,8 @@
  	return 0;
  }
  
@@ -45,7 +45,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
  {
  	u32 val;
  
-@@ -1154,8 +1155,8 @@ static void rk_tsadcv2_tshut_mode(int ch
+@@ -1154,8 +1155,8 @@
  	writel_relaxed(val, regs + TSADCV2_INT_EN);
  }
  
@@ -56,7 +56,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
  {
  	u32 val_gpio, val_cru;
  
-@@ -1773,7 +1774,8 @@ rockchip_thermal_register_sensor(struct
+@@ -1773,7 +1774,8 @@
  
  	tshut_temp = min(thermal->tshut_temp + sensor->trim_temp, RK_MAX_TEMP);
  
@@ -66,7 +66,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
  
  	error = tsadc->set_tshut_temp(&tsadc->table, id, thermal->regs, tshut_temp);
  	if (error)
-@@ -1960,8 +1962,8 @@ static int __maybe_unused rockchip_therm
+@@ -1959,8 +1961,8 @@
  		tshut_temp = min(thermal->tshut_temp + sensor->trim_temp,
  				 RK_MAX_TEMP);
  

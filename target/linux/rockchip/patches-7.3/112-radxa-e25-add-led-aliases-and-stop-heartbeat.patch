@@ -11,7 +11,7 @@ Signed-off-by: Marius Durbaca <mariusd84@gmail.com>
 
 --- a/arch/arm64/boot/dts/rockchip/rk3568-radxa-e25.dts
 +++ b/arch/arm64/boot/dts/rockchip/rk3568-radxa-e25.dts
-@@ -9,6 +9,10 @@
+@@ -10,6 +10,10 @@
  
  	aliases {
  		mmc1 = &sdmmc0;
@@ -21,7 +21,7 @@ Signed-off-by: Marius Durbaca <mariusd84@gmail.com>
 +		led-upgrade = &led_user;
  	};
  
- 	pwm-leds {
+ 	adc-keys {
 --- a/arch/arm64/boot/dts/rockchip/rk3568-radxa-cm3i.dtsi
 +++ b/arch/arm64/boot/dts/rockchip/rk3568-radxa-cm3i.dtsi
 @@ -23,7 +23,7 @@

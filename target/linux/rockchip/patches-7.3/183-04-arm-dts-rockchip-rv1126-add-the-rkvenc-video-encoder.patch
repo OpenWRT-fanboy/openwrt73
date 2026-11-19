@@ -15,7 +15,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
 
 --- a/arch/arm/boot/dts/rockchip/rv1126.dtsi
 +++ b/arch/arm/boot/dts/rockchip/rv1126.dtsi
-@@ -331,6 +331,21 @@
+@@ -327,6 +327,21 @@
  		reg = <0xfe8d0000 0x20>;
  	};
  
@@ -37,7 +37,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
  	qos_ispp_m0: qos@fe880000 {
  		compatible = "rockchip,rv1126-qos", "syscon";
  		reg = <0xfe880000 0x20>;
-@@ -472,6 +487,17 @@
+@@ -468,6 +483,17 @@
  					 <&qos_iep>;
  				#power-domain-cells = <0>;
  			};
@@ -55,7 +55,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
  		};
  	};
  
-@@ -1315,6 +1341,34 @@
+@@ -1253,6 +1279,34 @@
  		status = "disabled";
  	};
  

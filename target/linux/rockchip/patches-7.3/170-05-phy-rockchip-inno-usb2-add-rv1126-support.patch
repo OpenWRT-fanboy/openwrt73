@@ -19,7 +19,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
 
 --- a/drivers/phy/rockchip/phy-rockchip-inno-usb2.c
 +++ b/drivers/phy/rockchip/phy-rockchip-inno-usb2.c
-@@ -2386,6 +2386,49 @@ static const struct rockchip_usb2phy_cfg
+@@ -2387,6 +2387,49 @@
  	{ /* sentinel */ }
  };
  
@@ -69,7 +69,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
  static const struct of_device_id rockchip_usb2phy_dt_match[] = {
  	{ .compatible = "rockchip,px30-usb2phy", .data = &rk3328_phy_cfgs },
  	{ .compatible = "rockchip,rk3036-usb2phy", .data = &rk3036_phy_cfgs },
-@@ -2401,6 +2444,7 @@ static const struct of_device_id rockchi
+@@ -2402,6 +2445,7 @@
  	{ .compatible = "rockchip,rk3576-usb2phy", .data = &rk3576_phy_cfgs },
  	{ .compatible = "rockchip,rk3588-usb2phy", .data = &rk3588_phy_cfgs },
  	{ .compatible = "rockchip,rv1108-usb2phy", .data = &rv1108_phy_cfgs },

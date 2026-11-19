@@ -31,8 +31,8 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
  	i2c2 {
  		/omit-if-no-ref/
  		i2c2_xfer: i2c2-xfer {
-@@ -123,6 +133,50 @@
- 				<1 RK_PD7 3 &pcfg_pull_none>;
+@@ -133,6 +143,50 @@
+ 				<2 RK_PB3 7 &pcfg_pull_none_drv_level_0_smt>;
  		};
  	};
 +	i2c4 {
@@ -82,7 +82,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
  	i2s0 {
  		i2s0m0_lrck_tx: i2s0m0-lrck-tx {
  			rockchip,pins =
-@@ -495,6 +549,142 @@
+@@ -505,6 +559,142 @@
  				<1 RK_PD1 2 &pcfg_pull_none>;
  		};
  	};

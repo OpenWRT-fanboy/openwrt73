@@ -26,7 +26,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
 
 --- a/drivers/leds/flash/Kconfig
 +++ b/drivers/leds/flash/Kconfig
-@@ -75,6 +75,19 @@ config LEDS_MT6370_FLASH
+@@ -75,6 +75,19 @@
  	  This driver can also be built as a module. If so, the module
  	  will be called "leds-mt6370-flash".
  
@@ -44,11 +44,11 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
 +	  "leds-pwm-flash".
 +
  config LEDS_QCOM_FLASH
- 	tristate "LED support for flash module inside Qualcomm Technologies, Inc. PMIC"
+ 	tristate "LED support for flash module inside Qualcomm PMIC"
  	depends on MFD_SPMI_PMIC || COMPILE_TEST
 --- a/drivers/leds/flash/Makefile
 +++ b/drivers/leds/flash/Makefile
-@@ -7,6 +7,7 @@ obj-$(CONFIG_LEDS_AS3645A)	+= leds-as364
+@@ -7,6 +7,7 @@
  obj-$(CONFIG_LEDS_KTD2692)	+= leds-ktd2692.o
  obj-$(CONFIG_LEDS_LM3601X)	+= leds-lm3601x.o
  obj-$(CONFIG_LEDS_MAX77693)	+= leds-max77693.o

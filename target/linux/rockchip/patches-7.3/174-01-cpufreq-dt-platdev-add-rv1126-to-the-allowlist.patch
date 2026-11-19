@@ -14,11 +14,11 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
 
 --- a/drivers/cpufreq/cpufreq-dt-platdev.c
 +++ b/drivers/cpufreq/cpufreq-dt-platdev.c
-@@ -80,6 +80,7 @@ static const struct of_device_id allowli
+@@ -80,6 +80,7 @@
  	  .data = &(struct cpufreq_dt_platform_data)
  		{ .have_governor_per_policy = true, },
  	},
 +	{ .compatible = "rockchip,rv1126", },
  
- 	{ .compatible = "st-ericsson,u8500", },
- 	{ .compatible = "st-ericsson,u8540", },
+ 	{ .compatible = "spacemit,k1", },
+ 
