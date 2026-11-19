@@ -10,7 +10,7 @@ Signed-off-by: Mathias Kresin <openwrt@kresin.me>
 
 --- a/drivers/mtd/parsers/ofpart_core.c
 +++ b/drivers/mtd/parsers/ofpart_core.c
-@@ -38,6 +38,38 @@ static bool node_has_compatible(struct d
+@@ -42,6 +42,38 @@
  	return of_get_property(pp, "compatible", NULL);
  }
  
@@ -49,7 +49,7 @@ Signed-off-by: Mathias Kresin <openwrt@kresin.me>
  static int parse_fixed_partitions(struct mtd_info *master,
  				  const struct mtd_partition **pparts,
  				  struct mtd_part_parser_data *data)
-@@ -51,6 +83,8 @@ static int parse_fixed_partitions(struct
+@@ -55,6 +87,8 @@
  	struct device_node *pp;
  	int nr_parts, i, ret = 0;
  	bool dedicated = true;
@@ -58,7 +58,7 @@ Signed-off-by: Mathias Kresin <openwrt@kresin.me>
  
  	/* Pull of_node from the master device node */
  	mtd_node = mtd_get_of_node(master);
-@@ -105,6 +139,14 @@ static int parse_fixed_partitions(struct
+@@ -109,6 +143,14 @@
  		return -ENOMEM;
  	}
  
@@ -73,7 +73,7 @@ Signed-off-by: Mathias Kresin <openwrt@kresin.me>
  	i = 0;
  	for_each_child_of_node(ofpart_node,  pp) {
  		const __be32 *reg;
-@@ -173,6 +215,11 @@ static int parse_fixed_partitions(struct
+@@ -177,6 +219,11 @@
  		if (of_property_read_bool(pp, "slc-mode"))
  			parts[i].add_flags |= MTD_SLC_ON_MLC_EMULATION;
  
@@ -85,7 +85,7 @@ Signed-off-by: Mathias Kresin <openwrt@kresin.me>
  		i++;
  	}
  
-@@ -185,6 +232,11 @@ static int parse_fixed_partitions(struct
+@@ -189,6 +236,11 @@
  	if (dedicated)
  		of_node_put(ofpart_node);
  
@@ -97,7 +97,7 @@ Signed-off-by: Mathias Kresin <openwrt@kresin.me>
  	*pparts = parts;
  	return nr_parts;
  
-@@ -197,6 +249,7 @@ ofpart_none:
+@@ -201,6 +253,7 @@
  	if (dedicated)
  		of_node_put(ofpart_node);
  	kfree(parts);

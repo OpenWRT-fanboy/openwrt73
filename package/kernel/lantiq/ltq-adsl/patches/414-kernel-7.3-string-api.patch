@@ -1,0 +1,110 @@
+From: OpenWrt <openwrt@openwrt.org>
+Subject: [PATCH] ltq-adsl: use strscpy instead of removed strncpy
+
+Linux 7.3 removed strncpy(). Use strscpy() and include linux/string.h.
+
+Signed-off-by: OpenWrt <openwrt@openwrt.org>
+
+--- a/src/common/drv_dsl_cpe_api.c
++++ b/src/common/drv_dsl_cpe_api.c
+@@ -11,6 +11,7 @@
+ 
+ #define DSL_INTERN
+ 
++#include <linux/string.h>
+ #include "drv_dsl_cpe_api.h"
+ #include "drv_dsl_cpe_api_ioctl.h"
+ 
+@@ -2030,7 +2031,7 @@
+    DSL_CHECK_ERR_CODE();
+ 
+    DSL_DRV_MemSet(pData, 0, sizeof(DSL_VersionInformation_t));
+-   strncpy(pData->data.DSL_DriverVersionApi, DSL_CPE_API_PACKAGE_VERSION,
++   strscpy(pData->data.DSL_DriverVersionApi, DSL_CPE_API_PACKAGE_VERSION,
+            MAX_INFO_STRING_LEN);
+ 
+    nErrCode = DSL_DRV_DEV_DriverVersionGet(pContext, pData->data.DSL_DriverVersionMeiBsp);
+--- a/src/mib/drv_dsl_cpe_adslmib.c
++++ b/src/mib/drv_dsl_cpe_adslmib.c
+@@ -10,6 +10,7 @@
+ ******************************************************************************/
+ #define DSL_INTERN
+ 
++#include <linux/string.h>
+ #include "drv_dsl_cpe_api.h"
+ 
+ #ifdef INCLUDE_DSL_ADSL_MIB
+@@ -2248,7 +2249,7 @@
+       return DSL_ERR_NOT_SUPPORTED;
+    }
+ 
+-   strncpy((DSL_char_t *)&pData->adslLineAlarmConfProfileName,
++   strscpy((DSL_char_t *)&pData->adslLineAlarmConfProfileName,
+       (DSL_char_t *)&alarmConfProfile.adslLineAlarmConfProfileName, 32);
+ 
+ #if defined (INCLUDE_DSL_PM) && defined (INCLUDE_DSL_CPE_PM_LINE_THRESHOLDS) && \
+@@ -2505,7 +2506,7 @@
+       return DSL_ERR_NOT_SUPPORTED;
+    }
+ 
+-   strncpy((DSL_char_t*)&alarmConfProfile.adslLineAlarmConfProfileName,
++   strscpy((DSL_char_t*)&alarmConfProfile.adslLineAlarmConfProfileName,
+       (DSL_char_t*)&pData->adslLineAlarmConfProfileName, 32);
+ 
+ #if defined (INCLUDE_DSL_PM) && defined (INCLUDE_DSL_CPE_PM_LINE_THRESHOLDS) && \
+@@ -3424,7 +3425,7 @@
+ 
+    memset(&lineSecThresholds, 0x0, sizeof(DSL_PM_LineSecThreshold_t));
+ 
+-   strncpy((DSL_char_t *)&pData->adslLineAlarmConfProfileExtName,
++   strscpy((DSL_char_t *)&pData->adslLineAlarmConfProfileExtName,
+       (DSL_char_t *)&alarmExtConfProfile.adslLineAlarmExtConfProfileName, 32);
+ 
+    lineSecThresholds.nDirection = DSL_NEAR_END;
+@@ -3510,7 +3511,7 @@
+    memset(&lineSecThresholds, 0x0, sizeof(DSL_PM_LineSecThreshold_t));
+    lineSecThresholds.nDirection = DSL_FAR_END;
+ 
+-   strncpy((DSL_char_t*)&alarmExtConfProfile.adslLineAlarmExtConfProfileName,
++   strscpy((DSL_char_t*)&alarmExtConfProfile.adslLineAlarmExtConfProfileName,
+       (DSL_char_t*)&pData->adslLineAlarmConfProfileExtName, 32);
+ 
+    nErrCode = DSL_DRV_PM_LineSecThresholds15MinGet(pContext, &lineSecThresholds);
+--- a/src/device/drv_dsl_cpe_device_danube.c
++++ b/src/device/drv_dsl_cpe_device_danube.c
+@@ -11,6 +11,7 @@
+ 
+ #define DSL_INTERN
+ /* lower level BSP driver stuff */
++#include <linux/string.h>
+ #include "drv_dsl_cpe_api.h"
+ 
+ #if defined (INCLUDE_DSL_CPE_API_DANUBE)
+@@ -3674,15 +3675,15 @@
+       switch (FwVer.nMajorVersion)
+       {
+       case DSL_AR9_FW_MAJOR_NUMBER:
+-         strncpy(pString, "Ifx-AR9", MAX_INFO_STRING_LEN);
++         strscpy(pString, "Ifx-AR9", MAX_INFO_STRING_LEN);
+          break;
+ 
+       case DSL_DANUBE_FW_MAJOR_NUMBER:
+-         strncpy(pString, "Ifx-Danube", MAX_INFO_STRING_LEN);
++         strscpy(pString, "Ifx-Danube", MAX_INFO_STRING_LEN);
+          break;
+ 
+       case DSL_AMAZON_SE_FW_MAJOR_NUMBER:
+-         strncpy(pString, "Ifx-Amazon-SE", MAX_INFO_STRING_LEN);
++         strscpy(pString, "Ifx-Amazon-SE", MAX_INFO_STRING_LEN);
+          break;
+ 
+       default:
+@@ -3690,7 +3691,7 @@
+             "DSL[%02d]: ERROR - Unknown Chipset type (%d)" DSL_DRV_CRLF,
+             DSL_DEV_NUM(pContext), FwVer.nMajorVersion));
+ 
+-         strncpy(pString, "Ifx-Unknown", MAX_INFO_STRING_LEN);
++         strscpy(pString, "Ifx-Unknown", MAX_INFO_STRING_LEN);
+ 
+          nErrCode = DSL_WRN_DEVICE_NO_DATA;
+ 

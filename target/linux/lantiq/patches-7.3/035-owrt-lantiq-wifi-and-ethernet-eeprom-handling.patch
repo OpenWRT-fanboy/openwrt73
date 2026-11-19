@@ -5,18 +5,19 @@ Subject: [PATCH 35/36] owrt: lantiq: wifi and ethernet eeprom handling
 
 Signed-off-by: John Crispin <blogic@openwrt.org>
 ---
- .../mips/include/asm/mach-lantiq/xway/lantiq_soc.h |   3 +
- arch/mips/lantiq/xway/Makefile                     |   3 +
- arch/mips/lantiq/xway/ath5k_eep.c                  | 136 +++++++++++++++++++++
- arch/mips/lantiq/xway/eth_mac.c                    |  25 ++++
- drivers/net/ethernet/lantiq_etop.c                 |   6 +-
- 5 files changed, 172 insertions(+), 1 deletion(-)
+ arch/mips/include/asm/mach-lantiq/xway/lantiq_soc.h |    3 +++
+ arch/mips/lantiq/xway/Makefile                      |    3 +++
+ arch/mips/lantiq/xway/ath5k_eep.c                   |  135 ++++++++++++++++++++++++++++++++++++++++++++++++++
+ arch/mips/lantiq/xway/eth_mac.c                     |   27 +++++++++++++++++++++++++++
+ arch/mips/pci/fixup-lantiq.c                        |    6 ++++++
+ drivers/net/ethernet/lantiq_etop.c                  |    6 +++++-
+ 6 files changed, 179 insertions(+), 1 deletions(-)
  create mode 100644 arch/mips/lantiq/xway/ath5k_eep.c
  create mode 100644 arch/mips/lantiq/xway/eth_mac.c
 
 --- a/arch/mips/include/asm/mach-lantiq/xway/lantiq_soc.h
 +++ b/arch/mips/include/asm/mach-lantiq/xway/lantiq_soc.h
-@@ -102,5 +102,8 @@ extern void ltq_pmu_disable(unsigned int
+@@ -102,5 +102,8 @@
  /* VMMC */
  extern unsigned int *ltq_get_cp1_base(void);
  
@@ -27,7 +28,7 @@ Signed-off-by: John Crispin <blogic@openwrt.org>
  #endif /* _LTQ_XWAY_H__ */
 --- a/arch/mips/lantiq/xway/Makefile
 +++ b/arch/mips/lantiq/xway/Makefile
-@@ -8,3 +8,6 @@ obj-y += timer.o
+@@ -8,3 +8,6 @@
  endif
  
  obj-y += vmmc.o
@@ -174,7 +175,7 @@ Signed-off-by: John Crispin <blogic@openwrt.org>
 +subsys_initcall(of_ath5k_eeprom_init);
 --- /dev/null
 +++ b/arch/mips/lantiq/xway/eth_mac.c
-@@ -0,0 +1,26 @@
+@@ -0,0 +1,27 @@
 +/*
 + *  Copyright (C) 2012 John Crispin <blogic@openwrt.org>
 + *
@@ -185,6 +186,7 @@ Signed-off-by: John Crispin <blogic@openwrt.org>
 +
 +#include <lantiq_soc.h>
 +#include <linux/init.h>
++#include <linux/hex.h>
 +#include <linux/if_ether.h>
 +
 +static u8 eth_mac[6];
@@ -224,7 +226,7 @@ Signed-off-by: John Crispin <blogic@openwrt.org>
  
 --- a/drivers/net/ethernet/lantiq_etop.c
 +++ b/drivers/net/ethernet/lantiq_etop.c
-@@ -769,7 +769,11 @@ ltq_etop_init(struct net_device *dev)
+@@ -769,7 +769,11 @@
  	if (err)
  		goto err_hw;
  
