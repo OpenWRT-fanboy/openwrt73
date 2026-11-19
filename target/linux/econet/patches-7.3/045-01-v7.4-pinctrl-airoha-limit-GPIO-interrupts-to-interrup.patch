@@ -32,7 +32,7 @@ Reviewed-by: Benjamin Larsson <benjamin.larsson@genexis.eu>
 
 --- a/drivers/pinctrl/airoha/airoha-common.h
 +++ b/drivers/pinctrl/airoha/airoha-common.h
-@@ -127,6 +127,7 @@ struct airoha_pinctrl {
+@@ -127,6 +127,7 @@
  
  	struct gpio_chip gpiochip;
  	struct airoha_gpiochip_regs *gpio_regs;
@@ -40,7 +40,7 @@ Reviewed-by: Benjamin Larsson <benjamin.larsson@genexis.eu>
  };
  
  struct airoha_pinctrl_match_data {
-@@ -140,6 +141,8 @@ struct airoha_pinctrl_match_data {
+@@ -140,6 +141,8 @@
  	const struct airoha_pinctrl_func *funcs;
  	const unsigned int num_funcs;
  	const struct airoha_pinctrl_confs_info confs_info[AIROHA_PINCTRL_CONFS_MAX];
@@ -51,7 +51,7 @@ Reviewed-by: Benjamin Larsson <benjamin.larsson@genexis.eu>
  int airoha_pinctrl_probe(struct platform_device *pdev);
 --- a/drivers/pinctrl/airoha/pinctrl-airoha.c
 +++ b/drivers/pinctrl/airoha/pinctrl-airoha.c
-@@ -213,7 +213,7 @@ static void airoha_irq_unmask(struct irq
+@@ -213,7 +213,7 @@
  	u32 mask = GENMASK(2 * offset + 1, 2 * offset);
  	u32 val = BIT(2 * offset);
  
@@ -60,7 +60,7 @@ Reviewed-by: Benjamin Larsson <benjamin.larsson@genexis.eu>
  		return;
  
  	gpiochip_enable_irq(gc, irqd_to_hwirq(data));
-@@ -249,7 +249,7 @@ static void airoha_irq_mask(struct irq_d
+@@ -249,7 +249,7 @@
  	u8 index = data->hwirq / AIROHA_REG_GPIOCTRL_NUM_PIN;
  	u32 mask = GENMASK(2 * offset + 1, 2 * offset);
  
@@ -69,7 +69,7 @@ Reviewed-by: Benjamin Larsson <benjamin.larsson@genexis.eu>
  		return;
  
  	regmap_clear_bits(pinctrl->regmap, gpio_regs->level[index], mask);
-@@ -265,7 +265,7 @@ static void airoha_irq_ack(struct irq_da
+@@ -265,7 +265,7 @@
  	u8 offset = data->hwirq % AIROHA_PIN_BANK_SIZE;
  	u8 index = data->hwirq / AIROHA_PIN_BANK_SIZE;
  
@@ -78,7 +78,7 @@ Reviewed-by: Benjamin Larsson <benjamin.larsson@genexis.eu>
  		return;
  
  	regmap_write(pinctrl->regmap, gpio_regs->status[index], BIT(offset));
-@@ -273,7 +273,10 @@ static void airoha_irq_ack(struct irq_da
+@@ -273,7 +273,10 @@
  
  static int airoha_irq_type(struct irq_data *data, unsigned int type)
  {
@@ -90,7 +90,7 @@ Reviewed-by: Benjamin Larsson <benjamin.larsson@genexis.eu>
  		return -EINVAL;
  
  	if (type == IRQ_TYPE_NONE) {
-@@ -304,9 +307,11 @@ static irqreturn_t airoha_irq_handler(in
+@@ -304,9 +307,11 @@
  {
  	struct airoha_pinctrl *pinctrl = data;
  	bool handled = false;
@@ -103,7 +103,7 @@ Reviewed-by: Benjamin Larsson <benjamin.larsson@genexis.eu>
  		struct gpio_irq_chip *girq = &pinctrl->gpiochip.irq;
  		u32 regmap;
  		unsigned long status;
-@@ -340,6 +345,22 @@ static const struct irq_chip airoha_gpio
+@@ -340,6 +345,22 @@
  	GPIOCHIP_IRQ_RESOURCE_HELPERS,
  };
  
@@ -126,7 +126,7 @@ Reviewed-by: Benjamin Larsson <benjamin.larsson@genexis.eu>
  static int airoha_pinctrl_add_gpiochip(struct airoha_pinctrl *pinctrl,
  					struct platform_device *pdev)
  {
-@@ -362,6 +383,7 @@ static int airoha_pinctrl_add_gpiochip(s
+@@ -362,6 +383,7 @@
  
  	girq->default_type = IRQ_TYPE_NONE;
  	girq->handler = handle_bad_irq;
@@ -134,7 +134,7 @@ Reviewed-by: Benjamin Larsson <benjamin.larsson@genexis.eu>
  	gpio_irq_chip_set_chip(girq, &airoha_gpio_irq_chip);
  
  	irq = platform_get_irq(pdev, 0);
-@@ -850,6 +872,7 @@ int airoha_pinctrl_probe(struct platform
+@@ -848,6 +870,7 @@
  	pinctrl->grps = data->grps;
  	pinctrl->funcs = data->funcs;
  	pinctrl->confs_info = data->confs_info;
@@ -144,7 +144,7 @@ Reviewed-by: Benjamin Larsson <benjamin.larsson@genexis.eu>
  	if (err)
 --- a/drivers/pinctrl/airoha/pinctrl-an7563.c
 +++ b/drivers/pinctrl/airoha/pinctrl-an7563.c
-@@ -1069,6 +1069,7 @@ static const struct airoha_pinctrl_match
+@@ -1069,6 +1069,7 @@
  	.num_grps = ARRAY_SIZE(pinctrl_groups),
  	.funcs = pinctrl_funcs,
  	.num_funcs = ARRAY_SIZE(pinctrl_funcs),
@@ -154,7 +154,7 @@ Reviewed-by: Benjamin Larsson <benjamin.larsson@genexis.eu>
  			.confs = pinctrl_pullup_conf,
 --- a/drivers/pinctrl/airoha/pinctrl-an7581.c
 +++ b/drivers/pinctrl/airoha/pinctrl-an7581.c
-@@ -1441,6 +1441,7 @@ static const struct airoha_pinctrl_match
+@@ -1441,6 +1441,7 @@
  	.num_grps = ARRAY_SIZE(pinctrl_groups),
  	.funcs = pinctrl_funcs,
  	.num_funcs = ARRAY_SIZE(pinctrl_funcs),
@@ -164,7 +164,7 @@ Reviewed-by: Benjamin Larsson <benjamin.larsson@genexis.eu>
  			.confs = pinctrl_pullup_conf,
 --- a/drivers/pinctrl/airoha/pinctrl-an7583.c
 +++ b/drivers/pinctrl/airoha/pinctrl-an7583.c
-@@ -1471,6 +1471,7 @@ static const struct airoha_pinctrl_match
+@@ -1471,6 +1471,7 @@
  	.num_grps = ARRAY_SIZE(pinctrl_groups),
  	.funcs = pinctrl_funcs,
  	.num_funcs = ARRAY_SIZE(pinctrl_funcs),
@@ -174,7 +174,7 @@ Reviewed-by: Benjamin Larsson <benjamin.larsson@genexis.eu>
  			.confs = pinctrl_pullup_conf,
 --- a/drivers/pinctrl/airoha/pinctrl-en7523.c
 +++ b/drivers/pinctrl/airoha/pinctrl-en7523.c
-@@ -1113,6 +1113,7 @@ static const struct airoha_pinctrl_match
+@@ -1113,6 +1113,7 @@
  	.num_grps = ARRAY_SIZE(pinctrl_groups),
  	.funcs = pinctrl_funcs,
  	.num_funcs = ARRAY_SIZE(pinctrl_funcs),

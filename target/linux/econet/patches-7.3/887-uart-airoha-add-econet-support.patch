@@ -5,9 +5,10 @@ AN7523 SoCs. Add ECONET to the Kconfig dependency to enable
 the Airoha UART driver for EcoNet platforms.
 
 Signed-off-by: Ahmed Naseef <naseefkm@gmail.com>
+
 --- a/drivers/tty/serial/8250/Kconfig
 +++ b/drivers/tty/serial/8250/Kconfig
-@@ -358,7 +358,7 @@ config SERIAL_8250_ACORN
+@@ -349,7 +349,7 @@
  
  config SERIAL_8250_AIROHA
  	tristate "Airoha UART support"

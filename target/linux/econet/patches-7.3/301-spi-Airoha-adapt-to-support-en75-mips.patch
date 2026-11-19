@@ -10,9 +10,10 @@ operations from being lost sporadically on the EN751221.
 
 Signed-off-by: Caleb James DeLisle <cjd@cjdns.fr>
 ---
+
 --- a/drivers/spi/Kconfig
 +++ b/drivers/spi/Kconfig
-@@ -406,7 +406,7 @@ config SPI_DLN2
+@@ -399,7 +399,7 @@
  
  config SPI_AIROHA_EN7523
  	bool "Airoha EN7523 SPI controller support"
@@ -23,7 +24,7 @@ Signed-off-by: Caleb James DeLisle <cjd@cjdns.fr>
  
 --- a/drivers/spi/spi-en7523.c
 +++ b/drivers/spi/spi-en7523.c
-@@ -82,10 +82,11 @@ static void opfifo_write(u32 cmd, u32 le
+@@ -82,10 +82,11 @@
  
  static void set_cs(int state)
  {
@@ -39,7 +40,7 @@ Signed-off-by: Caleb James DeLisle <cjd@cjdns.fr>
  }
  
  static void manual_begin_cmd(void)
-@@ -226,12 +227,12 @@ static int xfer_write(struct spi_transfe
+@@ -226,12 +227,12 @@
  	return xfer->len;
  }
  
