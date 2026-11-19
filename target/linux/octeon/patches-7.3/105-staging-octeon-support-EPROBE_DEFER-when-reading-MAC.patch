@@ -26,7 +26,7 @@ Signed-off-by: Hauke Mehrtens <hauke@hauke-m.de>
 
 --- a/drivers/staging/octeon/ethernet.c
 +++ b/drivers/staging/octeon/ethernet.c
-@@ -669,6 +669,27 @@ static void cvm_set_rgmii_delay(struct o
+@@ -684,6 +684,27 @@
  		priv->phy_mode = PHY_INTERFACE_MODE_RGMII;
  }
  
@@ -54,7 +54,7 @@ Signed-off-by: Hauke Mehrtens <hauke@hauke-m.de>
  static int cvm_oct_probe(struct platform_device *pdev)
  {
  	int num_interfaces;
-@@ -697,6 +718,9 @@ static int cvm_oct_probe(struct platform
+@@ -713,6 +734,9 @@
  		return -EINVAL;
  	}
  

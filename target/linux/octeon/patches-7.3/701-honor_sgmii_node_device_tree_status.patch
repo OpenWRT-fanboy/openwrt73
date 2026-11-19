@@ -10,9 +10,10 @@ initialized but have nothing connected to them.
 
 Tested-by: Johannes Kimmel <fff@bareminimum.eu>
 Signed-off-by: Roman Kuzmitskii <damex.pp@icloud.com>
+
 --- a/drivers/staging/octeon/ethernet.c
 +++ b/drivers/staging/octeon/ethernet.c
-@@ -909,8 +909,10 @@ static int cvm_oct_probe(struct platform
+@@ -921,8 +921,10 @@
  
  			case CVMX_HELPER_INTERFACE_MODE_SGMII:
  				priv->phy_mode = PHY_INTERFACE_MODE_SGMII;
