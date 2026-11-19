@@ -972,7 +972,7 @@ Signed-off-by: Dong Aisheng <aisheng.dong@nxp.com>
 +};
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -10020,6 +10020,14 @@ F:	drivers/net/ethernet/freescale/enetc/
+@@ -10522,6 +10522,14 @@
  F:	drivers/ptp/ptp_qoriq.c
  F:	include/linux/fsl/ptp_qoriq.h
  
@@ -989,19 +989,19 @@ Signed-off-by: Dong Aisheng <aisheng.dong@nxp.com>
  L:	linux-spi@vger.kernel.org
 --- a/drivers/staging/Kconfig
 +++ b/drivers/staging/Kconfig
-@@ -50,4 +50,6 @@ source "drivers/staging/vme_user/Kconfig
+@@ -48,4 +48,6 @@
  
- source "drivers/staging/gpib/Kconfig"
+ source "drivers/staging/vme_user/Kconfig"
  
 +source "drivers/staging/fsl_ppfe/Kconfig"
 +
  endif # STAGING
 --- a/drivers/staging/Makefile
 +++ b/drivers/staging/Makefile
-@@ -14,3 +14,4 @@ obj-$(CONFIG_GREYBUS)		+= greybus/
+@@ -13,3 +13,4 @@
+ obj-$(CONFIG_GREYBUS)		+= greybus/
  obj-$(CONFIG_BCM2835_VCHIQ)	+= vc04_services/
  obj-$(CONFIG_XIL_AXIS_FIFO)	+= axis-fifo/
- obj-$(CONFIG_GPIB)	 	+= gpib/
 +obj-$(CONFIG_FSL_PPFE)		+= fsl_ppfe/
 --- /dev/null
 +++ b/drivers/staging/fsl_ppfe/Kconfig

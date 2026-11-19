@@ -20,7 +20,7 @@ Signed-off-by: Aleksei Sviridkin <f@lex.la>
 
 --- a/Documentation/devicetree/bindings/net/ethernet-controller.yaml
 +++ b/Documentation/devicetree/bindings/net/ethernet-controller.yaml
-@@ -42,6 +42,7 @@ properties:
+@@ -42,6 +42,7 @@
        - mii-lite
        - gmii
        - sgmii
@@ -30,7 +30,7 @@ Signed-off-by: Aleksei Sviridkin <f@lex.la>
        - qusgmii
 --- a/drivers/base/property.c
 +++ b/drivers/base/property.c
-@@ -1023,6 +1023,10 @@ int fwnode_get_phy_mode(const struct fwn
+@@ -1030,6 +1030,10 @@
  		if (!strcasecmp(pm, phy_modes(i)))
  			return i;
  
@@ -43,7 +43,7 @@ Signed-off-by: Aleksei Sviridkin <f@lex.la>
  EXPORT_SYMBOL_GPL(fwnode_get_phy_mode);
 --- a/net/core/of_net.c
 +++ b/net/core/of_net.c
-@@ -43,6 +43,12 @@ int of_get_phy_mode(struct device_node *
+@@ -43,6 +43,12 @@
  			return 0;
  		}
  
