@@ -3,9 +3,10 @@ Dynamically rename the active partition to "ubi".
 
 Signed-off-by: Imre Kaloz <kaloz@openwrt.org>
 ---
+
 --- a/drivers/mtd/parsers/ofpart_core.c
 +++ b/drivers/mtd/parsers/ofpart_core.c
-@@ -38,6 +38,8 @@ static bool node_has_compatible(struct d
+@@ -42,6 +42,8 @@
  	return of_get_property(pp, "compatible", NULL);
  }
  
@@ -14,7 +15,7 @@ Signed-off-by: Imre Kaloz <kaloz@openwrt.org>
  static int parse_fixed_partitions(struct mtd_info *master,
  				  const struct mtd_partition **pparts,
  				  struct mtd_part_parser_data *data)
-@@ -47,6 +49,7 @@ static int parse_fixed_partitions(struct
+@@ -51,6 +53,7 @@
  	struct mtd_partition *parts;
  	struct device_node *mtd_node;
  	struct device_node *ofpart_node;
@@ -22,7 +23,7 @@ Signed-off-by: Imre Kaloz <kaloz@openwrt.org>
  	const char *partname;
  	struct device_node *pp;
  	int nr_parts, i, ret = 0;
-@@ -159,9 +162,15 @@ static int parse_fixed_partitions(struct
+@@ -163,9 +166,15 @@
  		parts[i].size = of_read_number(reg + a_cells, s_cells);
  		parts[i].of_node = pp;
  
@@ -41,7 +42,7 @@ Signed-off-by: Imre Kaloz <kaloz@openwrt.org>
  		parts[i].name = partname;
  
  		if (of_property_read_bool(pp, "read-only"))
-@@ -283,6 +292,18 @@ static int __init ofpart_parser_init(voi
+@@ -291,6 +300,18 @@
  	return 0;
  }
  
