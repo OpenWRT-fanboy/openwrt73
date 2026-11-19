@@ -1,6 +1,6 @@
 --- a/arch/powerpc/boot/wrapper
 +++ b/arch/powerpc/boot/wrapper
-@@ -342,6 +342,7 @@ adder875-redboot)
+@@ -343,6 +343,7 @@
  simpleboot-*)
      platformo="$object/fixed-head.o $object/simpleboot.o"
      binary=y
