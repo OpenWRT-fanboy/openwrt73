@@ -8,6 +8,7 @@ Based on GPL vendor code:
 https://github.com/keenetic/kernel-49/commit/ee0e0b7cf28c208cd5b892ea96180ffae0de9b7f
 
 Signed-off-by: Ahmed Naseef <naseefkm@gmail.com>
+
 --- a/drivers/usb/host/xhci-mtk.c
 +++ b/drivers/usb/host/xhci-mtk.c
 @@ -80,6 +80,8 @@
@@ -19,7 +20,7 @@ Signed-off-by: Ahmed Naseef <naseefkm@gmail.com>
  #define XSEOF_OFFSET_MASK	GENMASK(11, 0)
  
  /* usb remote wakeup registers in syscon */
-@@ -191,6 +193,18 @@ static void xhci_mtk_rxfifo_depth_set(st
+@@ -191,6 +193,18 @@
  	writel(value, hcd->regs + HSCH_CFG1);
  }
  
@@ -38,7 +39,7 @@ Signed-off-by: Ahmed Naseef <naseefkm@gmail.com>
  static void xhci_mtk_init_quirk(struct xhci_hcd_mtk *mtk)
  {
  	/* workaround only for mt8195 */
-@@ -198,6 +212,9 @@ static void xhci_mtk_init_quirk(struct x
+@@ -198,6 +212,9 @@
  
  	/* workaround for SoCs using SSUSB about before IPM v1.6.0 */
  	xhci_mtk_rxfifo_depth_set(mtk);
@@ -48,7 +49,7 @@ Signed-off-by: Ahmed Naseef <naseefkm@gmail.com>
  }
  
  static int xhci_mtk_host_enable(struct xhci_hcd_mtk *mtk)
-@@ -846,6 +863,7 @@ static const struct dev_pm_ops xhci_mtk_
+@@ -845,6 +862,7 @@
  static const struct of_device_id mtk_xhci_of_match[] = {
  	{ .compatible = "mediatek,mt8173-xhci"},
  	{ .compatible = "mediatek,mt8195-xhci"},
