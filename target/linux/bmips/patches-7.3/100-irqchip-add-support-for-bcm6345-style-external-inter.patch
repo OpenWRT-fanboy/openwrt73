@@ -50,7 +50,7 @@ Signed-off-by: Jonas Gorski <jogo@openwrt.org>
 +};
 --- a/drivers/irqchip/Kconfig
 +++ b/drivers/irqchip/Kconfig
-@@ -143,6 +143,10 @@ config BCM2712_MIP
+@@ -159,6 +159,10 @@
  
  	  If unsure say n.
  
@@ -277,8 +277,8 @@ Signed-off-by: Jonas Gorski <jogo@openwrt.org>
 +	data->chip.irq_unmask = bcm6345_ext_intc_irq_unmask;
 +	data->chip.irq_set_type = bcm6345_ext_intc_set_type;
 +
-+	data->domain = irq_domain_add_linear(node, num_irqs,
-+					     &bcm6345_ext_domain_ops, data);
++	data->domain = irq_domain_create_linear(of_fwnode_handle(node), num_irqs,
++						&bcm6345_ext_domain_ops, data);
 +	if (!data->domain) {
 +		kfree(data);
 +		return -ENOMEM;
@@ -363,7 +363,7 @@ Signed-off-by: Jonas Gorski <jogo@openwrt.org>
 +#endif /* __INCLUDE_LINUX_IRQCHIP_IRQ_BCM6345_EXT_H */
 --- a/drivers/irqchip/Makefile
 +++ b/drivers/irqchip/Makefile
-@@ -68,6 +68,7 @@ obj-$(CONFIG_XILINX_INTC)		+= irq-xilinx
+@@ -66,6 +66,7 @@
  obj-$(CONFIG_IRQ_CROSSBAR)		+= irq-crossbar.o
  obj-$(CONFIG_SOC_VF610)			+= irq-vf610-mscm-ir.o
  obj-$(CONFIG_BCM2712_MIP)               += irq-bcm2712-mip.o

@@ -42,7 +42,7 @@ Signed-off-by: Jonas Gorski <jonas.gorski@gmail.com>
 
 --- a/drivers/net/dsa/b53/Kconfig
 +++ b/drivers/net/dsa/b53/Kconfig
-@@ -47,3 +47,13 @@ config B53_SERDES
+@@ -47,3 +47,13 @@
  	default ARCH_BCM_NSP
  	help
  	  Select to enable support for SerDes on e.g: Northstar Plus SoCs.
@@ -58,7 +58,7 @@ Signed-off-by: Jonas Gorski <jonas.gorski@gmail.com>
 +	  the phy interface, but actually requires internal delays enabled.
 --- a/drivers/net/dsa/b53/b53_common.c
 +++ b/drivers/net/dsa/b53/b53_common.c
-@@ -1444,6 +1444,16 @@ static void b53_adjust_531x5_rgmii(struc
+@@ -1465,6 +1465,16 @@
  	else
  		off = B53_RGMII_CTRL_P(port);
  
@@ -75,7 +75,7 @@ Signed-off-by: Jonas Gorski <jonas.gorski@gmail.com>
  	/* Configure the port RGMII clock delay by DLL disabled and
  	 * tx_clk aligned timing (restoring to reset defaults)
  	 */
-@@ -1455,19 +1465,24 @@ static void b53_adjust_531x5_rgmii(struc
+@@ -1476,19 +1486,24 @@
  	 * account for this internal delay that is inserted, otherwise
  	 * the switch won't be able to receive correctly.
  	 *

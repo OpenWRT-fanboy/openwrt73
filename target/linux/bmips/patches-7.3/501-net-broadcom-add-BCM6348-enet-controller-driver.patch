@@ -16,7 +16,7 @@ Signed-off-by: Álvaro Fernández Rojas <noltari@gmail.com>
 
 --- a/drivers/net/ethernet/broadcom/Kconfig
 +++ b/drivers/net/ethernet/broadcom/Kconfig
-@@ -68,6 +68,14 @@ config BCM63XX_ENET
+@@ -69,6 +69,14 @@
  	  This driver supports the ethernet MACs in the Broadcom 63xx
  	  MIPS chipset family (BCM63XX).
  
