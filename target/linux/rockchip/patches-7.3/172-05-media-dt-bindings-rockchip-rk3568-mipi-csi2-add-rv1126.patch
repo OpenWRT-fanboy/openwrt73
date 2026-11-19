@@ -14,7 +14,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
 
 --- a/Documentation/devicetree/bindings/media/rockchip,rk3568-mipi-csi2.yaml
 +++ b/Documentation/devicetree/bindings/media/rockchip,rk3568-mipi-csi2.yaml
-@@ -23,6 +23,7 @@ properties:
+@@ -24,6 +24,7 @@
        - items:
            - enum:
                - rockchip,rk3588-mipi-csi2

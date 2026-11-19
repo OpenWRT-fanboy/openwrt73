@@ -341,7 +341,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
 +		return ret;
 +	dvfs->qos_added = true;
 +
-+	dvfs->cdev = thermal_of_cooling_device_register(dev->of_node, "rkvenc",
++	dvfs->cdev = thermal_of_cooling_device_register(dev->of_node, 0, "rkvenc",
 +							dvfs, &rkvenc_cdev_ops);
 +	if (IS_ERR(dvfs->cdev)) {
 +		ret = PTR_ERR(dvfs->cdev);

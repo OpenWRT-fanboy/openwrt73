@@ -14,7 +14,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
 
 --- a/Documentation/devicetree/bindings/usb/rockchip,dwc3.yaml
 +++ b/Documentation/devicetree/bindings/usb/rockchip,dwc3.yaml
-@@ -30,6 +30,7 @@ select:
+@@ -31,6 +31,7 @@
            - rockchip,rk3568-dwc3
            - rockchip,rk3576-dwc3
            - rockchip,rk3588-dwc3
@@ -22,7 +22,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
    required:
      - compatible
  
-@@ -42,6 +43,7 @@ properties:
+@@ -44,6 +45,7 @@
            - rockchip,rk3568-dwc3
            - rockchip,rk3576-dwc3
            - rockchip,rk3588-dwc3
@@ -30,7 +30,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
        - const: snps,dwc3
  
    reg:
-@@ -51,7 +53,7 @@ properties:
+@@ -53,7 +55,7 @@
      maxItems: 1
  
    clocks:
@@ -39,7 +39,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
      items:
        - description:
            Controller reference clock, must to be 24 MHz
-@@ -66,10 +68,12 @@ properties:
+@@ -68,10 +70,12 @@
            PIPE clock
  
    clock-names:
@@ -54,7 +54,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
        - const: bus_clk
        - enum:
            - grf_clk
-@@ -140,12 +144,27 @@ allOf:
+@@ -143,12 +147,27 @@
      then:
        properties:
          clocks:

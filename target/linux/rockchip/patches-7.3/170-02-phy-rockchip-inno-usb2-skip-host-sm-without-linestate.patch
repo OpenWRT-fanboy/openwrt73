@@ -16,7 +16,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
 
 --- a/drivers/phy/rockchip/phy-rockchip-inno-usb2.c
 +++ b/drivers/phy/rockchip/phy-rockchip-inno-usb2.c
-@@ -561,6 +561,10 @@ static int rockchip_usb2phy_init(struct
+@@ -562,6 +562,10 @@
  			dev_dbg(&rport->phy->dev, "mode %d\n", rport->mode);
  		}
  	} else if (rport->port_id == USB2PHY_PORT_HOST) {

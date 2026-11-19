@@ -14,7 +14,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
 
 --- a/drivers/pmdomain/rockchip/pm-domains.c
 +++ b/drivers/pmdomain/rockchip/pm-domains.c
-@@ -1112,6 +1112,8 @@ static const struct rockchip_domain_info
+@@ -1157,6 +1157,8 @@
  	[RV1126_PD_NVM]		= DOMAIN_RV1126("nvm", BIT(7), BIT(11), BIT(11),  false),
  	[RV1126_PD_SDIO]	= DOMAIN_RV1126("sdio", BIT(8), BIT(13), BIT(13),  false),
  	[RV1126_PD_USB]		= DOMAIN_RV1126("usb", BIT(9), BIT(15), BIT(15),  false),
@@ -22,4 +22,4 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
 +					     BIT(4), BIT(20), BIT(20), false, false),
  };
  
- static const struct rockchip_domain_info rk3036_pm_domains[] = {
+ static const struct rockchip_domain_info rv1126b_pm_domains[] = {

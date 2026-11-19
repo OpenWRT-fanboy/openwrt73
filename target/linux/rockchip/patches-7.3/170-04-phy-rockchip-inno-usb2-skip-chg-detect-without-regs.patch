@@ -17,7 +17,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
 
 --- a/drivers/phy/rockchip/phy-rockchip-inno-usb2.c
 +++ b/drivers/phy/rockchip/phy-rockchip-inno-usb2.c
-@@ -710,6 +710,11 @@ static void rockchip_usb2phy_otg_sm_work
+@@ -711,6 +711,11 @@
  			return;
  		} else if (vbus_attach) {
  			dev_dbg(&rport->phy->dev, "vbus_attach\n");

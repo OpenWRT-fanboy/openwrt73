@@ -1,6 +1,6 @@
 --- a/arch/arm64/boot/dts/rockchip/rk3399-nanopi-r4s.dtsi
 +++ b/arch/arm64/boot/dts/rockchip/rk3399-nanopi-r4s.dtsi
-@@ -17,6 +17,13 @@
+@@ -18,6 +18,13 @@
  #include "rk3399-nanopi4.dtsi"
  
  / {

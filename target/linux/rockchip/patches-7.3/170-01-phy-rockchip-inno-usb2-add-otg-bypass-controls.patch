@@ -20,7 +20,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
 
 --- a/drivers/phy/rockchip/phy-rockchip-inno-usb2.c
 +++ b/drivers/phy/rockchip/phy-rockchip-inno-usb2.c
-@@ -114,6 +114,8 @@ struct rockchip_chg_det_reg {
+@@ -114,6 +114,8 @@
  /**
   * struct rockchip_usb2phy_port_cfg - usb-phy port configuration.
   * @phy_sus: phy suspend register.
@@ -29,7 +29,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
   * @bvalid_det_en: vbus valid rise detection enable register.
   * @bvalid_det_st: vbus valid rise detection status register.
   * @bvalid_det_clr: vbus valid rise detection clear register.
-@@ -140,6 +142,8 @@ struct rockchip_chg_det_reg {
+@@ -140,6 +142,8 @@
   */
  struct rockchip_usb2phy_port_cfg {
  	struct usb2phy_reg	phy_sus;
@@ -38,7 +38,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
  	struct usb2phy_reg	bvalid_det_en;
  	struct usb2phy_reg	bvalid_det_st;
  	struct usb2phy_reg	bvalid_det_clr;
-@@ -1307,7 +1311,15 @@ static int rockchip_usb2phy_otg_port_ini
+@@ -1308,7 +1312,15 @@
  
  	mutex_init(&rport->mutex);
  

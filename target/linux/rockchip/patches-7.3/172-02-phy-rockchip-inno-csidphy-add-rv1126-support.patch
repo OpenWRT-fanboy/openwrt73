@@ -42,9 +42,9 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
  #define RK3568_CSIDPHY_CLK_CALIB_EN		0x168
 +#define RV1126_CSIDPHY_CLK_CALIB_EN		0x168
  
- #define RESETS_MAX				2
- 
-@@ -85,6 +91,10 @@ enum dphy_reg_id {
+ #define CSIDPHY_LANE_CLK_3_PHASE		0x38
+ #define CSIDPHY_CLK_PHASE_MASK			GENMASK(6, 4)
+@@ -89,6 +95,10 @@
  	GRF_DPHY_CSIPHY_FORCERXMODE,
  	GRF_DPHY_CSIPHY_CLKLANE_EN,
  	GRF_DPHY_CSIPHY_DATALANE_EN,
@@ -55,7 +55,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
  };
  
  struct dphy_reg {
-@@ -97,34 +107,56 @@ struct dphy_reg {
+@@ -101,34 +111,56 @@
  #define PHY_REG(_offset, _width, _shift) \
  	{ .offset = _offset, .mask = BIT(_width) - 1, .shift = _shift, .valid = 1, }
  
@@ -117,7 +117,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
  struct hsfreq_range {
  	u32 range_h;
  	u8 cfg_bit;
-@@ -137,6 +169,8 @@ struct dphy_drv_data {
+@@ -141,6 +173,8 @@
  	const struct hsfreq_range *hsfreq_ranges;
  	int num_hsfreq_ranges;
  	const struct dphy_reg *grf_regs;
@@ -126,7 +126,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
  	const char *const *resets;
  	unsigned int resets_num;
  };
-@@ -146,6 +180,8 @@ struct rockchip_inno_csidphy {
+@@ -150,6 +184,8 @@
  	void __iomem *phy_base;
  	struct clk *pclk;
  	struct regmap *grf;
@@ -135,7 +135,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
  	struct reset_control_bulk_data resets[RESETS_MAX];
  	unsigned int resets_num;
  	const struct dphy_drv_data *drv_data;
-@@ -156,8 +192,7 @@ struct rockchip_inno_csidphy {
+@@ -161,8 +197,7 @@
  static inline void write_grf_reg(struct rockchip_inno_csidphy *priv,
  				 int index, u8 value)
  {
@@ -145,16 +145,16 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
  
  	if (reg->valid)
  		regmap_write(priv->grf, reg->offset,
-@@ -304,6 +339,8 @@ static int rockchip_inno_csidphy_power_o
- 		rockchip_inno_csidphy_ths_settle(priv, priv->hsfreq,
- 						 CSIDPHY_LANE_THS_SETTLE(i));
+@@ -316,6 +351,8 @@
+ 		writel(val, priv->phy_base + CSIDPHY_LANE_CLK_3_PHASE);
+ 	}
  
 +	write_grf_reg(priv, GRF_DPHY_CSIPHY_CLK_INV_SEL, 0x1);
 +	write_grf_reg(priv, GRF_DPHY_CIF_SEL, priv->cif_sel);
  	write_grf_reg(priv, GRF_DPHY_CSIPHY_CLKLANE_EN, 0x1);
  	write_grf_reg(priv, GRF_DPHY_CSIPHY_DATALANE_EN,
  		      GENMASK(priv->config.lanes - 1, 0));
-@@ -414,6 +451,29 @@ static const struct dphy_drv_data rk3588
+@@ -426,6 +463,29 @@
  	.resets_num = ARRAY_SIZE(rk3588_reset_names),
  };
  
@@ -184,7 +184,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
  static const struct of_device_id rockchip_inno_csidphy_match_id[] = {
  	{
  		.compatible = "rockchip,px30-csi-dphy",
-@@ -439,6 +499,10 @@ static const struct of_device_id rockchi
+@@ -451,6 +511,10 @@
  		.compatible = "rockchip,rk3588-csi-dphy",
  		.data = &rk3588_mipidphy_drv_data,
  	},
@@ -195,15 +195,15 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
  	{}
  };
  MODULE_DEVICE_TABLE(of, rockchip_inno_csidphy_match_id);
-@@ -448,6 +512,7 @@ static int rockchip_inno_csidphy_probe(s
+@@ -460,6 +524,7 @@
  	struct rockchip_inno_csidphy *priv;
  	struct device *dev = &pdev->dev;
  	struct phy_provider *phy_provider;
 +	struct resource *res;
  	struct phy *phy;
+ 	u32 phase;
  	int ret;
- 
-@@ -471,10 +536,24 @@ static int rockchip_inno_csidphy_probe(s
+@@ -496,10 +561,24 @@
  		return PTR_ERR(priv->grf);
  	}
  

@@ -22,9 +22,9 @@ Signed-off-by: David Bauer <mail@david-bauer.net>
  	status = "okay";
 --- a/arch/arm64/boot/dts/rockchip/rk3399-nanopi-r4s.dtsi
 +++ b/arch/arm64/boot/dts/rockchip/rk3399-nanopi-r4s.dtsi
-@@ -109,6 +109,11 @@
- 	status = "disabled";
- };
+@@ -145,6 +145,11 @@
+ 
+ /delete-node/ &sdio_pwrseq;
  
 +&sdmmc {
 +	/delete-property/ sd-uhs-sdr104;

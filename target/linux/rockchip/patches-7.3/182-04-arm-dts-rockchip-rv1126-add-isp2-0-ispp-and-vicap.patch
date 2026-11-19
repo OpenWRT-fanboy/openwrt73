@@ -20,8 +20,8 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
 
 --- a/arch/arm/boot/dts/rockchip/rv1126.dtsi
 +++ b/arch/arm/boot/dts/rockchip/rv1126.dtsi
-@@ -37,6 +37,18 @@
- 		spi1 = &spi1;
+@@ -33,6 +33,18 @@
+ 		serial5 = &uart5;
  	};
  
 +	reserved-memory {
@@ -39,7 +39,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
  	cpus {
  		#address-cells = <1>;
  		#size-cells = <0>;
-@@ -319,6 +331,16 @@
+@@ -315,6 +327,16 @@
  		reg = <0xfe8d0000 0x20>;
  	};
  
@@ -56,7 +56,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
  	gic: interrupt-controller@feff0000 {
  		compatible = "arm,gic-400";
  		interrupt-controller;
-@@ -421,6 +443,17 @@
+@@ -417,6 +439,17 @@
  				#power-domain-cells = <0>;
  			};
  
@@ -74,7 +74,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
  			power-domain@RV1126_PD_VO {
  				reg = <RV1126_PD_VO>;
  				clocks = <&cru ACLK_RGA>,
-@@ -1196,6 +1229,68 @@
+@@ -1134,6 +1167,68 @@
  		};
  	};
  
@@ -119,7 +119,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
 +			 <&cru CLK_ISPP>;
 +		clock-names = "aclk_ispp", "hclk_ispp", "clk_ispp";
 +		assigned-clocks = <&cru ACLK_ISPP>, <&cru HCLK_ISPP>,
-+			          <&cru CLK_ISPP>;
++				  <&cru CLK_ISPP>;
 +		assigned-clock-rates = <500000000>, <250000000>,
 +			       <400000000>;
 +		power-domains = <&power RV1126_PD_ISPP>;

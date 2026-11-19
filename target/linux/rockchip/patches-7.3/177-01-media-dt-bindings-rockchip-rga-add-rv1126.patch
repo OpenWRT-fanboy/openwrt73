@@ -14,7 +14,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
 
 --- a/Documentation/devicetree/bindings/media/rockchip-rga.yaml
 +++ b/Documentation/devicetree/bindings/media/rockchip-rga.yaml
-@@ -25,6 +25,7 @@ properties:
+@@ -30,6 +30,7 @@
                - rockchip,rk3228-rga
                - rockchip,rk3568-rga
                - rockchip,rk3588-rga

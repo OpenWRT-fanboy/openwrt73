@@ -17,7 +17,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
 
 --- a/arch/arm/boot/dts/rockchip/rv1126.dtsi
 +++ b/arch/arm/boot/dts/rockchip/rv1126.dtsi
-@@ -47,6 +47,8 @@
+@@ -43,6 +43,8 @@
  			reg = <0xf00>;
  			enable-method = "psci";
  			clocks = <&cru ARMCLK>;
@@ -26,7 +26,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
  		};
  
  		cpu1: cpu@f01 {
-@@ -55,6 +57,8 @@
+@@ -51,6 +53,8 @@
  			reg = <0xf01>;
  			enable-method = "psci";
  			clocks = <&cru ARMCLK>;
@@ -35,7 +35,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
  		};
  
  		cpu2: cpu@f02 {
-@@ -63,6 +67,8 @@
+@@ -59,6 +63,8 @@
  			reg = <0xf02>;
  			enable-method = "psci";
  			clocks = <&cru ARMCLK>;
@@ -44,7 +44,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
  		};
  
  		cpu3: cpu@f03 {
-@@ -71,6 +77,8 @@
+@@ -67,6 +73,8 @@
  			reg = <0xf03>;
  			enable-method = "psci";
  			clocks = <&cru ARMCLK>;
@@ -53,7 +53,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
  		};
  	};
  
-@@ -94,6 +102,18 @@
+@@ -90,6 +98,18 @@
  			polling-delay = <0>;
  			thermal-sensors = <&tsadc 0>;
  
@@ -72,7 +72,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
  			trips {
  				cpu_alert0: cpu-alert0 {
  					temperature = <85000>;
-@@ -138,6 +158,60 @@
+@@ -134,6 +154,60 @@
  		clock-frequency = <24000000>;
  	};
  

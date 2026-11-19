@@ -44,8 +44,8 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
 
 --- a/drivers/crypto/Kconfig
 +++ b/drivers/crypto/Kconfig
-@@ -736,33 +736,29 @@ config CRYPTO_DEV_XILINX_TRNG
- 	  will be called xilinx-trng.
+@@ -692,33 +692,29 @@
+ 	  AES encryption/decryption and HASH algorithms.
  
  config CRYPTO_DEV_ROCKCHIP2
 -	tristate "Rockchip's cryptographic offloader V2"
@@ -89,9 +89,9 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
  	tristate "Support for Xilinx ZynqMP AES hw accelerator"
 --- a/drivers/crypto/Makefile
 +++ b/drivers/crypto/Makefile
-@@ -30,6 +30,7 @@ obj-$(CONFIG_CRYPTO_DEV_PPC4XX) += amcc/
+@@ -28,6 +28,7 @@
+ obj-$(CONFIG_CRYPTO_DEV_PPC4XX) += amcc/
  obj-$(CONFIG_CRYPTO_DEV_QCE) += qce/
- obj-$(CONFIG_CRYPTO_DEV_QCOM_RNG) += qcom-rng.o
  obj-$(CONFIG_CRYPTO_DEV_ROCKCHIP) += rockchip/
 +obj-$(CONFIG_CRYPTO_DEV_ROCKCHIP2) += rockchip/
  obj-$(CONFIG_CRYPTO_DEV_S5P) += s5p-sss.o
@@ -1294,7 +1294,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
  
  struct rk2_crypto_lli {
  	__le32 src_addr;
-@@ -126,121 +95,78 @@ struct rk2_crypto_lli {
+@@ -126,121 +95,78 @@
  	__le32 dst_addr;
  	__le32 dst_len;
  	__le32 user;
@@ -1584,7 +1584,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
  
  	return crypto_ahash_init(&rctx->fallback_req);
  }
-@@ -100,14 +46,9 @@ int rk2_ahash_init(struct ahash_request
+@@ -100,14 +46,9 @@
  int rk2_ahash_update(struct ahash_request *req)
  {
  	struct rk2_ahash_rctx *rctx = ahash_request_ctx(req);
@@ -1601,7 +1601,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
  
  	return crypto_ahash_update(&rctx->fallback_req);
  }
-@@ -115,13 +56,9 @@ int rk2_ahash_update(struct ahash_reques
+@@ -115,13 +56,9 @@
  int rk2_ahash_final(struct ahash_request *req)
  {
  	struct rk2_ahash_rctx *rctx = ahash_request_ctx(req);
@@ -1617,7 +1617,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
  
  	return crypto_ahash_final(&rctx->fallback_req);
  }
-@@ -129,187 +66,184 @@ int rk2_ahash_final(struct ahash_request
+@@ -129,187 +66,184 @@
  int rk2_ahash_finup(struct ahash_request *req)
  {
  	struct rk2_ahash_rctx *rctx = ahash_request_ctx(req);
@@ -1932,7 +1932,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
  	local_bh_enable();
  
  	return 0;
-@@ -317,28 +251,28 @@ theend:
+@@ -317,28 +251,28 @@
  
  int rk2_hash_init_tfm(struct crypto_ahash *tfm)
  {
