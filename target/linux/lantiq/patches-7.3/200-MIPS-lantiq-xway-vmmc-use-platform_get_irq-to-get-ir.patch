@@ -18,7 +18,7 @@ Signed-off-by: Martin Schiller <ms@dev.tdt.de>
 
 --- a/arch/mips/lantiq/xway/vmmc.c
 +++ b/arch/mips/lantiq/xway/vmmc.c
-@@ -15,6 +15,10 @@
+@@ -14,6 +14,10 @@
  
  static unsigned int *cp1_base;
  
@@ -29,7 +29,7 @@ Signed-off-by: Martin Schiller <ms@dev.tdt.de>
  unsigned int *ltq_get_cp1_base(void)
  {
  	if (!cp1_base)
-@@ -24,6 +28,33 @@ unsigned int *ltq_get_cp1_base(void)
+@@ -23,6 +27,33 @@
  }
  EXPORT_SYMBOL(ltq_get_cp1_base);
  
@@ -63,7 +63,7 @@ Signed-off-by: Martin Schiller <ms@dev.tdt.de>
  static int vmmc_probe(struct platform_device *pdev)
  {
  #define CP1_SIZE       (1 << 20)
-@@ -31,11 +62,33 @@ static int vmmc_probe(struct platform_de
+@@ -30,11 +61,33 @@
  	int gpio_count;
  	dma_addr_t dma;
  	int error;
@@ -99,7 +99,7 @@ Signed-off-by: Martin Schiller <ms@dev.tdt.de>
  		gpio = devm_gpiod_get_index(&pdev->dev,
 --- a/arch/mips/include/asm/mach-lantiq/xway/lantiq_soc.h
 +++ b/arch/mips/include/asm/mach-lantiq/xway/lantiq_soc.h
-@@ -101,6 +101,9 @@ extern void ltq_pmu_disable(unsigned int
+@@ -101,6 +101,9 @@
  
  /* VMMC */
  extern unsigned int *ltq_get_cp1_base(void);

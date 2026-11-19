@@ -28,7 +28,7 @@ Signed-off-by: Aleksander Jan Bajkowski <olek2@wp.pl>
  static int cfi_intelext_erase_varsize(struct mtd_info *, struct erase_info *);
  static void cfi_intelext_sync (struct mtd_info *);
  static int cfi_intelext_lock(struct mtd_info *mtd, loff_t ofs, uint64_t len);
-@@ -305,6 +307,7 @@ static void fixup_use_point(struct mtd_i
+@@ -305,6 +307,7 @@
  	}
  }
  
@@ -36,7 +36,7 @@ Signed-off-by: Aleksander Jan Bajkowski <olek2@wp.pl>
  static void fixup_use_write_buffers(struct mtd_info *mtd)
  {
  	struct map_info *map = mtd->priv;
-@@ -315,6 +318,7 @@ static void fixup_use_write_buffers(stru
+@@ -315,6 +318,7 @@
  		mtd->_writev = cfi_intelext_writev;
  	}
  }
@@ -44,15 +44,15 @@ Signed-off-by: Aleksander Jan Bajkowski <olek2@wp.pl>
  
  /*
   * Some chips power-up with all sectors locked by default.
-@@ -1720,6 +1724,7 @@ static int cfi_intelext_write_words (str
+@@ -1728,6 +1732,7 @@
+ 	map_write(map, CMD(cmd), adr);
  }
- 
  
 +#if !FORCE_WORD_WRITE
  static int __xipram do_write_buffer(struct map_info *map, struct flchip *chip,
  				    unsigned long adr, const struct kvec **pvec,
  				    unsigned long *pvec_seek, int len)
-@@ -1948,6 +1953,7 @@ static int cfi_intelext_write_buffers (s
+@@ -1954,6 +1959,7 @@
  
  	return cfi_intelext_writev(mtd, &vec, 1, to, retlen);
  }

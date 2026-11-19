@@ -431,7 +431,7 @@ Signed-off-by: John Crispin <blogic@openwrt.org>
  
  #include <asm/bootinfo.h>
  #include <asm/irq_cpu.h>
-@@ -93,6 +94,7 @@ void ltq_disable_irq(struct irq_data *d)
+@@ -93,6 +94,7 @@
  	}
  	raw_spin_unlock_irqrestore(&ltq_icu_lock, flags);
  }
@@ -441,7 +441,7 @@ Signed-off-by: John Crispin <blogic@openwrt.org>
  {
 --- a/arch/mips/mm/cache.c
 +++ b/arch/mips/mm/cache.c
-@@ -80,6 +80,10 @@ void (*_dma_cache_wback_inv)(unsigned lo
+@@ -80,6 +80,10 @@
  void (*_dma_cache_wback)(unsigned long start, unsigned long size);
  void (*_dma_cache_inv)(unsigned long start, unsigned long size);
  
@@ -471,7 +471,7 @@ Signed-off-by: John Crispin <blogic@openwrt.org>
  	int		max_pcr;	/* maximum PCR in cells per second */
 --- a/net/atm/proc.c
 +++ b/net/atm/proc.c
-@@ -141,7 +141,7 @@ static void *vcc_seq_next(struct seq_fil
+@@ -138,7 +138,7 @@
  static void pvc_info(struct seq_file *seq, struct atm_vcc *vcc)
  {
  	static const char *const class_name[] = {
