@@ -21,7 +21,7 @@ Signed-off-by: Christophe Roullier <christophe.roullier@foss.st.com>
  #include <linux/pm_wakeirq.h>
  #include <linux/regmap.h>
  #include <linux/slab.h>
-@@ -103,6 +104,7 @@ struct stm32_dwmac {
+@@ -98,6 +99,7 @@
  	u32 mode_reg;		 /* MAC glue-logic mode register */
  	u32 mode_mask;
  	struct regmap *regmap;
@@ -29,7 +29,7 @@ Signed-off-by: Christophe Roullier <christophe.roullier@foss.st.com>
  	u32 speed;
  	const struct stm32_ops *ops;
  	struct device *dev;
-@@ -433,6 +435,16 @@ static int stm32_dwmac_parse_data(struct
+@@ -437,6 +439,16 @@
  		}
  	}
  
@@ -46,7 +46,7 @@ Signed-off-by: Christophe Roullier <christophe.roullier@foss.st.com>
  	return err;
  }
  
-@@ -518,6 +530,28 @@ static int stm32_dwmac_resume(struct dev
+@@ -522,6 +534,28 @@
  	return stm32_dwmac_init(priv->plat);
  }
  
@@ -75,7 +75,7 @@ Signed-off-by: Christophe Roullier <christophe.roullier@foss.st.com>
  static int stm32_dwmac_probe(struct platform_device *pdev)
  {
  	struct plat_stmmacenet_data *plat_dat;
-@@ -572,12 +606,19 @@ static int stm32_dwmac_probe(struct plat
+@@ -576,12 +610,19 @@
  			goto err_clk_disable;
  	}
  
@@ -96,7 +96,7 @@ Signed-off-by: Christophe Roullier <christophe.roullier@foss.st.com>
  err_clk_disable_suspend:
  	if (dwmac->ops->clk_rx_enable_in_suspend)
  		clk_disable_unprepare(dwmac->clk_rx);
-@@ -610,6 +651,8 @@ static void stm32_dwmac_remove(struct pl
+@@ -614,6 +655,8 @@
  		dev_pm_clear_wake_irq(&pdev->dev);
  		device_init_wakeup(&pdev->dev, false);
  	}
