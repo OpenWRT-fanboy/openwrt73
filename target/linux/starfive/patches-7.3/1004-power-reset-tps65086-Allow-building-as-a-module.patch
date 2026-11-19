@@ -11,7 +11,7 @@ Signed-off-by: Emil Renner Berthing <kernel@esmil.dk>
 
 --- a/drivers/power/reset/Kconfig
 +++ b/drivers/power/reset/Kconfig
-@@ -247,7 +247,7 @@ config POWER_RESET_TORADEX_EC
+@@ -259,7 +259,7 @@
  	  If unsure, say N.
  
  config POWER_RESET_TPS65086
@@ -22,7 +22,7 @@ Signed-off-by: Emil Renner Berthing <kernel@esmil.dk>
  	  This driver adds support for resetting the TPS65086 PMIC on restart.
 --- a/drivers/power/reset/tps65086-restart.c
 +++ b/drivers/power/reset/tps65086-restart.c
-@@ -57,3 +57,4 @@ module_platform_driver(tps65086_restart_
+@@ -56,3 +56,4 @@
  
  MODULE_AUTHOR("Emil Renner Berthing <kernel@esmil.dk>");
  MODULE_DESCRIPTION("TPS65086 restart driver");

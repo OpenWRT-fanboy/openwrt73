@@ -21,7 +21,7 @@ Signed-off-by: Hal Feng <hal.feng@starfivetech.com>
  
  /*
   * This macro is used to define some register default values.
-@@ -364,6 +365,7 @@ struct pl022 {
+@@ -364,6 +365,7 @@
  	resource_size_t			phybase;
  	void __iomem			*virtbase;
  	struct clk			*clk;
@@ -29,7 +29,7 @@ Signed-off-by: Hal Feng <hal.feng@starfivetech.com>
  	struct spi_controller		*host;
  	struct pl022_ssp_controller	*host_info;
  	struct spi_transfer		*cur_transfer;
-@@ -1927,6 +1929,19 @@ static int pl022_probe(struct amba_devic
+@@ -1926,6 +1928,19 @@
  		goto err_no_clk;
  	}
  
@@ -49,7 +49,7 @@ Signed-off-by: Hal Feng <hal.feng@starfivetech.com>
  	/* Disable SSP */
  	writew((readw(SSP_CR1(pl022->virtbase)) & (~SSP_CR1_MASK_SSE)),
  	       SSP_CR1(pl022->virtbase));
-@@ -1982,6 +1997,8 @@ static int pl022_probe(struct amba_devic
+@@ -1981,6 +1996,8 @@
  	if (platform_info->enable_dma)
  		pl022_dma_remove(pl022);
   err_no_irq:

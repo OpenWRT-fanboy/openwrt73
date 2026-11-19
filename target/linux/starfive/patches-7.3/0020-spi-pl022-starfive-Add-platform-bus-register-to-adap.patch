@@ -22,7 +22,7 @@ Signed-off-by: Hal Feng <hal.feng@starfivetech.com>
  
  /*
   * This macro is used to define some register default values.
-@@ -1838,7 +1839,10 @@ pl022_platform_data_dt_get(struct device
+@@ -1838,7 +1839,10 @@
  		return NULL;
  	}
  
@@ -34,7 +34,7 @@ Signed-off-by: Hal Feng <hal.feng@starfivetech.com>
  	if (!pd)
  		return NULL;
  
-@@ -1858,6 +1862,14 @@ static int pl022_probe(struct amba_devic
+@@ -1858,6 +1862,14 @@
  	struct spi_controller *host;
  	struct pl022 *pl022 = NULL;	/*Data for this driver */
  	int status = 0;
@@ -49,8 +49,8 @@ Signed-off-by: Hal Feng <hal.feng@starfivetech.com>
  
  	dev_info(&adev->dev,
  		 "ARM PL022 driver, device ID: 0x%08x\n", adev->periphid);
-@@ -1913,7 +1925,11 @@ static int pl022_probe(struct amba_devic
- 		goto err_no_ioregion;
+@@ -1912,7 +1924,11 @@
+ 		return status;
  
  	pl022->phybase = adev->res.start;
 -	pl022->virtbase = devm_ioremap(dev, adev->res.start,
@@ -62,7 +62,7 @@ Signed-off-by: Hal Feng <hal.feng@starfivetech.com>
  				       resource_size(&adev->res));
  	if (pl022->virtbase == NULL) {
  		status = -ENOMEM;
-@@ -1922,14 +1938,28 @@ static int pl022_probe(struct amba_devic
+@@ -1921,14 +1937,28 @@
  	dev_info(&adev->dev, "mapped registers from %pa to %p\n",
  		&adev->res.start, pl022->virtbase);
  
@@ -93,7 +93,7 @@ Signed-off-by: Hal Feng <hal.feng@starfivetech.com>
  	if (IS_ERR(pl022->rst)) {
  		status = PTR_ERR(pl022->rst);
  		dev_err(&adev->dev, "could not retrieve SSP/SPI bus reset\n");
-@@ -1947,7 +1977,11 @@ static int pl022_probe(struct amba_devic
+@@ -1946,7 +1976,11 @@
  	       SSP_CR1(pl022->virtbase));
  	load_ssp_default_config(pl022);
  
@@ -106,7 +106,7 @@ Signed-off-by: Hal Feng <hal.feng@starfivetech.com>
  				  0, "pl022", pl022);
  	if (status < 0) {
  		dev_err(&adev->dev, "probe - cannot get IRQ (%d)\n", status);
-@@ -1997,13 +2031,24 @@ static int pl022_probe(struct amba_devic
+@@ -1996,9 +2030,19 @@
  	if (platform_info->enable_dma)
  		pl022_dma_remove(pl022);
   err_no_irq:
@@ -117,6 +117,7 @@ Signed-off-by: Hal Feng <hal.feng@starfivetech.com>
 +	if (platform_flag)
 +		reset_control_put(pl022->rst);
   err_no_rst:
++ err_no_clk_en:
 +	if (platform_flag)
 +		clk_put(pl022->clk);
   err_no_clk:
@@ -124,14 +125,8 @@ Signed-off-by: Hal Feng <hal.feng@starfivetech.com>
 +		iounmap(pl022->virtbase);
   err_no_ioremap:
  	amba_release_regions(adev);
-  err_no_ioregion:
- 	spi_controller_put(host);
-+	if (platform_flag)
-+		kfree(platform_info);
- 	return status;
- }
  
-@@ -2208,6 +2253,89 @@ static void __exit pl022_exit(void)
+@@ -2198,6 +2242,90 @@
  }
  module_exit(pl022_exit);
  
@@ -218,6 +213,7 @@ Signed-off-by: Hal Feng <hal.feng@starfivetech.com>
 +/* platform register end */
 +
 +MODULE_AUTHOR("xingyu.wu <xingyu.wu@starfivetech.com>");
++
  MODULE_AUTHOR("Linus Walleij <linus.walleij@stericsson.com>");
  MODULE_DESCRIPTION("PL022 SSP Controller Driver");
  MODULE_LICENSE("GPL");

@@ -49,9 +49,9 @@ Signed-off-by: Hal Feng <hal.feng@starfivetech.com>
 +};
 +
  &mmc0 {
- 	non-removable;
- };
-@@ -65,3 +83,85 @@
+ 	cap-mmc-highspeed;
+ 	cap-mmc-hw-reset;
+@@ -89,3 +107,85 @@
  	dr_mode = "peripheral";
  	status = "okay";
  };
