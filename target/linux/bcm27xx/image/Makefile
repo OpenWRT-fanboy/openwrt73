@@ -117,7 +117,6 @@ define Device/rpi-2
 	broadcom/bcm2710-rpi-3-b broadcom/bcm2710-rpi-3-b-plus \
 	broadcom/bcm2710-rpi-cm3 broadcom/bcm2711-rpi-4-b \
 	broadcom/bcm2711-rpi-400 broadcom/bcm2711-rpi-cm4-io \
-	broadcom/bcm2711-rpi-cm4 broadcom/bcm2711-rpi-cm4s \
 	broadcom/bcm2710-rpi-zero-2 broadcom/bcm2710-rpi-zero-2-w \
 	broadcom/bcm2710-rpi-cm0
   SUPPORTED_DEVICES := \
@@ -181,9 +180,7 @@ define Device/rpi-4
   DEVICE_DTS := \
 	broadcom/bcm2711-rpi-4-b \
 	broadcom/bcm2711-rpi-400 \
-	broadcom/bcm2711-rpi-cm4-io \
-	broadcom/bcm2711-rpi-cm4 \
-	broadcom/bcm2711-rpi-cm4s
+	broadcom/bcm2711-rpi-cm4-io
   SUPPORTED_DEVICES := \
 	raspberrypi,400 \
 	raspberrypi,4-compute-module \
