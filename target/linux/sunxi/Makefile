@@ -11,6 +11,7 @@ FEATURES:=ext4 legacy-sdcard ramdisk rootfs-part rtc squashfs usb usbgadget
 SUBTARGETS:=cortexa8 cortexa7 cortexa53 arm926ejs
 
 KERNEL_PATCHVER:=6.18
+KERNEL_TESTING_PATCHVER:=7.3
 
 KERNELNAME:=zImage dtbs
 
