@@ -11,6 +11,7 @@ FEATURES:=ext4 ramdisk rootfs-part squashfs
 KERNELNAME:=Image dtbs
 
 KERNEL_PATCHVER:=6.18
+KERNEL_TESTING_PATCHVER:=7.3
 
 include $(INCLUDE_DIR)/target.mk
 
