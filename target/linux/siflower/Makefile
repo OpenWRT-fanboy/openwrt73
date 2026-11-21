@@ -8,6 +8,7 @@ FEATURES:=squashfs usb usbgadget
 SUBTARGETS:=sf19a2890 sf21
 
 KERNEL_PATCHVER:=6.18
+KERNEL_TESTING_PATCHVER:=7.3
 
 include $(INCLUDE_DIR)/target.mk
 
