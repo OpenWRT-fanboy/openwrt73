@@ -32,7 +32,7 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 
 --- a/drivers/usb/host/Kconfig
 +++ b/drivers/usb/host/Kconfig
-@@ -213,6 +213,11 @@ config USB_EHCI_PORT_RESET_HOOKS
+@@ -219,6 +219,11 @@
  	bool
  	# Used for hosts with controller-specific port reset sequencing
  
@@ -91,7 +91,7 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
  #define	PORT_WAKE_BITS	(PORT_WKOC_E|PORT_WKDISC_E|PORT_WKCONN_E)
  
  #ifdef	CONFIG_PM
-@@ -287,8 +325,9 @@ static int ehci_bus_suspend (struct usb_
+@@ -287,8 +325,9 @@
  			 * sake, add a delay if we need one.
  			 */
  			if ((t2 & PORT_WKDISC_E) &&
@@ -103,7 +103,7 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
  				fs_idle_delay = true;
  			ehci_writel(ehci, t2, reg);
  			changed = 1;
-@@ -990,12 +1029,14 @@ int ehci_hub_control(
+@@ -990,12 +1029,14 @@
  
  		if (temp & PORT_CONNECT) {
  			status |= USB_PORT_STAT_CONNECTION;
@@ -124,7 +124,7 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
  			status |= USB_PORT_STAT_ENABLE;
 --- a/drivers/usb/host/ehci.h
 +++ b/drivers/usb/host/ehci.h
-@@ -126,6 +126,10 @@ struct ehci_hcd {			/* one per controlle
+@@ -126,6 +126,10 @@
  #ifdef CONFIG_USB_EHCI_DEVIANT_PORT_STATUS_REG
  	u32 __iomem		*port_status;
  #endif
@@ -135,7 +135,7 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
  #ifdef CONFIG_USB_EHCI_PORT_RESET_HOOKS
  	int			(*pre_port_reset)(struct ehci_hcd *ehci,
  						  unsigned int port);
-@@ -673,38 +677,12 @@ struct ehci_tt {
+@@ -673,38 +677,12 @@
  
  #ifdef CONFIG_USB_EHCI_ROOT_HUB_TT
  
