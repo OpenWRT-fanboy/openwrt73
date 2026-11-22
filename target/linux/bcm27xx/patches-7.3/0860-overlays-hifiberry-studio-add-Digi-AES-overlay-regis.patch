@@ -28,46 +28,6 @@ Signed-off-by: j-schambacher <joerg@hifiberry.com>
  5 files changed, 120 insertions(+), 7 deletions(-)
  create mode 100644 arch/arm/boot/dts/overlays/hifiberry-studio-digi-overlay.dts
 
---- a/arch/arm/boot/dts/overlays/Makefile
-+++ b/arch/arm/boot/dts/overlays/Makefile
-@@ -109,6 +109,7 @@ dtbo-$(CONFIG_ARCH_BCM2835) += \
- 	hifiberry-digi-pro.dtbo \
- 	hifiberry-studio-dac8x.dtbo \
- 	hifiberry-studio-dac8x-pro.dtbo \
-+	hifiberry-studio-digi.dtbo \
- 	highperi.dtbo \
- 	hy28a.dtbo \
- 	hy28b.dtbo \
---- a/arch/arm/boot/dts/overlays/README
-+++ b/arch/arm/boot/dts/overlays/README
-@@ -2127,14 +2127,23 @@ Params: <None>
- 
- Name:   hifiberry-studio-dac8x
- Info:   Configures the HifiBerry Studio DAC8x audio card
--Load:   dtoverlay=hifiberry-studio-dac8x
--Params: <None>
-+Load:   dtoverlay=hifiberry-studio-dac8x,<param>=<val>
-+Params: no_controls             Do not register the ALSA controls for
-+                                this card
- 
- 
- Name:   hifiberry-studio-dac8x-pro
- Info:   Configures the HifiBerry Studio DAC8x PRO audio card
--Load:   dtoverlay=hifiberry-studio-dac8x-pro
--Params: <None>
-+Load:   dtoverlay=hifiberry-studio-dac8x-pro,<param>=<val>
-+Params: no_controls             Do not register the ALSA controls for
-+                                this card
-+
-+
-+Name:   hifiberry-studio-digi
-+Info:   Configures the HifiBerry Studio Digi/AES audio card
-+Load:   dtoverlay=hifiberry-studio-digi,<param>=<val>
-+Params: no_controls             Do not register the ALSA controls for
-+                                this card
- 
- 
- Name:   highperi
 --- a/arch/arm/boot/dts/overlays/hifiberry-studio-dac8x-overlay.dts
 +++ b/arch/arm/boot/dts/overlays/hifiberry-studio-dac8x-overlay.dts
 @@ -10,6 +10,13 @@

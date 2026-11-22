@@ -86,7 +86,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
 
 --- a/arch/arm/include/asm/string.h
 +++ b/arch/arm/include/asm/string.h
-@@ -72,4 +72,9 @@ static inline void *memset64(uint64_t *p
+@@ -72,4 +72,9 @@
  
  #endif
  
@@ -98,7 +98,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  #endif
 --- a/arch/arm/include/asm/uaccess.h
 +++ b/arch/arm/include/asm/uaccess.h
-@@ -533,6 +533,9 @@ do {									\
+@@ -557,6 +557,9 @@
  extern unsigned long __must_check
  arm_copy_from_user(void *to, const void __user *from, unsigned long n);
  
@@ -121,7 +121,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  		   strchr.o strrchr.o                                 \
  		   testchangebit.o testclearbit.o testsetbit.o        \
  		   ashldi3.o ashrdi3.o lshrdi3.o muldi3.o             \
-@@ -25,6 +25,16 @@ else
+@@ -25,6 +25,16 @@
    lib-y	+= backtrace.o
  endif
  
@@ -302,7 +302,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
 +.endm
 --- a/arch/arm/lib/copy_from_user.S
 +++ b/arch/arm/lib/copy_from_user.S
-@@ -104,7 +104,8 @@ UNWIND( .save	{r0, r2, r3, \regs}		)
+@@ -104,7 +104,8 @@
  
  	.text
  
@@ -312,7 +312,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  #ifdef CONFIG_CPU_SPECTRE
  	ldr	r3, =TASK_SIZE
  	uaccess_mask_range_ptr r1, r2, r3, ip
-@@ -113,6 +114,7 @@ ENTRY(arm_copy_from_user)
+@@ -113,6 +114,7 @@
  #include "copy_template.S"
  
  ENDPROC(arm_copy_from_user)
@@ -1425,7 +1425,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  static int
  pin_page_for_write(const void __user *_addr, pte_t **ptep, spinlock_t **ptlp)
  {
-@@ -43,7 +51,7 @@ pin_page_for_write(const void __user *_a
+@@ -43,7 +51,7 @@
  		return 0;
  
  	pmd = pmd_offset(pud, addr);
@@ -1434,7 +1434,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  		return 0;
  
  	/*
-@@ -89,6 +97,47 @@ pin_page_for_write(const void __user *_a
+@@ -89,6 +97,47 @@
  	return 1;
  }
  
@@ -1482,7 +1482,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  static unsigned long noinline
  __copy_to_user_memcpy(void __user *to, const void *from, unsigned long n)
  {
-@@ -137,6 +186,54 @@ out:
+@@ -137,6 +186,54 @@
  	return n;
  }
  
@@ -1537,7 +1537,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  unsigned long
  arm_copy_to_user(void __user *to, const void *from, unsigned long n)
  {
-@@ -147,7 +244,7 @@ arm_copy_to_user(void __user *to, const
+@@ -147,7 +244,7 @@
  	 * With frame pointer disabled, tail call optimization kicks in
  	 * as well making this test almost invisible.
  	 */
@@ -1546,7 +1546,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  		unsigned long ua_flags = uaccess_save_and_enable();
  		n = __copy_to_user_std(to, from, n);
  		uaccess_restore(ua_flags);
-@@ -157,6 +254,32 @@ arm_copy_to_user(void __user *to, const
+@@ -157,6 +254,32 @@
  	}
  	return n;
  }
@@ -1581,7 +1581,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  __clear_user_memset(void __user *addr, unsigned long n)
 --- a/arch/arm/mach-bcm/Kconfig
 +++ b/arch/arm/mach-bcm/Kconfig
-@@ -181,6 +181,13 @@ config ARCH_BCM_53573
+@@ -180,6 +180,13 @@
  	  The base chip is BCM53573 and there are some packaging modifications
  	  like BCM47189 and BCM47452.
  

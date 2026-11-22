@@ -18,7 +18,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
 
 --- a/drivers/gpu/drm/drm_blend.c
 +++ b/drivers/gpu/drm/drm_blend.c
-@@ -269,6 +269,8 @@ EXPORT_SYMBOL(drm_plane_create_alpha_pro
+@@ -284,6 +284,8 @@
   * 	"reflect-x"
   * DRM_MODE_REFLECT_Y:
   * 	"reflect-y"
@@ -27,7 +27,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
   *
   * Rotation is the specified amount in degrees in counter clockwise direction,
   * the X and Y axis are within the source rectangle, i.e.  the X/Y axis before
-@@ -286,6 +288,7 @@ int drm_plane_create_rotation_property(s
+@@ -301,6 +303,7 @@
  		{ __builtin_ffs(DRM_MODE_ROTATE_270) - 1, "rotate-270" },
  		{ __builtin_ffs(DRM_MODE_REFLECT_X) - 1,  "reflect-x" },
  		{ __builtin_ffs(DRM_MODE_REFLECT_Y) - 1,  "reflect-y" },
@@ -37,7 +37,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  
 --- a/include/uapi/drm/drm_mode.h
 +++ b/include/uapi/drm/drm_mode.h
-@@ -203,6 +203,7 @@ extern "C" {
+@@ -194,6 +194,7 @@
   */
  #define DRM_MODE_REFLECT_X      (1<<4)
  #define DRM_MODE_REFLECT_Y      (1<<5)

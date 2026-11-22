@@ -28,7 +28,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
 
 --- a/drivers/usb/host/xhci-mem.c
 +++ b/drivers/usb/host/xhci-mem.c
-@@ -732,6 +732,14 @@ void xhci_setup_streams_ep_input_ctx(str
+@@ -739,6 +739,14 @@
  	ep_ctx->ep_info &= cpu_to_le32(~EP_MAXPSTREAMS_MASK);
  	ep_ctx->ep_info |= cpu_to_le32(EP_MAXPSTREAMS(max_primary_streams)
  				       | EP_HAS_LSA);
@@ -45,12 +45,12 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
  
 --- a/drivers/usb/host/xhci.h
 +++ b/drivers/usb/host/xhci.h
-@@ -456,6 +456,8 @@ struct xhci_ep_ctx {
- #define CTX_TO_EP_MAXPSTREAMS(p)	(((p) & EP_MAXPSTREAMS_MASK) >> 10)
- /* Endpoint is set up with a Linear Stream Array (vs. Secondary Stream Array) */
- #define	EP_HAS_LSA		(1 << 15)
+@@ -456,6 +456,8 @@
+ #define EP_STATE_RUNNING	1
+ #define EP_STATE_HALTED		2
+ #define EP_STATE_STOPPED	3
 +/* Host initiated data move disable in info2 */
 +#define EP_HID			(1 << 7)
- /* hosts with LEC=1 use bits 31:24 as ESIT high bits. */
- #define CTX_TO_MAX_ESIT_PAYLOAD_HI(p)	(((p) >> 24) & 0xff)
+ #define EP_STATE_ERROR		4
+ #define GET_EP_CTX_STATE(ctx)	(le32_to_cpu((ctx)->ep_info) & EP_STATE_MASK)
  

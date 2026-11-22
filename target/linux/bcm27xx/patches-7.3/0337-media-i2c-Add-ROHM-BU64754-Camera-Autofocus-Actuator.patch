@@ -18,7 +18,7 @@ Signed-off-by: Jacopo Mondi <jacopo.mondi@ideasonboard.com>
 
 --- a/drivers/media/i2c/Kconfig
 +++ b/drivers/media/i2c/Kconfig
-@@ -900,6 +900,19 @@ config VIDEO_AK7375
+@@ -955,6 +955,19 @@
  	  capability. This is designed for linear control of
  	  voice coil motors, controlled via I2C serial interface.
  
@@ -40,7 +40,7 @@ Signed-off-by: Jacopo Mondi <jacopo.mondi@ideasonboard.com>
  	depends on GPIOLIB
 --- a/drivers/media/i2c/Makefile
 +++ b/drivers/media/i2c/Makefile
-@@ -26,6 +26,7 @@ obj-$(CONFIG_VIDEO_ARDUCAM_PIVARIETY) +=
+@@ -26,6 +26,7 @@
  obj-$(CONFIG_VIDEO_BT819) += bt819.o
  obj-$(CONFIG_VIDEO_BT856) += bt856.o
  obj-$(CONFIG_VIDEO_BT866) += bt866.o

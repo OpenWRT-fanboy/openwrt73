@@ -10,7 +10,7 @@ This reverts commit 09d1901497ce36a24c62a0befa76dee0418b48ce.
 
 --- a/drivers/net/ethernet/broadcom/genet/bcmgenet.c
 +++ b/drivers/net/ethernet/broadcom/genet/bcmgenet.c
-@@ -70,7 +70,7 @@
+@@ -72,7 +72,7 @@
  
  /* Forward declarations */
  static void bcmgenet_set_rx_mode(struct net_device *dev);
@@ -18,4 +18,4 @@ This reverts commit 09d1901497ce36a24c62a0befa76dee0418b48ce.
 +static bool skip_umac_reset = true;
  module_param(skip_umac_reset, bool, 0444);
  MODULE_PARM_DESC(skip_umac_reset, "Skip UMAC reset step");
- 
+ static bool eee = true;

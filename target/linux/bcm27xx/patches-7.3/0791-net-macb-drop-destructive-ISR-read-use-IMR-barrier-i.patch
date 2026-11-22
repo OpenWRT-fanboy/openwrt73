@@ -43,7 +43,7 @@ Signed-off-by: Lukasz Raczylo <lukasz@raczylo.com>
 
 --- a/drivers/net/ethernet/cadence/macb_main.c
 +++ b/drivers/net/ethernet/cadence/macb_main.c
-@@ -2004,24 +2004,31 @@ static int macb_tx_poll(struct napi_stru
+@@ -1977,24 +1977,31 @@
  	if (work_done < budget && napi_complete_done(napi, work_done)) {
  		queue_writel(queue, IER, MACB_BIT(TCOMP));
  
@@ -88,5 +88,5 @@ Signed-off-by: Lukasz Raczylo <lukasz@raczylo.com>
 +		(void)queue_readl(queue, IMR);
 +		if (macb_tx_complete_pending(queue)) {
  			queue_writel(queue, IDR, MACB_BIT(TCOMP));
- 			if (bp->caps & MACB_CAPS_ISR_CLEAR_ON_WRITE)
- 				queue_writel(queue, ISR, MACB_BIT(TCOMP));
+ 			macb_queue_isr_clear(bp, queue, MACB_BIT(TCOMP));
+ 			netdev_vdbg(bp->netdev, "TX poll: packets pending, reschedule\n");

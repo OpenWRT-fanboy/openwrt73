@@ -27,7 +27,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
 
 --- a/drivers/gpu/drm/vc4/vc4_plane.c
 +++ b/drivers/gpu/drm/vc4/vc4_plane.c
-@@ -1296,7 +1296,7 @@ static int vc4_plane_mode_set(struct drm
+@@ -1293,7 +1293,7 @@
  	u32 v_subsample = fb->format->vsub;
  	bool mix_plane_alpha;
  	bool covers_screen;
@@ -36,7 +36,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  	u32 tiling, src_x, src_y;
  	u32 width, height;
  	u32 hvs_format = format->hvs;
-@@ -1350,7 +1350,7 @@ static int vc4_plane_mode_set(struct drm
+@@ -1347,7 +1347,7 @@
  	switch (base_format_mod) {
  	case DRM_FORMAT_MOD_LINEAR:
  		tiling = SCALER_CTL0_TILING_LINEAR;
@@ -45,7 +45,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  
  		/* Adjust the base pointer to the first pixel to be scanned
  		 * out.
-@@ -1402,23 +1402,23 @@ static int vc4_plane_mode_set(struct drm
+@@ -1399,23 +1399,23 @@
  		 */
  		if (rotation & DRM_MODE_REFLECT_Y) {
  			y_off = tile_h_mask - y_off;
@@ -76,7 +76,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  			offsets[0] += (tiles_w - tiles_l) << tile_size_shift;
  			offsets[0] -= (1 + !tile_y) << 10;
  		} else {
-@@ -1433,6 +1433,7 @@ static int vc4_plane_mode_set(struct drm
+@@ -1430,6 +1430,7 @@
  	case DRM_FORMAT_MOD_BROADCOM_SAND128:
  	case DRM_FORMAT_MOD_BROADCOM_SAND256: {
  		uint32_t param = fourcc_mod_broadcom_param(fb->modifier);
@@ -84,7 +84,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  
  		if (param > SCALER_TILE_HEIGHT_MASK) {
  			DRM_DEBUG_KMS("SAND height too large (%d)\n",
-@@ -1443,18 +1444,22 @@ static int vc4_plane_mode_set(struct drm
+@@ -1440,18 +1441,22 @@
  		if (fb->format->format == DRM_FORMAT_P030) {
  			hvs_format = HVS_PIXEL_FORMAT_YCBCR_10BIT;
  			tiling = SCALER_CTL0_TILING_128B;
@@ -107,7 +107,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  				break;
  			default:
  				return -EINVAL;
-@@ -1472,7 +1477,16 @@ static int vc4_plane_mode_set(struct drm
+@@ -1469,7 +1474,16 @@
  		 * should be 6.
  		 */
  		for (i = 0; i < num_planes; i++) {
@@ -125,7 +125,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  
  			if (fb->format->format == DRM_FORMAT_P030) {
  				/*
-@@ -1488,23 +1502,9 @@ static int vc4_plane_mode_set(struct drm
+@@ -1485,23 +1499,9 @@
  				u32 last_bits = remaining_pixels % 12;
  
  				x_off = aligned * 16 + last_bits;
@@ -150,7 +150,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  				x_off = (src_x % pix_per_tile) /
  					(i ? h_subsample : 1) *
  					fb->format->cpp[i];
-@@ -1512,12 +1512,10 @@ static int vc4_plane_mode_set(struct drm
+@@ -1509,12 +1509,10 @@
  
  			tile = src_x / pix_per_tile;
  
@@ -165,7 +165,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  		break;
  	}
  
-@@ -1672,7 +1670,7 @@ static int vc4_plane_mode_set(struct drm
+@@ -1669,7 +1667,7 @@
  		vc4_dlist_write(vc4_state, 0xc0c0c0c0);
  
  	/* Pitch word 0 */
@@ -174,7 +174,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  
  	/* Pitch word 1/2 */
  	for (i = 1; i < num_planes; i++) {
-@@ -1682,7 +1680,7 @@ static int vc4_plane_mode_set(struct drm
+@@ -1679,7 +1677,7 @@
  					VC4_SET_FIELD(fb->pitches[i],
  						      SCALER_SRC_PITCH));
  		} else {
@@ -183,7 +183,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  		}
  	}
  
-@@ -1837,7 +1835,7 @@ static int vc6_plane_mode_set(struct drm
+@@ -1834,7 +1832,7 @@
  	u32 v_subsample = fb->format->vsub;
  	bool mix_plane_alpha;
  	bool covers_screen;
@@ -192,7 +192,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  	u32 tiling, src_x, src_y;
  	u32 width, height;
  	u32 hvs_format = format->hvs;
-@@ -1907,6 +1905,7 @@ static int vc6_plane_mode_set(struct drm
+@@ -1904,6 +1902,7 @@
  	case DRM_FORMAT_MOD_BROADCOM_SAND128:
  	case DRM_FORMAT_MOD_BROADCOM_SAND256: {
  		uint32_t param = fourcc_mod_broadcom_param(fb->modifier);
@@ -200,7 +200,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  		u32 components_per_word;
  		u32 starting_offset;
  		u32 fetch_count;
-@@ -1920,21 +1919,29 @@ static int vc6_plane_mode_set(struct drm
+@@ -1917,21 +1916,29 @@
  		if (fb->format->format == DRM_FORMAT_P030) {
  			hvs_format = HVS_PIXEL_FORMAT_YCBCR_10BIT;
  			tiling = SCALER6_CTL0_ADDR_MODE_128B;
@@ -230,7 +230,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  		/* Adjust the base pointer to the first pixel to be scanned
  		 * out.
  		 *
-@@ -1946,7 +1953,16 @@ static int vc6_plane_mode_set(struct drm
+@@ -1943,7 +1950,16 @@
  		 * should be 6.
  		 */
  		for (i = 0; i < num_planes; i++) {
@@ -248,7 +248,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  
  			if (fb->format->format == DRM_FORMAT_P030) {
  				/*
-@@ -1962,20 +1978,9 @@ static int vc6_plane_mode_set(struct drm
+@@ -1959,20 +1975,9 @@
  				u32 last_bits = remaining_pixels % 12;
  
  				x_off = aligned * 16 + last_bits;
@@ -270,7 +270,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  				x_off = (src_x % pix_per_tile) /
  					(i ? h_subsample : 1) *
  					fb->format->cpp[i];
-@@ -1983,18 +1988,18 @@ static int vc6_plane_mode_set(struct drm
+@@ -1980,18 +1985,18 @@
  
  			tile = src_x / pix_per_tile;
  
@@ -298,7 +298,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  		break;
  	}
  
-@@ -2107,7 +2112,7 @@ static int vc6_plane_mode_set(struct drm
+@@ -2104,7 +2109,7 @@
  					VC4_SET_FIELD(fb->pitches[i],
  						      SCALER6_PTR2_PITCH));
  		} else {
@@ -307,7 +307,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  		}
  	}
  
-@@ -2616,9 +2621,9 @@ struct drm_plane *vc4_plane_init(struct
+@@ -2613,9 +2618,9 @@
  	unsigned i;
  	static const uint64_t modifiers[] = {
  		DRM_FORMAT_MOD_BROADCOM_VC4_T_TILED,

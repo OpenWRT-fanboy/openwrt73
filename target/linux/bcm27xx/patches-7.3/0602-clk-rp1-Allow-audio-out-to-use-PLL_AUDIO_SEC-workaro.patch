@@ -16,7 +16,7 @@ Signed-off-by: Nick Hollinghurst <nick.hollinghurst@raspberrypi.com>
 
 --- a/drivers/clk/clk-rp1.c
 +++ b/drivers/clk/clk-rp1.c
-@@ -1083,9 +1083,11 @@ static void rp1_clock_choose_div_and_pra
+@@ -1083,9 +1083,11 @@
  	/*
  	 * Prevent overclocks - if all parent choices result in
  	 * a downstream clock in excess of the maximum, then the
@@ -30,12 +30,3 @@ Signed-off-by: Nick Hollinghurst <nick.hollinghurst@raspberrypi.com>
  		*calc_rate = 0;
  	else
  		*calc_rate = tmp;
-@@ -1738,7 +1740,7 @@ static struct rp1_clk_desc clk_audio_in_
- 
- static const struct clk_parent_data clk_audio_out_parents[] = {
- 	{ .index = -1 },
--	{ .index = -1 },
-+	{ .hw = &pll_audio_sec_desc.hw },
- 	{ .hw = &pll_video_sec_desc.hw },
- 	{ .index = 0 },
- };

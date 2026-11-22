@@ -15,7 +15,7 @@ Signed-off-by: Nick Hollinghurst <nick.hollinghurst@raspberrypi.com>
 
 --- a/drivers/spi/spi-gpio.c
 +++ b/drivers/spi/spi-gpio.c
-@@ -11,6 +11,7 @@
+@@ -10,6 +10,7 @@
  #include <linux/module.h>
  #include <linux/platform_device.h>
  #include <linux/property.h>
@@ -23,7 +23,7 @@ Signed-off-by: Nick Hollinghurst <nick.hollinghurst@raspberrypi.com>
  
  #include <linux/spi/spi.h>
  #include <linux/spi/spi_bitbang.h>
-@@ -82,12 +83,18 @@ static inline int getmiso(const struct s
+@@ -81,12 +82,18 @@
  }
  
  /*

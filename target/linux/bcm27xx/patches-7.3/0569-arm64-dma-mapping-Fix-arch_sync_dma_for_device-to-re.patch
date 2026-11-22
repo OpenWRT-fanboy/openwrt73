@@ -17,19 +17,19 @@ Signed-off-by: John Cox <jc@kynesim.co.uk>
 
 --- a/arch/arm64/mm/dma-mapping.c
 +++ b/arch/arm64/mm/dma-mapping.c
-@@ -16,8 +16,22 @@ void arch_sync_dma_for_device(phys_addr_
+@@ -16,8 +16,22 @@
  			      enum dma_data_direction dir)
  {
  	unsigned long start = (unsigned long)phys_to_virt(paddr);
 +	unsigned long end = start + size;
  
--	dcache_clean_poc(start, start + size);
+-	dcache_clean_poc_nosync(start, start + size);
 +	switch (dir) {
 +	case DMA_BIDIRECTIONAL:
 +		dcache_clean_inval_poc(start, end);
 +		break;
 +	case DMA_TO_DEVICE:
-+		dcache_clean_poc(start, end);
++		dcache_clean_poc_nosync(start, end);
 +		break;
 +	case DMA_FROM_DEVICE:
 +		dcache_inval_poc(start, end);

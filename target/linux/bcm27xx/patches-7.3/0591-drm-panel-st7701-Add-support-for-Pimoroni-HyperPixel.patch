@@ -16,7 +16,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
 
 --- a/drivers/gpu/drm/panel/panel-sitronix-st7701.c
 +++ b/drivers/gpu/drm/panel/panel-sitronix-st7701.c
-@@ -12,6 +12,7 @@
+@@ -13,6 +13,7 @@
  #include <linux/bitfield.h>
  #include <linux/gpio/consumer.h>
  #include <linux/delay.h>
@@ -24,7 +24,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  #include <linux/module.h>
  #include <linux/of.h>
  #include <linux/regulator/consumer.h>
-@@ -106,6 +107,7 @@ struct st7701_panel_desc {
+@@ -107,6 +108,7 @@
  	const struct drm_display_mode *mode;
  	unsigned int lanes;
  	enum mipi_dsi_pixel_format format;
@@ -32,7 +32,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  	unsigned int panel_sleep_delay;
  
  	/* TFT matrix driver configuration, panel specific. */
-@@ -542,6 +544,94 @@ static void wf40eswaa6mnn0_gip_sequence(
+@@ -543,6 +545,94 @@
  	ST7701_WRITE(st7701, MIPI_DCS_SET_ADDRESS_MODE, 0);
  }
  
@@ -127,7 +127,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  static int st7701_prepare(struct drm_panel *panel)
  {
  	struct st7701 *st7701 = panel_to_st7701(panel);
-@@ -631,6 +721,11 @@ static int st7701_get_modes(struct drm_p
+@@ -632,6 +722,11 @@
  	drm_mode_set_name(mode);
  	drm_mode_probed_add(connector, mode);
  
@@ -139,7 +139,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  	connector->display_info.width_mm = desc_mode->width_mm;
  	connector->display_info.height_mm = desc_mode->height_mm;
  
-@@ -1178,6 +1273,26 @@ static const struct drm_display_mode wf4
+@@ -1179,6 +1274,26 @@
  	.type = DRM_MODE_TYPE_DRIVER | DRM_MODE_TYPE_PREFERRED,
  };
  
@@ -166,7 +166,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  static const struct st7701_panel_desc wf40eswaa6mnn0_desc = {
  	.mode = &wf40eswaa6mnn0_mode,
  	.lanes = 2,
-@@ -1258,6 +1373,134 @@ static const struct st7701_panel_desc wf
+@@ -1259,6 +1374,134 @@
  	.gip_sequence = wf40eswaa6mnn0_gip_sequence,
  };
  
@@ -301,7 +301,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  static void st7701_cleanup(void *data)
  {
  	struct st7701 *st7701 = (struct st7701 *)data;
-@@ -1290,7 +1533,7 @@ static int st7701_probe(struct device *d
+@@ -1291,7 +1534,7 @@
  	if (ret < 0)
  		return ret;
  
@@ -310,7 +310,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  	if (IS_ERR(st7701->reset)) {
  		dev_err(dev, "Couldn't get our reset GPIO\n");
  		return PTR_ERR(st7701->reset);
-@@ -1395,12 +1638,16 @@ MODULE_DEVICE_TABLE(of, st7701_dsi_of_ma
+@@ -1396,12 +1639,16 @@
  
  static const struct of_device_id st7701_spi_of_match[] = {
  	{ .compatible = "anbernic,rg28xx-panel", .data = &rg28xx_desc },

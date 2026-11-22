@@ -14,25 +14,15 @@ for hostapd). Guard against it anyway.
 Signed-off-by: Bogdan Nicolae <bogdan.nicolae@acm.org>
 ---
  .../wireless/broadcom/brcm80211/brcmfmac/cyw/core.c   | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ 1 file changed, 1 deletion(-)
 
 --- a/drivers/net/wireless/broadcom/brcm80211/brcmfmac/cyw/core.c
 +++ b/drivers/net/wireless/broadcom/brcm80211/brcmfmac/cyw/core.c
-@@ -127,7 +127,7 @@ int brcmf_cyw_mgmt_tx(struct wiphy *wiph
- 	if (!ieee80211_is_auth(mgmt->frame_control))
- 		return brcmf_cfg80211_mgmt_tx(wiphy, wdev, params, cookie);
- 
--	*cookie = (u32)atomic_inc_return(&brcmf_cyw_mgmt_tx_id);
-+	*cookie = 0;
- 	vif = container_of(wdev, struct brcmf_cfg80211_vif, wdev);
- 
- 	reinit_completion(&vif->mgmt_tx);
-@@ -159,7 +159,7 @@ int brcmf_cyw_mgmt_tx(struct wiphy *wiph
+@@ -154,7 +154,6 @@
  
  	memcpy(&mf_params->da[0], &mgmt->da[0], ETH_ALEN);
  	memcpy(&mf_params->bssid[0], &mgmt->bssid[0], ETH_ALEN);
--	mf_params->packet_id = cpu_to_le32(*cookie);
-+	mf_params->packet_id = cpu_to_le32(atomic_inc_return(&brcmf_cyw_mgmt_tx_id));
+-	mf_params->packet_id = cpu_to_le32(cookie);
  	memcpy(mf_params->data, &buf[DOT11_MGMT_HDR_LEN],
  	       le16_to_cpu(mf_params->len));
  

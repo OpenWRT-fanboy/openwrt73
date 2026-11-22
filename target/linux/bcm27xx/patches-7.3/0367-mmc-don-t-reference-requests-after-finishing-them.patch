@@ -16,7 +16,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
 
 --- a/drivers/mmc/core/block.c
 +++ b/drivers/mmc/core/block.c
-@@ -1553,6 +1553,7 @@ static void mmc_blk_cqe_complete_rq(stru
+@@ -1550,6 +1550,7 @@
  	struct request_queue *q = req->q;
  	struct mmc_host *host = mq->card->host;
  	enum mmc_issue_type issue_type = mmc_issue_type(mq, req);
@@ -24,7 +24,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
  	unsigned long flags;
  	bool put_card;
  	int err;
-@@ -1587,7 +1588,7 @@ static void mmc_blk_cqe_complete_rq(stru
+@@ -1583,7 +1584,7 @@
  
  	spin_lock_irqsave(&mq->lock, flags);
  
@@ -33,7 +33,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
  		mq->pending_writes--;
  	mq->in_flight[issue_type] -= 1;
  
-@@ -2208,15 +2209,16 @@ static void mmc_blk_mq_poll_completion(s
+@@ -2138,15 +2139,16 @@
  }
  
  static void mmc_blk_mq_dec_in_flight(struct mmc_queue *mq, enum mmc_issue_type issue_type,
@@ -52,7 +52,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
  	mq->in_flight[issue_type] -= 1;
  
  	put_card = (mmc_tot_in_flight(mq) == 0);
-@@ -2231,6 +2233,7 @@ static void mmc_blk_mq_post_req(struct m
+@@ -2161,6 +2163,7 @@
  				bool can_sleep)
  {
  	enum mmc_issue_type issue_type = mmc_issue_type(mq, req);
@@ -60,7 +60,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
  	struct mmc_queue_req *mqrq = req_to_mmc_queue_req(req);
  	struct mmc_request *mrq = &mqrq->brq.mrq;
  	struct mmc_host *host = mq->card->host;
-@@ -2250,7 +2253,7 @@ static void mmc_blk_mq_post_req(struct m
+@@ -2180,7 +2183,7 @@
  			blk_mq_complete_request(req);
  	}
  

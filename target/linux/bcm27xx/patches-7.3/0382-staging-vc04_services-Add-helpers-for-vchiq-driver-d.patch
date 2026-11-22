@@ -13,9 +13,9 @@ Signed-off-by: Kieran Bingham <kieran.bingham@ideasonboard.com>
  .../vc04_services/interface/vchiq_arm/vchiq_bus.h      | 10 ++++++++++
  1 file changed, 10 insertions(+)
 
---- a/drivers/staging/vc04_services/interface/vchiq_arm/vchiq_bus.h
-+++ b/drivers/staging/vc04_services/interface/vchiq_arm/vchiq_bus.h
-@@ -37,6 +37,16 @@ static inline struct vchiq_driver *to_vc
+--- a/include/linux/raspberrypi/vchiq_bus.h
++++ b/include/linux/raspberrypi/vchiq_bus.h
+@@ -37,6 +37,16 @@
  	return container_of(d, struct vchiq_driver, driver);
  }
  

@@ -24,12 +24,12 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
 
 --- a/drivers/video/fbdev/core/fb_defio.c
 +++ b/drivers/video/fbdev/core/fb_defio.c
-@@ -435,7 +435,8 @@ EXPORT_SYMBOL_GPL(fb_deferred_io_open);
+@@ -450,7 +450,8 @@
  
  static void fb_deferred_io_lastclose(struct fb_info *info)
  {
 -	flush_delayed_work(&info->deferred_work);
-+	if (!list_empty(&info->fbdefio->pagereflist))
++	if (!list_empty(&info->fbdefio_state->pagereflist))
 +		flush_delayed_work(&info->deferred_work);
  }
  

@@ -16,22 +16,19 @@ Signed-off-by: Richard Acayan <mailingradian@gmail.com>
 --- a/drivers/media/i2c/imx355.c
 +++ b/drivers/media/i2c/imx355.c
 @@ -66,6 +66,9 @@
- #define IMX355_EXT_CLK			19200000
- #define IMX355_LINK_FREQ_INDEX		0
- 
+ #define IMX355_ANA_GAIN_MAX		960
+ #define IMX355_ANA_GAIN_STEP		1
+ #define IMX355_ANA_GAIN_DEFAULT		0
 +/* number of data lanes */
 +#define IMX355_DATA_LANES		4
 +
- struct imx355_reg {
- 	u16 address;
- 	u8 val;
-@@ -1705,6 +1708,9 @@ static struct imx355_hwcfg *imx355_get_h
- 	if (!cfg)
- 		goto out_err;
  
+ /* Digital gain control */
+ #define IMX355_REG_DPGA_USE_GLOBAL_GAIN	CCI_REG8(0x3070)
+@@ -1360,3 +1363,6 @@
+ MODULE_AUTHOR("Yang, Hyungwoo");
+ MODULE_DESCRIPTION("Sony imx355 sensor driver");
+ MODULE_LICENSE("GPL v2");
 +	if (bus_cfg.bus.mipi_csi2.num_data_lanes != IMX355_DATA_LANES)
 +		goto out_err;
 +
- 	ret = v4l2_link_freq_to_bitmap(dev, bus_cfg.link_frequencies,
- 				       bus_cfg.nr_of_link_frequencies,
- 				       link_freq_menu_items,

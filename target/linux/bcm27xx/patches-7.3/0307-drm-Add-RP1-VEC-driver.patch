@@ -3124,7 +3124,7 @@ Fixup rp1-vec Kconfig
 +#endif // VEC_REGS_DEFINED
 --- a/drivers/gpu/drm/vc4/vc4_vec.c
 +++ b/drivers/gpu/drm/vc4/vc4_vec.c
-@@ -272,6 +272,18 @@ static const struct debugfs_reg32 vec_re
+@@ -273,6 +273,18 @@
  	VC4_REG32(VEC_DAC_MISC),
  };
  
@@ -3143,7 +3143,7 @@ Fixup rp1-vec Kconfig
  static const struct vc4_vec_tv_mode vc4_vec_tv_modes[] = {
  	{
  		.mode = DRM_MODE_TV_MODE_NTSC,
-@@ -496,9 +508,31 @@ static const struct drm_connector_funcs
+@@ -497,9 +509,31 @@
  	.atomic_set_property = vc4_vec_connector_set_property,
  };
  

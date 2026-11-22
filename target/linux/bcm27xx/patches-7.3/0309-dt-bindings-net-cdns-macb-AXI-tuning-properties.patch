@@ -13,7 +13,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
 
 --- a/Documentation/devicetree/bindings/net/cdns,macb.yaml
 +++ b/Documentation/devicetree/bindings/net/cdns,macb.yaml
-@@ -145,6 +145,22 @@ properties:
+@@ -176,6 +176,22 @@
        Node containing PHY children. If this node is not present, then PHYs will
        be direct children.
  

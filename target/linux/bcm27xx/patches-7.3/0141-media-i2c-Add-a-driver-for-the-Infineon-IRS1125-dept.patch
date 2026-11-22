@@ -164,7 +164,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
 
 --- a/drivers/media/i2c/Kconfig
 +++ b/drivers/media/i2c/Kconfig
-@@ -1426,6 +1426,18 @@ config VIDEO_TW9910
+@@ -1492,6 +1492,18 @@
  	  To compile this driver as a module, choose M here: the
  	  module will be called tw9910.
  
@@ -185,9 +185,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  	depends on VIDEO_DEV && I2C
 --- a/drivers/media/i2c/Makefile
 +++ b/drivers/media/i2c/Makefile
-@@ -63,6 +63,7 @@ obj-$(CONFIG_VIDEO_IMX415) += imx415.o
- obj-$(CONFIG_VIDEO_IMX477) += imx477.o
- obj-$(CONFIG_VIDEO_IMX519) += imx519.o
+@@ -64,6 +64,7 @@
+ obj-$(CONFIG_VIDEO_IMX678) += imx678.o
+ obj-$(CONFIG_VIDEO_IMX471) += imx471.o
  obj-$(CONFIG_VIDEO_IR_I2C) += ir-kbd-i2c.o
 +obj-$(CONFIG_VIDEO_IRS1125) += irs1125.o
  obj-$(CONFIG_VIDEO_ISL7998X) += isl7998x.o

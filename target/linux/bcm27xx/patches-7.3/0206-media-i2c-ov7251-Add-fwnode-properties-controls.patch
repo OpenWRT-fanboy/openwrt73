@@ -13,7 +13,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
 
 --- a/drivers/media/i2c/ov7251.c
 +++ b/drivers/media/i2c/ov7251.c
-@@ -1569,7 +1569,7 @@ static int ov7251_init_ctrls(struct ov72
+@@ -1568,7 +1568,7 @@
  	s64 pixel_rate;
  	int hblank;
  
@@ -22,7 +22,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  	ov7251->ctrls.lock = &ov7251->lock;
  
  	v4l2_ctrl_new_std(&ov7251->ctrls, &ov7251_ctrl_ops,
-@@ -1628,6 +1628,7 @@ static int ov7251_init_ctrls(struct ov72
+@@ -1627,6 +1627,7 @@
  
  static int ov7251_probe(struct i2c_client *client)
  {
@@ -30,7 +30,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  	struct device *dev = &client->dev;
  	struct ov7251 *ov7251;
  	int ret;
-@@ -1696,6 +1697,15 @@ static int ov7251_probe(struct i2c_clien
+@@ -1695,6 +1696,15 @@
  		goto destroy_mutex;
  	}
  

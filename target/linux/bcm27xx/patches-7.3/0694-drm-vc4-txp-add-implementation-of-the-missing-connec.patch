@@ -22,7 +22,7 @@ Signed-off-by: Jeongjun Park <aha310510@gmail.com>
 
 --- a/drivers/gpu/drm/vc4/vc4_drv.h
 +++ b/drivers/gpu/drm/vc4/vc4_drv.h
-@@ -1060,6 +1060,7 @@ extern struct platform_driver vc4_vec_dr
+@@ -1042,6 +1042,7 @@
  
  /* vc4_txp.c */
  extern struct platform_driver vc4_txp_driver;
@@ -32,7 +32,7 @@ Signed-off-by: Jeongjun Park <aha310510@gmail.com>
  void vc4_irq_enable(struct drm_device *dev);
 --- a/drivers/gpu/drm/vc4/vc4_txp.c
 +++ b/drivers/gpu/drm/vc4/vc4_txp.c
-@@ -390,11 +390,27 @@ vc4_txp_connector_detect(struct drm_conn
+@@ -390,11 +390,27 @@
  	return connector_status_connected;
  }
  

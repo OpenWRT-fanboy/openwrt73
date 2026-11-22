@@ -12,7 +12,7 @@ Signed-off-by: Tim Gover <tim.gover@raspberrypi.com>
 
 --- a/include/uapi/linux/serial_core.h
 +++ b/include/uapi/linux/serial_core.h
-@@ -231,6 +231,9 @@
+@@ -234,6 +234,9 @@
  /* Sunplus UART */
  #define PORT_SUNPLUS	123
  

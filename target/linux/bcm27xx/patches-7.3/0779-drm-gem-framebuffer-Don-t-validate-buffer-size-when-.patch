@@ -16,7 +16,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
 
 --- a/drivers/gpu/drm/drm_gem_framebuffer_helper.c
 +++ b/drivers/gpu/drm/drm_gem_framebuffer_helper.c
-@@ -182,6 +182,9 @@ int drm_gem_fb_init_with_funcs(struct dr
+@@ -183,6 +183,9 @@
  			goto err_gem_object_put;
  		}
  

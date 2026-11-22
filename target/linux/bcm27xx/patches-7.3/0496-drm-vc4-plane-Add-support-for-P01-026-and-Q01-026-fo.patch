@@ -21,7 +21,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
 
 --- a/drivers/gpu/drm/vc4/vc4_plane.c
 +++ b/drivers/gpu/drm/vc4/vc4_plane.c
-@@ -36,6 +36,7 @@ static const struct hvs_format {
+@@ -35,6 +35,7 @@
  	u32 pixel_order;
  	u32 pixel_order_hvs5;
  	bool hvs5_only;
@@ -29,7 +29,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  } hvs_formats[] = {
  	{
  		.drm = DRM_FORMAT_XRGB8888,
-@@ -247,6 +248,42 @@ static const struct hvs_format {
+@@ -246,6 +247,42 @@
  		.pixel_order = HVS_PIXEL_ORDER_BGRA,
  		.pixel_order_hvs5 = HVS_PIXEL_ORDER_RGBA,
  	},
@@ -72,7 +72,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  };
  
  static const struct hvs_format *vc4_get_hvs_format(u32 drm_format)
-@@ -2638,6 +2675,12 @@ static bool vc4_format_mod_supported(str
+@@ -2635,6 +2672,12 @@
  	case DRM_FORMAT_YVU420:
  	case DRM_FORMAT_NV16:
  	case DRM_FORMAT_NV61:
@@ -85,7 +85,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  	default:
  		return (modifier == DRM_FORMAT_MOD_LINEAR);
  	}
-@@ -2672,10 +2715,13 @@ struct drm_plane *vc4_plane_init(struct
+@@ -2669,10 +2712,13 @@
  	};
  
  	for (i = 0; i < ARRAY_SIZE(hvs_formats); i++) {
@@ -105,7 +105,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  	vc4_plane = drmm_universal_plane_alloc(dev, struct vc4_plane, base,
 --- a/drivers/gpu/drm/vc4/vc4_regs.h
 +++ b/drivers/gpu/drm/vc4/vc4_regs.h
-@@ -1079,6 +1079,15 @@ enum hvs_pixel_format {
+@@ -1079,6 +1079,15 @@
  	HVS_PIXEL_FORMAT_AYUV444_RGB = 15,
  	HVS_PIXEL_FORMAT_RGBA1010102 = 16,
  	HVS_PIXEL_FORMAT_YCBCR_10BIT = 17,

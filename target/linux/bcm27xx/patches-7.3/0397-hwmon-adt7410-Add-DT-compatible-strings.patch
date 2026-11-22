@@ -10,9 +10,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
 
 --- a/drivers/hwmon/adt7410.c
 +++ b/drivers/hwmon/adt7410.c
-@@ -94,9 +94,17 @@ static const struct i2c_device_id adt741
+@@ -103,9 +103,17 @@
  };
- MODULE_DEVICE_TABLE(i2c, adt7410_ids);
+ MODULE_DEVICE_TABLE(of, adt7410_of_match);
  
 +static const struct of_device_id adt7410_of_ids[] = {
 +	{ .compatible = "adi,adt7410" },
@@ -26,5 +26,5 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  		.name	= "adt7410",
 +		.of_match_table = adt7410_of_ids,
  		.pm	= pm_sleep_ptr(&adt7x10_dev_pm_ops),
+ 		.of_match_table = adt7410_of_match,
  	},
- 	.probe		= adt7410_i2c_probe,

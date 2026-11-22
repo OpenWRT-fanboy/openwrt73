@@ -715,8 +715,8 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
 
 --- a/drivers/media/platform/Kconfig
 +++ b/drivers/media/platform/Kconfig
-@@ -67,6 +67,7 @@ source "drivers/media/platform/amlogic/K
- source "drivers/media/platform/amphion/Kconfig"
+@@ -69,6 +69,7 @@
+ source "drivers/media/platform/arm/Kconfig"
  source "drivers/media/platform/aspeed/Kconfig"
  source "drivers/media/platform/atmel/Kconfig"
 +source "drivers/media/platform/bcm2835/Kconfig"
@@ -725,8 +725,8 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  source "drivers/media/platform/chips-media/Kconfig"
 --- a/drivers/media/platform/Makefile
 +++ b/drivers/media/platform/Makefile
-@@ -10,6 +10,7 @@ obj-y += amlogic/
- obj-y += amphion/
+@@ -12,6 +12,7 @@
+ obj-y += arm/
  obj-y += aspeed/
  obj-y += atmel/
 +obj-y += bcm2835/

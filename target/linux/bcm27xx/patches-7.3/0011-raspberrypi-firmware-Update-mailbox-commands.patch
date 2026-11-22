@@ -10,7 +10,7 @@ Signed-off-by: Dom Cobley <popcornmix@gmail.com>
 
 --- a/include/soc/bcm2835/raspberrypi-firmware.h
 +++ b/include/soc/bcm2835/raspberrypi-firmware.h
-@@ -36,6 +36,8 @@ struct rpi_firmware_property_tag_header
+@@ -36,6 +36,8 @@
  enum rpi_firmware_property_tag {
  	RPI_FIRMWARE_PROPERTY_END =                           0,
  	RPI_FIRMWARE_GET_FIRMWARE_REVISION =                  0x00000001,
@@ -19,7 +19,7 @@ Signed-off-by: Dom Cobley <popcornmix@gmail.com>
  
  	RPI_FIRMWARE_SET_CURSOR_INFO =                        0x00008010,
  	RPI_FIRMWARE_SET_CURSOR_STATE =                       0x00008011,
-@@ -71,6 +73,7 @@ enum rpi_firmware_property_tag {
+@@ -71,6 +73,7 @@
  	RPI_FIRMWARE_GET_DISPMANX_RESOURCE_MEM_HANDLE =       0x00030014,
  	RPI_FIRMWARE_GET_EDID_BLOCK =                         0x00030020,
  	RPI_FIRMWARE_GET_CUSTOMER_OTP =                       0x00030021,
@@ -27,7 +27,7 @@ Signed-off-by: Dom Cobley <popcornmix@gmail.com>
  	RPI_FIRMWARE_GET_DOMAIN_STATE =                       0x00030030,
  	RPI_FIRMWARE_GET_THROTTLED =                          0x00030046,
  	RPI_FIRMWARE_GET_CLOCK_MEASURED =                     0x00030047,
-@@ -89,9 +92,14 @@ enum rpi_firmware_property_tag {
+@@ -89,9 +92,14 @@
  	RPI_FIRMWARE_GET_PERIPH_REG =                         0x00030045,
  	RPI_FIRMWARE_SET_PERIPH_REG =                         0x00038045,
  	RPI_FIRMWARE_GET_POE_HAT_VAL =                        0x00030049,
@@ -43,7 +43,7 @@ Signed-off-by: Dom Cobley <popcornmix@gmail.com>
  
  	/* Dispmanx TAGS */
  	RPI_FIRMWARE_FRAMEBUFFER_ALLOCATE =                   0x00040001,
-@@ -105,9 +113,16 @@ enum rpi_firmware_property_tag {
+@@ -105,9 +113,16 @@
  	RPI_FIRMWARE_FRAMEBUFFER_GET_VIRTUAL_OFFSET =         0x00040009,
  	RPI_FIRMWARE_FRAMEBUFFER_GET_OVERSCAN =               0x0004000a,
  	RPI_FIRMWARE_FRAMEBUFFER_GET_PALETTE =                0x0004000b,
@@ -60,7 +60,7 @@ Signed-off-by: Dom Cobley <popcornmix@gmail.com>
  	RPI_FIRMWARE_FRAMEBUFFER_TEST_PHYSICAL_WIDTH_HEIGHT = 0x00044003,
  	RPI_FIRMWARE_FRAMEBUFFER_TEST_VIRTUAL_WIDTH_HEIGHT =  0x00044004,
  	RPI_FIRMWARE_FRAMEBUFFER_TEST_DEPTH =                 0x00044005,
-@@ -116,22 +131,33 @@ enum rpi_firmware_property_tag {
+@@ -116,22 +131,33 @@
  	RPI_FIRMWARE_FRAMEBUFFER_TEST_VIRTUAL_OFFSET =        0x00044009,
  	RPI_FIRMWARE_FRAMEBUFFER_TEST_OVERSCAN =              0x0004400a,
  	RPI_FIRMWARE_FRAMEBUFFER_TEST_PALETTE =               0x0004400b,
@@ -94,12 +94,12 @@ Signed-off-by: Dom Cobley <popcornmix@gmail.com>
  	RPI_FIRMWARE_GET_COMMAND_LINE =                       0x00050001,
  	RPI_FIRMWARE_GET_DMA_CHANNELS =                       0x00060001,
  };
-@@ -156,6 +182,8 @@ enum rpi_firmware_clk_id {
- 	RPI_FIRMWARE_NUM_CLK_ID,
+@@ -164,6 +190,8 @@
+ 	RPI_FIRMWARE_NUM_VOLT_ID,
  };
  
 +#define GET_DISPLAY_SETTINGS_PAYLOAD_SIZE 64
 +
  /**
-  * struct rpi_firmware_clk_rate_request - Firmware Request for a rate
-  * @id:	ID of the clock being queried
+  * struct rpi_firmware_get_voltage_request - Firmware request for a voltage
+  * @id:		ID of the voltage being queried

@@ -13,7 +13,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
 
 --- a/drivers/mmc/core/sd.c
 +++ b/drivers/mmc/core/sd.c
-@@ -1195,7 +1195,7 @@ static int mmc_sd_read_ext_regs(struct m
+@@ -1201,7 +1201,7 @@
  	if (!(card->scr.cmds & SD_SCR_CMD48_SUPPORT))
  		return 0;
  
@@ -22,7 +22,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
  	if (!gen_info_buf)
  		return -ENOMEM;
  
-@@ -1226,14 +1226,23 @@ static int mmc_sd_read_ext_regs(struct m
+@@ -1226,14 +1226,23 @@
  	num_ext = gen_info_buf[4];
  
  	/*

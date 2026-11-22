@@ -23,9 +23,9 @@ Signed-off-by: Ratchanan Srirattanamet <peathot@hotmail.com>
 
 --- a/drivers/gpio/Kconfig
 +++ b/drivers/gpio/Kconfig
-@@ -582,6 +582,14 @@ config GPIO_POLARFIRE_SOC
+@@ -606,6 +606,14 @@
  	help
- 	  Say yes here to support the GPIO controllers on Microchip FPGAs.
+ 	  Enable gpiolib support for ppc440 based boards.
  
 +config GPIO_PWM
 +	tristate "PWM chip GPIO"
@@ -40,14 +40,14 @@ Signed-off-by: Ratchanan Srirattanamet <peathot@hotmail.com>
  	depends on ARCH_PXA || ARCH_MMP || COMPILE_TEST
 --- a/drivers/gpio/Makefile
 +++ b/drivers/gpio/Makefile
-@@ -148,6 +148,7 @@ obj-$(CONFIG_GPIO_PISOSR)		+= gpio-pisos
- obj-$(CONFIG_GPIO_PL061)		+= gpio-pl061.o
+@@ -152,6 +152,7 @@
+ obj-$(CONFIG_GPIO_PPC44X)		+= gpio-ppc44x.o
  obj-$(CONFIG_GPIO_PMIC_EIC_SPRD)	+= gpio-pmic-eic-sprd.o
  obj-$(CONFIG_GPIO_POLARFIRE_SOC)	+= gpio-mpfs.o
 +obj-$(CONFIG_GPIO_PWM)			+= gpio-pwm.o
  obj-$(CONFIG_GPIO_PXA)			+= gpio-pxa.o
+ obj-$(CONFIG_GPIO_QIXIS_FPGA)		+= gpio-qixis-fpga.o
  obj-$(CONFIG_GPIO_RASPBERRYPI_EXP)	+= gpio-raspberrypi-exp.o
- obj-$(CONFIG_GPIO_RC5T583)		+= gpio-rc5t583.o
 --- /dev/null
 +++ b/drivers/gpio/gpio-pwm.c
 @@ -0,0 +1,143 @@

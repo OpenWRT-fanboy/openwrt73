@@ -56,7 +56,7 @@ Signed-off-by: Noralf Trønnes <noralf@tronnes.org>
  struct bcm2835_i2c_dev {
  	struct device *dev;
  	void __iomem *regs;
-@@ -68,8 +80,78 @@ struct bcm2835_i2c_dev {
+@@ -68,8 +80,78 @@
  	u32 msg_err;
  	u8 *msg_buf;
  	size_t msg_buf_remaining;
@@ -135,7 +135,7 @@ Signed-off-by: Noralf Trønnes <noralf@tronnes.org>
  static inline void bcm2835_i2c_writel(struct bcm2835_i2c_dev *i2c_dev,
  				      u32 reg, u32 val)
  {
-@@ -257,6 +339,7 @@ static void bcm2835_i2c_start_transfer(s
+@@ -259,6 +341,7 @@
  	bcm2835_i2c_writel(i2c_dev, BCM2835_I2C_A, msg->addr);
  	bcm2835_i2c_writel(i2c_dev, BCM2835_I2C_DLEN, msg->len);
  	bcm2835_i2c_writel(i2c_dev, BCM2835_I2C_C, c);
@@ -143,7 +143,7 @@ Signed-off-by: Noralf Trønnes <noralf@tronnes.org>
  }
  
  static void bcm2835_i2c_finish_transfer(struct bcm2835_i2c_dev *i2c_dev)
-@@ -283,6 +366,7 @@ static irqreturn_t bcm2835_i2c_isr(int t
+@@ -285,6 +368,7 @@
  	u32 val, err;
  
  	val = bcm2835_i2c_readl(i2c_dev, BCM2835_I2C_S);
@@ -151,7 +151,7 @@ Signed-off-by: Noralf Trønnes <noralf@tronnes.org>
  
  	err = val & (BCM2835_I2C_S_CLKT | BCM2835_I2C_S_ERR);
  	if (err) {
-@@ -349,6 +433,13 @@ static int bcm2835_i2c_xfer(struct i2c_a
+@@ -351,6 +435,13 @@
  	unsigned long time_left;
  	int i;
  
@@ -165,7 +165,7 @@ Signed-off-by: Noralf Trønnes <noralf@tronnes.org>
  	for (i = 0; i < (num - 1); i++)
  		if (msgs[i].flags & I2C_M_RD) {
  			dev_warn_once(i2c_dev->dev,
-@@ -367,6 +458,10 @@ static int bcm2835_i2c_xfer(struct i2c_a
+@@ -369,6 +460,10 @@
  
  	bcm2835_i2c_finish_transfer(i2c_dev);
  
@@ -176,7 +176,7 @@ Signed-off-by: Noralf Trønnes <noralf@tronnes.org>
  	if (!time_left) {
  		bcm2835_i2c_writel(i2c_dev, BCM2835_I2C_C,
  				   BCM2835_I2C_C_CLEAR);
-@@ -376,7 +471,9 @@ static int bcm2835_i2c_xfer(struct i2c_a
+@@ -378,7 +473,9 @@
  	if (!i2c_dev->msg_err)
  		return num;
  

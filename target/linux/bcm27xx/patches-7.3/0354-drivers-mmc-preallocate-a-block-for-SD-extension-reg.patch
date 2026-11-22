@@ -19,7 +19,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
 
 --- a/drivers/mmc/core/bus.c
 +++ b/drivers/mmc/core/bus.c
-@@ -267,6 +267,8 @@ static void mmc_release_card(struct devi
+@@ -267,6 +267,8 @@
  
  	sdio_free_common_cis(card);
  
@@ -30,7 +30,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
  	kfree(card);
 --- a/drivers/mmc/core/sd.c
 +++ b/drivers/mmc/core/sd.c
-@@ -1044,9 +1044,8 @@ int sd_write_ext_reg(struct mmc_card *ca
+@@ -1041,9 +1041,8 @@
  	struct scatterlist sg;
  	u8 *reg_buf;
  
@@ -42,7 +42,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
  
  	mrq.cmd = &cmd;
  	mrq.data = &data;
-@@ -1078,8 +1077,6 @@ int sd_write_ext_reg(struct mmc_card *ca
+@@ -1075,8 +1074,6 @@
  	mmc_set_data_timeout(&data, card);
  	mmc_wait_for_req(host, &mrq);
  
@@ -51,7 +51,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
  	/*
  	 * Note that, the SD card is allowed to signal busy on DAT0 up to 1s
  	 * after the CMD49. Although, let's leave this to be managed by the
-@@ -1120,9 +1117,7 @@ static int sd_parse_ext_reg_power(struct
+@@ -1117,9 +1114,7 @@
  	int err;
  	u8 *reg_buf;
  
@@ -62,7 +62,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
  
  	/* Read the extension register for power management function. */
  	err = sd_read_ext_reg(card, fno, page, offset, 512, reg_buf);
-@@ -1152,7 +1147,6 @@ static int sd_parse_ext_reg_power(struct
+@@ -1149,7 +1144,6 @@
  	card->ext_power.offset = offset;
  
  out:
@@ -70,7 +70,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
  	return err;
  }
  
-@@ -1162,9 +1156,7 @@ static int sd_parse_ext_reg_perf(struct
+@@ -1159,9 +1153,7 @@
  	int err;
  	u8 *reg_buf;
  
@@ -81,7 +81,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
  
  	err = sd_read_ext_reg(card, fno, page, offset, 512, reg_buf);
  	if (err) {
-@@ -1207,7 +1199,6 @@ static int sd_parse_ext_reg_perf(struct
+@@ -1204,7 +1196,6 @@
  	card->ext_perf.offset = offset;
  
  out:
@@ -89,7 +89,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
  	return err;
  }
  
-@@ -1278,6 +1269,12 @@ static int sd_read_ext_regs(struct mmc_c
+@@ -1275,6 +1266,12 @@
  	if (!gen_info_buf)
  		return -ENOMEM;
  
@@ -102,7 +102,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
  	/*
  	 * Read 512 bytes of general info, which is found at function number 0,
  	 * at page 0 and with no offset.
-@@ -1344,9 +1341,7 @@ static int sd_flush_cache(struct mmc_hos
+@@ -1341,9 +1338,7 @@
  	if (!sd_cache_enabled(host))
  		return 0;
  
@@ -113,7 +113,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
  
  	/*
  	 * Set Flush Cache at bit 0 in the performance enhancement register at
-@@ -1382,21 +1377,15 @@ static int sd_flush_cache(struct mmc_hos
+@@ -1379,7 +1374,6 @@
  	if (reg_buf[0] & BIT(0))
  		err = -ETIMEDOUT;
  out:
@@ -121,31 +121,9 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
  	return err;
  }
  
- static int sd_enable_cache(struct mmc_card *card)
- {
--	u8 *reg_buf;
- 	int err;
- 
- 	card->ext_perf.feature_enabled &= ~SD_EXT_PERF_CACHE;
- 
--	reg_buf = kzalloc(512, GFP_KERNEL);
--	if (!reg_buf)
--		return -ENOMEM;
--
- 	/*
- 	 * Set Cache Enable at bit 0 in the performance enhancement register at
- 	 * 260 bytes offset.
-@@ -1415,7 +1404,6 @@ static int sd_enable_cache(struct mmc_ca
- 		card->ext_perf.feature_enabled |= SD_EXT_PERF_CACHE;
- 
- out:
--	kfree(reg_buf);
- 	return err;
- }
- 
 --- a/include/linux/mmc/card.h
 +++ b/include/linux/mmc/card.h
-@@ -357,6 +357,7 @@ struct mmc_card {
+@@ -356,6 +356,7 @@
  	struct sd_switch_caps	sw_caps;	/* switch (CMD6) caps */
  	struct sd_ext_reg	ext_power;	/* SD extension reg for PM */
  	struct sd_ext_reg	ext_perf;	/* SD extension reg for PERF */

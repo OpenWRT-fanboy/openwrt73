@@ -28,7 +28,7 @@ Signed-off-by: Waveshare_Team <support@waveshare.com>
 
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -23736,6 +23736,12 @@ S:	Maintained
+@@ -25227,6 +25227,12 @@
  W:	http://www.winischhofer.at/linuxsisusbvga.shtml
  F:	drivers/usb/misc/sisusbvga/
  
@@ -43,7 +43,7 @@ Signed-off-by: Waveshare_Team <support@waveshare.com>
  S:	Maintained
 --- a/drivers/input/touchscreen/Kconfig
 +++ b/drivers/input/touchscreen/Kconfig
-@@ -1251,6 +1251,18 @@ config TOUCHSCREEN_SIS_I2C
+@@ -1241,6 +1241,18 @@
  	  To compile this driver as a module, choose M here: the
  	  module will be called sis_i2c.
  
@@ -64,7 +64,7 @@ Signed-off-by: Waveshare_Team <support@waveshare.com>
  	depends on I2C
 --- a/drivers/input/touchscreen/Makefile
 +++ b/drivers/input/touchscreen/Makefile
-@@ -83,6 +83,7 @@ obj-$(CONFIG_TOUCHSCREEN_RM_TS)		+= rayd
+@@ -81,6 +81,7 @@
  obj-$(CONFIG_TOUCHSCREEN_S6SY761)	+= s6sy761.o
  obj-$(CONFIG_TOUCHSCREEN_SILEAD)	+= silead.o
  obj-$(CONFIG_TOUCHSCREEN_SIS_I2C)	+= sis_i2c.o

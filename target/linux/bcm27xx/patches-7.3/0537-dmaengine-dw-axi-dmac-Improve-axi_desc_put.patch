@@ -16,7 +16,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
 
 --- a/drivers/dma/dw-axi-dmac/dw-axi-dmac-platform.c
 +++ b/drivers/dma/dw-axi-dmac/dw-axi-dmac-platform.c
-@@ -367,7 +367,8 @@ static void axi_desc_put(struct axi_dma_
+@@ -345,7 +345,8 @@
  
  	for (descs_put = 0; descs_put < count; descs_put++) {
  		hw_desc = &desc->hw_desc[descs_put];

@@ -10,12 +10,12 @@ and brcm_config_clkreq().
 
 Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
 ---
- drivers/pci/controller/pcie-brcmstb.c | 11 ++++++-----
- 1 file changed, 6 insertions(+), 5 deletions(-)
+ drivers/pci/controller/pcie-brcmstb.c | 8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
 
 --- a/drivers/pci/controller/pcie-brcmstb.c
 +++ b/drivers/pci/controller/pcie-brcmstb.c
-@@ -1575,7 +1575,7 @@ static void brcm_config_clkreq(struct br
+@@ -1504,7 +1504,7 @@
  {
  	static const char err_msg[] = "invalid 'brcm,clkreq-mode' DT string\n";
  	const char *mode = "default";
@@ -24,20 +24,15 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
  	int ret, tmp;
  
  	ret = of_property_read_string(pcie->np, "brcm,clkreq-mode", &mode);
-@@ -1584,10 +1584,6 @@ static void brcm_config_clkreq(struct br
- 		mode = "safe";
- 	}
+@@ -1578,11 +1578,17 @@
+ 	u16 nlw, cls, lnksta, tmp16;
+ 	bool ssc_good = false;
+ 	int ret, i;
++	u32 tmp;
  
--	/* Start out assuming safe mode (both mode bits cleared) */
--	clkreq_cntl = readl(pcie->base + HARD_DEBUG(pcie));
--	clkreq_cntl &= ~PCIE_CLKREQ_MASK;
--
- 	if (strcmp(mode, "no-l1ss") == 0) {
- 		/*
- 		 * "no-l1ss" -- Provides Clock Power Management, L0s, and
-@@ -1784,6 +1780,11 @@ static int brcm_pcie_start_link(struct b
- 
- 	brcm_pcie_stats_trigger(pcie, 0);
+ 	/* Limit the generation if specified */
+ 	if (pcie->gen)
+ 		brcm_pcie_set_gen(pcie, pcie->gen);
  
 +	/* Disable CLKREQ# input prior to link-up */
 +	tmp = readl(pcie->base + HARD_DEBUG(pcie));
@@ -45,5 +40,5 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
 +	writel(tmp, pcie->base + HARD_DEBUG(pcie));
 +
  	/* Unassert the fundamental reset */
- 	if (pcie->tperst_clk_ms) {
- 		/*
+ 	ret = pcie->cfg->perst_set(pcie, 0);
+ 	if (ret)

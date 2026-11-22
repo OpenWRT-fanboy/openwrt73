@@ -18,7 +18,7 @@ Signed-off-by: Dom Cobley <popcornmix@gmail.com>
 
 --- a/drivers/nvmem/Kconfig
 +++ b/drivers/nvmem/Kconfig
-@@ -75,6 +75,18 @@ config NVMEM_BLOCK
+@@ -176,6 +176,18 @@
  	  typically used with eMMC to store MAC addresses or Wi-Fi
  	  calibration data on embedded devices.
  
@@ -39,7 +39,7 @@ Signed-off-by: Dom Cobley <popcornmix@gmail.com>
  	depends on ARCH_BCM_IPROC || COMPILE_TEST
 --- a/drivers/nvmem/Makefile
 +++ b/drivers/nvmem/Makefile
-@@ -16,6 +16,8 @@ obj-$(CONFIG_NVMEM_APPLE_EFUSES)	+= nvme
+@@ -23,6 +23,8 @@
  nvmem-apple-efuses-y 			:= apple-efuses.o
  obj-$(CONFIG_NVMEM_APPLE_SPMI)		+= apple_nvmem_spmi.o
  apple_nvmem_spmi-y			:= apple-spmi-nvmem.o

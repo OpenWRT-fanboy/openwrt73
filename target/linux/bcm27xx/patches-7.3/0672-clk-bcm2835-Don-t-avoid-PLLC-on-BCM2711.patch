@@ -12,7 +12,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
 
 --- a/drivers/clk/bcm/clk-bcm2835.c
 +++ b/drivers/clk/bcm/clk-bcm2835.c
-@@ -1262,6 +1262,8 @@ static unsigned long bcm2835_clock_choos
+@@ -1264,6 +1264,8 @@
  static int bcm2835_clock_determine_rate(struct clk_hw *hw,
  					struct clk_rate_request *req)
  {
@@ -21,7 +21,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  	struct clk_hw *parent, *best_parent = NULL;
  	bool current_parent_is_pllc;
  	unsigned long rate, best_rate = 0;
-@@ -1281,13 +1283,17 @@ static int bcm2835_clock_determine_rate(
+@@ -1283,13 +1285,17 @@
  			continue;
  
  		/*

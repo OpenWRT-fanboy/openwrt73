@@ -17,7 +17,7 @@ Signed-off-by: Maxime Ripard <maxime@cerno.tech>
 
 --- a/drivers/gpu/drm/vc4/Makefile
 +++ b/drivers/gpu/drm/vc4/Makefile
-@@ -31,7 +31,8 @@ vc4-$(CONFIG_DRM_VC4_KUNIT_TEST) += \
+@@ -31,7 +31,8 @@
  	tests/vc4_mock_crtc.o \
  	tests/vc4_mock_output.o \
  	tests/vc4_mock_plane.o \
@@ -338,13 +338,3 @@ Signed-off-by: Maxime Ripard <maxime@cerno.tech>
 +};
 +
 +kunit_test_suite(vc4_lbm_size_test_suite);
---- a/drivers/gpu/drm/vc4/tests/vc4_test_pv_muxing.c
-+++ b/drivers/gpu/drm/vc4/tests/vc4_test_pv_muxing.c
-@@ -896,7 +896,6 @@ static struct kunit_case vc6_pv_muxing_t
- static struct kunit_suite vc6_pv_muxing_test_suite = {
- 	.name = "vc6-pv-muxing-combinations",
- 	.init = vc4_pv_muxing_test_init,
--	.exit = vc4_pv_muxing_test_exit,
- 	.test_cases = vc6_pv_muxing_tests,
- };
- 

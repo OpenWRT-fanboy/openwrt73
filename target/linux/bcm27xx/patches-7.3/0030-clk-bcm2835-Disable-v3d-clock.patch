@@ -16,7 +16,7 @@ Signed-off-by: Dom Cobley <popcornmix@gmail.com>
 
 --- a/drivers/clk/bcm/clk-bcm2835.c
 +++ b/drivers/clk/bcm/clk-bcm2835.c
-@@ -1769,16 +1769,12 @@ static const struct bcm2835_clk_desc clk
+@@ -1756,16 +1756,12 @@
  		.hold_mask = CM_PLLA_HOLDCORE,
  		.fixed_divider = 1,
  		.flags = CLK_SET_RATE_PARENT),
@@ -39,7 +39,7 @@ Signed-off-by: Dom Cobley <popcornmix@gmail.com>
  	[BCM2835_PLLA_DSI0]	= REGISTER_PLL_DIV(
  		SOC_ALL,
  		.name = "plla_dsi0",
-@@ -2079,14 +2075,12 @@ static const struct bcm2835_clk_desc clk
+@@ -2066,14 +2062,12 @@
  		.int_bits = 6,
  		.frac_bits = 0,
  		.tcnt_mux = 3),
@@ -60,25 +60,3 @@ Signed-off-by: Dom Cobley <popcornmix@gmail.com>
  	/*
  	 * VPU clock.  This doesn't have an enable bit, since it drives
  	 * the bus for everything else, and is special so it doesn't need
-@@ -2249,21 +2243,6 @@ static const struct bcm2835_clk_desc clk
- 		.tcnt_mux = 28,
- 		.round_up = true),
- 
--	/* TV encoder clock.  Only operating frequency is 108Mhz.  */
--	[BCM2835_CLOCK_VEC]	= REGISTER_PER_CLK(
--		SOC_ALL,
--		.name = "vec",
--		.ctl_reg = CM_VECCTL,
--		.div_reg = CM_VECDIV,
--		.int_bits = 4,
--		.frac_bits = 0,
--		/*
--		 * Allow rate change propagation only on PLLH_AUX which is
--		 * assigned index 7 in the parent array.
--		 */
--		.set_rate_parent = BIT(7),
--		.tcnt_mux = 29),
--
- 	/* dsi clocks */
- 	[BCM2835_CLOCK_DSI0E]	= REGISTER_PER_CLK(
- 		SOC_ALL,

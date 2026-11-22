@@ -15,7 +15,7 @@ Signed-off-by: kun_liu <kun_liu@shtdo.com>
 
 --- a/drivers/gpu/drm/panel/Kconfig
 +++ b/drivers/gpu/drm/panel/Kconfig
-@@ -1101,6 +1101,20 @@ config DRM_PANEL_TPO_Y17P
+@@ -1333,6 +1333,20 @@
  	  Say Y if you want to enable support for panels based on the
  	  TDO Y17P controller.
  
@@ -38,7 +38,7 @@ Signed-off-by: kun_liu <kun_liu@shtdo.com>
  	depends on OF && SPI
 --- a/drivers/gpu/drm/panel/Makefile
 +++ b/drivers/gpu/drm/panel/Makefile
-@@ -108,6 +108,7 @@ obj-$(CONFIG_DRM_PANEL_SONY_TULIP_TRULY_
+@@ -128,6 +128,7 @@
  obj-$(CONFIG_DRM_PANEL_STARTEK_KD070FHFID015) += panel-startek-kd070fhfid015.o
  obj-$(CONFIG_DRM_PANEL_TDO_TL070WSH30) += panel-tdo-tl070wsh30.o
  obj-$(CONFIG_DRM_PANEL_TPO_Y17P) += panel-tdo-y17p.o

@@ -22,7 +22,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
 
 --- a/drivers/gpu/drm/vc4/vc4_drv.h
 +++ b/drivers/gpu/drm/vc4/vc4_drv.h
-@@ -459,6 +459,11 @@ struct vc4_plane_state {
+@@ -452,6 +452,11 @@
  	 */
  	bool is_yuv444_unity;
  
@@ -36,7 +36,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  
 --- a/drivers/gpu/drm/vc4/vc4_plane.c
 +++ b/drivers/gpu/drm/vc4/vc4_plane.c
-@@ -962,7 +962,7 @@ static void vc4_write_scaling_parameters
+@@ -966,7 +966,7 @@
  
  	/* Ch0 V-TPZ Words 0-2: Scaling Parameters, Recip, Context */
  	if (vc4_state->y_scaling[channel] == VC4_SCALING_TPZ) {
@@ -45,7 +45,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  			      vc4_state->crtc_h);
  		vc4_dlist_write(vc4_state, 0xc0c0c0c0);
  	}
-@@ -1388,6 +1388,17 @@ static int vc4_plane_mode_set(struct drm
+@@ -1391,6 +1391,17 @@
  		return 0;
  	}
  
@@ -63,7 +63,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  	width = vc4_state->src_w[0] >> 16;
  	height = vc4_state->src_h[0] >> 16;
  
-@@ -1433,6 +1444,9 @@ static int vc4_plane_mode_set(struct drm
+@@ -1436,6 +1447,9 @@
  		break;
  
  	case DRM_FORMAT_MOD_BROADCOM_VC4_T_TILED: {
@@ -73,7 +73,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  		u32 tile_size_shift = 12; /* T tiles are 4kb */
  		/* Whole-tile offsets, mostly for setting the pitch. */
  		u32 tile_w_shift = fb->format->cpp[0] == 2 ? 6 : 5;
-@@ -1585,6 +1599,9 @@ static int vc4_plane_mode_set(struct drm
+@@ -1588,6 +1602,9 @@
  			offsets[i] += pitch[i] * tile * tile_width;
  			offsets[i] += src_y / (i ? v_subsample : 1) * tile_width;
  			offsets[i] += x_off & ~(i ? 1 : 0);
@@ -83,7 +83,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  		}
  		break;
  	}
-@@ -1662,7 +1679,8 @@ static int vc4_plane_mode_set(struct drm
+@@ -1665,7 +1682,8 @@
  				(mix_plane_alpha ? SCALER_POS2_ALPHA_MIX : 0) |
  				vc4_hvs4_get_alpha_blend_mode(state) |
  				VC4_SET_FIELD(width, SCALER_POS2_WIDTH) |
@@ -93,7 +93,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  
  		/* Position Word 3: Context.  Written by the HVS. */
  		vc4_dlist_write(vc4_state, 0xc0c0c0c0);
-@@ -1716,7 +1734,8 @@ static int vc4_plane_mode_set(struct drm
+@@ -1719,7 +1737,8 @@
  		vc4_state->pos2_offset = vc4_state->dlist_count;
  		vc4_dlist_write(vc4_state,
  				VC4_SET_FIELD(width, SCALER5_POS2_WIDTH) |
@@ -103,7 +103,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  
  		/* Position Word 3: Context.  Written by the HVS. */
  		vc4_dlist_write(vc4_state, 0xc0c0c0c0);
-@@ -1740,18 +1759,22 @@ static int vc4_plane_mode_set(struct drm
+@@ -1743,18 +1762,22 @@
  		vc4_dlist_write(vc4_state, 0xc0c0c0c0);
  
  	/* Pitch word 0 */
@@ -132,7 +132,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  	}
  
  	/* Colorspace conversion words */
-@@ -1965,6 +1988,17 @@ static int vc6_plane_mode_set(struct drm
+@@ -1968,6 +1991,17 @@
  	width = vc4_state->src_w[0] >> 16;
  	height = vc4_state->src_h[0] >> 16;
  
@@ -150,7 +150,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  	/* SCL1 is used for Cb/Cr scaling of planar formats.  For RGB
  	 * and 4:4:4, scl1 should be set to scl0 so both channels of
  	 * the scaler do the same thing.  For YUV, the Y plane needs
-@@ -2117,8 +2151,11 @@ static int vc6_plane_mode_set(struct drm
+@@ -2102,8 +2136,11 @@
  			 * Finished using the pitch as a pitch, so pack it as the
  			 * register value.
  			 */
@@ -164,7 +164,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  		}
  
  		break;
-@@ -2179,7 +2216,7 @@ static int vc6_plane_mode_set(struct drm
+@@ -2182,7 +2219,7 @@
  	/* Position Word 2: Source Image Size */
  	vc4_state->pos2_offset = vc4_state->dlist_count;
  	vc4_dlist_write(vc4_state,
@@ -173,7 +173,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  				      SCALER6_POS2_SRC_LINES) |
  			VC4_SET_FIELD(width - 1,
  				      SCALER6_POS2_SRC_WIDTH));
-@@ -2214,7 +2251,7 @@ static int vc6_plane_mode_set(struct drm
+@@ -2217,7 +2254,7 @@
  		if (base_format_mod != DRM_FORMAT_MOD_BROADCOM_SAND128 &&
  		    base_format_mod != DRM_FORMAT_MOD_BROADCOM_SAND256) {
  			vc4_dlist_write(vc4_state,
@@ -184,7 +184,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  			vc4_dlist_write(vc4_state, pitch[i]);
 --- a/drivers/gpu/drm/vc4/vc4_regs.h
 +++ b/drivers/gpu/drm/vc4/vc4_regs.h
-@@ -1437,4 +1437,8 @@ enum hvs_pixel_format {
+@@ -1437,4 +1437,8 @@
  #define SCALER6_PTR2_PITCH_MASK			VC4_MASK(16, 0)
  #define SCALER6_PTR2_FETCH_COUNT_MASK		VC4_MASK(26, 16)
  

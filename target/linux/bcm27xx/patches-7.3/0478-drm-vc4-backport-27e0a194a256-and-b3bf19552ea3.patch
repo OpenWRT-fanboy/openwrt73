@@ -16,7 +16,7 @@ Signed-off-by: Maíra Canal <mcanal@igalia.com>
 
 --- a/drivers/gpu/drm/vc4/tests/vc4_mock.h
 +++ b/drivers/gpu/drm/vc4/tests/vc4_mock.h
-@@ -35,16 +35,14 @@ struct drm_plane *vc4_mock_find_plane_fo
+@@ -35,16 +35,14 @@
  	return NULL;
  }
  
@@ -47,7 +47,7 @@ Signed-off-by: Maíra Canal <mcanal@igalia.com>
  #include <drm/drm_kunit_helpers.h>
  #include <drm/drm_atomic_uapi.h>
  #include <drm/drm_plane.h>
-@@ -33,9 +34,10 @@ struct drm_plane *vc4_dummy_plane(struct
+@@ -19,9 +20,10 @@
  	KUNIT_ASSERT_EQ(test, type, DRM_PLANE_TYPE_PRIMARY);
  
  	plane = drm_kunit_helper_create_primary_plane(test, drm,

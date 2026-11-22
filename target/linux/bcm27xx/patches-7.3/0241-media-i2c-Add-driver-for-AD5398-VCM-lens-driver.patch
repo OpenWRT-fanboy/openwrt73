@@ -27,7 +27,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
 
 --- a/drivers/media/i2c/Kconfig
 +++ b/drivers/media/i2c/Kconfig
-@@ -843,6 +843,13 @@ menuconfig VIDEO_CAMERA_LENS
+@@ -911,6 +911,13 @@
  
  if VIDEO_CAMERA_LENS
  

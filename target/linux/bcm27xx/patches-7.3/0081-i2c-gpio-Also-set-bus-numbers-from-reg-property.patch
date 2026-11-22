@@ -22,7 +22,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 
 --- a/drivers/i2c/busses/i2c-gpio.c
 +++ b/drivers/i2c/busses/i2c-gpio.c
-@@ -428,7 +428,9 @@ static int i2c_gpio_probe(struct platfor
+@@ -614,7 +614,9 @@
  	adap->dev.parent = dev;
  	device_set_node(&adap->dev, fwnode);
  
@@ -32,4 +32,4 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 +		adap->nr = pdev->id;
  	ret = i2c_bit_add_numbered_bus(adap);
  	if (ret)
- 		return ret;
+ 		goto err_cleanup_scl;

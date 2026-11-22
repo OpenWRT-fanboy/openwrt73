@@ -18,7 +18,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
 
 --- a/drivers/gpu/drm/vc4/vc4_dsi.c
 +++ b/drivers/gpu/drm/vc4/vc4_dsi.c
-@@ -289,6 +289,8 @@
+@@ -291,6 +291,8 @@
  					 DSI1_INT_PR_TO)
  
  #define DSI0_STAT		0x2c
@@ -27,7 +27,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  #define DSI0_HSTX_TO_CNT	0x30
  #define DSI0_LPRX_TO_CNT	0x34
  #define DSI0_TA_TO_CNT		0x38
-@@ -1213,10 +1215,9 @@ static int vc4_dsi_bridge_attach(struct
+@@ -1221,10 +1223,9 @@
  				 &dsi->bridge, flags);
  }
  
@@ -40,7 +40,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  	struct drm_device *drm = dsi->bridge.dev;
  	struct mipi_dsi_packet packet;
  	u32 pkth = 0, pktc = 0;
-@@ -1337,10 +1338,12 @@ static ssize_t vc4_dsi_host_transfer(str
+@@ -1345,10 +1346,12 @@
  	DSI_PORT_WRITE(TXPKT1C, pktc);
  
  	if (!wait_for_completion_timeout(&dsi->xfer_completion,
@@ -57,7 +57,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  		ret = -ETIMEDOUT;
  	} else {
  		ret = dsi->xfer_result;
-@@ -1383,7 +1386,8 @@ static ssize_t vc4_dsi_host_transfer(str
+@@ -1391,7 +1394,8 @@
  	return ret;
  
  reset_fifo_and_return:
@@ -67,7 +67,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  
  	DSI_PORT_WRITE(TXPKT1C, DSI_PORT_READ(TXPKT1C) & ~DSI_TXPKT1C_CMD_EN);
  	udelay(1);
-@@ -1396,6 +1400,40 @@ reset_fifo_and_return:
+@@ -1404,6 +1408,40 @@
  	return ret;
  }
  

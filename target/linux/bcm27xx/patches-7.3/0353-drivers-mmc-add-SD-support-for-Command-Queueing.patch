@@ -20,7 +20,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
 
 --- a/drivers/mmc/core/block.c
 +++ b/drivers/mmc/core/block.c
-@@ -896,7 +896,10 @@ static int mmc_blk_part_switch_pre(struc
+@@ -896,7 +896,10 @@
  
  	if ((part_type & mask) == rpmb) {
  		if (card->ext_csd.cmdq_en) {
@@ -32,7 +32,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
  			if (ret)
  				return ret;
  		}
-@@ -915,8 +918,12 @@ static int mmc_blk_part_switch_post(stru
+@@ -915,8 +918,12 @@
  
  	if ((part_type & mask) == rpmb) {
  		mmc_retune_unpause(card->host);
@@ -47,7 +47,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
  	}
  
  	return ret;
-@@ -1127,7 +1134,10 @@ static void mmc_blk_issue_drv_op(struct
+@@ -1124,7 +1131,10 @@
  	switch (mq_rq->drv_op) {
  	case MMC_DRV_OP_IOCTL:
  		if (card->ext_csd.cmdq_en) {
@@ -59,7 +59,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
  			if (ret)
  				break;
  		}
-@@ -1145,8 +1155,12 @@ static void mmc_blk_issue_drv_op(struct
+@@ -1142,8 +1152,12 @@
  		/* Always switch back to main area after RPMB access */
  		if (rpmb_ioctl)
  			mmc_blk_part_switch(card, 0);
@@ -76,7 +76,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
  		ret = mmc_switch(card, EXT_CSD_CMD_SET_NORMAL, EXT_CSD_BOOT_WP,
 --- a/drivers/mmc/core/core.c
 +++ b/drivers/mmc/core/core.c
-@@ -563,7 +563,11 @@ int mmc_cqe_recovery(struct mmc_host *ho
+@@ -564,7 +564,11 @@
  	mmc_poll_for_busy(host->card, MMC_CQE_RECOVERY_TIMEOUT, true, MMC_BUSY_IO);
  
  	memset(&cmd, 0, sizeof(cmd));
@@ -91,7 +91,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
  	cmd.busy_timeout = MMC_CQE_RECOVERY_TIMEOUT;
 --- a/drivers/mmc/core/sd.c
 +++ b/drivers/mmc/core/sd.c
-@@ -1034,8 +1034,8 @@ static bool mmc_sd_card_using_v18(struct
+@@ -1031,8 +1031,8 @@
  	       (SD_MODE_UHS_SDR50 | SD_MODE_UHS_SDR104 | SD_MODE_UHS_DDR50);
  }
  
@@ -102,7 +102,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
  {
  	struct mmc_host *host = card->host;
  	struct mmc_request mrq = {};
-@@ -1193,8 +1193,14 @@ static int sd_parse_ext_reg_perf(struct
+@@ -1190,8 +1190,14 @@
  		card->ext_perf.feature_support |= SD_EXT_PERF_CACHE;
  
  	/* Command queue support indicated via queue depth bits (0 to 4). */
@@ -118,7 +118,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
  
  	card->ext_perf.fno = fno;
  	card->ext_perf.page = page;
-@@ -1584,13 +1590,41 @@ cont:
+@@ -1574,13 +1580,41 @@
  			goto free_card;
  	}
  
@@ -165,7 +165,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
  
 --- a/drivers/mmc/core/sd_ops.c
 +++ b/drivers/mmc/core/sd_ops.c
-@@ -417,3 +417,40 @@ int mmc_app_sd_status(struct mmc_card *c
+@@ -417,3 +417,40 @@
  
  	return 0;
  }
@@ -208,7 +208,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
 +EXPORT_SYMBOL_GPL(mmc_sd_cmdq_disable);
 --- a/drivers/mmc/core/sd_ops.h
 +++ b/drivers/mmc/core/sd_ops.h
-@@ -24,6 +24,8 @@ int mmc_app_sd_status(struct mmc_card *c
+@@ -24,6 +24,8 @@
  int mmc_app_cmd(struct mmc_host *host, struct mmc_card *card);
  int mmc_send_ext_addr(struct mmc_host *host, u32 addr);
  void mmc_uhs2_prepare_cmd(struct mmc_host *host, struct mmc_request *mrq);

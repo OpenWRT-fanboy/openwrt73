@@ -14,7 +14,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
 
 --- a/drivers/gpu/drm/vc4/vc4_dsi.c
 +++ b/drivers/gpu/drm/vc4/vc4_dsi.c
-@@ -1460,6 +1460,15 @@ static const struct drm_bridge_funcs vc4
+@@ -1468,6 +1468,15 @@
  	.mode_fixup = vc4_dsi_bridge_mode_fixup,
  };
  
@@ -30,7 +30,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  static int vc4_dsi_late_register(struct drm_encoder *encoder)
  {
  	struct drm_device *drm = encoder->dev;
-@@ -1690,6 +1699,9 @@ static int vc4_dsi_bind(struct device *d
+@@ -1698,6 +1707,9 @@
  	dsi->encoder.type = dsi->variant->port ?
  		VC4_ENCODER_TYPE_DSI1 : VC4_ENCODER_TYPE_DSI0;
  

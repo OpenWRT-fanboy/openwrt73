@@ -14,7 +14,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
 
 --- a/drivers/power/reset/gpio-poweroff.c
 +++ b/drivers/power/reset/gpio-poweroff.c
-@@ -50,7 +50,7 @@ static int gpio_poweroff_do_poweroff(str
+@@ -49,7 +49,7 @@
  	 * Warn the user that the attempt to poweroff via gpio-poweroff
  	 * has gone wrong.
  	 */

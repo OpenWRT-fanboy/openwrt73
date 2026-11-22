@@ -21,7 +21,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
 
 --- a/drivers/usb/dwc2/hcd.c
 +++ b/drivers/usb/dwc2/hcd.c
-@@ -676,6 +676,18 @@ static void dwc2_hc_init(struct dwc2_hso
+@@ -676,6 +676,18 @@
  		hcchar |= HCCHAR_EPDIR;
  	if (chan->speed == USB_SPEED_LOW)
  		hcchar |= HCCHAR_LSPDDEV;
@@ -42,7 +42,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
  	dwc2_writel(hsotg, hcchar, HCCHAR(hc_num));
 --- a/drivers/usb/dwc2/hcd_intr.c
 +++ b/drivers/usb/dwc2/hcd_intr.c
-@@ -2048,6 +2048,9 @@ static void dwc2_hc_n_intr(struct dwc2_h
+@@ -2050,6 +2050,9 @@
  
  	chan->hcint = hcintraw;
  

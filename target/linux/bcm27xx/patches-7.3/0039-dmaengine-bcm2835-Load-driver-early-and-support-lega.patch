@@ -168,17 +168,6 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  drivers/dma/bcm2835-dma.c | 668 +++++++++++++++++++++++++++++++-------
  2 files changed, 556 insertions(+), 114 deletions(-)
 
---- a/drivers/dma/Kconfig
-+++ b/drivers/dma/Kconfig
-@@ -143,7 +143,7 @@ config BCM_SBA_RAID
- 
- config DMA_BCM2835
- 	tristate "BCM2835 DMA engine support"
--	depends on ARCH_BCM2835
-+	depends on ARCH_BCM2835 || ARCH_BCM2708 || ARCH_BCM2709
- 	select DMA_ENGINE
- 	select DMA_VIRTUAL_CHANNELS
- 
 --- a/drivers/dma/bcm2835-dma.c
 +++ b/drivers/dma/bcm2835-dma.c
 @@ -25,6 +25,7 @@
@@ -203,7 +192,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  
  /**
   * struct bcm2835_dmadev - BCM2835 DMA controller
-@@ -48,6 +56,7 @@ struct bcm2835_dmadev {
+@@ -48,6 +56,7 @@
  	struct dma_device ddev;
  	void __iomem *base;
  	dma_addr_t zero_page;
@@ -211,7 +200,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  };
  
  struct bcm2835_dma_cb {
-@@ -60,6 +69,17 @@ struct bcm2835_dma_cb {
+@@ -60,6 +69,17 @@
  	uint32_t pad[2];
  };
  
@@ -229,7 +218,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  struct bcm2835_cb_entry {
  	struct bcm2835_dma_cb *cb;
  	dma_addr_t paddr;
-@@ -80,6 +100,7 @@ struct bcm2835_chan {
+@@ -80,6 +100,7 @@
  	unsigned int irq_flags;
  
  	bool is_lite_channel;
@@ -237,7 +226,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  };
  
  struct bcm2835_desc {
-@@ -136,11 +157,37 @@ struct bcm2835_desc {
+@@ -136,11 +157,37 @@
  #define BCM2835_DMA_S_WIDTH	BIT(9) /* 128bit writes if set */
  #define BCM2835_DMA_S_DREQ	BIT(10) /* enable SREQ for source */
  #define BCM2835_DMA_S_IGNORE	BIT(11) /* ignore source reads - read 0 */
@@ -276,7 +265,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  /* debug register bits */
  #define BCM2835_DMA_DEBUG_LAST_NOT_SET_ERR	BIT(0)
  #define BCM2835_DMA_DEBUG_FIFO_ERR		BIT(1)
-@@ -165,13 +212,124 @@ struct bcm2835_desc {
+@@ -165,13 +212,124 @@
  #define BCM2835_DMA_DATA_TYPE_S128	16
  
  /* Valid only for channels 0 - 14, 15 has its own base address */
@@ -402,7 +391,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  static inline size_t bcm2835_dma_max_frame_length(struct bcm2835_chan *c)
  {
  	/* lite and normal channels have different max frame length */
-@@ -201,6 +359,36 @@ static inline struct bcm2835_desc *to_bc
+@@ -201,6 +359,36 @@
  	return container_of(t, struct bcm2835_desc, vd.tx);
  }
  
@@ -439,7 +428,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  static void bcm2835_dma_free_cb_chain(struct bcm2835_desc *desc)
  {
  	size_t i;
-@@ -219,45 +407,53 @@ static void bcm2835_dma_desc_free(struct
+@@ -219,51 +407,59 @@
  }
  
  static void bcm2835_dma_create_cb_set_length(
@@ -518,8 +507,6 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
 +	}
  }
  
- static inline size_t bcm2835_dma_count_frames_for_sg(
-@@ -280,7 +476,7 @@ static inline size_t bcm2835_dma_count_f
  /**
   * bcm2835_dma_create_cb_chain - create a control block and fills data in
   *
@@ -528,7 +515,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
   * @direction:      the direction in which we transfer
   * @cyclic:         it is a cyclic transfer
   * @info:           the default info bits to apply per controlblock
-@@ -298,12 +494,11 @@ static inline size_t bcm2835_dma_count_f
+@@ -281,12 +477,11 @@
   * @gfp:            the GFP flag to use for allocation
   */
  static struct bcm2835_desc *bcm2835_dma_create_cb_chain(
@@ -542,7 +529,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  	size_t len = buf_len, total_len;
  	size_t frame;
  	struct bcm2835_desc *d;
-@@ -335,11 +530,23 @@ static struct bcm2835_desc *bcm2835_dma_
+@@ -318,11 +513,23 @@
  
  		/* fill in the control block */
  		control_block = cb_entry->cb;
@@ -571,7 +558,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  		/* set up length in control_block if requested */
  		if (buf_len) {
  			/* calculate length honoring period_length */
-@@ -349,25 +556,51 @@ static struct bcm2835_desc *bcm2835_dma_
+@@ -332,25 +539,51 @@
  				cyclic ? finalextrainfo : 0);
  
  			/* calculate new remaining length */
@@ -631,7 +618,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  
  	/* detect a size mismatch */
  	if (buf_len && (d->size != buf_len))
-@@ -381,13 +614,12 @@ error_cb:
+@@ -364,13 +597,12 @@
  }
  
  static void bcm2835_dma_fill_cb_chain_with_sg(
@@ -646,7 +633,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  	size_t len, max_len;
  	unsigned int i;
  	dma_addr_t addr;
-@@ -395,14 +627,35 @@ static void bcm2835_dma_fill_cb_chain_wi
+@@ -378,14 +610,35 @@
  
  	max_len = bcm2835_dma_max_frame_length(c);
  	for_each_sg(sgl, sgent, sg_len, i) {
@@ -690,7 +677,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  		}
  	}
  }
-@@ -410,29 +663,74 @@ static void bcm2835_dma_fill_cb_chain_wi
+@@ -393,29 +646,74 @@
  static void bcm2835_dma_abort(struct bcm2835_chan *c)
  {
  	void __iomem *chan_base = c->chan_base;
@@ -753,8 +740,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
 -			"failed to complete outstanding writes\n");
 +		/* We need to clear the next DMA block pending */
 +		writel(0, chan_base + BCM2835_DMA_NEXTCB);
- 
--	writel(BCM2835_DMA_RESET, chan_base + BCM2835_DMA_CS);
++
 +		/* Abort the DMA, which needs to be enabled to complete */
 +		writel(readl(chan_base + BCM2835_DMA_CS) | BCM2835_DMA_ABORT | BCM2835_DMA_ACTIVE,
 +		      chan_base + BCM2835_DMA_CS);
@@ -777,14 +763,15 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
 +			dev_err(c->vc.chan.device->dev,
 +				"failed to complete pause on dma %d (CS:%08x)\n", c->ch,
 +				readl(chan_base + BCM2835_DMA_CS));
-+
+ 
+-	writel(BCM2835_DMA_RESET, chan_base + BCM2835_DMA_CS);
 +		/* Set CS back to default state and reset the DMA */
 +		writel(BCM2835_DMA_RESET, chan_base + BCM2835_DMA_CS);
 +	}
  }
  
  static void bcm2835_dma_start_desc(struct bcm2835_chan *c)
-@@ -449,8 +747,16 @@ static void bcm2835_dma_start_desc(struc
+@@ -432,8 +730,16 @@
  
  	c->desc = d = to_bcm2835_dma_desc(&vd->tx);
  
@@ -803,7 +790,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  }
  
  static irqreturn_t bcm2835_dma_callback(int irq, void *data)
-@@ -477,8 +783,13 @@ static irqreturn_t bcm2835_dma_callback(
+@@ -460,8 +766,13 @@
  	 * if this IRQ handler is threaded.) If the channel is finished, it
  	 * will remain idle despite the ACTIVE flag being set.
  	 */
@@ -819,7 +806,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  
  	d = c->desc;
  
-@@ -540,20 +851,39 @@ static size_t bcm2835_dma_desc_size_pos(
+@@ -523,20 +834,39 @@
  	unsigned int i;
  	size_t size;
  
@@ -871,7 +858,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  	}
  
  	return size;
-@@ -580,12 +910,25 @@ static enum dma_status bcm2835_dma_tx_st
+@@ -563,12 +893,25 @@
  		struct bcm2835_desc *d = c->desc;
  		dma_addr_t pos;
  
@@ -900,7 +887,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  
  		txstate->residue = bcm2835_dma_desc_size_pos(d, pos);
  	} else {
-@@ -615,8 +958,10 @@ static struct dma_async_tx_descriptor *b
+@@ -598,8 +941,10 @@
  {
  	struct bcm2835_chan *c = to_bcm2835_dma_chan(chan);
  	struct bcm2835_desc *d;
@@ -913,7 +900,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  	size_t max_len = bcm2835_dma_max_frame_length(c);
  	size_t frames;
  
-@@ -628,7 +973,7 @@ static struct dma_async_tx_descriptor *b
+@@ -611,7 +956,7 @@
  	frames = bcm2835_dma_frames_for_length(len, max_len);
  
  	/* allocate the CB chain - this also fills in the pointers */
@@ -922,7 +909,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  					info, extra, frames,
  					src, dst, len, 0, GFP_KERNEL);
  	if (!d)
-@@ -646,7 +991,8 @@ static struct dma_async_tx_descriptor *b
+@@ -629,7 +974,8 @@
  	struct bcm2835_chan *c = to_bcm2835_dma_chan(chan);
  	struct bcm2835_desc *d;
  	dma_addr_t src = 0, dst = 0;
@@ -932,7 +919,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  	u32 extra = BCM2835_DMA_INT_EN;
  	size_t frames;
  
-@@ -662,12 +1008,14 @@ static struct dma_async_tx_descriptor *b
+@@ -645,12 +991,14 @@
  	if (direction == DMA_DEV_TO_MEM) {
  		if (c->cfg.src_addr_width != DMA_SLAVE_BUSWIDTH_4_BYTES)
  			return NULL;
@@ -949,8 +936,8 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  		info |= BCM2835_DMA_D_DREQ | BCM2835_DMA_S_INC;
  	}
  
-@@ -675,7 +1023,7 @@ static struct dma_async_tx_descriptor *b
- 	frames = bcm2835_dma_count_frames_for_sg(c, sgl, sg_len);
+@@ -658,7 +1006,7 @@
+ 	frames = sg_nents_for_dma(sgl, sg_len, bcm2835_dma_max_frame_length(c));
  
  	/* allocate the CB chain */
 -	d = bcm2835_dma_create_cb_chain(chan, direction, false,
@@ -958,7 +945,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  					info, extra,
  					frames, src, dst, 0, 0,
  					GFP_NOWAIT);
-@@ -683,7 +1031,7 @@ static struct dma_async_tx_descriptor *b
+@@ -666,7 +1014,7 @@
  		return NULL;
  
  	/* fill in frames with scatterlist pointers */
@@ -967,7 +954,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  					  sgl, sg_len);
  
  	return vchan_tx_prep(&c->vc, &d->vd, flags);
-@@ -698,7 +1046,8 @@ static struct dma_async_tx_descriptor *b
+@@ -681,7 +1029,8 @@
  	struct bcm2835_chan *c = to_bcm2835_dma_chan(chan);
  	struct bcm2835_desc *d;
  	dma_addr_t src, dst;
@@ -977,7 +964,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  	u32 extra = 0;
  	size_t max_len = bcm2835_dma_max_frame_length(c);
  	size_t frames;
-@@ -736,13 +1085,15 @@ static struct dma_async_tx_descriptor *b
+@@ -719,13 +1068,15 @@
  	if (direction == DMA_DEV_TO_MEM) {
  		if (c->cfg.src_addr_width != DMA_SLAVE_BUSWIDTH_4_BYTES)
  			return NULL;
@@ -995,7 +982,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  		src = buf_addr;
  		info |= BCM2835_DMA_D_DREQ | BCM2835_DMA_S_INC;
  
-@@ -762,7 +1113,7 @@ static struct dma_async_tx_descriptor *b
+@@ -745,7 +1096,7 @@
  	 * note that we need to use GFP_NOWAIT, as the ALSA i2s dmaengine
  	 * implementation calls prep_dma_cyclic with interrupts disabled.
  	 */
@@ -1004,7 +991,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  					info, extra,
  					frames, src, dst, buf_len,
  					period_len, GFP_NOWAIT);
-@@ -770,7 +1121,12 @@ static struct dma_async_tx_descriptor *b
+@@ -753,7 +1104,12 @@
  		return NULL;
  
  	/* wrap around into a loop */
@@ -1018,7 +1005,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  
  	return vchan_tx_prep(&c->vc, &d->vd, flags);
  }
-@@ -831,9 +1187,11 @@ static int bcm2835_dma_chan_init(struct
+@@ -814,9 +1170,11 @@
  	c->irq_number = irq;
  	c->irq_flags = irq_flags;
  
@@ -1033,7 +1020,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  		c->is_lite_channel = true;
  
  	return 0;
-@@ -854,7 +1212,8 @@ static void bcm2835_dma_free(struct bcm2
+@@ -837,7 +1195,8 @@
  }
  
  static const struct of_device_id bcm2835_dma_of_match[] = {
@@ -1043,7 +1030,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  	{},
  };
  MODULE_DEVICE_TABLE(of, bcm2835_dma_of_match);
-@@ -898,7 +1257,10 @@ static const struct dev_pm_ops bcm2835_d
+@@ -881,7 +1240,10 @@
  
  static int bcm2835_dma_probe(struct platform_device *pdev)
  {
@@ -1054,7 +1041,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  	void __iomem *base;
  	int rc;
  	int i, j;
-@@ -906,11 +1268,20 @@ static int bcm2835_dma_probe(struct plat
+@@ -889,11 +1251,20 @@
  	int irq_flags;
  	uint32_t chans_available;
  	char chan_name[BCM2835_DMA_CHAN_NAME_SIZE];
@@ -1076,7 +1063,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  	if (rc) {
  		dev_err(&pdev->dev, "Unable to set DMA mask\n");
  		return rc;
-@@ -922,10 +1293,17 @@ static int bcm2835_dma_probe(struct plat
+@@ -905,10 +1276,17 @@
  
  	dma_set_max_seg_size(&pdev->dev, 0x3FFFFFFF);
  
@@ -1095,7 +1082,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  	od->base = base;
  
  	dma_cap_set(DMA_SLAVE, od->ddev.cap_mask);
-@@ -961,6 +1339,14 @@ static int bcm2835_dma_probe(struct plat
+@@ -944,6 +1322,14 @@
  		return -ENOMEM;
  	}
  
@@ -1110,7 +1097,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  	/* Request DMA channel mask from device tree */
  	if (of_property_read_u32(pdev->dev.of_node,
  			"brcm,dma-channel-mask",
-@@ -970,8 +1356,36 @@ static int bcm2835_dma_probe(struct plat
+@@ -953,8 +1339,36 @@
  		goto err_no_dma;
  	}
  
@@ -1148,7 +1135,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  		/* skip masked out channels */
  		if (!(chans_available & (1 << i))) {
  			irq[i] = -1;
-@@ -994,13 +1408,17 @@ static int bcm2835_dma_probe(struct plat
+@@ -977,13 +1391,17 @@
  		irq[i] = platform_get_irq(pdev, i < 11 ? i : 11);
  	}
  
@@ -1167,7 +1154,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  		irq_flags = 0;
  		for (j = 0; j <= BCM2835_DMA_MAX_DMA_CHAN_SUPPORTED; j++)
  			if ((i != j) && (irq[j] == irq[i])) {
-@@ -1012,9 +1430,10 @@ static int bcm2835_dma_probe(struct plat
+@@ -995,9 +1413,10 @@
  		rc = bcm2835_dma_chan_init(od, i, irq[i], irq_flags);
  		if (rc)
  			goto err_no_dma;
@@ -1179,7 +1166,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  
  	/* Device-tree DMA controller registration */
  	rc = of_dma_controller_register(pdev->dev.of_node,
-@@ -1044,7 +1463,15 @@ static void bcm2835_dma_remove(struct pl
+@@ -1027,7 +1446,15 @@
  {
  	struct bcm2835_dmadev *od = platform_get_drvdata(pdev);
  
@@ -1195,7 +1182,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  	bcm2835_dma_free(od);
  }
  
-@@ -1058,7 +1485,22 @@ static struct platform_driver bcm2835_dm
+@@ -1041,7 +1468,22 @@
  	},
  };
  
@@ -1217,5 +1204,5 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
 +subsys_initcall(bcm2835_dma_init);
 +module_exit(bcm2835_dma_exit);
  
- MODULE_ALIAS("platform:bcm2835-dma");
  MODULE_DESCRIPTION("BCM2835 DMA engine driver");
+ MODULE_AUTHOR("Florian Meier <florian.meier@koalo.de>");

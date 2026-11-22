@@ -53,7 +53,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
 
 --- a/drivers/mfd/Kconfig
 +++ b/drivers/mfd/Kconfig
-@@ -2527,6 +2527,18 @@ config MFD_QNAP_MCU
+@@ -2526,6 +2526,18 @@
  	  This driver implements the base serial protocol to talk to the
  	  device and provides functions for the other parts to hook into.
  
@@ -74,7 +74,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  	depends on I2C && OF
 --- a/drivers/mfd/Makefile
 +++ b/drivers/mfd/Makefile
-@@ -303,3 +303,5 @@ obj-$(CONFIG_MFD_RSMU_SPI)	+= rsmu_spi.o
+@@ -304,3 +304,5 @@
  obj-$(CONFIG_MFD_UPBOARD_FPGA)	+= upboard-fpga.o
  
  obj-$(CONFIG_MFD_LOONGSON_SE)	+= loongson-se.o
@@ -402,8 +402,8 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
 +	}
 +
 +	pcie_pdev = of_find_device_by_node(rp1_node->parent);
-+	rp1->domain = irq_domain_add_linear(rp1_node, RP1_IRQS,
-+					    &rp1_domain_ops, rp1);
++	rp1->domain = irq_domain_create_linear(of_fwnode_handle(rp1_node), RP1_IRQS,
++					       &rp1_domain_ops, rp1);
 +
 +	g_rp1 = rp1;
 +
@@ -425,7 +425,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
 +					rp1_chained_handle_irq);
 +	}
 +
-+	of_node_to_fwnode(rp1_node)->dev = rp1->dev;
++	of_fwnode_handle(rp1_node)->dev = rp1->dev;
 +	of_platform_populate(rp1_node, NULL, NULL, &pcie_pdev->dev);
 +	of_node_put(rp1_node);
 +

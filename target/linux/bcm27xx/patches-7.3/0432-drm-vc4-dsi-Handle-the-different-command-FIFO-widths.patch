@@ -18,15 +18,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
 
 --- a/drivers/gpu/drm/vc4/vc4_dsi.c
 +++ b/drivers/gpu/drm/vc4/vc4_dsi.c
-@@ -44,7 +44,6 @@
- 
- #define DSI_CMD_FIFO_DEPTH  16
- #define DSI_PIX_FIFO_DEPTH 256
--#define DSI_PIX_FIFO_WIDTH   4
- 
- #define DSI0_CTRL		0x00
- 
-@@ -170,11 +169,15 @@
+@@ -171,11 +171,15 @@
  #define DSI1_DISP1_CTRL		0x2c
  /* Format of the data written to TXPKT_PIX_FIFO. */
  # define DSI_DISP1_PFORMAT_MASK		VC4_MASK(2, 1)
@@ -47,7 +39,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  
  /* DISP1 is always command mode. */
  # define DSI_DISP1_ENABLE		BIT(0)
-@@ -540,6 +543,7 @@ struct vc4_dsi_variant {
+@@ -541,6 +545,7 @@
  	unsigned int port;
  
  	bool broken_axi_workaround;
@@ -55,7 +47,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  
  	const char *debugfs_name;
  	const struct debugfs_reg32 *regs;
-@@ -1107,10 +1111,16 @@ static void vc4_dsi_bridge_pre_enable(st
+@@ -1108,10 +1113,16 @@
  	/* Set up DISP1 for transferring long command payloads through
  	 * the pixfifo.
  	 */
@@ -76,7 +68,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  
  	/* Ungate the block. */
  	if (dsi->variant->port == 0)
-@@ -1200,9 +1210,9 @@ static ssize_t vc4_dsi_host_transfer(str
+@@ -1201,9 +1212,9 @@
  			pix_fifo_len = 0;
  		} else {
  			cmd_fifo_len = (packet.payload_length %
@@ -88,7 +80,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  		}
  
  		WARN_ON_ONCE(pix_fifo_len >= DSI_PIX_FIFO_DEPTH);
-@@ -1220,14 +1230,25 @@ static ssize_t vc4_dsi_host_transfer(str
+@@ -1221,14 +1232,25 @@
  
  	for (i = 0; i < cmd_fifo_len; i++)
  		DSI_PORT_WRITE(TXPKT_CMD_FIFO, packet.payload[i]);
@@ -121,7 +113,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  	}
  
  	if (msg->flags & MIPI_DSI_MSG_USE_LPM)
-@@ -1435,6 +1456,7 @@ static const struct drm_encoder_funcs vc
+@@ -1436,6 +1458,7 @@
  
  static const struct vc4_dsi_variant bcm2711_dsi1_variant = {
  	.port			= 1,
@@ -129,7 +121,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  	.debugfs_name		= "dsi1_regs",
  	.regs			= dsi1_regs,
  	.nregs			= ARRAY_SIZE(dsi1_regs),
-@@ -1442,6 +1464,7 @@ static const struct vc4_dsi_variant bcm2
+@@ -1443,6 +1466,7 @@
  
  static const struct vc4_dsi_variant bcm2835_dsi0_variant = {
  	.port			= 0,
@@ -137,7 +129,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  	.debugfs_name		= "dsi0_regs",
  	.regs			= dsi0_regs,
  	.nregs			= ARRAY_SIZE(dsi0_regs),
-@@ -1449,6 +1472,7 @@ static const struct vc4_dsi_variant bcm2
+@@ -1450,6 +1474,7 @@
  
  static const struct vc4_dsi_variant bcm2835_dsi1_variant = {
  	.port			= 1,

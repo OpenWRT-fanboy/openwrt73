@@ -16,7 +16,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
 
 --- a/drivers/mmc/host/sdhci-brcmstb.c
 +++ b/drivers/mmc/host/sdhci-brcmstb.c
-@@ -243,6 +243,20 @@ static void sdhci_brcmstb_set_uhs_signal
+@@ -266,6 +266,20 @@
  	sdhci_writew(host, ctrl_2, SDHCI_HOST_CONTROL2);
  }
  
@@ -31,13 +31,13 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
 +	 * so bump the clock down now before card/controller setup is
 +	 * performed.
 +	 */
-+	sdhci_bcm2712_set_clock(host, 52000000);
++	sdhci_set_clock(host, 52000000);
 +}
 +
  static void sdhci_brcmstb_cfginit_2712(struct sdhci_host *host)
  {
  	struct sdhci_pltfm_host *pltfm_host = sdhci_priv(host);
-@@ -262,6 +276,8 @@ static void sdhci_brcmstb_cfginit_2712(s
+@@ -281,6 +295,8 @@
  		reg &= ~SDIO_CFG_MAX_50MHZ_MODE_ENABLE;
  		reg |= SDIO_CFG_MAX_50MHZ_MODE_STRAP_OVERRIDE;
  		writel(reg, brcmstb_priv->cfg_regs + SDIO_CFG_MAX_50MHZ_MODE);

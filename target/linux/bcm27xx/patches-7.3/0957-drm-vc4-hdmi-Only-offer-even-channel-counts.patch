@@ -22,7 +22,7 @@ Signed-off-by: Dom Cobley <popcornmix@gmail.com>
 
 --- a/drivers/gpu/drm/vc4/vc4_hdmi.c
 +++ b/drivers/gpu/drm/vc4/vc4_hdmi.c
-@@ -2167,8 +2167,17 @@ static int vc4_hdmi_audio_cpu_dai_probe(
+@@ -2255,8 +2255,17 @@
  	return 0;
  }
  

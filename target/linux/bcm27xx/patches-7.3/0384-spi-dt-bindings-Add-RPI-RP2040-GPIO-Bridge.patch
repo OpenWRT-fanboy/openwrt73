@@ -94,7 +94,7 @@ Signed-off-by: Richard Oliver <richard.oliver@raspberrypi.com>
 +
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -21542,6 +21542,11 @@ L:	linux-edac@vger.kernel.org
+@@ -22834,6 +22834,11 @@
  S:	Maintained
  F:	drivers/ras/amd/fmpm.c
  

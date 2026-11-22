@@ -16,7 +16,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
 
 --- a/drivers/pci/controller/pcie-brcmstb.c
 +++ b/drivers/pci/controller/pcie-brcmstb.c
-@@ -1575,7 +1575,7 @@ static void brcm_config_clkreq(struct br
+@@ -1504,7 +1504,7 @@
  {
  	static const char err_msg[] = "invalid 'brcm,clkreq-mode' DT string\n";
  	const char *mode = "default";
@@ -25,14 +25,3 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
  	int ret, tmp;
  
  	ret = of_property_read_string(pcie->np, "brcm,clkreq-mode", &mode);
-@@ -1584,6 +1584,10 @@ static void brcm_config_clkreq(struct br
- 		mode = "safe";
- 	}
- 
-+	/* Start out assuming safe mode (both mode bits cleared) */
-+	clkreq_cntl = readl(pcie->base + HARD_DEBUG(pcie));
-+	clkreq_cntl &= ~PCIE_CLKREQ_MASK;
-+
- 	if (strcmp(mode, "no-l1ss") == 0) {
- 		/*
- 		 * "no-l1ss" -- Provides Clock Power Management, L0s, and

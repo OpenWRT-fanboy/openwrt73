@@ -13,7 +13,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
 
 --- a/drivers/gpu/drm/vc4/vc4_dsi.c
 +++ b/drivers/gpu/drm/vc4/vc4_dsi.c
-@@ -361,6 +361,16 @@
+@@ -363,6 +363,16 @@
  # define DSI_PHY_AFEC0_CTATADJ_MASK		VC4_MASK(3, 0)
  # define DSI_PHY_AFEC0_CTATADJ_SHIFT		0
  
@@ -30,7 +30,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  #define DSI0_PHY_AFEC1		0x68
  # define DSI0_PHY_AFEC1_IDR_DLANE1_MASK		VC4_MASK(10, 8)
  # define DSI0_PHY_AFEC1_IDR_DLANE1_SHIFT	8
-@@ -810,6 +820,16 @@ static void vc4_dsi_bridge_disable(struc
+@@ -812,6 +822,16 @@
  	disp0_ctrl = DSI_PORT_READ(DISP0_CTRL);
  	disp0_ctrl &= ~DSI_DISP0_ENABLE;
  	DSI_PORT_WRITE(DISP0_CTRL, disp0_ctrl);

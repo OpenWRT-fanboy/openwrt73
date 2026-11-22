@@ -13,13 +13,13 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
 
 --- a/drivers/i2c/busses/i2c-designware-master.c
 +++ b/drivers/i2c/busses/i2c-designware-master.c
-@@ -230,6 +230,9 @@ static int i2c_dw_set_timings_master(str
- 			dev->hs_hcnt, dev->hs_lcnt);
- 	}
+@@ -230,6 +230,9 @@
+ 	u32 ic_con = 0, ic_tar = 0;
+ 	unsigned int dummy;
  
 +	if (!dev->sda_hold_time)
 +		dev->sda_hold_time = lcnt / 2;
 +
- 	ret = i2c_dw_set_sda_hold(dev);
- 	if (ret)
- 		return ret;
+ 	/* Disable the adapter */
+ 	__i2c_dw_disable(dev);
+ 

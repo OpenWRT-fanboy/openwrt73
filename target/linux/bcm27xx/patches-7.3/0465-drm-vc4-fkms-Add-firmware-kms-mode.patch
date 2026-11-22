@@ -140,16 +140,16 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  drivers/gpu/drm/vc4/vc4_debugfs.c      |    3 +-
  drivers/gpu/drm/vc4/vc4_drv.c          |   29 +-
  drivers/gpu/drm/vc4/vc4_drv.h          |    7 +
- drivers/gpu/drm/vc4/vc4_firmware_kms.c | 2079 ++++++++++++++++++++++++
+ drivers/gpu/drm/vc4/vc4_firmware_kms.c | 2079 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
  drivers/gpu/drm/vc4/vc4_kms.c          |   54 +-
  drivers/gpu/drm/vc4/vc_image_types.h   |  175 ++
- 7 files changed, 2324 insertions(+), 24 deletions(-)
+ 7 files changed, 2327 insertions(+), 27 deletions(-)
  create mode 100644 drivers/gpu/drm/vc4/vc4_firmware_kms.c
  create mode 100644 drivers/gpu/drm/vc4/vc_image_types.h
 
 --- a/drivers/gpu/drm/vc4/Makefile
 +++ b/drivers/gpu/drm/vc4/Makefile
-@@ -9,6 +9,7 @@ vc4-y := \
+@@ -9,6 +9,7 @@
  	vc4_dpi.o \
  	vc4_dsi.o \
  	vc4_fence.o \
@@ -159,7 +159,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  	vc4_hdmi.o \
 --- a/drivers/gpu/drm/vc4/vc4_debugfs.c
 +++ b/drivers/gpu/drm/vc4/vc4_debugfs.c
-@@ -24,7 +24,8 @@ vc4_debugfs_init(struct drm_minor *minor
+@@ -25,7 +25,8 @@
  	struct vc4_dev *vc4 = to_vc4_dev(minor->dev);
  	struct drm_device *drm = &vc4->base;
  
@@ -171,9 +171,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  		drm_WARN_ON(drm, vc4_bo_debugfs_init(minor));
 --- a/drivers/gpu/drm/vc4/vc4_drv.c
 +++ b/drivers/gpu/drm/vc4/vc4_drv.c
-@@ -300,6 +300,18 @@ static const struct of_device_id vc4_dma
- 	{}
- };
+@@ -287,6 +287,18 @@
+ 	component_unbind_all(vc4->dev, &vc4->base);
+ }
  
 +/*
 + * we need this helper function for determining presence of fkms
@@ -190,16 +190,16 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  static int vc4_drm_bind(struct device *dev)
  {
  	struct platform_device *pdev = to_platform_device(dev);
-@@ -380,7 +392,7 @@ static int vc4_drm_bind(struct device *d
- 	if (ret)
+@@ -353,7 +365,7 @@
  		goto err;
+ 	}
  
 -	if (firmware) {
 +	if (firmware && !firmware_kms()) {
  		ret = rpi_firmware_property(firmware,
  					    RPI_FIRMWARE_NOTIFY_DISPLAY_DONE,
  					    NULL, 0);
-@@ -398,16 +410,20 @@ static int vc4_drm_bind(struct device *d
+@@ -371,16 +383,20 @@
  	if (ret)
  		goto err;
  
@@ -225,7 +225,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  
  	ret = drm_dev_register(drm, 0);
  	if (ret < 0)
-@@ -453,6 +469,7 @@ static struct platform_driver *const com
+@@ -426,6 +442,7 @@
  	&vc4_dsi_driver,
  	&vc4_txp_driver,
  	&vc4_crtc_driver,
@@ -235,7 +235,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  
 --- a/drivers/gpu/drm/vc4/vc4_drv.h
 +++ b/drivers/gpu/drm/vc4/vc4_drv.h
-@@ -96,8 +96,12 @@ struct vc4_dev {
+@@ -96,8 +96,12 @@
  
  	unsigned int irq;
  
@@ -248,7 +248,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  
  	struct vc4_hang_state *hang_state;
  
-@@ -1007,6 +1011,9 @@ extern struct platform_driver vc4_dsi_dr
+@@ -989,6 +993,9 @@
  /* vc4_fence.c */
  extern const struct dma_fence_ops vc4_fence_ops;
  
@@ -755,7 +755,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
 +}
 +
 +static void vc4_plane_atomic_update(struct drm_plane *plane,
-+				    struct drm_atomic_state *old_state)
++				    struct drm_atomic_commit *old_state)
 +{
 +	struct drm_plane_state *state = plane->state;
 +
@@ -771,7 +771,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
 +}
 +
 +static void vc4_plane_atomic_disable(struct drm_plane *plane,
-+				     struct drm_atomic_state *old_state)
++				     struct drm_atomic_commit *old_state)
 +{
 +	struct drm_plane_state *state = plane->state;
 +	struct vc4_fkms_plane *vc4_plane = to_vc4_fkms_plane(plane);
@@ -939,7 +939,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
 +}
 +
 +static int vc4_fkms_plane_atomic_check(struct drm_plane *plane,
-+				       struct drm_atomic_state *state)
++				       struct drm_atomic_commit *state)
 +{
 +	struct drm_plane_state *new_plane_state = drm_atomic_get_new_plane_state(state,
 +										 plane);
@@ -952,7 +952,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
 +}
 +
 +static void vc4_plane_atomic_async_update(struct drm_plane *plane,
-+					  struct drm_atomic_state *state)
++					  struct drm_atomic_commit *state)
 +{
 +	struct drm_plane_state *new_plane_state =
 +		drm_atomic_get_new_plane_state(state, plane);
@@ -981,7 +981,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
 +}
 +
 +static int vc4_plane_atomic_async_check(struct drm_plane *plane,
-+					struct drm_atomic_state *state, bool flip)
++					struct drm_atomic_commit *state, bool flip)
 +{
 +	struct drm_plane_state *new_plane_state =
 +		drm_atomic_get_new_plane_state(state, plane);
@@ -1309,7 +1309,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
 +}
 +
 +static void vc4_crtc_disable(struct drm_crtc *crtc,
-+			     struct drm_atomic_state *state)
++			     struct drm_atomic_commit *state)
 +{
 +	struct drm_device *dev = crtc->dev;
 +	struct drm_plane *plane;
@@ -1362,7 +1362,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
 +}
 +
 +static void vc4_crtc_enable(struct drm_crtc *crtc,
-+			    struct drm_atomic_state *state)
++			    struct drm_atomic_commit *state)
 +{
 +	struct drm_plane *plane;
 +
@@ -1434,7 +1434,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
 +}
 +
 +static int vc4_fkms_crtc_atomic_check(struct drm_crtc *crtc,
-+				 struct drm_atomic_state *state)
++				 struct drm_atomic_commit *state)
 +{
 +	struct drm_crtc_state *crtc_state = drm_atomic_get_new_crtc_state(state,
 +									  crtc);
@@ -1459,7 +1459,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
 +}
 +
 +static void vc4_crtc_atomic_flush(struct drm_crtc *crtc,
-+				  struct drm_atomic_state *state)
++				  struct drm_atomic_commit *state)
 +{
 +	struct drm_crtc_state *old_state = drm_atomic_get_old_crtc_state(state,
 +									 crtc);
@@ -1669,7 +1669,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
 +
 +	/* Equivalent to DRM_MODE macro. */
 +	memset(mode, 0, sizeof(*mode));
-+	strncpy(mode->name, "FIXED_MODE", sizeof(mode->name));
++	strscpy(mode->name, "FIXED_MODE", sizeof(mode->name));
 +	mode->status = 0;
 +	mode->type = DRM_MODE_TYPE_DRIVER | DRM_MODE_TYPE_PREFERRED;
 +	mode->clock = timings.clock;
@@ -1896,7 +1896,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
 +}
 +
 +static int vc4_connector_atomic_check(struct drm_connector *connector,
-+			       struct drm_atomic_state *state)
++			       struct drm_atomic_commit *state)
 +{
 +	struct drm_connector_state *old_state =
 +		drm_atomic_get_old_connector_state(state, connector);
@@ -2342,7 +2342,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
 +};
 --- a/drivers/gpu/drm/vc4/vc4_kms.c
 +++ b/drivers/gpu/drm/vc4/vc4_kms.c
-@@ -138,6 +138,9 @@ vc4_ctm_commit(struct vc4_dev *vc4, stru
+@@ -148,6 +148,9 @@
  	struct vc4_ctm_state *ctm_state = to_vc4_ctm_state(vc4->ctm_manager.state);
  	struct drm_color_ctm *ctm = ctm_state->ctm;
  
@@ -2352,7 +2352,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  	WARN_ON_ONCE(vc4->gen > VC4_GEN_5);
  
  	if (ctm_state->fifo) {
-@@ -406,9 +409,10 @@ static void vc4_atomic_commit_tail(struc
+@@ -416,9 +419,10 @@
  		for_each_new_crtc_in_state(state, crtc, new_crtc_state, i) {
  			struct vc4_crtc_state *vc4_crtc_state;
  
@@ -2364,7 +2364,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  			vc4_crtc_state = to_vc4_crtc_state(new_crtc_state);
  			vc4_hvs_mask_underrun(hvs, vc4_crtc_state->assigned_channel);
  		}
-@@ -433,7 +437,7 @@ static void vc4_atomic_commit_tail(struc
+@@ -443,7 +447,7 @@
  		old_hvs_state->fifo_state[channel].pending_commit = NULL;
  	}
  
@@ -2373,7 +2373,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  		unsigned long state_rate = max(old_hvs_state->core_clock_rate,
  					       new_hvs_state->core_clock_rate);
  		unsigned long core_rate = clamp_t(unsigned long, state_rate,
-@@ -454,23 +458,25 @@ static void vc4_atomic_commit_tail(struc
+@@ -464,23 +468,25 @@
  	if (vc4->gen <= VC4_GEN_5)
  		vc4_ctm_commit(vc4, state);
  
@@ -2416,7 +2416,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  	}
  
  	drm_atomic_helper_commit_planes(dev, state,
-@@ -486,7 +492,7 @@ static void vc4_atomic_commit_tail(struc
+@@ -496,7 +502,7 @@
  
  	drm_atomic_helper_cleanup_planes(dev, state);
  
@@ -2425,9 +2425,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  		unsigned long core_rate = min_t(unsigned long,
  						hvs->max_core_rate,
  						new_hvs_state->core_clock_rate);
-@@ -507,11 +513,21 @@ static void vc4_atomic_commit_tail(struc
+@@ -517,11 +523,21 @@
  
- static int vc4_atomic_commit_setup(struct drm_atomic_state *state)
+ static int vc4_atomic_commit_setup(struct drm_atomic_commit *state)
  {
 +	struct drm_device *dev = state->dev;
 +	struct vc4_dev *vc4 = to_vc4_dev(dev);
@@ -2447,15 +2447,15 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  	hvs_state = vc4_hvs_get_new_global_state(state);
  	if (WARN_ON(IS_ERR(hvs_state)))
  		return PTR_ERR(hvs_state);
-@@ -890,6 +906,7 @@ static int cmp_vc4_crtc_hvs_output(const
+@@ -916,6 +932,7 @@
  static int vc4_pv_muxing_atomic_check(struct drm_device *dev,
- 				      struct drm_atomic_state *state)
+ 				      struct drm_atomic_commit *state)
  {
 +	struct vc4_dev *vc4 = to_vc4_dev(state->dev);
  	struct vc4_hvs_state *hvs_new_state;
  	struct drm_crtc **sorted_crtcs;
  	struct drm_crtc *crtc;
-@@ -897,6 +914,9 @@ static int vc4_pv_muxing_atomic_check(st
+@@ -923,6 +940,9 @@
  	unsigned int i;
  	int ret;
  

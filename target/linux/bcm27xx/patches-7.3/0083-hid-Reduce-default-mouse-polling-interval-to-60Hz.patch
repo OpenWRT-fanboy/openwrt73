@@ -16,7 +16,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.org>
 
 --- a/drivers/hid/usbhid/hid-core.c
 +++ b/drivers/hid/usbhid/hid-core.c
-@@ -47,7 +47,7 @@
+@@ -48,7 +48,7 @@
   * Module parameters.
   */
  
@@ -25,7 +25,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.org>
  module_param_named(mousepoll, hid_mousepoll_interval, uint, 0644);
  MODULE_PARM_DESC(mousepoll, "Polling interval of mice");
  
-@@ -1133,7 +1133,9 @@ static int usbhid_start(struct hid_devic
+@@ -1141,7 +1141,9 @@
  		 */
  		switch (hid->collection->usage) {
  		case HID_GD_MOUSE:
@@ -36,7 +36,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.org>
  				interval = hid_mousepoll_interval;
  			break;
  		case HID_GD_JOYSTICK:
-@@ -1145,6 +1147,7 @@ static int usbhid_start(struct hid_devic
+@@ -1153,6 +1155,7 @@
  				interval = hid_kbpoll_interval;
  			break;
  		}

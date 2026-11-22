@@ -40,7 +40,7 @@ Signed-off-by: Dom Cobley <popcornmix@gmail.com>
 
 --- a/drivers/gpu/drm/vc4/vc4_hdmi.c
 +++ b/drivers/gpu/drm/vc4/vc4_hdmi.c
-@@ -1730,6 +1730,9 @@ static int vc4_hdmi_encoder_atomic_check
+@@ -1818,6 +1818,9 @@
  		tmds_char_rate = mode->clock * 1000;
  	}
  

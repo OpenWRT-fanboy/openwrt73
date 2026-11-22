@@ -30,29 +30,6 @@ Assisted-by: Claude:claude-opus-4-8
  4 files changed, 225 insertions(+)
  create mode 100644 arch/arm/boot/dts/overlays/draws-pi5-overlay.dts
 
---- a/arch/arm/boot/dts/overlays/Makefile
-+++ b/arch/arm/boot/dts/overlays/Makefile
-@@ -60,6 +60,7 @@ dtbo-$(CONFIG_ARCH_BCM2835) += \
- 	dpi18cpadhi.dtbo \
- 	dpi24.dtbo \
- 	draws.dtbo \
-+	draws-pi5.dtbo \
- 	dwc-otg-deprecated.dtbo \
- 	dwc2.dtbo \
- 	edt-ft5406.dtbo \
---- a/arch/arm/boot/dts/overlays/README
-+++ b/arch/arm/boot/dts/overlays/README
-@@ -1253,6 +1253,10 @@ Params: draws_adc_ch4_gain      Sets the
-         alsaname                Name of the ALSA audio device (default "draws")
- 
- 
-+Name:   draws-pi5
-+Info:   See draws (this is the Pi 5 version)
-+
-+
- Name:   dwc-otg
- Info:   The dwc-otg has been deprecated.
- Load:   <Deprecated>
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/draws-pi5-overlay.dts
 @@ -0,0 +1,210 @@
@@ -266,22 +243,3 @@ Assisted-by: Claude:claude-opus-4-8
 +        alsaname = <&snd>, "simple-audio-card,name";
 +    };
 +};
---- a/arch/arm/boot/dts/overlays/overlay_map.dts
-+++ b/arch/arm/boot/dts/overlays/overlay_map.dts
-@@ -53,6 +53,16 @@
- 		bcm2712;
- 	};
- 
-+	draws {
-+		bcm2835;
-+		bcm2711;
-+		bcm2712 = "draws-pi5";
-+	};
-+
-+	draws-pi5 {
-+		bcm2712;
-+	};
-+
- 	dwc-otg {
- 		renamed = "dwc-otg-deprecated";
- 	};

@@ -22,7 +22,17 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
 
 --- a/drivers/net/usb/smsc95xx.c
 +++ b/drivers/net/usb/smsc95xx.c
-@@ -86,6 +86,10 @@ static int packetsize = 2560;
+@@ -9,6 +9,7 @@
+ #include <linux/kmod.h>
+ #include <linux/netdevice.h>
+ #include <linux/etherdevice.h>
++#include <linux/hex.h>
+ #include <linux/ethtool.h>
+ #include <linux/mii.h>
+ #include <linux/usb.h>
+--- a/drivers/net/usb/smsc95xx.c
++++ b/drivers/net/usb/smsc95xx.c
+@@ -85,6 +85,10 @@
  module_param(packetsize, int, 0644);
  MODULE_PARM_DESC(packetsize, "Override the RX URB packet size");
  
@@ -33,9 +43,9 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  static int __must_check smsc95xx_read_reg(struct usbnet *dev, u32 index,
  					  u32 *data)
  {
-@@ -866,6 +870,21 @@ static int smsc95xx_ioctl(struct net_dev
- 	return phy_mii_ioctl(netdev->phydev, rq, cmd);
- }
+@@ -857,6 +861,21 @@
+ 	.set_pauseparam	= smsc95xx_set_pauseparam,
+ };
  
 +/* Check the macaddr module parameter for a MAC address */
 +static int smsc95xx_macaddr_param(struct usbnet *dev, struct net_device *nd)
@@ -55,7 +65,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  static void smsc95xx_init_mac_address(struct usbnet *dev)
  {
  	u8 addr[ETH_ALEN];
-@@ -888,6 +907,14 @@ static void smsc95xx_init_mac_address(st
+@@ -879,6 +898,14 @@
  			return;
  		}
  	}

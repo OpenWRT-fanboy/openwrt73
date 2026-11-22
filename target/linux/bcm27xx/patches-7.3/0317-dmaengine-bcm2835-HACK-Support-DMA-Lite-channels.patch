@@ -26,7 +26,7 @@ Signed-off-by: Dom Cobley <popcornmix@gmail.com>
 
 --- a/drivers/dma/bcm2835-dma.c
 +++ b/drivers/dma/bcm2835-dma.c
-@@ -101,6 +101,7 @@ struct bcm2835_chan {
+@@ -101,6 +101,7 @@
  
  	bool is_lite_channel;
  	bool is_40bit_channel;
@@ -34,7 +34,7 @@ Signed-off-by: Dom Cobley <popcornmix@gmail.com>
  };
  
  struct bcm2835_desc {
-@@ -549,7 +550,11 @@ static struct bcm2835_desc *bcm2835_dma_
+@@ -532,7 +533,11 @@
  			control_block->info = info;
  			control_block->src = src;
  			control_block->dst = dst;
@@ -47,7 +47,7 @@ Signed-off-by: Dom Cobley <popcornmix@gmail.com>
  			control_block->next = 0;
  		}
  
-@@ -574,7 +579,8 @@ static struct bcm2835_desc *bcm2835_dma_
+@@ -557,7 +562,8 @@
  			 d->cb_list[frame - 1].cb)->next_cb =
  				to_bcm2711_cbaddr(cb_entry->paddr);
  		if (frame && !c->is_40bit_channel)
@@ -57,7 +57,7 @@ Signed-off-by: Dom Cobley <popcornmix@gmail.com>
  
  		/* update src and dst and length */
  		if (src && (info & BCM2835_DMA_S_INC)) {
-@@ -759,7 +765,10 @@ static void bcm2835_dma_start_desc(struc
+@@ -742,7 +748,10 @@
  		writel(BCM2711_DMA40_ACTIVE | BCM2711_DMA40_PROT | BCM2711_DMA40_CS_FLAGS(c->dreq),
  		       c->chan_base + BCM2711_DMA40_CS);
  	} else {
@@ -69,7 +69,7 @@ Signed-off-by: Dom Cobley <popcornmix@gmail.com>
  		writel(BCM2835_DMA_ACTIVE | BCM2835_DMA_CS_FLAGS(c->dreq),
  		       c->chan_base + BCM2835_DMA_CS);
  	}
-@@ -1132,7 +1141,8 @@ static struct dma_async_tx_descriptor *b
+@@ -1115,7 +1124,8 @@
  		 d->cb_list[frames - 1].cb)->next_cb =
  			to_bcm2711_cbaddr(d->cb_list[0].paddr);
  	else
@@ -79,7 +79,7 @@ Signed-off-by: Dom Cobley <popcornmix@gmail.com>
  
  	return vchan_tx_prep(&c->vc, &d->vd, flags);
  }
-@@ -1199,6 +1209,8 @@ static int bcm2835_dma_chan_init(struct
+@@ -1182,6 +1192,8 @@
  	else if (readl(c->chan_base + BCM2835_DMA_DEBUG) &
  		 BCM2835_DMA_DEBUG_LITE)
  		c->is_lite_channel = true;

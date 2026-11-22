@@ -18,12 +18,12 @@ Fixes: https://github.com/raspberrypi/linux/issues/5964
 
 --- a/drivers/net/wireless/broadcom/brcm80211/brcmfmac/cfg80211.c
 +++ b/drivers/net/wireless/broadcom/brcm80211/brcmfmac/cfg80211.c
-@@ -2495,7 +2495,7 @@ brcmf_cfg80211_connect(struct wiphy *wip
- 				brcmf_dbg(INFO, "using PSK offload\n");
- 				profile->use_fwsup = BRCMF_PROFILE_FWSUP_PSK;
+@@ -2510,7 +2510,7 @@
+ 				bphy_err(drvr, "failed to enable fw supplicant\n");
+ 				goto done;
  			}
 -		} else {
 +		} else if (profile->use_fwsup != BRCMF_PROFILE_FWSUP_1X) {
- 			profile->use_fwsup = BRCMF_PROFILE_FWSUP_NONE;
+ 			err = brcmf_fil_iovar_int_set(ifp, "sup_wpa", 0);
  		}
- 
+ 		if (profile->use_fwsup == BRCMF_PROFILE_FWSUP_PSK)

@@ -20,7 +20,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
 
 --- a/drivers/clk/Kconfig
 +++ b/drivers/clk/Kconfig
-@@ -33,6 +33,17 @@ menuconfig COMMON_CLK
+@@ -33,6 +33,17 @@
  
  if COMMON_CLK
  
@@ -40,7 +40,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  	depends on MFD_WM831X
 --- a/drivers/clk/Makefile
 +++ b/drivers/clk/Makefile
-@@ -36,6 +36,7 @@ obj-$(CONFIG_COMMON_CLK)	+= clk-gpio.o
+@@ -47,6 +47,7 @@
  ifeq ($(CONFIG_OF), y)
  obj-$(CONFIG_COMMON_CLK)	+= clk-conf.o
  endif

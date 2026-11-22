@@ -13,7 +13,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.org>
 
 --- a/include/uapi/linux/v4l2-controls.h
 +++ b/include/uapi/linux/v4l2-controls.h
-@@ -1031,6 +1031,7 @@ enum v4l2_auto_n_preset_white_balance {
+@@ -1039,6 +1039,7 @@
  	V4L2_WHITE_BALANCE_FLASH		= 7,
  	V4L2_WHITE_BALANCE_CLOUDY		= 8,
  	V4L2_WHITE_BALANCE_SHADE		= 9,

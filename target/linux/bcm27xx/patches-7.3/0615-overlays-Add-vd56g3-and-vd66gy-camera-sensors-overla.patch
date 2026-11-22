@@ -23,56 +23,6 @@ Signed-off-by: Benjamin Mugnier <benjamin.mugnier@foss.st.com>
  create mode 100644 arch/arm/boot/dts/overlays/vd56g3_vd66gy-overlay.dtsi
  create mode 100644 arch/arm/boot/dts/overlays/vd66gy-overlay.dts
 
---- a/arch/arm/boot/dts/overlays/Makefile
-+++ b/arch/arm/boot/dts/overlays/Makefile
-@@ -346,6 +346,8 @@ dtbo-$(CONFIG_ARCH_BCM2835) += \
- 	vc4-kms-v3d-pi4.dtbo \
- 	vc4-kms-v3d-pi5.dtbo \
- 	vc4-kms-vga666.dtbo \
-+	vd56g3.dtbo \
-+	vd66gy.dtbo \
- 	vec-gpio-pi5.dtbo \
- 	vga666.dtbo \
- 	vl805.dtbo \
---- a/arch/arm/boot/dts/overlays/README
-+++ b/arch/arm/boot/dts/overlays/README
-@@ -5866,6 +5866,36 @@ Params: ddc                     Enables
-                                 GPIOs, therefore level shifters are required.
- 
- 
-+Name:   vd56g3
-+Info:   ST VD56G3 camera module.
-+        Uses Unicam 1, which is the standard camera connector on most Pi
-+        variants.
-+Load:   dtoverlay=vd56g3,<param>=<val>
-+Params: rotation                Mounting rotation of the camera sensor (0 or
-+                                180, default 0)
-+        orientation             Sensor orientation (0 = front, 1 = rear,
-+                                2 = external, default external)
-+        media-controller        Configure use of Media Controller API for
-+                                configuring the sensor (default on)
-+        cam0                    Adopt the default configuration for CAM0 on a
-+                                Compute Module (CSI0, i2c_vc, and cam0_reg).
-+
-+
-+Name:   vd66gy
-+Info:   ST VD66GY camera module.
-+        Uses Unicam 1, which is the standard camera connector on most Pi
-+        variants.
-+Load:   dtoverlay=vd66gy,<param>=<val>
-+Params: rotation                Mounting rotation of the camera sensor (0 or
-+                                180, default 0)
-+        orientation             Sensor orientation (0 = front, 1 = rear,
-+                                2 = external, default external)
-+        media-controller        Configure use of Media Controller API for
-+                                configuring the sensor (default on)
-+        cam0                    Adopt the default configuration for CAM0 on a
-+                                Compute Module (CSI0, i2c_vc, and cam0_reg).
-+
-+
- Name:   vec-gpio-pi5
- Info:   Overlay to output composite video as an 8-bit digital code over GPIO
-         pins 4-11, for Raspberry Pi 5 series only. Requires composite video
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/vd56g3-overlay.dts
 @@ -0,0 +1,22 @@

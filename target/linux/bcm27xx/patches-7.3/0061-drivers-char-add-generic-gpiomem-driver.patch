@@ -27,7 +27,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
 
 --- a/drivers/char/Kconfig
 +++ b/drivers/char/Kconfig
-@@ -425,4 +425,12 @@ config ADI
+@@ -373,4 +373,12 @@
  	  and SSM (Silicon Secured Memory).  Intended consumers of this
  	  driver include crash and makedumpfile.
  
@@ -42,7 +42,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
  endmenu
 --- a/drivers/char/Makefile
 +++ b/drivers/char/Makefile
-@@ -45,3 +45,4 @@ obj-$(CONFIG_XILLYBUS_CLASS)	+= xillybus
+@@ -42,3 +42,4 @@
  obj-$(CONFIG_POWERNV_OP_PANEL)	+= powernv-op-panel.o
  obj-$(CONFIG_ADI)		+= adi.o
  obj-$(CONFIG_BRCM_CHAR_DRIVERS) += broadcom/

@@ -21,7 +21,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
 
 --- a/drivers/gpu/drm/vc4/vc4_plane.c
 +++ b/drivers/gpu/drm/vc4/vc4_plane.c
-@@ -265,7 +265,11 @@ static enum vc4_scaling_mode vc4_get_sca
+@@ -264,7 +264,11 @@
  {
  	if (dst == src >> 16)
  		return VC4_SCALING_NONE;
@@ -34,7 +34,7 @@ Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
  		return VC4_SCALING_PPF;
  	else
  		return VC4_SCALING_TPZ;
-@@ -574,12 +578,17 @@ static void vc4_write_tpz(struct vc4_pla
+@@ -572,12 +576,17 @@
  
  	WARN_ON_ONCE(vc4->gen > VC4_GEN_6_D);
  

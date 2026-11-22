@@ -17,8 +17,8 @@ Signed-off-by: Maíra Canal <mcanal@igalia.com>
 
 --- a/drivers/gpu/drm/v3d/v3d_drv.c
 +++ b/drivers/gpu/drm/v3d/v3d_drv.c
-@@ -426,21 +426,18 @@ static int v3d_platform_drm_probe(struct
- 		}
+@@ -350,21 +350,18 @@
+ 			return ret;
  	}
  
 -	v3d->clk = devm_clk_get(dev, NULL);

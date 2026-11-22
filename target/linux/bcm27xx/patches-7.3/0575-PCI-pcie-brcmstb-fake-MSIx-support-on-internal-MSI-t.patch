@@ -16,7 +16,7 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
 
 --- a/drivers/pci/controller/pcie-brcmstb.c
 +++ b/drivers/pci/controller/pcie-brcmstb.c
-@@ -666,7 +666,8 @@ static void brcm_pcie_set_outbound_win(s
+@@ -595,7 +595,8 @@
  				 MSI_FLAG_NO_AFFINITY)
  
  #define BRCM_MSI_FLAGS_SUPPORTED (MSI_GENERIC_FLAGS_MASK	| \
