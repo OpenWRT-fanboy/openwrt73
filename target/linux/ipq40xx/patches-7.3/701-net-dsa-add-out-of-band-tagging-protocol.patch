@@ -20,22 +20,22 @@ information about the destination port to the MAC driver
 
 Signed-off-by: Maxime Chevallier <maxime.chevallier@bootlin.com>
 ---
- Documentation/networking/dsa/dsa.rst | 13 +++++++-
- MAINTAINERS                          |  1 +
- include/linux/dsa/oob.h              | 16 +++++++++
- include/linux/skbuff.h               |  3 ++
- include/net/dsa.h                    |  2 ++
- net/core/skbuff.c                    | 10 ++++++
- net/dsa/Kconfig                      |  9 +++++
- net/dsa/Makefile                     |  1 +
- net/dsa/tag_oob.c                    | 49 ++++++++++++++++++++++++++++
- 9 files changed, 103 insertions(+), 1 deletion(-)
+ Documentation/networking/dsa/dsa.rst |   13 ++++++++++++-
+ MAINTAINERS                          |    1 +
+ include/linux/dsa/oob.h              |   16 ++++++++++++++++
+ include/linux/skbuff.h               |    3 +++
+ include/net/dsa.h                    |    2 ++
+ net/core/skbuff.c                    |    7 +++++++
+ net/dsa/Kconfig                      |    9 +++++++++
+ net/dsa/Makefile                     |    1 +
+ net/dsa/tag_oob.c                    |   51 ++++++++++++++++++++++++++++++++++++++++++++++++++
+ 9 files changed, 102 insertions(+), 1 deletions(-)
  create mode 100644 include/linux/dsa/oob.h
  create mode 100644 net/dsa/tag_oob.c
 
 --- a/Documentation/networking/dsa/dsa.rst
 +++ b/Documentation/networking/dsa/dsa.rst
-@@ -70,7 +70,8 @@ Switch tagging protocols
+@@ -70,7 +70,8 @@
  ------------------------
  
  DSA supports many vendor-specific tagging protocols, one software-defined
@@ -45,7 +45,7 @@ Signed-off-by: Maxime Chevallier <maxime.chevallier@bootlin.com>
  
  The exact format of the tag protocol is vendor specific, but in general, they
  all contain something which:
-@@ -221,6 +222,16 @@ receive all frames regardless of the val
+@@ -221,6 +222,16 @@
  setting the ``promisc_on_conduit`` property of the ``struct dsa_device_ops``.
  Note that this assumes a DSA-unaware conduit driver, which is the norm.
  
@@ -64,14 +64,14 @@ Signed-off-by: Maxime Chevallier <maxime.chevallier@bootlin.com>
  
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -21166,6 +21166,7 @@ L:	netdev@vger.kernel.org
+@@ -22443,6 +22443,7 @@
  S:	Maintained
  F:	Documentation/devicetree/bindings/net/qcom,ipq4019-ess-edma.yaml
  F:	drivers/net/ethernet/qualcomm/ipqess/
 +F:	net/dsa/tag_oob.c
  
  QUALCOMM ETHQOS ETHERNET DRIVER
- M:	Vinod Koul <vkoul@kernel.org>
+ M:	Mohd Ayaan Anwar <mohd.anwar@oss.qualcomm.com>
 --- /dev/null
 +++ b/include/linux/dsa/oob.h
 @@ -0,0 +1,16 @@
@@ -93,9 +93,9 @@ Signed-off-by: Maxime Chevallier <maxime.chevallier@bootlin.com>
 +#endif
 --- a/include/linux/skbuff.h
 +++ b/include/linux/skbuff.h
-@@ -4935,6 +4935,9 @@ enum skb_ext_id {
- #if IS_ENABLED(CONFIG_INET_PSP)
- 	SKB_EXT_PSP,
+@@ -5042,6 +5042,9 @@
+ #if IS_ENABLED(CONFIG_CAN)
+ 	SKB_EXT_CAN,
  #endif
 +#if IS_ENABLED(CONFIG_NET_DSA_TAG_OOB)
 +	SKB_EXT_DSA_OOB,
@@ -105,17 +105,17 @@ Signed-off-by: Maxime Chevallier <maxime.chevallier@bootlin.com>
  
 --- a/include/net/dsa.h
 +++ b/include/net/dsa.h
-@@ -57,6 +57,7 @@ struct tc_action;
- #define DSA_TAG_PROTO_BRCM_LEGACY_FCS_VALUE	29
- #define DSA_TAG_PROTO_MXL862_VALUE		30
- #define DSA_TAG_PROTO_MXL862_8021Q_VALUE	31
-+#define DSA_TAG_PROTO_OOB_VALUE			32
+@@ -64,6 +64,7 @@
+ #define DSA_TAG_PROTO_YT922X_VALUE		37
+ #define DSA_TAG_PROTO_YT922X_4B_VALUE	38
+ #define DSA_TAG_PROTO_MXL862_8021Q_VALUE	36
++#define DSA_TAG_PROTO_OOB_VALUE			39
  
  enum dsa_tag_protocol {
  	DSA_TAG_PROTO_NONE		= DSA_TAG_PROTO_NONE_VALUE,
-@@ -91,6 +92,7 @@ enum dsa_tag_protocol {
- 	DSA_TAG_PROTO_VSC73XX_8021Q	= DSA_TAG_PROTO_VSC73XX_8021Q_VALUE,
- 	DSA_TAG_PROTO_MXL862		= DSA_TAG_PROTO_MXL862_VALUE,
+@@ -105,6 +106,7 @@
+ 	DSA_TAG_PROTO_YT922X		= DSA_TAG_PROTO_YT922X_VALUE,
+ 	DSA_TAG_PROTO_YT922X_4B		= DSA_TAG_PROTO_YT922X_4B_VALUE,
  	DSA_TAG_PROTO_MXL862_8021Q	= DSA_TAG_PROTO_MXL862_8021Q_VALUE,
 +	DSA_TAG_PROTO_OOB		= DSA_TAG_PROTO_OOB_VALUE,
  };
@@ -136,19 +136,19 @@ Signed-off-by: Maxime Chevallier <maxime.chevallier@bootlin.com>
  #include <net/dst.h>
  #include <net/sock.h>
  #include <net/checksum.h>
-@@ -5120,6 +5124,9 @@ static const u8 skb_ext_type_len[] = {
- #if IS_ENABLED(CONFIG_INET_PSP)
- 	[SKB_EXT_PSP] = SKB_EXT_CHUNKSIZEOF(struct psp_skb_ext),
+@@ -5206,6 +5210,9 @@
+ #if IS_ENABLED(CONFIG_CAN)
+ 	[SKB_EXT_CAN] = SKB_EXT_CHUNKSIZEOF(struct can_skb_ext),
  #endif
 +#if IS_ENABLED(CONFIG_NET_DSA_TAG_OOB)
 +	[SKB_EXT_DSA_OOB] = SKB_EXT_CHUNKSIZEOF(struct dsa_oob_tag_info),
 +#endif
  };
  
- static __always_inline unsigned int skb_ext_total_length(void)
+ static __always_inline __no_profile unsigned int skb_ext_total_length(void)
 --- a/net/dsa/Kconfig
 +++ b/net/dsa/Kconfig
-@@ -145,6 +145,15 @@ config NET_DSA_TAG_OCELOT_8021Q
+@@ -169,6 +169,15 @@
  	  this mode, less TCAM resources (VCAP IS1, IS2, ES0) are available for
  	  use with tc-flower.
  
@@ -166,7 +166,7 @@ Signed-off-by: Maxime Chevallier <maxime.chevallier@bootlin.com>
  	help
 --- a/net/dsa/Makefile
 +++ b/net/dsa/Makefile
-@@ -33,6 +33,7 @@ obj-$(CONFIG_NET_DSA_TAG_MXL_862XX_8021Q
+@@ -36,6 +36,7 @@
  obj-$(CONFIG_NET_DSA_TAG_NONE) += tag_none.o
  obj-$(CONFIG_NET_DSA_TAG_OCELOT) += tag_ocelot.o
  obj-$(CONFIG_NET_DSA_TAG_OCELOT_8021Q) += tag_ocelot_8021q.o

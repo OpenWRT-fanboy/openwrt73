@@ -27,7 +27,7 @@ Signed-off-by: Brian Norris <computersforpeace@gmail.com>
  #include "qcom_scm.h"
  
  static DEFINE_MUTEX(qcom_scm_lock);
-@@ -117,6 +120,25 @@ static void __scm_legacy_do(const struct
+@@ -117,6 +120,25 @@
  	} while (res->a0 == QCOM_SCM_INTERRUPTED);
  }
  
@@ -53,7 +53,7 @@ Signed-off-by: Brian Norris <computersforpeace@gmail.com>
  /**
   * scm_legacy_call() - Sends a command to the SCM and waits for the command to
   * finish processing.
-@@ -163,10 +185,16 @@ int scm_legacy_call(struct device *dev,
+@@ -163,10 +185,16 @@
  
  	rsp = scm_legacy_command_to_response(cmd);
  
@@ -74,7 +74,7 @@ Signed-off-by: Brian Norris <computersforpeace@gmail.com>
  	}
  
  	smc.args[0] = 1;
-@@ -182,13 +210,26 @@ int scm_legacy_call(struct device *dev,
+@@ -182,13 +210,26 @@
  		goto out;
  
  	do {
@@ -106,7 +106,7 @@ Signed-off-by: Brian Norris <computersforpeace@gmail.com>
  
  	if (res) {
  		res_buf = scm_legacy_get_response_buffer(rsp);
-@@ -196,7 +237,8 @@ int scm_legacy_call(struct device *dev,
+@@ -196,7 +237,8 @@
  			res->result[i] = le32_to_cpu(res_buf[i]);
  	}
  out:
@@ -118,7 +118,7 @@ Signed-off-by: Brian Norris <computersforpeace@gmail.com>
  }
 --- a/drivers/firmware/qcom/qcom_scm.c
 +++ b/drivers/firmware/qcom/qcom_scm.c
-@@ -401,6 +401,17 @@ static int qcom_scm_set_boot_addr(void *
+@@ -420,6 +420,17 @@
  	desc.args[0] = flags;
  	desc.args[1] = virt_to_phys(entry);
  
