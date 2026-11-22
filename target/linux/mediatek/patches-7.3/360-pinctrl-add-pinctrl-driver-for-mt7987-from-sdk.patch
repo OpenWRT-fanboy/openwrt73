@@ -12,7 +12,7 @@ Subject: [PATCH] pinctrl: add pinctrl driver for mt7987 from sdk
 
 --- a/drivers/pinctrl/mediatek/Kconfig
 +++ b/drivers/pinctrl/mediatek/Kconfig
-@@ -212,6 +212,13 @@ config PINCTRL_MT7986
+@@ -217,6 +217,13 @@ config PINCTRL_MT7986
  	default ARM64 && ARCH_MEDIATEK
  	select PINCTRL_MTK_MOORE
  
@@ -24,11 +24,11 @@ Subject: [PATCH] pinctrl: add pinctrl driver for mt7987 from sdk
 +	select PINCTRL_MTK_MOORE
 +
  config PINCTRL_MT7988
- 	bool "Mediatek MT7988 pin control"
+ 	tristate "Mediatek MT7988 pin control"
  	depends on OF
 --- a/drivers/pinctrl/mediatek/Makefile
 +++ b/drivers/pinctrl/mediatek/Makefile
-@@ -29,6 +29,7 @@ obj-$(CONFIG_PINCTRL_MT7623)		+= pinctrl
+@@ -30,6 +30,7 @@ obj-$(CONFIG_PINCTRL_MT7623)		+= pinctrl
  obj-$(CONFIG_PINCTRL_MT7629)		+= pinctrl-mt7629.o
  obj-$(CONFIG_PINCTRL_MT7981)		+= pinctrl-mt7981.o
  obj-$(CONFIG_PINCTRL_MT7986)		+= pinctrl-mt7986.o
