@@ -95,7 +95,7 @@ the boot and the other radios are unaffected.
     `0409-arm64-dts-qcom-ipq9574-add-ath11k-node.patch`.
 
 - `target/linux/qualcommbe/config-7.3`
-  - 105 new defaults appended to config-7.3 (unique `CONFIG_*` symbols added in 4/4).
+  - 183 new defaults appended to config-7.3 (unique `CONFIG_*` symbols added in 4/4).
 
 ## Feed packages that need patches
 
