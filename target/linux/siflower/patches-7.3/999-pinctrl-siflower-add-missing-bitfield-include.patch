@@ -1,0 +1,28 @@
+From: OpenWrt <openwrt@openwrt.org>
+Subject: pinctrl: siflower: sf19a2890: add missing bitfield/bits includes
+
+The driver uses FIELD_PREP() but relied on a transitive include that no
+longer provides it in 7.3. FIELD_PREP() is defined in <linux/bitfield.h>
+and BITS_PER_TYPE()/GENMASK() in <linux/bits.h>, so include both headers
+explicitly. Without this, the driver fails to build with:
+
+  drivers/pinctrl/pinctrl-sf19a2890.c:302:37: error: implicit declaration
+  of function 'FIELD_PREP' [-Wimplicit-function-declaration]
+
+Signed-off-by: OpenWrt <openwrt@openwrt.org>
+---
+ drivers/pinctrl/pinctrl-sf19a2890.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+--- a/drivers/pinctrl/pinctrl-sf19a2890.c
++++ b/drivers/pinctrl/pinctrl-sf19a2890.c
+@@ -8,7 +8,9 @@
+  * Copyright (C) 2012 Chris Boot, Simon Arlott, Stephen Warren
+  */
+ 
++#include <linux/bitfield.h>
+ #include <linux/bitmap.h>
++#include <linux/bits.h>
+ #include <linux/device.h>
+ #include <linux/err.h>
+ #include <linux/io.h>
