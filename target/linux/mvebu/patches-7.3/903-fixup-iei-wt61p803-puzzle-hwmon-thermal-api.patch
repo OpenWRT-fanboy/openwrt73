@@ -1,0 +1,29 @@
+From 3c8e2f5e7b9a45c6a8c4e0f9a1b2d3e4c5f60718 Mon Sep 17 00:00:00 2001
+From: OpenWrt <openwrt@openwrt.org>
+Date: Fri, 20 Nov 2026 00:00:00 +0000
+Subject: [PATCH] hwmon: iei-wt61p803-puzzle-hwmon: use child cooling device API
+
+In Linux 7.3, devm_thermal_of_cooling_device_register() takes a u32
+cdev_id as its second argument instead of a struct device_node *. The
+driver registers one cooling device per child node of the PWM cooling
+controller, so use devm_thermal_of_child_cooling_device_register(),
+which accepts the child node directly and is the intended replacement.
+
+Signed-off-by: OpenWrt <openwrt@openwrt.org>
+---
+ drivers/hwmon/iei-wt61p803-puzzle-hwmon.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+--- a/drivers/hwmon/iei-wt61p803-puzzle-hwmon.c
++++ b/drivers/hwmon/iei-wt61p803-puzzle-hwmon.c
+@@ -376,8 +376,8 @@
+ 	mcu_hwmon->cdev[pwm_channel] = cdev;
+ 
+ 	snprintf(cdev->name, THERMAL_NAME_LENGTH, "wt61p803_puzzle_%d", pwm_channel);
+-	cdev->tcdev = devm_thermal_of_cooling_device_register(dev, to_of_node(child), cdev->name,
+-							      cdev, &iei_wt61p803_puzzle_cooling_ops);
++	cdev->tcdev = devm_thermal_of_child_cooling_device_register(dev, to_of_node(child),
++			cdev->name, cdev, &iei_wt61p803_puzzle_cooling_ops);
+ 	if (IS_ERR(cdev->tcdev))
+ 		return PTR_ERR(cdev->tcdev);
+ 

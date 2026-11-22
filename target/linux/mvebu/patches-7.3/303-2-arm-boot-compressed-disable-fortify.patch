@@ -1,0 +1,22 @@
+From: OpenWrt <openwrt@openwrt.org>
+Subject: [PATCH] arm: boot: compressed: disable fortify in atags_to_fdt
+
+The decompressor runs without the full kernel runtime. With kernel fortify
+enabled, memcpy() in merge_fdt_bootargs() generates references to
+warn_slowpath_fmt and a .data..once section, neither of which exists in the
+compressed boot link. Define __NO_FORTIFY before including headers.
+
+Signed-off-by: OpenWrt <openwrt@openwrt.org>
+---
+ arch/arm/boot/compressed/atags_to_fdt.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+--- a/arch/arm/boot/compressed/atags_to_fdt.c
++++ b/arch/arm/boot/compressed/atags_to_fdt.c
+@@ -1,4 +1,6 @@
+ // SPDX-License-Identifier: GPL-2.0
++#define __NO_FORTIFY
++
+ #include <linux/libfdt_env.h>
+ #include <asm/setup.h>
+ #include <libfdt.h>
