@@ -14,7 +14,7 @@ Signed-off-by: Maksim Kiselev <bigunclemax@gmail.com>
 
 --- a/arch/riscv/boot/dts/allwinner/sunxi-d1s-t113.dtsi
 +++ b/arch/riscv/boot/dts/allwinner/sunxi-d1s-t113.dtsi
-@@ -203,6 +203,13 @@
+@@ -209,6 +209,13 @@
  				pins = "PD7", "PD8";
  				function = "uart4";
  			};
