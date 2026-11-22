@@ -1,0 +1,106 @@
+From: OpenWrt <openwrt@openwrt.org>
+Subject: net: phy: realtek: port RTL8214FC SFP handling to 7.3 phy_port API
+
+Linux 7.3 made phy_sfp_attach(), phy_sfp_detach() and the two-argument
+phy_sfp_probe() static in phy_device.c: phy_sfp_probe() is now called from
+the generic phy_probe() path and registers the built-in sfp_phydev_ops.
+PHY drivers customise SFP behaviour through the SFP port's
+phy_port_ops.configure_mii() callback instead of passing a private
+sfp_upstream_ops to phy_sfp_probe().
+
+Replace the removed calls with the 7.3 mechanism: implement
+rtl8214fc_configure_mii() to switch the RTL8214FC media on SFP
+insertion/removal, expose the SFP MII interfaces and install those port
+ops from attach_mii_port(). Drop the now redundant driver-side
+phy_sfp_probe() call; the generic path performs it after the driver probe,
+which still leaves the media setup from rtl8214fc_phy_probe() in place
+before any SFP event.
+
+Signed-off-by: OpenWrt <openwrt@openwrt.org>
+---
+ drivers/net/phy/realtek/realtek_multiport.c | 41 ++++++++++++++---------
+ 1 file changed, 22 insertions(+), 19 deletions(-)
+
+--- a/drivers/net/phy/realtek/realtek_multiport.c
++++ b/drivers/net/phy/realtek/realtek_multiport.c
+@@ -9,6 +9,7 @@
+ #include <linux/delay.h>
+ #include <linux/of.h>
+ #include <linux/phy.h>
++#include <linux/phy_port.h>
+ #include <linux/netdevice.h>
+ #include <linux/firmware.h>
+ #include <linux/crc32.h>
+@@ -705,35 +706,36 @@
+ 	return rtl821x_write_mmd(phydev, devnum, regnum, val);
+ }
+ 
+-static int rtl8214fc_sfp_insert(void *upstream, const struct sfp_eeprom_id *id)
++static int rtl8214fc_configure_mii(struct phy_port *port, bool enable,
++				   phy_interface_t interface)
+ {
+-	struct phy_device *phydev = upstream;
+-	const struct sfp_module_caps *caps;
+-	phy_interface_t iface;
++	struct phy_device *phydev = port_phydev(port);
+ 
+-	caps = sfp_get_module_caps(phydev->sfp_bus);
+-	iface = sfp_select_interface(phydev->sfp_bus, caps->link_modes);
++	if (enable)
++		phydev_info(phydev, "%s SFP module inserted\n",
++			    phy_modes(interface));
+ 
+-	phydev_info(phydev, "%s SFP module inserted\n", phy_modes(iface));
+-
+-	rtl8214fc_media_set(phydev, true);
++	rtl8214fc_media_set(phydev, enable);
+ 
+ 	return 0;
+ }
+ 
+-static void rtl8214fc_sfp_remove(void *upstream)
++static const struct phy_port_ops rtl8214fc_sfp_port_ops = {
++	.configure_mii = rtl8214fc_configure_mii,
++};
++
++static int rtl8214fc_attach_mii_port(struct phy_device *phydev,
++				     struct phy_port *port)
+ {
+-	struct phy_device *phydev = upstream;
++	if (!port->is_sfp)
++		return 0;
+ 
+-	rtl8214fc_media_set(phydev, false);
+-}
++	__set_bit(PHY_INTERFACE_MODE_1000BASEX, port->interfaces);
++	__set_bit(PHY_INTERFACE_MODE_100BASEX, port->interfaces);
++	port->ops = &rtl8214fc_sfp_port_ops;
+ 
+-static const struct sfp_upstream_ops rtl8214fc_sfp_ops = {
+-	.attach = phy_sfp_attach,
+-	.detach = phy_sfp_detach,
+-	.module_insert = rtl8214fc_sfp_insert,
+-	.module_remove = rtl8214fc_sfp_remove,
+-};
++	return 0;
++}
+ 
+ static int rtl8214c_phy_probe(struct phy_device *phydev)
+ {
+@@ -959,7 +961,7 @@
+ 	/* Disable EEE. 0xa5d/0x10 is the same as MDIO_MMD_AN / MDIO_AN_EEE_ADV */
+ 	phy_write_paged(phydev, 0xa5d, 0x10, 0x0000);
+ 
+-	return phy_sfp_probe(phydev, &rtl8214fc_sfp_ops);
++	return 0;
+ }
+ 
+ static struct phy_driver rtl83xx_phy_driver[] = {
+@@ -989,6 +991,7 @@
+ 	{
+ 		.match_phy_device = rtl8214fc_match_phy_device,
+ 		.name		= "Realtek RTL8214FC",
++		.attach_mii_port = rtl8214fc_attach_mii_port,
+ 		.config_aneg	= rtl8214fc_config_aneg,
+ 		.get_features	= rtl8214fc_get_features,
+ 		.get_tunable    = rtl8214fc_get_tunable,

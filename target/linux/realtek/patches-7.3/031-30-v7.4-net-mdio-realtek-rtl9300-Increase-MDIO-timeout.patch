@@ -41,7 +41,7 @@ Signed-off-by: Jakub Kicinski <kuba@kernel.org>
 
 --- a/drivers/net/mdio/mdio-realtek-rtl9300.c
 +++ b/drivers/net/mdio/mdio-realtek-rtl9300.c
-@@ -275,9 +275,9 @@ static int otto_emdio_run_cmd(struct mii
+@@ -276,9 +276,9 @@
  	u32 cmdstate;
  	int ret;
  
@@ -53,7 +53,7 @@ Signed-off-by: Jakub Kicinski <kuba@kernel.org>
  	if (ret)
  		return ret;
  
-@@ -317,7 +317,7 @@ static int otto_emdio_run_cmd(struct mii
+@@ -318,7 +318,7 @@
  		return ret;
  
  	ret = regmap_read_poll_timeout(priv->regmap, info->cmd_regs.c22_data,

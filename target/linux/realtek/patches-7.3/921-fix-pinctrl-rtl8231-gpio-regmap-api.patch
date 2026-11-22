@@ -1,0 +1,27 @@
+From: OpenAI <openai@example.com>
+Date: Sat, 21 Nov 2026 00:00:00 +0000
+Subject: [PATCH] pinctrl: rtl8231: update reg_mask_xlate to 7.3 gpio-regmap API
+
+Linux 7.3 added an enum gpio_regmap_operation argument to the gpio-regmap
+reg_mask_xlate() callback. Update the RTL8231 callback signature to match;
+the driver still derives the register from the base address, so the new
+operation argument is unused.
+
+Signed-off-by: OpenAI <openai@example.com>
+
+---
+ drivers/pinctrl/pinctrl-rtl8231.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+--- a/drivers/pinctrl/pinctrl-rtl8231.c
++++ b/drivers/pinctrl/pinctrl-rtl8231.c
+@@ -462,7 +462,8 @@
+ /*
+  * GPIO controller functionality
+  */
+-static int rtl8231_gpio_reg_mask_xlate(struct gpio_regmap *gpio, unsigned int base,
++static int rtl8231_gpio_reg_mask_xlate(struct gpio_regmap *gpio,
++	enum gpio_regmap_operation op, unsigned int base,
+ 	unsigned int offset, unsigned int *reg, unsigned int *mask)
+ {
+ 	unsigned int pin_mask = BIT(offset % RTL8231_BITS_VAL);

@@ -1,0 +1,48 @@
+From: OpenWrt <openwrt@openwrt.org>
+Subject: clk: realtek: rtl83xx: switch clk_ops.round_rate to determine_rate
+
+clk_ops.round_rate was removed in 7.3; clocks must provide
+.determine_rate() and write the achievable rate into clk_rate_request.
+Convert rtcl_round_rate() to rtcl_determine_rate(): use req->rate as the
+requested rate and write the rounded result back into req->rate. This
+clock's rounding logic does not use the parent rate, so
+req->best_parent_rate is intentionally left untouched.
+
+Signed-off-by: OpenWrt <openwrt@openwrt.org>
+---
+ drivers/clk/realtek/clk-rtl83xx.c | 9 ++++++---
+ 1 file changed, 5 insertions(+), 4 deletions(-)
+
+--- a/drivers/clk/realtek/clk-rtl83xx.c
++++ b/drivers/clk/realtek/clk-rtl83xx.c
+@@ -455,17 +455,18 @@
+ 	return -ENXIO;
+ }
+ 
+-static long rtcl_round_rate(struct clk_hw *hw, unsigned long rate, unsigned long *parent_rate)
++static int rtcl_determine_rate(struct clk_hw *hw, struct clk_rate_request *req)
+ {
+ 	struct rtcl_clk *clk = rtcl_hw_to_clk(hw);
+-	unsigned long rrate = max(clk->min, min(clk->max, rate));
++	unsigned long rrate = max(clk->min, min(clk->max, req->rate));
+ 	const struct rtcl_round_set *round = &rtcl_round_set[rtcl_ccu->soc][clk->idx];
+ 
+ 	rrate = ((rrate + (round->step >> 1)) / round->step) * round->step;
+ 	rrate -= (rrate > clk->max) ? round->step : 0;
+ 	rrate += (rrate < clk->min) ? round->step : 0;
+ 
+-	return rrate;
++	req->rate = rrate;
++	return 0;
+ }
+ 
+ static unsigned long rtcl_960x_cpu_recalc_rate(struct clk_hw *hw,
+@@ -568,7 +569,7 @@
+ 
+ static const struct clk_ops rtcl_clk_ops = {
+ 	.set_rate = rtcl_set_rate,
+-	.round_rate = rtcl_round_rate,
++	.determine_rate = rtcl_determine_rate,
+ 	.recalc_rate = rtcl_recalc_rate,
+ };
+ 

@@ -20,9 +20,9 @@ Signed-off-by: Taiga Ogawa <zectaiga@gmail.com>
 
 --- a/drivers/net/ethernet/realtek/Kconfig
 +++ b/drivers/net/ethernet/realtek/Kconfig
-@@ -146,4 +146,13 @@ config NET_RTL838X
- 	help
- 	  Say Y here if you want to use the Realtek rtl838x Gbps Ethernet MAC.
+@@ -126,4 +126,13 @@
+ 	  To compile this driver as a module, choose M here: the module
+ 	  will be called rtase. This is recommended.
  
 +config NET_RTL960X_GMAC
 +	tristate "Realtek RTL960X Ethernet MAC support"
@@ -36,8 +36,8 @@ Signed-off-by: Taiga Ogawa <zectaiga@gmail.com>
  endif # NET_VENDOR_REALTEK
 --- a/drivers/net/ethernet/realtek/Makefile
 +++ b/drivers/net/ethernet/realtek/Makefile
-@@ -11,3 +11,4 @@ r8169-$(CONFIG_R8169_LEDS) += r8169_leds
+@@ -9,3 +9,4 @@
+ r8169-$(CONFIG_R8169_LEDS) += r8169_leds.o
  obj-$(CONFIG_R8169) += r8169.o
  obj-$(CONFIG_RTASE) += rtase/
- obj-$(CONFIG_NET_RTL838X) += rtl838x_eth.o
 +obj-$(CONFIG_NET_RTL960X_GMAC) += rtl960x_gmac.o

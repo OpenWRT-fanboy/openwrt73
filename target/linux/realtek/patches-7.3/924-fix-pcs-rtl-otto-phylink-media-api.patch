@@ -1,0 +1,102 @@
+From: OpenWrt <openwrt@openwrt.org>
+Subject: net: pcs: rtl-otto: port PCS config to 7.3 phylink API
+
+Linux 7.3 has no struct phylink_media, PHYLINK_MEDIA_* constants or
+phylink_pcs.media_teardown, and .pcs_config() takes five arguments rather
+than six: the Realtek-only 744-net-phylink-pass-media-to-PCS-configuration
+patch that supplied that API was dropped during the 6.18 to 7.3 migration,
+but the driver source still uses it. The build fails with errors such as
+"struct phylink_media declared inside parameter list" and undeclared
+PHYLINK_MEDIA_* enumerators.
+
+Use the 7.3 API: drop the media argument from rtpcs_pcs_config() (matching
+the upstream pcs_config callback signature), select the default
+RTPCS_SDS_ATTACH_PHY attachment instead of deriving it from media, drop the
+media generation tracking and the media_teardown opt-in, and remove the now
+unused rtpcs_media_attachment() helper. This is the PHYLINK_MEDIA_UNSPEC
+behaviour of retaining the driver non-SFP defaults.
+
+Signed-off-by: OpenWrt <openwrt@openwrt.org>
+---
+ drivers/net/pcs/pcs-rtl-otto.c | 6 hunks, 3 insertions(+), 29 deletions(-)
+ 1 file changed, 3 insertions(+), 29 deletions(-)
+
+--- a/drivers/net/pcs/pcs-rtl-otto.c
++++ b/drivers/net/pcs/pcs-rtl-otto.c
+@@ -968,25 +968,6 @@
+ 	return 0;
+ }
+ 
+-static enum rtpcs_sds_attachment
+-rtpcs_media_attachment(const struct phylink_media *media)
+-{
+-	switch (media->type) {
+-	case PHYLINK_MEDIA_NONE:
+-		return RTPCS_SDS_ATTACH_NONE;
+-	case PHYLINK_MEDIA_UNSPEC:
+-	case PHYLINK_MEDIA_PHY:
+-		return RTPCS_SDS_ATTACH_PHY;
+-	case PHYLINK_MEDIA_DAC_PASSIVE:
+-		/* An unspecified length uses the long-cable profile. */
+-		return media->cable_len_m && media->cable_len_m < 3 ?
+-			RTPCS_SDS_ATTACH_DAC_SHORT : RTPCS_SDS_ATTACH_DAC_LONG;
+-	default:
+-		/* Active cables and optics use the ordinary module profile. */
+-		return RTPCS_SDS_ATTACH_FIBER;
+-	}
+-}
+-
+ static int rtpcs_generic_sds_set_autoneg(struct rtpcs_serdes *sds, unsigned int neg_mode,
+ 					 const unsigned long *advertising)
+ {
+@@ -4976,7 +4957,7 @@
+ 
+ static int rtpcs_pcs_config(struct phylink_pcs *pcs, unsigned int neg_mode,
+ 			    phy_interface_t interface, const unsigned long *advertising,
+-			    bool permit_pause_to_mac, const struct phylink_media *media)
++			    bool permit_pause_to_mac)
+ {
+ 	struct rtpcs_link *link = rtpcs_phylink_pcs_to_link(pcs);
+ 	enum rtpcs_sds_usxgmii_submode submode;
+@@ -4988,15 +4969,10 @@
+ 	int changed, ret;
+ 
+ 	if (sds->num_of_links == 1) {
+-		attachment = rtpcs_media_attachment(media);
++		attachment = RTPCS_SDS_ATTACH_PHY;
+ 		scoped_guard(mutex, &ctrl->lock)
+-			attachment_changed = sds->attachment != attachment ||
+-					     link->media_generation != media->generation;
++			attachment_changed = sds->attachment != attachment;
+ 	} else {
+-		if (media->type == PHYLINK_MEDIA_NONE) {
+-			link->media_generation = media->generation;
+-			return 0;
+-		}
+ 		attachment = RTPCS_SDS_ATTACH_PHY;
+ 		attachment_changed = false;
+ 	}
+@@ -5008,7 +4984,6 @@
+ 
+ 	/* Media removal only stops attachment work; do not reactivate the lane. */
+ 	if (attachment == RTPCS_SDS_ATTACH_NONE) {
+-		link->media_generation = media->generation;
+ 		return 0;
+ 	}
+ 
+@@ -5085,7 +5060,6 @@
+ 				 sds->id, phy_modes(interface));
+ 		}
+ 	}
+-	link->media_generation = media->generation;
+ 
+ 	/*
+ 	 * Calibration completion may not generate a MAC link IRQ.
+@@ -5259,7 +5233,6 @@
+ 			link->port = sds->link_port[link_idx];
+ 			link->sds = sds;
+ 			link->pcs.ops = sds->ctrl->cfg->pcs_ops;
+-			link->pcs.media_teardown = true;
+ 
+ 			sds->link[link_idx] = link;
+ 		}

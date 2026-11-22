@@ -22,7 +22,7 @@ Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
 
 --- a/drivers/gpio/gpio-realtek-otto.c
 +++ b/drivers/gpio/gpio-realtek-otto.c
-@@ -175,10 +175,10 @@ static void realtek_gpio_update_line_imr
+@@ -176,10 +176,10 @@
  	u32 reg_val;
  
  	reg += 4 * (line_shift / 32);
