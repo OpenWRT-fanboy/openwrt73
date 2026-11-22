@@ -29,7 +29,7 @@ Tested-by: Koen Vandeputte <koen.vandeputte@ncentric.com>
 
 --- a/drivers/gpio/Kconfig
 +++ b/drivers/gpio/Kconfig
-@@ -418,6 +418,12 @@ config GPIO_IXP4XX
+@@ -435,6 +435,12 @@ config GPIO_IXP4XX
  
  	  If unsure, say N.
  
@@ -42,7 +42,7 @@ Tested-by: Koen Vandeputte <koen.vandeputte@ncentric.com>
  config GPIO_LOGICVC
  	tristate "Xylon LogiCVC GPIO support"
  	depends on MFD_SYSCON && OF
-@@ -583,6 +589,10 @@ config GPIO_PXA
+@@ -607,6 +613,10 @@ config GPIO_PXA
  	help
  	  Say yes here to support the PXA GPIO device.
  
@@ -55,7 +55,7 @@ Tested-by: Koen Vandeputte <koen.vandeputte@ncentric.com>
  	depends on ARCH_RENESAS || COMPILE_TEST
 --- a/drivers/gpio/Makefile
 +++ b/drivers/gpio/Makefile
-@@ -89,6 +89,7 @@ obj-$(CONFIG_GPIO_IXP4XX)		+= gpio-ixp4x
+@@ -90,6 +90,7 @@ obj-$(CONFIG_GPIO_IXP4XX)		+= gpio-ixp4x
  obj-$(CONFIG_GPIO_JANZ_TTL)		+= gpio-janz-ttl.o
  obj-$(CONFIG_GPIO_KEMPLD)		+= gpio-kempld.o
  obj-$(CONFIG_GPIO_LATCH)		+= gpio-latch.o
@@ -63,8 +63,8 @@ Tested-by: Koen Vandeputte <koen.vandeputte@ncentric.com>
  obj-$(CONFIG_GPIO_LINE_MUX)		+= gpio-line-mux.o
  obj-$(CONFIG_GPIO_LJCA) 		+= gpio-ljca.o
  obj-$(CONFIG_GPIO_LOGICVC)		+= gpio-logicvc.o
-@@ -149,6 +150,7 @@ obj-$(CONFIG_GPIO_POLARFIRE_SOC)	+= gpio
- obj-$(CONFIG_GPIO_PXA)			+= gpio-pxa.o
+@@ -154,6 +155,7 @@ obj-$(CONFIG_GPIO_PXA)			+= gpio-pxa.o
+ obj-$(CONFIG_GPIO_QIXIS_FPGA)		+= gpio-qixis-fpga.o
  obj-$(CONFIG_GPIO_RASPBERRYPI_EXP)	+= gpio-raspberrypi-exp.o
  obj-$(CONFIG_GPIO_RB4XX)		+= gpio-rb4xx.o
 +obj-$(CONFIG_GPIO_RB91X_KEY)		+= gpio-rb91x-key.o
@@ -73,7 +73,7 @@ Tested-by: Koen Vandeputte <koen.vandeputte@ncentric.com>
  obj-$(CONFIG_GPIO_RDA)			+= gpio-rda.o
 --- a/drivers/mtd/nand/raw/Kconfig
 +++ b/drivers/mtd/nand/raw/Kconfig
-@@ -552,4 +552,10 @@ config MTD_NAND_RB4XX
+@@ -553,4 +553,10 @@ config MTD_NAND_RB4XX
  	  Enables support for the NAND flash chip on Mikrotik Routerboard
  	  RB4xx series.
  

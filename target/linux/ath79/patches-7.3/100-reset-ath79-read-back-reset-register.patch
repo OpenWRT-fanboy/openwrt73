@@ -22,7 +22,7 @@ Signed-off-by: David Bauer <mail@david-bauer.net>
 
 --- a/drivers/reset/reset-ath79.c
 +++ b/drivers/reset/reset-ath79.c
-@@ -37,6 +37,8 @@ static int ath79_reset_update(struct res
+@@ -35,6 +35,8 @@ static int ath79_reset_update(struct res
  	else
  		val &= ~BIT(id);
  	writel(val, ath79_reset->base);
