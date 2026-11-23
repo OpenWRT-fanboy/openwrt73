@@ -11,6 +11,7 @@ INITRAMFS_EXTRA_FILES:=
 FEATURES:=cpiogz ext4 ramdisk squashfs targz
 
 KERNEL_PATCHVER:=6.18
+KERNEL_TESTING_PATCHVER:=7.3
 
 include $(INCLUDE_DIR)/target.mk
 
